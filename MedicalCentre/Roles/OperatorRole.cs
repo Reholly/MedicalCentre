@@ -6,7 +6,7 @@ namespace MedicalCentre.Roles
     {
         public void ShowCurrentRoleWindow()
         {
-            OperatorWindow window = OperatorWindow();
+            OperatorWindow window = new OperatorWindow();
             window.Show();
         }
     }
