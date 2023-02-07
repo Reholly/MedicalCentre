@@ -9,7 +9,7 @@ namespace MedicalCentre.Models
     public class Patient
     {
         public string PhoneNumber { get; }
-        public uint ID { get; }
+        public uint Id { get; }
         public string Name { get; }
         public string Surname { get; }
         public string? Patronymic { get; }

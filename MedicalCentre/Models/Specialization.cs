@@ -2,7 +2,7 @@
 {
     public class Specialization
     {
-        public uint ID { get; }
+        public uint Id { get; }
         public string Title { get; }
         public uint Salary { get; }
     }
