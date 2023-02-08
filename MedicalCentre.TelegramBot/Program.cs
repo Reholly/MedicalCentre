@@ -1,35 +1,44 @@
+﻿using MedicalCentre.TelegramBot.Models;
+using Telegram.Bot;
+using Telegram.Bot.Exceptions;
+using Telegram.Bot.Polling;
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
+
+
 namespace MedicalCentre.TelegramBot
 {
-    public class Program
-    {
-        public static void Main(string[] args)
+    internal class Program
+    { 
+
+        public static async Task Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            Logger.Log("Bot was started");
+            TelegramBotClient client = new TelegramBotClient(AppSetings.Token);
+            client.StartReceiving(Update, Error);
+            var me = await client.GetMeAsync();
+            Logger.Log($"Start listening for @{me.Username}");
+            Console.ReadLine();
 
-            // Add services to the container.
+        }
 
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+        private async static Task Update(ITelegramBotClient client, Update update, CancellationToken token)
+        {
+            var msg = update.Message;
+            var chatId = msg.Chat.Id;
+            if (msg == null)
+                return;
 
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            Logger.Log($"Received a '{msg.Text}' message in chat {chatId}.");
+            if(msg.Text.Contains("/"))
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                CommandManager.ExecuteCommand(client, update);
             }
+        }
 
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
-
-            app.MapControllers();
-
-            app.Run();
+        private async static Task Error(ITelegramBotClient botClient, Exception update, CancellationToken token)
+        {
+            throw new NotImplementedException();
         }
     }
 }
