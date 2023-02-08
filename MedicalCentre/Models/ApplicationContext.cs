@@ -10,8 +10,8 @@ namespace MedicalCentre.Models
         private DbSet<MedicalExamination> medicalExaminations = null!;
         private DbSet<Note> notes = null!;
         private DbSet<Patient> patiens = null!;
-        private DbSet<Specialization> specializations = null!;
         private DbSet<IRole> roles = null!;
+        private DbSet<Specialization> specializations = null!;       
 
         public ApplicationContext()
         {
@@ -19,9 +19,8 @@ namespace MedicalCentre.Models
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=sql7.freesqldatabase.com;user=sql7596671;password=ZekcL6nf9m;database=sql7596671;",
-                                    ServerVersion.AutoDetect("server=sql7.freesqldatabase.com;user=sql7596671;password=ZekcL6nf9m;database=sql7596671;"));
+            string databaseSettings = Properties.Settings.Default.DatabaseSettings;
+            optionsBuilder.UseMySql(databaseSettings, ServerVersion.AutoDetect(databaseSettings));
         }
-
     }
 }
