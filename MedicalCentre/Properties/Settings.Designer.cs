@@ -25,8 +25,8 @@ namespace MedicalCentre.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("server=sql7.freesqldatabase.com;user=sql7596671;password=ZekcL6nf9m;database=sql7" +
-            "596671;")]
+        [global::System.Configuration.DefaultSettingValueAttribute(" server=sql7.freesqldatabase.com;user=sql7596671;password=ZekcL6nf9m;database=sql" +
+            "7596671;")]
         public string DatabaseSettings {
             get {
                 return ((string)(this["DatabaseSettings"]));
