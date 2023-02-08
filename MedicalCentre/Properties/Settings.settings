@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="DatabaseSettings" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">server=koquuguda.beget.app;user=MedicalCentre;password=Admin@_1234;database=MedicalCentre;</Value>
+      <Value Profile="(Default)">server=sql7.freesqldatabase.com;user=sql7596671;password=ZekcL6nf9m;database=sql7596671;</Value>
     </Setting>
   </Settings>
 </SettingsFile>
