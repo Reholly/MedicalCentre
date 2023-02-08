@@ -2,9 +2,9 @@
 
 namespace MedicalCentre.Roles
 {
-    public class JuniorPersonalRole : IRole
+    public class JuniorPersonalRole : Role
     {
-        public void ShowCurrentRoleWindow()
+        public override void ShowCurrentRoleWindow()
         {
             JuniorPersonalWindow window = new JuniorPersonalWindow();
             window.Show();

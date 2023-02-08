@@ -2,9 +2,9 @@
 
 namespace MedicalCentre.Roles
 {
-    public class OperatorRole : IRole
+    public class OperatorRole : Role
     {
-        public void ShowCurrentRoleWindow()
+        public override void ShowCurrentRoleWindow()
         {
             OperatorWindow window = new OperatorWindow();
             window.Show();
