@@ -10,7 +10,7 @@ namespace MedicalCentre.TelegramBot.Models
     {
         public static void Log(string info)
         {
-            Console.WriteLine($"{DateTime.Now} - {info}");
+            Console.WriteLine($"{DateTime.Now} | {info}");
         }
     }
 }

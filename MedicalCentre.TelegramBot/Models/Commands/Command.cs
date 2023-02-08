@@ -10,7 +10,11 @@ namespace MedicalCentre.TelegramBot.Models.Commands
 {
     abstract class Command
     {
+        protected abstract TelegramBotClient client { get; }
+
         public abstract string Name { get; }
-        public abstract void Execute(ITelegramBotClient client, Update update);
+        public abstract void Execute(Update update);
     }
+
+
 }
