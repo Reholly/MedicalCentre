@@ -4,9 +4,9 @@ namespace MedicalCentre.Models
 {
     public class Note
     {
-        public uint ID { get; }
-        public string Title { get; }
-        public string NoteText { get; }
-        public DateTime PublicationDate { get; }
+        public uint Id { get; set; }
+        public string Title { get; set; } = null!;
+        public string NoteText { get; set; } = null!;
+        public DateTime PublicationDate { get; set; }
     }
 }
