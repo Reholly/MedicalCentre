@@ -10,7 +10,7 @@ namespace MedicalCentre.Models
         private DbSet<MedicalExamination> medicalExaminations { get; set; }
         private DbSet<Note> notes { get; set; }
         private DbSet<Patient> patiens { get; set; }
-        private DbSet<IRole> roles { get; set; }
+        private DbSet<Role> roles { get; set; }
         private DbSet<Specialization> specializations { get; set; }
 
         public ApplicationContext()
