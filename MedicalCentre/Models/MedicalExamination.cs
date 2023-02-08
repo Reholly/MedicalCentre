@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows.Media;
-
-namespace MedicalCentre.Models
+﻿namespace MedicalCentre.Models
 {
     public class MedicalExamination
     {
