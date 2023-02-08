@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;   
+﻿using System.Collections.Generic;
+using System.Windows.Media;
 
 namespace MedicalCentre.Models
 {
@@ -7,6 +8,6 @@ namespace MedicalCentre.Models
         public uint Id { get; set; }
         public string Title { get; set; } = null!;
         public string Conclusion { get; set; } = null!;
-        public List<byte[]> MaterialsImages { get; set; } = null!;
+        public Image[] MaterialsImages { get; set; } = null!;
     }
 }
