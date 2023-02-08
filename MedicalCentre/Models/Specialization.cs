@@ -2,8 +2,8 @@
 {
     public class Specialization
     {
-        public uint Id { get; }
-        public string Title { get; }
-        public uint Salary { get; }
+        public uint Id { get; set; }
+        public string Title { get; set; } = null!;
+        public uint Salary { get; set; }
     }
 }
