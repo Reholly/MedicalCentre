@@ -3,6 +3,7 @@ using System;
 using MedicalCentre.DatabaseLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedicalCentre.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230208161821_InitTables")]
+    partial class InitTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +52,7 @@ namespace MedicalCentre.Migrations
 
                     b.HasIndex("SpecializationId");
 
-                    b.ToTable("Employees");
+                    b.ToTable("employees");
                 });
 
             modelBuilder.Entity("MedicalCentre.Models.Image", b =>
@@ -62,9 +65,14 @@ namespace MedicalCentre.Migrations
                         .IsRequired()
                         .HasColumnType("longblob");
 
+                    b.Property<uint?>("MedicalExaminationId")
+                        .HasColumnType("int unsigned");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Images");
+                    b.HasIndex("MedicalExaminationId");
+
+                    b.ToTable("Image");
                 });
 
             modelBuilder.Entity("MedicalCentre.Models.Log", b =>
@@ -79,7 +87,7 @@ namespace MedicalCentre.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Logs");
+                    b.ToTable("logs");
                 });
 
             modelBuilder.Entity("MedicalCentre.Models.MedicalExamination", b =>
@@ -88,14 +96,11 @@ namespace MedicalCentre.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int unsigned");
 
-                    b.Property<uint>("AttachedImageId")
-                        .HasColumnType("int unsigned");
-
                     b.Property<string>("Conclusion")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<uint>("PatientId")
+                    b.Property<uint?>("PatientId")
                         .HasColumnType("int unsigned");
 
                     b.Property<string>("Title")
@@ -104,11 +109,9 @@ namespace MedicalCentre.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AttachedImageId");
-
                     b.HasIndex("PatientId");
 
-                    b.ToTable("MedicalExaminations");
+                    b.ToTable("medicalExaminations");
                 });
 
             modelBuilder.Entity("MedicalCentre.Models.Note", b =>
@@ -135,7 +138,7 @@ namespace MedicalCentre.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Notes");
+                    b.ToTable("notes");
                 });
 
             modelBuilder.Entity("MedicalCentre.Models.Patient", b =>
@@ -165,7 +168,7 @@ namespace MedicalCentre.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Patients");
+                    b.ToTable("patiens");
                 });
 
             modelBuilder.Entity("MedicalCentre.Models.Specialization", b =>
@@ -183,7 +186,7 @@ namespace MedicalCentre.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Specializations");
+                    b.ToTable("specializations");
                 });
 
             modelBuilder.Entity("MedicalCentre.Roles.Role", b =>
@@ -194,7 +197,7 @@ namespace MedicalCentre.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("roles");
                 });
 
             modelBuilder.Entity("MedicalCentre.Models.Employee", b =>
@@ -216,21 +219,18 @@ namespace MedicalCentre.Migrations
                     b.Navigation("Specialization");
                 });
 
+            modelBuilder.Entity("MedicalCentre.Models.Image", b =>
+                {
+                    b.HasOne("MedicalCentre.Models.MedicalExamination", null)
+                        .WithMany("MaterialsImages")
+                        .HasForeignKey("MedicalExaminationId");
+                });
+
             modelBuilder.Entity("MedicalCentre.Models.MedicalExamination", b =>
                 {
-                    b.HasOne("MedicalCentre.Models.Image", "AttachedImage")
-                        .WithMany()
-                        .HasForeignKey("AttachedImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("MedicalCentre.Models.Patient", null)
                         .WithMany("Examinations")
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AttachedImage");
+                        .HasForeignKey("PatientId");
                 });
 
             modelBuilder.Entity("MedicalCentre.Models.Note", b =>
@@ -238,6 +238,11 @@ namespace MedicalCentre.Migrations
                     b.HasOne("MedicalCentre.Models.Patient", null)
                         .WithMany("Notes")
                         .HasForeignKey("PatientId");
+                });
+
+            modelBuilder.Entity("MedicalCentre.Models.MedicalExamination", b =>
+                {
+                    b.Navigation("MaterialsImages");
                 });
 
             modelBuilder.Entity("MedicalCentre.Models.Patient", b =>
