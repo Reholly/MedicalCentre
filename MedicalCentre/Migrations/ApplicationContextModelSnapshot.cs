@@ -125,7 +125,7 @@ namespace MedicalCentre.Migrations
                         .HasColumnType("int unsigned");
 
                     b.Property<DateTime>("PublicationDate")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Title")
                         .IsRequired()

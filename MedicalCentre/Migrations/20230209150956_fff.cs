@@ -7,13 +7,30 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MedicalCentre.Migrations
 {
     /// <inheritdoc />
-    public partial class InitTables : Migration
+    public partial class fff : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateTable(
-                name: "logs",
+                name: "Images",
+                columns: table => new
+                {
+                    Id = table.Column<uint>(type: "int unsigned", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ImageBytes = table.Column<byte[]>(type: "longblob", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Logs",
                 columns: table => new
                 {
                     Id = table.Column<uint>(type: "int unsigned", nullable: false)
@@ -23,12 +40,12 @@ namespace MedicalCentre.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_logs", x => x.Id);
+                    table.PrimaryKey("PK_Logs", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "patiens",
+                name: "Patients",
                 columns: table => new
                 {
                     Id = table.Column<uint>(type: "int unsigned", nullable: false)
@@ -45,12 +62,12 @@ namespace MedicalCentre.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_patiens", x => x.Id);
+                    table.PrimaryKey("PK_Patients", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "roles",
+                name: "Roles",
                 columns: table => new
                 {
                     Id = table.Column<uint>(type: "int unsigned", nullable: false)
@@ -58,12 +75,12 @@ namespace MedicalCentre.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_roles", x => x.Id);
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "specializations",
+                name: "Specializations",
                 columns: table => new
                 {
                     Id = table.Column<uint>(type: "int unsigned", nullable: false)
@@ -74,35 +91,43 @@ namespace MedicalCentre.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_specializations", x => x.Id);
+                    table.PrimaryKey("PK_Specializations", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "medicalExaminations",
+                name: "MedicalExaminations",
                 columns: table => new
                 {
                     Id = table.Column<uint>(type: "int unsigned", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    PatientId = table.Column<uint>(type: "int unsigned", nullable: false),
                     Title = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Conclusion = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    PatientId = table.Column<uint>(type: "int unsigned", nullable: true)
+                    AttachedImageId = table.Column<uint>(type: "int unsigned", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_medicalExaminations", x => x.Id);
+                    table.PrimaryKey("PK_MedicalExaminations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_medicalExaminations_patiens_PatientId",
+                        name: "FK_MedicalExaminations_Images_AttachedImageId",
+                        column: x => x.AttachedImageId,
+                        principalTable: "Images",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MedicalExaminations_Patients_PatientId",
                         column: x => x.PatientId,
-                        principalTable: "patiens",
-                        principalColumn: "Id");
+                        principalTable: "Patients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "notes",
+                name: "Notes",
                 columns: table => new
                 {
                     Id = table.Column<uint>(type: "int unsigned", nullable: false)
@@ -111,22 +136,22 @@ namespace MedicalCentre.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NoteText = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    PublicationDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    PublicationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     PatientId = table.Column<uint>(type: "int unsigned", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_notes", x => x.Id);
+                    table.PrimaryKey("PK_Notes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_notes_patiens_PatientId",
+                        name: "FK_Notes_Patients_PatientId",
                         column: x => x.PatientId,
-                        principalTable: "patiens",
+                        principalTable: "Patients",
                         principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "employees",
+                name: "Employees",
                 columns: table => new
                 {
                     Id = table.Column<uint>(type: "int unsigned", nullable: false)
@@ -142,65 +167,45 @@ namespace MedicalCentre.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_employees", x => x.Id);
+                    table.PrimaryKey("PK_Employees", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_employees_roles_RoleId",
+                        name: "FK_Employees_Roles_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "roles",
+                        principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_employees_specializations_SpecializationId",
+                        name: "FK_Employees_Specializations_SpecializationId",
                         column: x => x.SpecializationId,
-                        principalTable: "specializations",
+                        principalTable: "Specializations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Image",
-                columns: table => new
-                {
-                    Id = table.Column<uint>(type: "int unsigned", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ImageBytes = table.Column<byte[]>(type: "longblob", nullable: false),
-                    MedicalExaminationId = table.Column<uint>(type: "int unsigned", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Image", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Image_medicalExaminations_MedicalExaminationId",
-                        column: x => x.MedicalExaminationId,
-                        principalTable: "medicalExaminations",
-                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_employees_RoleId",
-                table: "employees",
+                name: "IX_Employees_RoleId",
+                table: "Employees",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_employees_SpecializationId",
-                table: "employees",
+                name: "IX_Employees_SpecializationId",
+                table: "Employees",
                 column: "SpecializationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Image_MedicalExaminationId",
-                table: "Image",
-                column: "MedicalExaminationId");
+                name: "IX_MedicalExaminations_AttachedImageId",
+                table: "MedicalExaminations",
+                column: "AttachedImageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_medicalExaminations_PatientId",
-                table: "medicalExaminations",
+                name: "IX_MedicalExaminations_PatientId",
+                table: "MedicalExaminations",
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_notes_PatientId",
-                table: "notes",
+                name: "IX_Notes_PatientId",
+                table: "Notes",
                 column: "PatientId");
         }
 
@@ -208,28 +213,28 @@ namespace MedicalCentre.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "employees");
+                name: "Employees");
 
             migrationBuilder.DropTable(
-                name: "Image");
+                name: "Logs");
 
             migrationBuilder.DropTable(
-                name: "logs");
+                name: "MedicalExaminations");
 
             migrationBuilder.DropTable(
-                name: "notes");
+                name: "Notes");
 
             migrationBuilder.DropTable(
-                name: "roles");
+                name: "Roles");
 
             migrationBuilder.DropTable(
-                name: "specializations");
+                name: "Specializations");
 
             migrationBuilder.DropTable(
-                name: "medicalExaminations");
+                name: "Images");
 
             migrationBuilder.DropTable(
-                name: "patiens");
+                name: "Patients");
         }
     }
 }
