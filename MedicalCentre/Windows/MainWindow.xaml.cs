@@ -27,8 +27,8 @@ namespace MedicalCentre.Windows
         {
             InitializeComponent();
 
-            DatabaseInteraction db = new DatabaseInteraction();
-            db.AddEmployee(new Models.Employee { Id = 1, Name ="Иван", Surname = "Николаев", Patronymic = "Евгеньевич",  Role = new DoctorRole(), Specialization = new Specialization(1, "Проктолог", 10400)});
+            //DatabaseInteraction db = new DatabaseInteraction();
+            //db.AddEmployee(new Models.Employee { Id = 1, Name ="Иван", Surname = "Николаев", Patronymic = "Евгеньевич",  Role = new DoctorRole(), Specialization = new Specialization { Id = 1,  Title ="Проктолог",  Salary = 10400 } });
         }
     }
 }
