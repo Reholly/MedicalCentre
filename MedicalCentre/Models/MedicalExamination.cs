@@ -9,11 +9,11 @@ namespace MedicalCentre.Models
         public Patient Patient { get; set; }
         public string Title { get; set; } = null!;
         public string Conclusion { get; set; } = null!;
-        public Image AttachedImage { get; set; } = null!;
+        public Log AttachedImage { get; set; } = null!;
 
         public MedicalExamination() { }
 
-        public MedicalExamination(Patient patient, string title, string conclusion, Image attachedImage)
+        public MedicalExamination(Patient patient, string title, string conclusion, Log attachedImage)
         {
             Patient = patient;
             Title = title;

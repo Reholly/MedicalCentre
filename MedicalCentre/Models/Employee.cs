@@ -24,6 +24,16 @@ namespace MedicalCentre.Models
             Salary = salary;
             Role = role;
         }
+        public Employee(uint id, string name, string surname, string patronymic, string specialization, double salary, Role role)
+        {
+            Id = id;
+            Name = name;
+            Surname = surname;
+            Patronymic = patronymic;
+            Specialization = specialization;
+            Salary = salary;
+            Role = role;
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
