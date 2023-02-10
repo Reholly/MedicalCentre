@@ -3,6 +3,7 @@ using System;
 using MedicalCentre.DatabaseLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedicalCentre.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230209154229_refactor")]
+    partial class refactor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,12 +39,8 @@ namespace MedicalCentre.Migrations
                     b.Property<uint>("RoleId")
                         .HasColumnType("int unsigned");
 
-                    b.Property<double>("Salary")
-                        .HasColumnType("double");
-
-                    b.Property<string>("Specialization")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<uint>("SpecializationId")
+                        .HasColumnType("int unsigned");
 
                     b.Property<string>("Surname")
                         .IsRequired()
@@ -50,6 +49,8 @@ namespace MedicalCentre.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
+
+                    b.HasIndex("SpecializationId");
 
                     b.ToTable("Employees");
                 });
@@ -170,6 +171,24 @@ namespace MedicalCentre.Migrations
                     b.ToTable("Patients");
                 });
 
+            modelBuilder.Entity("MedicalCentre.Models.Specialization", b =>
+                {
+                    b.Property<uint>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int unsigned");
+
+                    b.Property<uint>("Salary")
+                        .HasColumnType("int unsigned");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Specializations");
+                });
+
             modelBuilder.Entity("MedicalCentre.Roles.Role", b =>
                 {
                     b.Property<uint>("Id")
@@ -189,7 +208,15 @@ namespace MedicalCentre.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MedicalCentre.Models.Specialization", "Specialization")
+                        .WithMany()
+                        .HasForeignKey("SpecializationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Role");
+
+                    b.Navigation("Specialization");
                 });
 
             modelBuilder.Entity("MedicalCentre.Models.MedicalExamination", b =>

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MedicalCentre.Models
+﻿namespace MedicalCentre.Models
 {
     public class Log
     {
