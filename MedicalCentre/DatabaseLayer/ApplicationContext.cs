@@ -1,5 +1,4 @@
 ﻿using MedicalCentre.Models;
-using MedicalCentre.Roles;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedicalCentre.DatabaseLayer

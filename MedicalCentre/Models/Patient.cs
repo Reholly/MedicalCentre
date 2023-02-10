@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace MedicalCentre.Models
 {
-    public class Patient
+    public class Patient : INotifyPropertyChanged
     { 
         public uint Id { get; set; }
         public string PhoneNumber { get; set; } = null!;
@@ -13,5 +15,25 @@ namespace MedicalCentre.Models
         public DateOnly BirthDate { get; set; }
         public List<MedicalExamination> Examinations { get; set; } = null!;
         public List<Note> Notes { get; set; } = null!;
+
+        public Patient() { }
+
+        public Patient(string phoneNumber, string name, string surname, string patronymic, DateOnly birthDate, List<MedicalExamination> examinations, List<Note> notes)
+        {
+            PhoneNumber = phoneNumber;
+            Name = name;
+            Surname = surname;
+            Patronymic = patronymic;
+            BirthDate = birthDate;
+            Examinations = examinations;
+            Notes = notes;
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
     }
 }
