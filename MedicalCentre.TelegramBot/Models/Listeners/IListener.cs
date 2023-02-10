@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 
-namespace MedicalCentre.TelegramBot.Models.Commands
+namespace MedicalCentre.TelegramBot.Models.Listeners
 {
     internal interface IListener
     {
-        public abstract void GetUpdate(Update update);
+        public void GetUpdate(Update update);
     }
 }

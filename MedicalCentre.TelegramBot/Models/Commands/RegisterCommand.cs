@@ -1,4 +1,5 @@
-﻿using MedicalCentre.TelegramBot.Models.UserWork;
+﻿using MedicalCentre.TelegramBot.Models.Listeners;
+using MedicalCentre.TelegramBot.Models.UserWork;
 using System;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -16,7 +17,13 @@ namespace MedicalCentre.TelegramBot.Models.Commands
         public override void Execute(Update update)
         {
             long chatId = update.Message.Chat.Id;
-            Listener.StartListen(this);
+            if(UsersManager.GetUserByChatId(chatId) != null)
+            {
+                client.SendTextMessageAsync(chatId, "Вы уже зарегистрированны!");
+                return;
+            }
+
+            Listenable.StartListen(this);
             RequestContact(chatId, client);
         }
 
@@ -26,15 +33,8 @@ namespace MedicalCentre.TelegramBot.Models.Commands
             long chatId = msg.Chat.Id;
             if (msg.Type == MessageType.Contact && msg.Contact != null)
             {
-                if (UsersManager.TryRegisterUser(chatId, msg.Contact.FirstName, msg.Contact.PhoneNumber))
-                {
-                    client.SendTextMessageAsync(chatId, "Поздравляем с регистрацией!");
-                }
-                else
-                {
-                    client.SendTextMessageAsync(chatId, "Вы уже зарегистрированны!");
-                }
-                Listener.StopListen();
+                client.SendTextMessageAsync(chatId, "Поздравляем с регистрацией!");
+                Listenable.StopListen();
             }
         }
 

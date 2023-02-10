@@ -1,4 +1,5 @@
 ﻿using MedicalCentre.TelegramBot.Models;
+using MedicalCentre.TelegramBot.Models.Listeners;
 using MedicalCentre.TelegramBot.Models.Notifacations;
 using MedicalCentre.TelegramBot.Models.UserWork;
 using Telegram.Bot;
@@ -9,7 +10,7 @@ namespace MedicalCentre.TelegramBot
 {
     internal class Program
     { 
-        
+
         public static async Task Main(string[] args)
         {
             TelegramBotClient client = Bot.GetTelegramBot();
@@ -27,22 +28,7 @@ namespace MedicalCentre.TelegramBot
 
         private async static Task Update(ITelegramBotClient client, Update update, CancellationToken token)
         {
-            Message msg = update.Message;
-            if (msg == null)
-            {
-                return;
-            }
-            long chatId = msg.Chat.Id;
-            Listener.Update(update);
-
-            if (msg.Text != null)
-            {
-                Logger.Log($"Received a '{msg.Text}' message in chat {chatId}.");
-                if (msg.Text.Contains("/"))
-                {
-                    CommandManager.ExecuteCommand(client, update);
-                }
-            }      
+            Listenable.Notify(update);
         }
 
         private async static Task Error(ITelegramBotClient botClient, Exception exception, CancellationToken token)

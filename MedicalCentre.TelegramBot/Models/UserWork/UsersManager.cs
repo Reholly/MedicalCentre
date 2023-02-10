@@ -23,8 +23,9 @@ namespace MedicalCentre.TelegramBot.Models.UserWork
             Users.Add(newUser);
             return true;
         }
+         
 
-        public static User GetUserByChatId(long chatId)
+        public static User? GetUserByChatId(long chatId)
         {
             foreach (var user in Users)
             {
@@ -33,7 +34,7 @@ namespace MedicalCentre.TelegramBot.Models.UserWork
                     return user;
                 }
             }
-            throw new ArgumentException("Несуществующий пользователь!");
+            return null;
         }
 
         private static bool isRegistred(User addUser)
