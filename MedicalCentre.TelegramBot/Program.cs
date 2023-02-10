@@ -1,11 +1,9 @@
 ﻿using MedicalCentre.TelegramBot.Models;
-using MedicalCentre.TelegramBot.Models.Commands;
+using MedicalCentre.TelegramBot.Models.Notifacations;
+using MedicalCentre.TelegramBot.Models.UserWork;
 using Telegram.Bot;
-using Telegram.Bot.Exceptions;
-using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = MedicalCentre.TelegramBot.Models.User;
 
 namespace MedicalCentre.TelegramBot
 {
@@ -14,22 +12,28 @@ namespace MedicalCentre.TelegramBot
         
         public static async Task Main(string[] args)
         {
-            Logger.Log("Bot was started");
             TelegramBotClient client = Bot.GetTelegramBot();
             client.StartReceiving(Update, Error);
+
             var me = await client.GetMeAsync();
+            Logger.Log("Bot was started");
             Logger.Log($"Start listening for @{me.Username}");
-            Console.ReadLine();
+
+            var nTimer = new TimerNotification(AppSetings.TimeOfNotification);
+            nTimer.StartTimer();
+
+            Console.ReadKey();
         }
 
         private async static Task Update(ITelegramBotClient client, Update update, CancellationToken token)
         {
             Message msg = update.Message;
-            long chatId = msg.Chat.Id;
             if (msg == null)
             {
                 return;
             }
+            long chatId = msg.Chat.Id;
+            Listener.Update(update);
 
             if (msg.Text != null)
             {
@@ -39,18 +43,6 @@ namespace MedicalCentre.TelegramBot
                     CommandManager.ExecuteCommand(client, update);
                 }
             }      
-            
-            if (msg.Type == MessageType.Contact && msg.Contact != null)
-            {
-                if(UsersManager.TryRegisterUser(chatId, msg.Contact.FirstName, msg.Contact.PhoneNumber))
-                {
-                    client.SendTextMessageAsync(chatId, "Поздравляем с регистрацией!");
-                }
-                else
-                {
-                    client.SendTextMessageAsync(chatId, "Вы уже зарегистрированны!");
-                }
-            }
         }
 
         private async static Task Error(ITelegramBotClient botClient, Exception exception, CancellationToken token)

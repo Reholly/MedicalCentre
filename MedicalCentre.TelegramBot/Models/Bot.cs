@@ -21,6 +21,5 @@ namespace MedicalCentre.TelegramBot.Models
             client = new TelegramBotClient(AppSetings.Token);
             return client;
         }
-
     }
 }
