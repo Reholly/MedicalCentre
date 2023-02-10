@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace MedicalCentre.Windows
 {
-    /// <summary>
-    /// Логика взаимодействия для DoctorWindow.xaml
-    /// </summary>
     public partial class DoctorWindow : Window
     {
         public DoctorWindow()
