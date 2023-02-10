@@ -27,8 +27,21 @@ namespace MedicalCentre.Windows
         {
             InitializeComponent();
 
-            //DatabaseInteraction db = new DatabaseInteraction();
-            //db.AddEmployee(new Models.Employee { Id = 1, Name ="Иван", Surname = "Николаев", Patronymic = "Евгеньевич",  Role = new DoctorRole(), Specialization = new Specialization { Id = 1,  Title ="Проктолог",  Salary = 10400 } });
+            DatabaseInteraction db = new DatabaseInteraction();
+
+            using (ApplicationContext context = new ApplicationContext())
+            {
+                foreach(var d in context.Employees.ToList())
+                {
+                    MessageBox.Show($"{d.Id} - {d.Name} ");
+                }
+                foreach(var b in context.Roles.ToList())
+                {
+                    MessageBox.Show(b.Id.ToString());
+                }
+                
+            }
+
         }
     }
-}
+}   
