@@ -170,11 +170,15 @@ namespace MedicalCentre.Migrations
                     b.ToTable("Patients");
                 });
 
-            modelBuilder.Entity("MedicalCentre.Roles.Role", b =>
+            modelBuilder.Entity("MedicalCentre.Models.Role", b =>
                 {
                     b.Property<uint>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int unsigned");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -183,7 +187,7 @@ namespace MedicalCentre.Migrations
 
             modelBuilder.Entity("MedicalCentre.Models.Employee", b =>
                 {
-                    b.HasOne("MedicalCentre.Roles.Role", "Role")
+                    b.HasOne("MedicalCentre.Models.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -200,13 +204,15 @@ namespace MedicalCentre.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MedicalCentre.Models.Patient", null)
+                    b.HasOne("MedicalCentre.Models.Patient", "Patient")
                         .WithMany("Examinations")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("AttachedImage");
+
+                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("MedicalCentre.Models.Note", b =>

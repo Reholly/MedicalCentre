@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedicalCentre.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230209150956_fff")]
-    partial class fff
+    [Migration("20230210045455_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,8 +39,12 @@ namespace MedicalCentre.Migrations
                     b.Property<uint>("RoleId")
                         .HasColumnType("int unsigned");
 
-                    b.Property<uint>("SpecializationId")
-                        .HasColumnType("int unsigned");
+                    b.Property<double>("Salary")
+                        .HasColumnType("double");
+
+                    b.Property<string>("Specialization")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Surname")
                         .IsRequired()
@@ -49,8 +53,6 @@ namespace MedicalCentre.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
-
-                    b.HasIndex("SpecializationId");
 
                     b.ToTable("Employees");
                 });
@@ -171,13 +173,10 @@ namespace MedicalCentre.Migrations
                     b.ToTable("Patients");
                 });
 
-            modelBuilder.Entity("MedicalCentre.Models.Specialization", b =>
+            modelBuilder.Entity("MedicalCentre.Models.Role", b =>
                 {
                     b.Property<uint>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int unsigned");
-
-                    b.Property<uint>("Salary")
                         .HasColumnType("int unsigned");
 
                     b.Property<string>("Title")
@@ -186,37 +185,18 @@ namespace MedicalCentre.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Specializations");
-                });
-
-            modelBuilder.Entity("MedicalCentre.Roles.Role", b =>
-                {
-                    b.Property<uint>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int unsigned");
-
-                    b.HasKey("Id");
-
                     b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("MedicalCentre.Models.Employee", b =>
                 {
-                    b.HasOne("MedicalCentre.Roles.Role", "Role")
+                    b.HasOne("MedicalCentre.Models.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MedicalCentre.Models.Specialization", "Specialization")
-                        .WithMany()
-                        .HasForeignKey("SpecializationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Role");
-
-                    b.Navigation("Specialization");
                 });
 
             modelBuilder.Entity("MedicalCentre.Models.MedicalExamination", b =>
@@ -227,13 +207,15 @@ namespace MedicalCentre.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MedicalCentre.Models.Patient", null)
+                    b.HasOne("MedicalCentre.Models.Patient", "Patient")
                         .WithMany("Examinations")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("AttachedImage");
+
+                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("MedicalCentre.Models.Note", b =>
