@@ -28,18 +28,11 @@ namespace MedicalCentre.Windows
 
             DatabaseInteraction db = new DatabaseInteraction();
 
-            using (ApplicationContext context = new ApplicationContext())
-            {
-                foreach(var d in context.Employees.ToList())
-                {
-                    MessageBox.Show($"{d.Id} - {d.Name} ");
-                }
-                foreach(var b in context.Roles.ToList())
-                {
-                    MessageBox.Show(b.Id.ToString());
-                }
-                
-            }
+            var emp = new Employee(1, "Иван", "Николаев", "Евгеньевич", "Уролог", 10500, new Role("Doctor"));
+            var currentEmployee = (Employee)db.GetEmployee(emp).Result;
+
+            MessageBox.Show($"{currentEmployee.Id} - {currentEmployee.Name}");
+            
 
         }
     }
