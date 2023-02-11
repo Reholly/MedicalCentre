@@ -28,10 +28,12 @@ namespace MedicalCentre.Windows
 
             DatabaseInteraction db = new DatabaseInteraction();
 
-            var emp = new Employee(1, "Иван", "Николаев", "Евгеньевич", "Уролог", 10500, new Role("Doctor"));
-            var currentEmployee = (Employee)db.GetEmployee(emp).Result;
+            var emp = new Employee(10, "Хрен", "Вай", "Ойой", "Уролог", 10500, new Role("Doctor"));
+            
+            Database<Employee> database = new Database<Employee>();
+            Employee mp = database.GetTable().Find(p => p.Id == emp.Id);
 
-            MessageBox.Show($"{currentEmployee.Id} - {currentEmployee.Name}");
+            MessageBox.Show(mp.Id.ToString());
             
 
         }
