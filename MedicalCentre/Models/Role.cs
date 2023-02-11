@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace MedicalCentre.Models
 {
-    public class Role :INotifyPropertyChanged
+    public class Role : INotifyPropertyChanged
     {
         public uint Id { get; set; }
         public string Title { get; set; } = null!;
