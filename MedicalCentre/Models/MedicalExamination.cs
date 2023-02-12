@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace MedicalCentre.Models
@@ -6,6 +7,8 @@ namespace MedicalCentre.Models
     public class MedicalExamination : INotifyPropertyChanged
     {
         public uint Id { get; set; }
+        public DateTime ExaminationDate { get; set; }
+        public uint PatientId { get; set; }
         public Patient Patient { get; set; }
         public string Title { get; set; } = null!;
         public string Conclusion { get; set; } = null!;
