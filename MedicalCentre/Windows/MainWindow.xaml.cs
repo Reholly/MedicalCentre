@@ -26,7 +26,7 @@ namespace MedicalCentre.Windows
         {
             InitializeComponent();
 
-            DatabaseInteraction db = new DatabaseInteraction();
+            
 
             var emp = new Employee(10, "Хрен", "Вай", "Ойой", "Уролог", 10500, new Role("Doctor"));
             
