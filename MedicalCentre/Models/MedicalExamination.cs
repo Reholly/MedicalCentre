@@ -8,10 +8,10 @@ namespace MedicalCentre.Models
     {
         public uint Id { get; set; } = default!;
         public DateTime ExaminationDate { get; set; } = default!;
-        public Patient Patient { get; set; } = null!;
+        public Patient PatientId { get; set; } = null!;
         public string Title { get; set; } = null!;
         public string Conclusion { get; set; } = null!;
-        public Image AttachedImage { get; set; } = null!;
+        public Image AttachedImageId { get; set; } = null!;
 
         public MedicalExamination() { }
 
