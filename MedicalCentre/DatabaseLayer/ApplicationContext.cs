@@ -8,7 +8,7 @@ namespace MedicalCentre.DatabaseLayer
     {
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Log> Logs { get; set; }
-        public DbSet<Image> Images { get; set; } 
+        public DbSet<ImageData> Images { get; set; } 
         public DbSet<MedicalExamination> MedicalExaminations { get; set; }
         public DbSet<Note> Notes { get; set; }
         public DbSet<Patient> Patients { get; set; }

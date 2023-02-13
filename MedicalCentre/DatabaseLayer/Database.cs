@@ -1,10 +1,5 @@
-﻿using MedicalCentre.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MedicalCentre.DatabaseLayer
 { 
@@ -21,5 +16,10 @@ namespace MedicalCentre.DatabaseLayer
         {
             return context.Set<T>().ToList();
         }
+
+        public T GetItem(T item)
+        {
+            return context.Set<T>().Find(item);
+        }       
     }
 }

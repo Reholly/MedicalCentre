@@ -16,6 +16,13 @@ namespace MedicalCentre.Models
             LogText = logText;
             IsSuccess = isSuccess;
         }
+
+        public Log(uint id, string logText, bool isSuccess)        {
+            Id = id;
+            LogText = logText;
+            IsSuccess = isSuccess;
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
