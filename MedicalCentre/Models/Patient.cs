@@ -29,6 +29,18 @@ namespace MedicalCentre.Models
             Notes = notes;
         }
 
+        public Patient(uint id, string phoneNumber, string name, string surname, string patronymic, DateOnly birthDate, List<MedicalExamination> examinations, List<Note> notes)
+        {
+            Id = id;
+            PhoneNumber = phoneNumber;
+            Name = name;
+            Surname = surname;
+            Patronymic = patronymic;
+            BirthDate = birthDate;
+            Examinations = examinations;
+            Notes = notes;
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
