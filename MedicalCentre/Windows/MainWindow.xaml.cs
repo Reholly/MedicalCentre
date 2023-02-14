@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,17 @@ namespace MedicalCentre.Windows
         public MainWindow()
         {
             InitializeComponent();
+
+            
+
+            var emp = new Employee(10, "Хрен", "Вай", "Ойой", "Уролог", 10500, new Role("Doctor"));
+            
+            Database<Employee> database = new Database<Employee>();
+            Employee mp = database.GetTable().Find(p => p.Id == emp.Id);
+
+            MessageBox.Show(mp.Id.ToString());
+            
+
         }
     }
-}
+}   
