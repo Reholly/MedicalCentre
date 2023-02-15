@@ -1,16 +1,14 @@
-﻿using MedicalCentre.TelegramBot.Models;
-using MedicalCentre.TelegramBot.Models.Listeners;
-using MedicalCentre.TelegramBot.Models.Notifacations;
-using MedicalCentre.TelegramBot.Models.UserWork;
+﻿using MedicalCentre.TelegramBot.MessageController;
+using MedicalCentre.TelegramBot.Models;
+using MedicalCentre.TelegramBot.Notifacations;
 using Telegram.Bot;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
+using User = MedicalCentre.TelegramBot.Models.User;
 
 namespace MedicalCentre.TelegramBot
 {
     internal class Program
-    { 
-
+    {
         public static async Task Main(string[] args)
         {
             TelegramBotClient client = Bot.GetTelegramBot();
@@ -28,7 +26,8 @@ namespace MedicalCentre.TelegramBot
 
         private async static Task Update(ITelegramBotClient client, Update update, CancellationToken token)
         {
-            Listenable.Notify(update);
+            long chatId = update.Message.Chat.Id;
+            MessageDistributor.Notify(update);
         }
 
         private async static Task Error(ITelegramBotClient botClient, Exception exception, CancellationToken token)

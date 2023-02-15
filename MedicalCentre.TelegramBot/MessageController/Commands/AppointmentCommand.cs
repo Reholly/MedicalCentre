@@ -1,4 +1,5 @@
-﻿using MedicalCentre.TelegramBot.Models.Listeners;
+﻿using MedicalCentre.TelegramBot.MessageController.Listeners;
+using MedicalCentre.TelegramBot.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace MedicalCentre.TelegramBot.Models.Commands
+namespace MedicalCentre.TelegramBot.MessageController.Commands
 {
     internal class AppointmentCommand : Command, IListener
     {
@@ -15,18 +16,16 @@ namespace MedicalCentre.TelegramBot.Models.Commands
 
         protected override TelegramBotClient client => Bot.GetTelegramBot();
 
-        public IListenable listenable => Listenable.GetListenable();
-
-        public override void Execute(Update update)
+        public override void Execute(Update update, BaseListener listener)
         {
             Message msg = update.Message;
             long chatId = msg.Chat.Id;
             //client.SendTextMessageAsync();
         }
 
-        public void GetUpdate(Update update)
+        public void GetUpdate(Update update, BaseListener listener)
         {
-            
+
         }
     }
 }

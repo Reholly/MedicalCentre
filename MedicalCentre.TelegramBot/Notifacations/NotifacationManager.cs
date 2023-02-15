@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot;
-using MedicalCentre.TelegramBot.Models.UserWork;
+using MedicalCentre.TelegramBot.Models;
 
-namespace MedicalCentre.TelegramBot.Models.Notifacations
+namespace MedicalCentre.TelegramBot.Notifacations
 {
     internal class NotifacationManager
     {
@@ -14,6 +14,7 @@ namespace MedicalCentre.TelegramBot.Models.Notifacations
         public static void SendAllNotifacate()
         {
             Logger.Log("Notification sended to all users");
+
             List<User> users = UsersManager.Users;
             foreach (User user in users)
             {

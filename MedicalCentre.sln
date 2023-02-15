@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalCentre", "MedicalCentre\MedicalCentre.csproj", "{ACB8467C-0431-4400-81E2-C2514AA1E538}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalCentre.TelegramBot", "MedicalCentre.TelegramBot\MedicalCentre.TelegramBot.csproj", "{B28E0EE0-FE20-49B9-A2C2-3395076C059A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalCentre.TelegramBot", "MedicalCentre.TelegramBot\MedicalCentre.TelegramBot.csproj", "{B28E0EE0-FE20-49B9-A2C2-3395076C059A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

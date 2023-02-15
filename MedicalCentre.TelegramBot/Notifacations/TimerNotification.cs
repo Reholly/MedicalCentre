@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Timers;
+using MedicalCentre.TelegramBot.Models;
 using Timer = System.Timers.Timer;
 
-namespace MedicalCentre.TelegramBot.Models.Notifacations
+namespace MedicalCentre.TelegramBot.Notifacations
 {
     internal class TimerNotification
     {
