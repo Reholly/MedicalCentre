@@ -3,19 +3,18 @@ using System.Runtime.CompilerServices;
 
 namespace MedicalCentre.Models
 {
-    public class Log : INotifyPropertyChanged
+    public class Image : INotifyPropertyChanged
     {
         public uint Id { get; set; }
-        public string LogText { get; set; } = null!;
-        public bool IsSuccess { get; }
+        public byte[] ImageBytes { get; set; } = null!;
+        
+        public Image() { }
 
-        public Log() { }
-
-        public Log(string logText, bool isSuccess)
+        public Image(byte[] image)
         {
-            LogText = logText;
-            IsSuccess = isSuccess;
+            ImageBytes = image;
         }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
