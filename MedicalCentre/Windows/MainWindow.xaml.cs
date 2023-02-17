@@ -37,5 +37,15 @@ namespace MedicalCentre.Windows
             
 
         }
+
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }   
