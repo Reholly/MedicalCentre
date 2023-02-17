@@ -1,5 +1,4 @@
-﻿using MedicalCentre.TelegramBot.MessageController.Listeners;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +14,7 @@ namespace MedicalCentre.TelegramBot.MessageController.Commands
 
         public abstract string Name { get; }
 
-        public abstract void Execute(Update update, BaseListener baseListener);
+        public abstract void Execute(Update update);
     }
 
 

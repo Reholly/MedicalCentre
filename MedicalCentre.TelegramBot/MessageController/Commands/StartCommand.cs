@@ -1,5 +1,4 @@
-﻿using MedicalCentre.TelegramBot.MessageController.Listeners;
-using MedicalCentre.TelegramBot.Models;
+﻿using MedicalCentre.TelegramBot.Models;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -11,7 +10,7 @@ namespace MedicalCentre.TelegramBot.MessageController.Commands
 
         public override string Name => "/start";
 
-        public override void Execute(Update update, BaseListener listener)
+        public override void Execute(Update update)
         {
             client.SendTextMessageAsync(update.Message.Chat.Id, "Вас приветствует Medical Centre Bot! На ротан дать?");
         }

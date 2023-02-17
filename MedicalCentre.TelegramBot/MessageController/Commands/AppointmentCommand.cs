@@ -1,5 +1,4 @@
-﻿using MedicalCentre.TelegramBot.MessageController.Listeners;
-using MedicalCentre.TelegramBot.Models;
+﻿using MedicalCentre.TelegramBot.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,18 +13,30 @@ namespace MedicalCentre.TelegramBot.MessageController.Commands
     {
         public override string Name => "/appointment";
 
+        public CommandExecutor Executor { get; }
+
         protected override TelegramBotClient client => Bot.GetTelegramBot();
 
-        public override void Execute(Update update, BaseListener listener)
+        public AppointmentCommand(CommandExecutor executor)
+        {
+            Executor = executor;
+        }
+
+        public override void Execute(Update update)
         {
             Message msg = update.Message;
             long chatId = msg.Chat.Id;
             //client.SendTextMessageAsync();
         }
 
-        public void GetUpdate(Update update, BaseListener listener)
+        public void GetUpdate(Update update, CommandExecutor listener)
         {
 
+        }
+
+        public void GetUpdate(Update update)
+        {
+            throw new NotImplementedException();
         }
     }
 }

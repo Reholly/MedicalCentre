@@ -1,7 +1,6 @@
 ﻿using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
 using MedicalCentre.TelegramBot.DataBaseLayer;
-using MedicalCentre.TelegramBot.MessageController.Listeners;
 using MedicalCentre.TelegramBot.Models;
 using System.Text;
 using Telegram.Bot;
@@ -16,7 +15,7 @@ namespace MedicalCentre.TelegramBot.MessageController.Commands
 
         protected override TelegramBotClient client => Bot.GetTelegramBot();
 
-        public override void Execute(Update update, BaseListener listener)
+        public override void Execute(Update update)
         {
             var chatId = update.Message.Chat.Id;
 

@@ -2,6 +2,7 @@
 using MedicalCentre.Models;
 using MedicalCentre.TelegramBot.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,27 +10,30 @@ using System.Threading.Tasks;
 
 namespace MedicalCentre.TelegramBot.DataBaseLayer
 {
-    internal class DataBaseTelegram
+    internal class DatabaseTelegram
     {
-        private List<Patient> patients;
-        private List<Employee> employee;
+        private Database<Patient> patientsDb;
+        private Database<Employee> employeeDb;
 
-        public DataBaseTelegram() 
+        public List<Patient> patients => patientsDb.GetTable();
+        public List<Employee> Employees => employeeDb.GetTable();
+
+        public DatabaseTelegram()
         {
-            Database<Patient> patientsDb = new Database<Patient>();
-            Database<Employee> employeeDb = new Database<Employee>();
-            patients = patientsDb.GetTable();
-            employee = employeeDb.GetTable();
+            patientsDb = new Database<Patient>();
+            employeeDb = new Database<Employee>();
         }
 
-        public Patient? GetPatientByPhone(string phoneNumber)
-        {
-            return patients.Find(patient => patient.PhoneNumber == phoneNumber);
-        }
+        public static List<User> Users { get; } = new List<User>();
 
-        public void AddPatient(Patient patient)
+        public void AutorizeUser(User user)
         {
-            patients.Add(patient);
+            Users.Add(user);
+        }
+        public void RegisterUser(User user)
+        {     
+            patientsDb.AddItem(user.GetAsPatient());
+            Users.Add(user);
         }
     }
 }

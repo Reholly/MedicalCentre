@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 
-namespace MedicalCentre.TelegramBot.MessageController.Listeners
+namespace MedicalCentre.TelegramBot.MessageController
 {
     internal interface IListener
     {
-        public void GetUpdate(Update update, BaseListener listener);
+        public void GetUpdate(Update update);
+
+        public CommandExecutor Executor { get; }
     }
 }

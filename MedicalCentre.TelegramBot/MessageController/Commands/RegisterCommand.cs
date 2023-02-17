@@ -1,6 +1,5 @@
 ﻿using MedicalCentre.Models;
 using MedicalCentre.TelegramBot.DataBaseLayer;
-using MedicalCentre.TelegramBot.MessageController.Listeners;
 using MedicalCentre.TelegramBot.Models;
 using System;
 using Telegram.Bot;
@@ -14,22 +13,29 @@ namespace MedicalCentre.TelegramBot.MessageController.Commands
     {
         protected override TelegramBotClient client => Bot.GetTelegramBot();
 
-        string? phone = null;
-        string? name = null;
-        string? surname = null;
-        string? lastname = null;
-        DateOnly? birthDate = null;
+        private string? phone = null;
+        private string? name = null;
+        private string? surname = null;
+        private string? lastname = null;
+        private DateOnly? birthDate = null;
+
 
         public override string Name => "/register";
 
-        public override void Execute(Update update, BaseListener listener)
+        public CommandExecutor Executor { get; }
+
+        public RegisterCommand(CommandExecutor executor) 
+        {
+            Executor = executor;
+        }
+        public override void Execute(Update update)
         {
             long chatId = update.Message.Chat.Id;
-            listener.StartListen(this);
+            Executor.StartListen(this);
             RequestContact(chatId, client);
         }
 
-        public void GetUpdate(Update update, BaseListener listener)
+        public void GetUpdate(Update update)
         {
             Message msg = update.Message;
             long chatId = msg.Chat.Id;
@@ -39,16 +45,20 @@ namespace MedicalCentre.TelegramBot.MessageController.Commands
                 if (msg.Type == MessageType.Contact && msg.Contact != null)
                 {
                     phone = msg.Contact.PhoneNumber;
-                    DataBaseTelegram db = new DataBaseTelegram();
-                    Patient patient = db.GetPatientByPhone(phone);
+                    DatabaseTelegram db = new DatabaseTelegram();
+                    Patient? patient = db.patients.Find(patient => patient.PhoneNumber == phone);
                     if (patient != null)
                     {
                         client.SendTextMessageAsync(chatId, "Вы уже зарегестрированы!");
-                        UsersManager.AddUser(new Models.User(chatId, patient));
-                        listener.StopListen();
+                        db.AutorizeUser(new Models.User(chatId, patient));
+                        Executor.StopListen();
                         return;
                     }
                     client.SendTextMessageAsync(chatId, "Укажите ваши ФИО в формате \"Иванов Иван Иванович\"");
+                }
+                else
+                {
+                    client.SendTextMessageAsync(chatId, "Отправьте контактом!");
                 }
             }
             else if (name == null || surname == null || lastname == null)
@@ -59,7 +69,11 @@ namespace MedicalCentre.TelegramBot.MessageController.Commands
                     surname = input[0];
                     name = input[1];
                     lastname = input[2];
-                    client.SendTextMessageAsync(chatId, $"Укажите вашу дату рождения в формате \"{DateTime.Today.Date}\"");
+                    client.SendTextMessageAsync(chatId, $"Укажите вашу дату рождения в формате \"{DateTime.Now.ToShortDateString()}\"");
+                }
+                else
+                {
+                    client.SendTextMessageAsync(chatId, "Невреный формат!");
                 }
             }
             else if (birthDate == null)
@@ -82,11 +96,12 @@ namespace MedicalCentre.TelegramBot.MessageController.Commands
                     Patronymic = lastname,
                     BirthDate = (DateOnly)birthDate
                 };
-                DataBaseTelegram db = new DataBaseTelegram();
-                db.AddPatient(patient);
+
+                DatabaseTelegram db = new DatabaseTelegram();
+                db.RegisterUser(new Models.User(chatId, patient));
                 client.SendTextMessageAsync(chatId, $"Вы успешно зарегестрированны!");
                 Logger.Log($"{patient.Name} registered by phone({patient.PhoneNumber}) in chat {chatId}");
-                listener.StopListen();
+                Executor.StopListen();
             }
         }
 
