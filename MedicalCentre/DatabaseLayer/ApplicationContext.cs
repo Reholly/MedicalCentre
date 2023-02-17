@@ -6,6 +6,8 @@ namespace MedicalCentre.DatabaseLayer
 {
     public class ApplicationContext : DbContext
     {
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Log> Logs { get; set; }
         public DbSet<ImageData> Images { get; set; } 
