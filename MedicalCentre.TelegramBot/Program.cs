@@ -1,26 +1,27 @@
-﻿using MedicalCentre.TelegramBot.MessageController;
-using MedicalCentre.TelegramBot.Models;
-using MedicalCentre.TelegramBot.Notifacations;
-using MedicalCentre.TelegramBot.UpdateDistributor;
-using Telegram.Bot;
-using Telegram.Bot.Types;
-using User = MedicalCentre.TelegramBot.Models.User;
-
 namespace MedicalCentre.TelegramBot
 {
-    internal class Program
+    public class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
-            TelegramBotClient client = Bot.GetTelegramBot();
+            var builder = WebApplication.CreateBuilder(args);
 
-            var distributor = new UpdateDistributor<CommandExecutor>(client);
-            distributor.StartReceiving();
+            // Add services to the container.
 
-            var nTimer = new TimerNotification(AppSetings.TimeOfNotification);
-            nTimer.StartTimer();
+            builder.Services.AddControllers().AddNewtonsoftJson();
 
-            Console.ReadKey();
+            var app = builder.Build();
+
+            // Configure the HTTP request pipeline.
+
+            app.UseHttpsRedirection();
+
+            app.UseAuthorization();
+
+
+            app.MapControllers();
+
+            app.Run();
         }
     }
 }
