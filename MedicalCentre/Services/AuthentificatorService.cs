@@ -15,20 +15,18 @@ namespace MedicalCentre.Services
             authentificationService = service;
         }
 
-        public async Task<bool> Login(uint id, string password)
+        public async Task<Account> Login(uint id, string password)
         {
-            bool success = true;
-
             try
             {
                 CurrentAccount = await authentificationService.Login(id, password);
             }
             catch(Exception)
             {
-                success = false;
+                CurrentAccount = null;
             }
 
-            return success;
+            return CurrentAccount;
         }
 
         public async Task<Result> Register(uint id, string password, Employee employee)
