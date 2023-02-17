@@ -1,16 +1,16 @@
 ﻿using MedicalCentre.Models;
+using MedicalCentre.Services;
 using MedicalCentre.Windows;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
-using MedicalCentre.Services;
 
 namespace MedicalCentre.ViewModels
 {
     public class DoctorViewModel
     {
-        public ObservableCollection<MedicalExamination> Examinations { get; set; } = new ObservableCollection<MedicalExamination>();
+        public ObservableCollection<MedicalExamination> Examinations { get; set; } = new();
         public MedicalExamination SelectedExamination { get; set; }
         public ICommand AddRowCommand { get; set; }
         public ICommand ShowInputHelpCommand { get; set; }
