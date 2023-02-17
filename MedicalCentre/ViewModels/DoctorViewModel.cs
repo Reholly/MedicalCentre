@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using MedicalCentre.Services;
 
 namespace MedicalCentre.ViewModels
 {
@@ -18,7 +19,7 @@ namespace MedicalCentre.ViewModels
 
         public DoctorViewModel(DoctorWindow window)
         {
-            window = window;
+            this.window = window;
             AddRowCommand = new RelayCommand(AddRow);
             ShowInputHelpCommand = new RelayCommand(ShowInputHelp);
             CreatePatientComand = new RelayCommand(CreatePatient);
