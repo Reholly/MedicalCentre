@@ -1,4 +1,5 @@
 ﻿using MedicalCentre.Models;
+using MedicalCentre.Services;
 using MedicalCentre.Windows;
 using System;
 using System.Collections.ObjectModel;
@@ -9,7 +10,7 @@ namespace MedicalCentre.ViewModels
 {
     public class DoctorViewModel
     {
-        public ObservableCollection<MedicalExamination> Examinations { get; set; } = new ObservableCollection<MedicalExamination>();
+        public ObservableCollection<MedicalExamination> Examinations { get; set; } = new();
         public MedicalExamination SelectedExamination { get; set; }
         public ICommand AddRowCommand { get; set; }
         public ICommand ShowInputHelpCommand { get; set; }
@@ -18,7 +19,7 @@ namespace MedicalCentre.ViewModels
 
         public DoctorViewModel(DoctorWindow window)
         {
-            window = window;
+            this.window = window;
             AddRowCommand = new RelayCommand(AddRow);
             ShowInputHelpCommand = new RelayCommand(ShowInputHelp);
             CreatePatientComand = new RelayCommand(CreatePatient);

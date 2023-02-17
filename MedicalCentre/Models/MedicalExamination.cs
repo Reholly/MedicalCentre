@@ -12,6 +12,7 @@ namespace MedicalCentre.Models
         public string Title { get; set; } = null!;
         public string Conclusion { get; set; } = null!;
         public ImageData AttachedImage { get; set; } = null!;
+        public bool IsFinished { get; set; } = false;
 
         public MedicalExamination() { }
 
