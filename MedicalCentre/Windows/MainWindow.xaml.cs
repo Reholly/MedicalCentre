@@ -29,11 +29,11 @@ namespace MedicalCentre.Windows
             
 
             var emp = new Employee(10, "Хрен", "Вай", "Ойой", "Уролог", 10500, new Role("Doctor"));
-            
+           
             Database<Employee> database = new Database<Employee>();
-            Employee mp = database.GetTable().Find(p => p.Id == emp.Id);
-
-            MessageBox.Show(mp.Id.ToString());
+            //database.AddItem(emp);
+            var cnt = new ApplicationContext();
+            cnt.Employees.Add(emp);
             
 
         }
