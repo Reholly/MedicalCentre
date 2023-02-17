@@ -15,6 +15,12 @@ namespace MedicalCentre.Models
             Title = title;
         }
 
+        public Role(uint id, string title)
+        {
+            Id = id;
+            Title = title;
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {

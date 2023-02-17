@@ -20,6 +20,14 @@ namespace MedicalCentre.Models
             PublicationDate = publicationDate;
         }
 
+        public Note(uint id, string title, string noteText, DateTime publicationDate)
+        {
+            Id = id;
+            Title = title;
+            NoteText = noteText;
+            PublicationDate = publicationDate;
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {

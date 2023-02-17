@@ -3,6 +3,7 @@ using System;
 using MedicalCentre.DatabaseLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,34 +11,16 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedicalCentre.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230213123644_EditConstructors")]
+    partial class EditConstructors
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("MedicalCentre.Models.Account", b =>
-                {
-                    b.Property<uint>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int unsigned");
-
-                    b.Property<uint>("EmployeeAccountId")
-                        .HasColumnType("int unsigned");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeAccountId");
-
-                    b.ToTable("Accounts");
-                });
 
             modelBuilder.Entity("MedicalCentre.Models.Employee", b =>
                 {
@@ -74,7 +57,7 @@ namespace MedicalCentre.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("MedicalCentre.Models.ImageData", b =>
+            modelBuilder.Entity("MedicalCentre.Models.Image", b =>
                 {
                     b.Property<uint>("Id")
                         .ValueGeneratedOnAdd()
@@ -208,34 +191,6 @@ namespace MedicalCentre.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("MedicalCentre.Models.Transaction", b =>
-                {
-                    b.Property<uint>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int unsigned");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("double");
-
-                    b.Property<DateTime>("TransactionDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Transactions");
-                });
-
-            modelBuilder.Entity("MedicalCentre.Models.Account", b =>
-                {
-                    b.HasOne("MedicalCentre.Models.Employee", "EmployeeAccount")
-                        .WithMany()
-                        .HasForeignKey("EmployeeAccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("EmployeeAccount");
-                });
-
             modelBuilder.Entity("MedicalCentre.Models.Employee", b =>
                 {
                     b.HasOne("MedicalCentre.Models.Role", "Role")
@@ -249,7 +204,7 @@ namespace MedicalCentre.Migrations
 
             modelBuilder.Entity("MedicalCentre.Models.MedicalExamination", b =>
                 {
-                    b.HasOne("MedicalCentre.Models.ImageData", "AttachedImage")
+                    b.HasOne("MedicalCentre.Models.Image", "AttachedImage")
                         .WithMany()
                         .HasForeignKey("AttachedImageId")
                         .OnDelete(DeleteBehavior.Cascade)
