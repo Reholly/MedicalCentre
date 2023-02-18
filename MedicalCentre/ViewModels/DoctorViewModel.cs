@@ -1,36 +1,35 @@
 ﻿using MedicalCentre.Models;
+using MedicalCentre.Pages.DoctorWindowPages;
 using MedicalCentre.Services;
-using MedicalCentre.Windows;
-using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace MedicalCentre.ViewModels
 {
     public class DoctorViewModel
     {
-        public ObservableCollection<MedicalExamination> Examinations { get; set; } = new();
-        public MedicalExamination SelectedExamination { get; set; }
+        public ObservableCollection<Appointment> Appointments { get; set; } = new();
+        public MedicalExamination SelectedAppointment { get; set; }
         public ICommand AddRowCommand { get; set; }
         public ICommand ShowInputHelpCommand { get; set; }
-        public ICommand CreatePatientComand { get; set; }
-        private DoctorWindow window;
+        public ICommand ShowTodaysAppointmentsCommand { get; set; }
 
-        public DoctorViewModel(DoctorWindow window)
+        public DoctorViewModel()
         {
-            this.window = window;
             AddRowCommand = new RelayCommand(AddRow);
             ShowInputHelpCommand = new RelayCommand(ShowInputHelp);
-            CreatePatientComand = new RelayCommand(CreatePatient);
+            ShowTodaysAppointmentsCommand = new RelayCommand(ShowTodaysAppointments);
         }
 
-        private void AddRow() => Examinations.Add(new MedicalExamination(new Patient(), "Test", "", null, DateTime.Now));
+        private void AddRow() => Appointments.Add(new());
         private void ShowInputHelp() => MessageBox.Show("DateTime input foramt: MM/DD/YYYY HH:MM:SS AM (or PM)");
-        private void CreatePatient()
+        private void ShowTodaysAppointments()
         {
-            window.patients.Visibility = Visibility.Visible;
-            window.addPatientButton.Visibility = Visibility.Visible;
+            NavigationWindow win = new();
+            win.Content = new TodaysAppointments();
+            win.Show();
         }
     }
 }
