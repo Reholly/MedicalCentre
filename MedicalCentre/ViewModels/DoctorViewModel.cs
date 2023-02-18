@@ -15,12 +15,14 @@ namespace MedicalCentre.ViewModels
         public ICommand AddRowCommand { get; set; }
         public ICommand ShowInputHelpCommand { get; set; }
         public ICommand ShowTodaysAppointmentsCommand { get; set; }
+        public ICommand ShowAllPatientsCommand { get; set; }
 
         public DoctorViewModel()
         {
             AddRowCommand = new RelayCommand(AddRow);
             ShowInputHelpCommand = new RelayCommand(ShowInputHelp);
             ShowTodaysAppointmentsCommand = new RelayCommand(ShowTodaysAppointments);
+            ShowAllPatientsCommand = new RelayCommand(ShowAllPatients);
         }
 
         private void AddRow() => Appointments.Add(new());
@@ -29,6 +31,13 @@ namespace MedicalCentre.ViewModels
         {
             NavigationWindow win = new();
             win.Content = new TodaysAppointments();
+            win.Show();
+        }
+
+        private void ShowAllPatients()
+        {
+            NavigationWindow win = new();
+            win.Content = new AllPatientsPage();
             win.Show();
         }
     }
