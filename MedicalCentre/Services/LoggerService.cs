@@ -14,7 +14,7 @@ namespace MedicalCentre.Services
         public static Log GetLog(Log log)
         {
             Database<Log> db = new Database<Log>();
-            return db.GetItemById(log.Id); 
+            return db.GetItemById(log.Id).Result; 
         }
     }
 }

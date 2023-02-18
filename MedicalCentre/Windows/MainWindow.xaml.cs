@@ -1,5 +1,6 @@
 ﻿using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
+using MedicalCentre.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,33 +15,36 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace MedicalCentre.Windows
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
-            InitializeComponent();
-
-            
-
-            var emp = new Employee(10, "Хрен", "Вай", "Ойой", "Уролог", 10500, new Role("Doctor"));
            
-            Database<Employee> database = new Database<Employee>();
-            //database.AddItem(emp);
-            var cnt = new ApplicationContext();
-            cnt.Employees.Add(emp);
-            
-
+            InitializeComponent();                  
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
+            string login = Login.Text;
+            string password = Password.Password;
 
+            AuthentificatorService authentificator = new AuthentificatorService(new AuthentificationService());
+
+            Account currentAccount = authentificator.Login(uint.Parse(login), password).Result;
+
+            Database<Employee> employeeDb = new Database<Employee>();
+            currentAccount.EmployeeAccount = employeeDb.GetItemById(currentAccount.Id).Result;
+
+            Database<Role> roleDb = new Database<Role>();
+            Role role = roleDb.GetItemById(currentAccount.EmployeeAccount.RoleId).Result;
+
+            authentificator.CheckRole(role, currentAccount);
+
+            Close();
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)

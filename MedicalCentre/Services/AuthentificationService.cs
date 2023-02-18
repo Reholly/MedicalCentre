@@ -1,5 +1,6 @@
 ﻿using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
+using MedicalCentre.Windows;
 using System;
 using System.Threading.Tasks;
 
@@ -20,7 +21,7 @@ namespace MedicalCentre.Services
                 LoggerService.CreateLog(ex.Message, false);
             }
 
-            if(id == accountDatabase.GetTable().Find(p => p.Id == id).Id)
+            if(id == accountDatabase.GetTable().Result.Find(p => p.Id == id).Id)
             {
                 return Result.UsernameAlreadyExist;
 
@@ -39,7 +40,7 @@ namespace MedicalCentre.Services
 
             try
             {
-                Account account = accountDatabase.GetItemById(id);
+                Account account = accountDatabase.GetItemById(id).Result;
                 if(account.Password == password)
                 {
                     LoggerService.CreateLog($"Login user {account.Id}", true);
@@ -51,6 +52,42 @@ namespace MedicalCentre.Services
             {
                 LoggerService.CreateLog(ex.Message, false);
                 return null;
+            }
+        }
+
+        public void CheckRole(Role role, Account currentAccount)
+        {
+            switch (role.Title)
+            {
+                case "Doctor":
+                    DoctorWindow doctor = new();
+                    doctor.Show();
+                    LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
+                    break;
+                case "SystemAdmin":
+                    SystemAdminWindow sysAdmin = new();
+                    sysAdmin.Show();
+                    LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
+                    break;
+                case "Admin":
+                    AdminWindow admin = new();
+                    admin.Show();
+                    LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
+                    break;
+                case "Operator":
+                    OperatorWindow operatorWindow = new();
+                    operatorWindow.Show();
+                    LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
+                    break;
+                case "JuniorPersonal":
+                    JuniorPersonalWindow juniorPersonal = new JuniorPersonalWindow();
+                    juniorPersonal.Show();
+                    LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
+                    break;
+                default:
+                    throw new Exception("Wrong role, please, try later and call System Admin");
+                    LoggerService.CreateLog("Неверно указана роль", false);
+                    break;
             }
         }
     }
