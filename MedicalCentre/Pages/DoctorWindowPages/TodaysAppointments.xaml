@@ -1,4 +1,4 @@
-﻿<Page x:Class="MedicalCentre.Pages.DoctorWindowPages.TodaysExaminations"
+﻿<Page x:Class="MedicalCentre.Pages.DoctorWindowPages.TodaysAppointments"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,13 +6,13 @@
       xmlns:local="clr-namespace:MedicalCentre.Pages.DoctorWindowPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Today's Examinations" BackGround="Azure">
+      Title="Today's Examinations" Background="Azure">
     <Grid>
         <DataGrid x:Name="todaysPatients" Grid.Column="0" AutoGenerateColumns="True"
                   Background="Azure" Margin="0 17.5 0 0" CanUserAddRows="False" CanUserDeleteRows="True" 
-                  CanUserReorderColumns="True" ItemsSource="{Binding Examinations}"/>
+                  CanUserReorderColumns="True" ItemsSource="{Binding Appointments}"/>
         <Menu Height="17.5" VerticalAlignment="Top">
-            <MenuItem Header="Add Row" Command="{Binding AddExaminationCommand}"/>
+            <MenuItem Header="Add Row" Command="{Binding AddAppointmentsCommand}"/>
         </Menu>
     </Grid>
 </Page>
