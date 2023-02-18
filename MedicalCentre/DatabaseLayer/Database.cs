@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,12 +13,12 @@ namespace MedicalCentre.DatabaseLayer
             await context.SaveChangesAsync();
         }  
 
-        public List<T> GetTable()
+        public async Task<List<T>> GetTable()
         {
             return context.Set<T>().ToList();
         }
 
-        public T GetItemById(uint id)
+        public async Task<T> GetItemById(uint id)
         {
             return context.Set<T>().Find(id);
         }       

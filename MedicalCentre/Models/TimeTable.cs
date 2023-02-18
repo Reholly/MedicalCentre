@@ -8,19 +8,19 @@ namespace MedicalCentre.Models
     public class TimeTable : INotifyPropertyChanged
     {
         public uint Id { get; set; }
-        public Employee Employee { get; set; }
+        public uint EmployeeId { get; set; }
         public List<DateTime> Timesheet { get; set; } = null!;
 
         public TimeTable() { }
-        public TimeTable(Employee employee,List<DateTime> timesheet)
+        public TimeTable(uint employeeId,List<DateTime> timesheet)
         {
-            Employee = employee;
+            EmployeeId = employeeId;
             Timesheet = timesheet;  
         }
-        public TimeTable(uint id, Employee employee, List<DateTime> timesheet)
+        public TimeTable(uint id, uint employeeId, List<DateTime> timesheet)
         {
             Id = id;
-            Employee = employee;
+            EmployeeId = employeeId;
             Timesheet = timesheet;
         }
 

@@ -11,20 +11,20 @@ namespace MedicalCentre.Models
         public string Patronymic { get; set; } = null!;
         public string Specialization { get; set; } = null!;
         public double Salary { get; set; }
-        public Role Role { get; set; } = null!;
+        public uint RoleId { get; set; }
         
         public Employee() { }
 
-        public Employee(string name, string surname, string patronymic, string specialization, double salary, Role role)
+        public Employee(string name, string surname, string patronymic, string specialization, double salary, uint role)
         {
             Name = name;
             Surname = surname;
             Patronymic = patronymic;
             Specialization = specialization;
             Salary = salary;
-            Role = role;
+            RoleId = role;
         }
-        public Employee(uint id, string name, string surname, string patronymic, string specialization, double salary, Role role)
+        public Employee(uint id, string name, string surname, string patronymic, string specialization, double salary, uint role)
         {
             Id = id;
             Name = name;
@@ -32,7 +32,7 @@ namespace MedicalCentre.Models
             Patronymic = patronymic;
             Specialization = specialization;
             Salary = salary;
-            Role = role;
+            RoleId = role;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
