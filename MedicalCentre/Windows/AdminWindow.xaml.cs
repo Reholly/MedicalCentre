@@ -14,10 +14,7 @@ using System.Windows.Shapes;
 
 namespace MedicalCentre.Windows
 {
-    /// <summary>
-    /// Логика взаимодействия для AdminWindow.xaml
-    /// </summary>
-    public partial class AdminWindow : Window
+        public partial class AdminWindow : Window
     {
         public AdminWindow()
         {
