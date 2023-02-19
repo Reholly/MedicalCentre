@@ -7,10 +7,10 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Patient's Examinations "
-      Background="Azure"
+      Background="Transparent"
       ShowsNavigationUI="False">
-    <Grid>
-        <DataGrid Background="Azure" ItemsSource="{Binding Examinations}" 
+    <Grid Margin="20">
+        <DataGrid Background="AliceBlue" ItemsSource="{Binding Examinations}" 
                   Grid.Column="0" AutoGenerateColumns="True" CanUserAddRows="False" CanUserDeleteRows="False"/>
     </Grid>
 </Page>

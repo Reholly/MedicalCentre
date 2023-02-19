@@ -7,9 +7,9 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CreateExaminationPage"
-      Background="Azure"
+      Background="Transparent"
       ShowsNavigationUI="False">
-    <Grid>
+    <Grid Background="AliceBlue">
         <StackPanel>
             <TextBlock Text="Title:"/>
             <TextBox x:Name="ExaminationTitleBox" Background="LightGray"/>
@@ -17,6 +17,6 @@
             <TextBox x:Name="ExaminationTextBox" Background="LightGray" TextWrapping="WrapWithOverflow"/>
         </StackPanel>
         <Button x:Name="SaveButton" Background="LightGray" Height="50" Width="200" VerticalAlignment="Bottom" 
-                Content="Save Examination" Command="{Binding SaveExaminationCommand}" BorderBrush="Azure"/>
+                Content="Save Examination" Command="{Binding SaveExaminationCommand}" BorderBrush="Transparent"/>
     </Grid>
 </Page>
