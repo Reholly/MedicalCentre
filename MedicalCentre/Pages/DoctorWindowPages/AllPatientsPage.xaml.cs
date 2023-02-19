@@ -3,12 +3,12 @@ using System.Windows.Controls;
 
 namespace MedicalCentre.Pages.DoctorWindowPages
 {
-    public partial class Page1 : Page
+    public partial class AllPatientsPage : Page
     {
-        public Page1()
+        public AllPatientsPage()
         {
             InitializeComponent();
-            DataContext = new Page1ViewModel();
+            DataContext = new AllPatientsPageViewModel();
         }
     }
 }

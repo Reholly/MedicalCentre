@@ -6,13 +6,16 @@
       xmlns:local="clr-namespace:MedicalCentre.Pages.DoctorWindowPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Today's Examinations" Background="Azure">
+      Title="Today's Examinations" 
+      Background="Azure"
+      ShowsNavigationUI="False">
     <Grid>
-        <DataGrid x:Name="todaysPatients" Grid.Column="0" AutoGenerateColumns="True"
+        <DataGrid x:Name="todaysPatients" AutoGenerateColumns="True"
                   Background="Azure" Margin="0 17.5 0 0" CanUserAddRows="False" CanUserDeleteRows="True" 
-                  CanUserReorderColumns="True" ItemsSource="{Binding Appointments}"/>
+                  CanUserReorderColumns="True" ItemsSource="{Binding Appointments}" SelectedItem="{Binding SelectedAppointment}"/>
         <Menu Height="17.5" VerticalAlignment="Top">
-            <MenuItem Header="Add Row" Command="{Binding AddAppointmentsCommand}"/>
+            <MenuItem Header="Delte Appointment" Command="{Binding DeleteAppointmentCommand}"/>
+            
         </Menu>
     </Grid>
 </Page>
