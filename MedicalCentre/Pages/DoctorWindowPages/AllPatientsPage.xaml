@@ -14,6 +14,6 @@
         </Menu>
         <DataGrid x:Name="todaysPatients" Grid.Column="0" AutoGenerateColumns="True"
                   Background="Azure" Margin="0 17.5 0 0" CanUserAddRows="False" CanUserDeleteRows="True" 
-                  CanUserReorderColumns="True" ItemsSource="{Binding Patients}"/>
+                  CanUserReorderColumns="True" ItemsSource="{Binding Patients}" SelectedItem="{Binding SelectedPatient}"/>
     </Grid>
 </Page>
