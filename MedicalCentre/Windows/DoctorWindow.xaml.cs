@@ -8,7 +8,7 @@ namespace MedicalCentre.Windows
         public DoctorWindow()
         {
             InitializeComponent();
-            DataContext = new DoctorViewModel();
+            DataContext = new DoctorViewModel(this);
         }
     }
 }

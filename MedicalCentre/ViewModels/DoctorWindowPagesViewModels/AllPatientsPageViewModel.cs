@@ -13,6 +13,7 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
     public class AllPatientsPageViewModel
     {
         public ObservableCollection<Patient> Patients { get; set; } = new();
+        public Patient SelectedPatient { get; set; }
         public ICommand AddPatientCommand { get; set; }
         public AllPatientsPageViewModel()
         {

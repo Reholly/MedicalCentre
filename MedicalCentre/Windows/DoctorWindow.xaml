@@ -28,11 +28,13 @@
                 <MenuItem Header="Input" x:Name="InputHelpButton" Command="{Binding ShowInputHelpCommand}"/>
             </MenuItem>
         </Menu>
-        <DataGrid x:Name="patients" Grid.Column="0" AutoGenerateColumns="True"
+        <DataGrid x:Name="Appointments" Grid.Column="0" AutoGenerateColumns="True"
                   Background="Azure" Margin="0 17.5 0 0" ItemsSource="{Binding Appointments}" 
                   SelectedItem="{Binding SelectedAppointment}" CanUserAddRows="True" CanUserDeleteRows="True" 
                   CanUserReorderColumns="True" CanUserSortColumns="True" Visibility="Collapsed"/>
         <Button Grid.Column="2" Height="50" Width="200" HorizontalAlignment="Center" Command="{Binding AddRowCommand}" 
                 Content="Добавить строку" Visibility="Collapsed" x:Name="addPatientButton"/>
+        <Frame Grid.Column="2" Margin="0 17.5 0 0" Name="DoctorRightFrame" />
+        <Frame Grid.Column="0" Margin="0 17.5 0 0 " Name="DoctorLeftFrame"/>
     </Grid>
 </Window>
