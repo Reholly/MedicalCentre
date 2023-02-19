@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace MedicalCentre.ViewModels
 {
-    internal class AdminViewModel
+    public class AdminViewModel
     {
+        public AdminViewModel()
+        {
+
+        }
+
+
     }
 }
