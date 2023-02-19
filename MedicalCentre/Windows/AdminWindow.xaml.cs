@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MedicalCentre.Pages.AdminWindowPages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,12 @@ namespace MedicalCentre.Windows
         private void CloseIcon_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             Close();
+        }
+
+        private void OpenEmployeesPage(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("AAAA");
+            MainFrame.Content = new EmployeesManagement();
         }
     }
 }
