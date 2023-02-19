@@ -15,6 +15,7 @@
                   CanUserReorderColumns="True" ItemsSource="{Binding Appointments}" SelectedItem="{Binding SelectedAppointment}"/>
         <Menu Height="17.5" VerticalAlignment="Top">
             <MenuItem Header="Delte Appointment" Command="{Binding DeleteAppointmentCommand}"/>
+            
         </Menu>
     </Grid>
 </Page>
