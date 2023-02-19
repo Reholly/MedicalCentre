@@ -10,9 +10,9 @@
     <Grid>
         <DataGrid x:Name="todaysPatients" AutoGenerateColumns="True"
                   Background="Azure" Margin="0 17.5 0 0" CanUserAddRows="False" CanUserDeleteRows="True" 
-                  CanUserReorderColumns="True" ItemsSource="{Binding Appointments}"/>
+                  CanUserReorderColumns="True" ItemsSource="{Binding Appointments}" SelectedItem="{Binding SelectedAppointment}"/>
         <Menu Height="17.5" VerticalAlignment="Top">
-            <MenuItem Header="Add Row" Command="{Binding AddAppointmentsCommand}"/>
+            <MenuItem Header="Delte Appointment" Command="{Binding DeleteAppointmentCommand}"/>
         </Menu>
     </Grid>
 </Page>
