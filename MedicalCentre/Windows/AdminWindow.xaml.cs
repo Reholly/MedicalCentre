@@ -20,5 +20,10 @@ namespace MedicalCentre.Windows
         {
             InitializeComponent();
         }
+
+        private void CloseIcon_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Close();
+        }
     }
 }
