@@ -114,12 +114,10 @@
                     <GradientStop Color="#26527c" Offset="1.3"/>
                 </LinearGradientBrush>
             </Border.Background>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1610"></ColumnDefinition>
-                    <ColumnDefinition Width="60"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <materialDesign:PackIcon Kind="Close"   
+            <Frame x:Name="MainFrame" Grid.Column="1"  />
+        </Border>
+            
+        <materialDesign:PackIcon Kind="Close"   
                                 Grid.Column="2"
                                 VerticalAlignment="Top"
                                 Width="20"
@@ -127,9 +125,5 @@
                                 HorizontalAlignment="Right"
                                 Opacity="0.3"
                                 Margin="0 13 14 0" MouseDoubleClick="CloseIcon_DoubleClick"/>
-                <Frame x:Name="MainFrame" Grid.Column="1"/>
-            </Grid>
-        </Border>
-        
     </Grid>
 </Window>
