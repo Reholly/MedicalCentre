@@ -1,7 +1,6 @@
-﻿using System.Collections;
+﻿using MedicalCentre.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using MedicalCentre.Models;
 
 namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {

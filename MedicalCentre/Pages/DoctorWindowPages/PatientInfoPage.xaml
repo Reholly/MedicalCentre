@@ -6,8 +6,9 @@
       xmlns:local="clr-namespace:MedicalCentre.Pages.DoctorWindowPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PatientInfoPage"
-      Background="Azure">
+      Title="Patient's Info"
+      Background="Azure"
+      ShowsNavigationUI="False">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -18,8 +19,12 @@
         <Menu Height="17.5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" Background="LightGray">
             <MenuItem Header="View" Height="17.5">
                 <MenuItem Header="Patient's Notes" Command="{Binding ViewPatientsNotes}"/>
+                <MenuItem Header="Patient's Examinations" Command="{Binding ViewPatientsExaminationsCommand}"/>
             </MenuItem>
-            <MenuItem Header="Add" Height="17.5" Command="{Binding}"/>
+            <MenuItem Header="Add" Height="17.5">
+                <MenuItem/>
+                <MenuItem/>
+            </MenuItem>
         </Menu>
         <Frame Grid.Column="0" x:Name="LeftFrame" Margin="0 17.5 0 0" Background="Azure"/>
     </Grid>

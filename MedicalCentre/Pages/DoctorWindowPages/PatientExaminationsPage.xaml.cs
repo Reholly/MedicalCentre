@@ -5,12 +5,12 @@ using System.Windows.Controls;
 
 namespace MedicalCentre.Pages.DoctorWindowPages
 {
-    public partial class PatientsNotesPage : Page
+    public partial class PatientExaminationsPage : Page
     {
-        public PatientsNotesPage(IEnumerable<Note>notes)
+        public PatientExaminationsPage(IEnumerable<MedicalExamination> examinations)
         {
             InitializeComponent();
-            DataContext = new PatientNotesPageViewModel(notes);
+            DataContext = new PatientExaminationPageViewModel(examinations);
         }
     }
 }

@@ -1,11 +1,9 @@
 ﻿using MedicalCentre.Models;
 using MedicalCentre.Pages.DoctorWindowPages;
-using MedicalCentre.Services;
 using MedicalCentre.Windows;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Navigation;
 
 namespace MedicalCentre.ViewModels
 {
