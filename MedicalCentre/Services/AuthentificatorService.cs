@@ -33,5 +33,10 @@ namespace MedicalCentre.Services
         {
             return await authentificationService.Register(id, password, employee);
         } 
+
+        public void CheckRole(Role role, Account currentAccount)
+        {
+            authentificationService.CheckRole(role, currentAccount);
+        }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MedicalCentre.Windows"
         mc:Ignorable="d"
-        Title="DoctorWindow" Height="450" Width="800" Background="Azure">
+        Title="Окно Врачебного персонала" Height="450" Width="800" Background="Azure">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

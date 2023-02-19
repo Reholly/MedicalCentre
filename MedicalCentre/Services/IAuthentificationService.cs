@@ -1,8 +1,4 @@
 ﻿using MedicalCentre.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MedicalCentre.Services
@@ -17,5 +13,8 @@ namespace MedicalCentre.Services
         {
             return new Account(1000000, null, null);
         }
+
+        public void CheckRole(Role role, Account currentAccount);
+
     }
 }
