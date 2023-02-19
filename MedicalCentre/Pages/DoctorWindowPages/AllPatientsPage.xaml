@@ -7,16 +7,16 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="All Patients"
-      Background="Azure"
+      Background="Transparent"
       ShowsNavigationUI="False">
     <Grid>
-        <Menu Height="17.5" VerticalAlignment="Top">
+        <Menu Height="17.5" VerticalAlignment="Top" Background="LightGray">
             <MenuItem Header="Add" Command="{Binding AddPatientCommand}"/>
             <MenuItem Header="Delete" Command="{Binding DeletePatientCommand}"/>
             <MenuItem Header="Show Info" Command="{Binding ShowPatientInfoCommand}"/>
         </Menu>
         <DataGrid Grid.Column="0" AutoGenerateColumns="True"
-                  Background="Azure" Margin="0 17.5 0 0" CanUserAddRows="True" CanUserDeleteRows="True" 
+                  Background="AliceBlue" Margin="0 17.5 0 0" CanUserAddRows="True" CanUserDeleteRows="True" 
                   CanUserReorderColumns="True" ItemsSource="{Binding Patients}" SelectedItem="{Binding SelectedPatient}"/>
     </Grid>
 </Page>
