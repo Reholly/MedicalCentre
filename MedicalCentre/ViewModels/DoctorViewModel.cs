@@ -10,8 +10,6 @@ namespace MedicalCentre.ViewModels
     public class DoctorViewModel
     {
         private readonly DoctorWindow window;
-        public ObservableCollection<Appointment> Appointments { get; set; } = new();
-        public Appointment SelectedAppointment { get; set; }
         public ICommand ShowInputHelpCommand { get; set; }
         public ICommand ShowTodaysAppointmentsCommand { get; set; }
         public ICommand ShowAllPatientsCommand { get; set; }

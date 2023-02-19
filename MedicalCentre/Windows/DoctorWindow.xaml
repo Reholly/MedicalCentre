@@ -15,24 +15,15 @@
         <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                       x:Name="Splitter"/>
         <Menu Grid.ColumnSpan="3" VerticalAlignment="Top" Height="17.5">
-            <MenuItem Header="Create">
-                <MenuItem Header="Patient"/>
-            </MenuItem>
             <MenuItem Header="View">
-                <MenuItem Header="Patients List">
-                    <MenuItem Header="Today's appointments" Command="{Binding ShowTodaysAppointmentsCommand}"/>
-                    <MenuItem Header="All patients" Command="{Binding ShowAllPatientsCommand}"/>
-                </MenuItem>
+                <MenuItem Header="Today's appointments" Command="{Binding ShowTodaysAppointmentsCommand}"/>
+                <MenuItem Header="All patients" Command="{Binding ShowAllPatientsCommand}"/>
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="Input" x:Name="InputHelpButton" Command="{Binding ShowInputHelpCommand}"/>
             </MenuItem>
         </Menu>
-        <DataGrid x:Name="Appointments" Grid.Column="0" AutoGenerateColumns="True"
-                  Background="Azure" Margin="0 17.5 0 0" ItemsSource="{Binding Appointments}" 
-                  SelectedItem="{Binding SelectedAppointment}" CanUserAddRows="True" CanUserDeleteRows="True" 
-                  CanUserReorderColumns="True" CanUserSortColumns="True" Visibility="Collapsed"/>
         <Frame Grid.Column="2" Margin="0 17.5 0 0" Name="DoctorRightFrame" />
-        <Frame Grid.Column="0" Margin="0 17.5 0 0 " Name="DoctorLeftFrame"/>
+        <Frame Grid.Column="0" Margin="0 17.5 0 0" Name="DoctorLeftFrame"/>
     </Grid>
 </Window>
