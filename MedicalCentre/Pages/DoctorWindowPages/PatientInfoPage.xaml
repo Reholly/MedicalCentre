@@ -21,11 +21,12 @@
                 <MenuItem Header="Patient's Notes" Command="{Binding ViewPatientsNotes}"/>
                 <MenuItem Header="Patient's Examinations" Command="{Binding ViewPatientsExaminationsCommand}"/>
             </MenuItem>
-            <MenuItem Header="Add" Height="17.5">
-                <MenuItem/>
-                <MenuItem/>
+            <MenuItem Header="Create" Height="17.5">
+                <MenuItem Header="Note" Command="{Binding CreateNoteCommand}"/>
+                <MenuItem Header="Examination" Command="{Binding CreateExaminationCommand}"/>
             </MenuItem>
         </Menu>
-        <Frame Grid.Column="0" x:Name="LeftFrame" Margin="0 17.5 0 0" Background="Azure"/>
+        <Frame Grid.Column="0" x:Name="LeftFrame" Margin="0 17.5 0 0" Background="Azure" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Column="2" x:Name="RightFrame" Margin="0 17.5 0 0" Background="Azure" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Page>
