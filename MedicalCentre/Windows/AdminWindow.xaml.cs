@@ -20,6 +20,8 @@ namespace MedicalCentre.Windows
         public AdminWindow()
         {
             InitializeComponent();
+
+            MainFrame.Content = new Analytics();
         }
 
         private void CloseIcon_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -27,7 +29,7 @@ namespace MedicalCentre.Windows
             Close();
         }
 
-        private void OpenEmployeesPage(object sender, RoutedEventArgs e)
+        public void OpenEmployeesPage(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("AAAA");
             MainFrame.Content = new EmployeesManagement();
