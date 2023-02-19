@@ -7,11 +7,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Today's Examinations" 
-      Background="Azure"
+      Background="Transparent"
       ShowsNavigationUI="False">
     <Grid>
         <DataGrid x:Name="todaysPatients" AutoGenerateColumns="True"
-                  Background="Azure" Margin="0 17.5 0 0" CanUserAddRows="False" CanUserDeleteRows="True" 
+                  Background="AliceBlue" Margin="0 17.5 0 0" CanUserAddRows="False" CanUserDeleteRows="True" 
                   CanUserReorderColumns="True" ItemsSource="{Binding Appointments}" SelectedItem="{Binding SelectedAppointment}"/>
         <Menu Height="17.5" VerticalAlignment="Top">
             <MenuItem Header="Delte Appointment" Command="{Binding DeleteAppointmentCommand}"/>
