@@ -13,8 +13,7 @@ namespace MedicalCentre.ViewModels
     {
         private readonly DoctorWindow window;
         public ObservableCollection<Appointment> Appointments { get; set; } = new();
-        public MedicalExamination SelectedAppointment { get; set; }
-        public ICommand AddRowCommand { get; set; }
+        public Appointment SelectedAppointment { get; set; }
         public ICommand ShowInputHelpCommand { get; set; }
         public ICommand ShowTodaysAppointmentsCommand { get; set; }
         public ICommand ShowAllPatientsCommand { get; set; }
@@ -22,13 +21,11 @@ namespace MedicalCentre.ViewModels
         public DoctorViewModel(DoctorWindow window)
         {
             this.window = window;
-            AddRowCommand = new RelayCommand(AddRow);
             ShowInputHelpCommand = new RelayCommand(ShowInputHelp);
             ShowTodaysAppointmentsCommand = new RelayCommand(ShowTodaysAppointments);
             ShowAllPatientsCommand = new RelayCommand(ShowAllPatients);
         }
 
-        private void AddRow() => Appointments.Add(new());
         private void ShowInputHelp() => MessageBox.Show("DateTime input foramt: MM/DD/YYYY HH:MM:SS AM (or PM)");
 
         private void CheckFrames()

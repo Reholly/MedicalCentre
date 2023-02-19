@@ -11,9 +11,10 @@
     <Grid>
         <Menu Height="17.5" VerticalAlignment="Top">
             <MenuItem Header="Add" Command="{Binding AddPatientCommand}"/>
+            <MenuItem Header="Delete" Command="{Binding DeletePatientCommand}"/>
         </Menu>
         <DataGrid x:Name="todaysPatients" Grid.Column="0" AutoGenerateColumns="True"
-                  Background="Azure" Margin="0 17.5 0 0" CanUserAddRows="False" CanUserDeleteRows="True" 
+                  Background="Azure" Margin="0 17.5 0 0" CanUserAddRows="True" CanUserDeleteRows="True" 
                   CanUserReorderColumns="True" ItemsSource="{Binding Patients}" SelectedItem="{Binding SelectedPatient}"/>
     </Grid>
 </Page>
