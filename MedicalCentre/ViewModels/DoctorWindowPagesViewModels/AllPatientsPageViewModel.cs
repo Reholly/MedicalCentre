@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MedicalCentre.Models;
+using MedicalCentre.Pages.DoctorWindowPages;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Navigation;
-using MedicalCentre.Models;
-using MedicalCentre.Services;
 
 namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {
@@ -30,7 +25,7 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
         private void ShowPatientInfo()
         {
             NavigationWindow window = new NavigationWindow();
-            window.Content = new object();
+            window.Content = new PatientInfoPage(SelectedPatient);
             window.Show();
         }
     }

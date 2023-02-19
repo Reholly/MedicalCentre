@@ -6,7 +6,9 @@
       xmlns:local="clr-namespace:MedicalCentre.Pages.DoctorWindowPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Today's Examinations" Background="Azure">
+      Title="Today's Examinations" 
+      Background="Azure"
+      ShowsNavigationUI="False">
     <Grid>
         <DataGrid x:Name="todaysPatients" AutoGenerateColumns="True"
                   Background="Azure" Margin="0 17.5 0 0" CanUserAddRows="False" CanUserDeleteRows="True" 

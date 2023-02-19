@@ -6,14 +6,16 @@
       xmlns:local="clr-namespace:MedicalCentre.Pages.DoctorWindowPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Page1">
-
+      Title="All Patients"
+      Background="Azure"
+      ShowsNavigationUI="False">
     <Grid>
         <Menu Height="17.5" VerticalAlignment="Top">
             <MenuItem Header="Add" Command="{Binding AddPatientCommand}"/>
             <MenuItem Header="Delete" Command="{Binding DeletePatientCommand}"/>
+            <MenuItem Header="Show Info" Command="{Binding ShowPatientInfoCommand}"/>
         </Menu>
-        <DataGrid x:Name="todaysPatients" Grid.Column="0" AutoGenerateColumns="True"
+        <DataGrid Grid.Column="0" AutoGenerateColumns="True"
                   Background="Azure" Margin="0 17.5 0 0" CanUserAddRows="True" CanUserDeleteRows="True" 
                   CanUserReorderColumns="True" ItemsSource="{Binding Patients}" SelectedItem="{Binding SelectedPatient}"/>
     </Grid>
