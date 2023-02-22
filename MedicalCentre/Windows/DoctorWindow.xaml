@@ -25,7 +25,7 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Help">
-                <MenuItem Header="Input" x:Name="InputHelpButton" Command="{Binding ShowInputHelpCommand}"/>
+                <MenuItem Header="Input" Command="{Binding ShowInputHelpCommand}"/>
             </MenuItem>
         </Menu>
         <DataGrid x:Name="patients" Grid.Column="0" AutoGenerateColumns="True"
