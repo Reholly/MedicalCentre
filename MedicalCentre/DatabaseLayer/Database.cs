@@ -10,7 +10,7 @@ namespace MedicalCentre.DatabaseLayer
         public async void AddItem<T>(T newItem) where T : class
         {
             await context.Set<T>().AddAsync(newItem);
-            await context.SaveChangesAsync();
+            context.SaveChangesAsync();
         }  
 
         public async Task<List<T>> GetTable()

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Models;
+using MedicalCentre.Pages.AdminWindowPages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +22,37 @@ namespace MedicalCentre.Windows
         public AdminWindow()
         {
             InitializeComponent();
+
+            MainFrame.Content = new Analytics();
+        }
+
+        private void CloseIcon_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Close();
+        }
+
+        public void OpenEmployeesPage(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new EmployeesManagement();
+        }
+
+        private void OpenPatientsPage(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new Patients();
+        }
+
+        private void OpenAnalyticsPage(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new Analytics();
+        }
+
+        private void OpenStoragePage(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new Storage();
+        }
+        private void OpentSettingsPage(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new CentreSettings();
         }
     }
 }
