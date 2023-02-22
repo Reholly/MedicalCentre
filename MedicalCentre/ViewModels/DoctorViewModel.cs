@@ -1,7 +1,5 @@
-﻿using MedicalCentre.Models;
-using MedicalCentre.Pages.DoctorWindowPages;
+﻿using MedicalCentre.Pages.DoctorWindowPages;
 using MedicalCentre.Windows;
-using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 

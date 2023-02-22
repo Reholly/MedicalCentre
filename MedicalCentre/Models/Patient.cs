@@ -16,7 +16,11 @@ namespace MedicalCentre.Models
         public List<MedicalExamination> Examinations { get; set; } = null!;
         public List<Note> Notes { get; set; } = null!;
 
-        public Patient() { }
+        public Patient()
+        {
+            Examinations = new();
+            Notes = new();
+        }
 
         public Patient(string phoneNumber, string name, string surname, string patronymic, DateOnly birthDate, List<MedicalExamination> examinations, List<Note> notes)
         {
