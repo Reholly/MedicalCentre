@@ -6,7 +6,7 @@ using System.Windows.Navigation;
 
 namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {
-    public class AllPatientsPageViewModel 
+    public class AllPatientsPageViewModel
     {
         public ObservableCollection<Patient> Patients { get; set; } = new();
         public Patient SelectedPatient { get; set; }
@@ -24,9 +24,12 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
         private void DeletePatient() => Patients.Remove(SelectedPatient);
         private void ShowPatientInfo()
         {
-            NavigationWindow window = new NavigationWindow();
-            window.Content = new PatientInfoPage(SelectedPatient);
-            window.Show();
+            if (SelectedPatient != null)
+            {
+                NavigationWindow window = new();
+                window.Content = new PatientInfoPage(SelectedPatient);
+                window.Show();
+            }
         }
     }
 }
