@@ -6,7 +6,7 @@ using System.Windows.Navigation;
 
 namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {
-    public class AllPatientsPageViewModel
+    public class AllPatientsPageViewModel 
     {
         public ObservableCollection<Patient> Patients { get; set; } = new();
         public Patient SelectedPatient { get; set; }

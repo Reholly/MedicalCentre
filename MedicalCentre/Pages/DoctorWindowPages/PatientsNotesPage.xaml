@@ -7,10 +7,10 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Patient's Notes"
-      Background="Azure" 
+      Background="Transparent" 
       ShowsNavigationUI="False">
     <Grid>
-        <DataGrid Background="Azure" ItemsSource="{Binding Notes}" 
+        <DataGrid Background="AliceBlue" ItemsSource="{Binding Notes}" 
                   Grid.Column="0" AutoGenerateColumns="True" CanUserAddRows="False" CanUserDeleteRows="False"/>
     </Grid>
 </Page>

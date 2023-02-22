@@ -20,7 +20,7 @@
                 <MenuItem Header="All patients" Command="{Binding ShowAllPatientsCommand}"/>
             </MenuItem>
             <MenuItem Header="Help">
-                <MenuItem Header="Input" x:Name="InputHelpButton" Command="{Binding ShowInputHelpCommand}"/>
+                <MenuItem Header="Input" Command="{Binding ShowInputHelpCommand}"/>
             </MenuItem>
         </Menu>
         <Frame Grid.Column="2" Margin="0 17.5 0 0" Name="DoctorRightFrame" />
