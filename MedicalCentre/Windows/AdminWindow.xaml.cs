@@ -1,4 +1,6 @@
-﻿using MedicalCentre.Pages.AdminWindowPages;
+﻿using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Models;
+using MedicalCentre.Pages.AdminWindowPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,8 @@ namespace MedicalCentre.Windows
             InitializeComponent();
 
             MainFrame.Content = new Analytics();
+
+         
         }
 
         private void CloseIcon_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -31,8 +35,26 @@ namespace MedicalCentre.Windows
 
         public void OpenEmployeesPage(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("AAAA");
             MainFrame.Content = new EmployeesManagement();
+        }
+
+        private void OpenPatientsPage(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new Patients();
+        }
+
+        private void OpenAnalyticsPage(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new Analytics();
+        }
+
+        private void OpenStoragePage(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new Storage();
+        }
+        private void OpentSettingsPage(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new CentreSettings();
         }
     }
 }

@@ -37,7 +37,16 @@ namespace MedicalCentre.Windows
             Account currentAccount = authentificator.Login(uint.Parse(login), password).Result;
 
             Database<Employee> employeeDb = new Database<Employee>();
-            currentAccount.EmployeeAccount = employeeDb.GetItemById(currentAccount.Id).Result;
+
+            if (currentAccount != null)
+            {
+                currentAccount.EmployeeAccount = employeeDb.GetItemById(currentAccount.Id).Result;
+            }
+            else
+            {
+                MessageBox.Show("Какие-то данные неверные, попробуйте снова");
+                return;
+            }
 
             Database<Role> roleDb = new Database<Role>();
             Role role = roleDb.GetItemById(currentAccount.EmployeeAccount.RoleId).Result;
