@@ -24,8 +24,6 @@ namespace MedicalCentre.Windows
             InitializeComponent();
 
             MainFrame.Content = new Analytics();
-
-         
         }
 
         private void CloseIcon_DoubleClick(object sender, MouseButtonEventArgs e)
