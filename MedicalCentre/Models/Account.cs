@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MedicalCentre.Models
 {
@@ -17,12 +12,12 @@ namespace MedicalCentre.Models
         public Account() { }
 
         public Account(Employee employeeAccount, string password)
-        { 
+        {
             EmployeeAccount = employeeAccount;
             Password = password;
         }
 
-        public Account(uint id, Employee employeeAccount,string password)
+        public Account(uint id, Employee employeeAccount, string password)
         {
             Id = id;
             EmployeeAccount = employeeAccount;
