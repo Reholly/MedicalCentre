@@ -12,7 +12,7 @@ namespace MedicalCentre.Models
         public string Specialization { get; set; } = null!;
         public double Salary { get; set; }
         public uint RoleId { get; set; }
-        
+
         public Employee() { }
 
         public Employee(string name, string surname, string patronymic, string specialization, double salary, uint role)

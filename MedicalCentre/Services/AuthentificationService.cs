@@ -44,9 +44,10 @@ namespace MedicalCentre.Services
                 if(account.Password == password)
                 {
                     LoggerService.CreateLog($"Login user {account.Id}", true);
+                    return account;
                 }
-                return account;
-                
+
+                return null;
             }
             catch(Exception ex)
             {
