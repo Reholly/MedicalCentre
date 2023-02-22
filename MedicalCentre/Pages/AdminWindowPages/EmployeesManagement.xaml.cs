@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MedicalCentre.ViewModels.AdminWindowPagesViewModels;
 
 namespace MedicalCentre.Pages.AdminWindowPages
 {
@@ -23,6 +24,7 @@ namespace MedicalCentre.Pages.AdminWindowPages
         public EmployeesManagement()
         {
             InitializeComponent();
+            DataContext = new EmployeeManagementViewModel(this);
         }
     }
 }

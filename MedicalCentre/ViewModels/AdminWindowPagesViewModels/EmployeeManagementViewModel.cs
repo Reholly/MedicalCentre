@@ -1,50 +1,38 @@
 ﻿using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
+using MedicalCentre.Pages.AdminWindowPages;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using System.Windows.Input;
+using System.Windows;
 
 namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
 {
     internal class EmployeeManagementViewModel
     {
-        public EmployeeManagementViewModel(DataGrid grid)
+        public ObservableCollection<Employee> Employees { get; set; } = new();
+        public Employee SelectedEmployee { get; set; }
+        public ICommand ShowTableCommand { get; set; }
+        private EmployeesManagement page;
+        public EmployeeManagementViewModel(EmployeesManagement page)
         {
-            DisplayEmployeeList(grid);
+            this.page = page;
+            ShowTableCommand = new RelayCommand(ShowTable);
         }
-        public void DisplayEmployeeList(DataGrid dataGrid)
+        private void ShowTable()
         {
             Database<Employee> empDb = new Database<Employee>();
-            dataGrid.AutoGenerateColumns = false;
-
-            dataGrid.ItemsSource = empDb.GetTable().Result;
-
             
-            dataGrid.Columns.Add(new DataGridTextColumn()
-            {
-                Header = "Id",
-                Binding = new Binding($"Data[{0}]")
-            });
-            dataGrid.Columns.Add(new DataGridTextColumn()
-            {
-                Header = "Name",
-                Binding = new Binding($"Data[{1}]")
-            });
-            dataGrid.Columns.Add(new DataGridTextColumn()
-            {
-                Header = "Surname",
-                Binding = new Binding($"Data[{2}]")
-            });
-            dataGrid.Columns.Add(new DataGridTextColumn()
-            {
-                Header = "Patronymic",
-                Binding = new Binding($"Data[{3}]")
-            });
-
+            var employees = empDb.GetTable().Result;
+            Employees = new ObservableCollection<Employee>(employees);
+            page.DataGridTest.ItemsSource = Employees; 
+            page.DataGridTest.Visibility = Visibility.Visible;
         }
     }
 }

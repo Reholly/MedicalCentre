@@ -26,7 +26,7 @@
                 <MenuItem Header="Input" Command="{Binding ShowInputHelpCommand}"/>
             </MenuItem>
         </Menu>
-        <Frame Grid.Column="2" Margin="0 17.5 0 0" Name="DoctorRightFrame" />
-        <Frame Grid.Column="0" Margin="0 17.5 0 0" Name="DoctorLeftFrame"/>
+        <Frame Grid.Column="2" Margin="0 17.5 0 0" Name="DoctorRightFrame" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Column="0" Margin="0 17.5 0 0" Name="DoctorLeftFrame" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
