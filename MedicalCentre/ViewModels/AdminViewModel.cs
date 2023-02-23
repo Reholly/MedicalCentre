@@ -12,7 +12,5 @@ namespace MedicalCentre.ViewModels
         {
 
         }
-
-
     }
 }

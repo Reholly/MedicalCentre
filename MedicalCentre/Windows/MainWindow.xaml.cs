@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using MedicalCentre.ViewModels;
 
 namespace MedicalCentre.Windows
 {
@@ -23,42 +24,8 @@ namespace MedicalCentre.Windows
     {
         public MainWindow()
         {
-           
-            InitializeComponent();                  
-        }
-
-        private void Login_Click(object sender, RoutedEventArgs e)
-        {
-            string login = Login.Text;
-            string password = Password.Password;
-
-            AuthentificatorService authentificator = new AuthentificatorService(new AuthentificationService());
-
-            Account currentAccount = authentificator.Login(uint.Parse(login), password).Result;
-
-            Database<Employee> employeeDb = new Database<Employee>();
-
-            if (currentAccount != null)
-            {
-                currentAccount.EmployeeAccount = employeeDb.GetItemById(currentAccount.Id).Result;
-            }
-            else
-            {
-                MessageBox.Show("Какие-то данные неверные, попробуйте снова");
-                return;
-            }
-
-            Database<Role> roleDb = new Database<Role>();
-            Role role = roleDb.GetItemById(currentAccount.EmployeeAccount.RoleId).Result;
-
-            authentificator.CheckRole(role, currentAccount);
-
-            Close();
-        }
-
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
+            InitializeComponent();
+            DataContext = new MainViewModel(this);
         }
     }
 }   

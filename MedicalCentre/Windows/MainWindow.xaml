@@ -47,7 +47,7 @@
                         Margin="0 13 14 0"
                         Background="Transparent"
                         BorderBrush="Transparent"
-                        Click="Close_Click"/>
+                        Command="{Binding CloseCommand}"/>
                 <!-- Ввод данных -->
                 <StackPanel VerticalAlignment="Center"
                             Margin="75 0">
@@ -76,7 +76,7 @@
                             Height="45"
                             materialDesign:ButtonAssist.CornerRadius="22"
                             VerticalAlignment="Center"
-                            Click="Login_Click"/>
+                            Command="{Binding LoginCommand}"/>
                     </StackPanel>
                 </StackPanel>
 
