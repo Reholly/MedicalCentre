@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="JuniorPersonalWindow" Height="450" Width="800">
     <Grid>
-        
+        <Menu Height="17.5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="LightGray">
+            <MenuItem Header="Show" Height="17.5">
+                <MenuItem Header="Storage" Command="{Binding ShowStorageItemsCommand}"/>
+            </MenuItem>
+        </Menu>
+        <Frame NavigationUIVisibility="Hidden" Name="frame"/>
     </Grid>
 </Window>

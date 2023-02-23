@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MedicalCentre.ViewModels.JuniorPersonalWindowPagesViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,17 +11,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MedicalCentre.ViewModels;
 
-namespace MedicalCentre.Windows
+namespace MedicalCentre.Pages.JuniorPersonalWindowPages
 {
-    public partial class JuniorPersonalWindow : Window
+    public partial class StorageItemsPage : Page
     {
-        public JuniorPersonalWindow()
+        public StorageItemsPage()
         {
             InitializeComponent();
-            DataContext = new JuniorPersonalViewModel(this);
+            DataContext = new StorageItemsPageViewModel();
         }
     }
 }

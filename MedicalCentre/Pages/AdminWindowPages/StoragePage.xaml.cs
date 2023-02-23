@@ -15,12 +15,9 @@ using System.Windows.Shapes;
 
 namespace MedicalCentre.Pages.AdminWindowPages
 {
-    /// <summary>
-    /// Логика взаимодействия для Storage.xaml
-    /// </summary>
-    public partial class Storage : Page
+    public partial class StoragePage : Page
     {
-        public Storage()
+        public StoragePage()
         {
             InitializeComponent();
         }

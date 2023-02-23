@@ -7,7 +7,7 @@ namespace MedicalCentre.DatabaseLayer
     public class Database<T> where T : class
     {
         private ApplicationContext context = new ApplicationContext();
-        public async void AddItem<T>(T newItem) where T : class
+        public async void AddItem<T>(T newItem) where T : class 
         {
             await context.Set<T>().AddAsync(newItem);
             context.SaveChangesAsync();
