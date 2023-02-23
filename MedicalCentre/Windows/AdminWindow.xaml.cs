@@ -1,23 +1,10 @@
-﻿using MedicalCentre.DatabaseLayer;
-using MedicalCentre.Models;
-using MedicalCentre.Pages.AdminWindowPages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MedicalCentre.Pages.AdminWindowPages;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MedicalCentre.Windows
 {
-        public partial class AdminWindow : Window
+    public partial class AdminWindow : Window
     {
         public AdminWindow()
         {
@@ -48,7 +35,7 @@ namespace MedicalCentre.Windows
 
         private void OpenStoragePage(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Storage();
+            MainFrame.Content = new StoragePage();
         }
         private void OpentSettingsPage(object sender, RoutedEventArgs e)
         {

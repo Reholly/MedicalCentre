@@ -18,7 +18,7 @@
         <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Background="White"/>
         <Menu Height="17.5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" Background="LightGray">
             <MenuItem Header="View" Height="17.5">
-                <MenuItem Header="Patient's Notes" Command="{Binding ViewPatientsNotes}"/>
+                <MenuItem Header="Patient's Notes" Command="{Binding ViewPatientsNotesCommand}"/>
                 <MenuItem Header="Patient's Examinations" Command="{Binding ViewPatientsExaminationsCommand}"/>
             </MenuItem>
             <MenuItem Header="Create" Height="17.5">
