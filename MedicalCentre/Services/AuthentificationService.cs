@@ -19,6 +19,7 @@ namespace MedicalCentre.Services
             catch (Exception ex)
             {
                 LoggerService.CreateLog(ex.Message, false);
+                return Result.Error;
             }
 
             if(id == accountDatabase.GetTable().Result.Find(p => p.Id == id).Id)
@@ -97,6 +98,7 @@ namespace MedicalCentre.Services
         Success,
         UsernameAlreadyExist,
         WrongPassword,
-        WrongUsername
+        WrongUsername,
+        Error
     }
 }
