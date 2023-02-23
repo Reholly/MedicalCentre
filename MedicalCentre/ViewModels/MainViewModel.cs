@@ -2,11 +2,6 @@
 using MedicalCentre.Models;
 using MedicalCentre.Services;
 using MedicalCentre.Windows;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 
@@ -24,31 +19,32 @@ namespace MedicalCentre.ViewModels
             CloseCommand = new RelayCommand(Close);
         }
 
-        private void Login()
+        private async void Login()
         {
             string login = window.Login.Text;
             string password = window.Password.Password;
 
             AuthentificatorService authentificator = new AuthentificatorService(new AuthentificationService());
-
-            Account currentAccount = authentificator.Login(uint.Parse(login), password).Result;
-
+            Account currentAccount = await authentificator.Login(uint.Parse(login), password);
+            
             Database<Employee> employeeDb = new Database<Employee>();
 
             if (currentAccount != null)
             {
-                currentAccount.EmployeeAccount = employeeDb.GetItemById(currentAccount.Id).Result;
+                Employee id = await employeeDb.GetItemByIdAsync(currentAccount.Id);
+                currentAccount.EmployeeAccountId = id.Id;
             }
             else
             {
-                MessageBox.Show("Какие-то данные неверные, попробуйте снова");
+                MessageBox.Show("Какие-то данные неверны, попробуйте снова");
                 return;
             }
 
             Database<Role> roleDb = new Database<Role>();
-            Role role = roleDb.GetItemById(currentAccount.EmployeeAccount.RoleId).Result;
+            Employee currentEmployee = await employeeDb.GetItemByIdAsync(currentAccount.EmployeeAccountId);
+            Role role = await roleDb.GetItemByIdAsync(currentEmployee.RoleId); 
 
-            authentificator.CheckRole(role, currentAccount);
+            await authentificator.CheckRole(role, currentAccount);
 
             window.Close();
         }

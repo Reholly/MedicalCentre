@@ -53,14 +53,14 @@
                             Margin="75 0">
                     <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Name="Login"
-                             Text="заглушка"
+                             Text="2"
                              materialDesign:HintAssist.Hint="Логин"
                              materialDesign:HintAssist.FloatingOffset="0, -20"
                              BorderBrush="#c5c8cc"
                              BorderThickness=" 0 0 0 1.5"/>
                     <PasswordBox Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
                              Name="Password"
-                             Password="1234"
+                             Password="admin"
                              materialDesign:HintAssist.Hint="Пароль"
                              materialDesign:HintAssist.FloatingOffset="0, -20"
                              BorderBrush="#c5c8cc"
@@ -76,6 +76,7 @@
                             Height="45"
                             materialDesign:ButtonAssist.CornerRadius="22"
                             VerticalAlignment="Center"
+                           
                             Command="{Binding LoginCommand}"/>
                     </StackPanel>
                 </StackPanel>
