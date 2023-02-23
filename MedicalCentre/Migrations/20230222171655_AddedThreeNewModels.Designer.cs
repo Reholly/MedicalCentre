@@ -3,6 +3,7 @@ using System;
 using MedicalCentre.DatabaseLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedicalCentre.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230222171655_AddedThreeNewModels")]
+    partial class AddedThreeNewModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,33 +40,6 @@ namespace MedicalCentre.Migrations
                     b.HasIndex("EmployeeAccountId");
 
                     b.ToTable("Accounts");
-                });
-
-            modelBuilder.Entity("MedicalCentre.Models.Appointment", b =>
-                {
-                    b.Property<uint>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int unsigned");
-
-                    b.Property<DateTime>("AppointmentTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<uint>("DoctorId")
-                        .HasColumnType("int unsigned");
-
-                    b.Property<bool>("IsFinished")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<uint>("PatientId")
-                        .HasColumnType("int unsigned");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("PatientId");
-
-                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("MedicalCentre.Models.Employee", b =>
@@ -265,25 +241,6 @@ namespace MedicalCentre.Migrations
                         .IsRequired();
 
                     b.Navigation("EmployeeAccount");
-                });
-
-            modelBuilder.Entity("MedicalCentre.Models.Appointment", b =>
-                {
-                    b.HasOne("MedicalCentre.Models.Employee", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MedicalCentre.Models.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Doctor");
-
-                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("MedicalCentre.Models.MedicalExamination", b =>

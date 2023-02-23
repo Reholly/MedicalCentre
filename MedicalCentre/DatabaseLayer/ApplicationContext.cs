@@ -14,6 +14,7 @@ namespace MedicalCentre.DatabaseLayer
         public DbSet<Note> Notes { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
 
         public ApplicationContext()
         {
