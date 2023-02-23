@@ -3,6 +3,7 @@ using MedicalCentre.Models;
 using MedicalCentre.Windows;
 using System;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MedicalCentre.Services
 {
@@ -13,24 +14,19 @@ namespace MedicalCentre.Services
             Database<Account> accountDatabase = new Database<Account>();
             try
             {
-                accountDatabase.AddItem(employee);
-                LoggerService.CreateLog($"Register new Account:{id}:{password}", true);
+                await Task.Run(() => accountDatabase.AddItemAsync(new Account(id, employee.Id, password)));
+                await LoggerService.CreateLog($"Register new Account:{id}:{password}", true);
             }
             catch (Exception ex)
             {
-                LoggerService.CreateLog(ex.Message, false);
+                await LoggerService.CreateLog(ex.Message, false);
                 return Result.Error;
             }
 
-            if(id == accountDatabase.GetTable().Result.Find(p => p.Id == id).Id)
-            {
-                return Result.UsernameAlreadyExist;
-
-            }
             Database<Employee> employeeDatabase = new Database<Employee>();
-            employeeDatabase.AddItem(employee);
-            Account account = new Account(id, employee, password);
-            accountDatabase.AddItem(account);
+            await employeeDatabase.AddItemAsync(employee);
+            Account account = new Account(id, employee.Id, password);
+            await accountDatabase.AddItemAsync(account);
 
             return Result.Success;
         }
@@ -41,10 +37,10 @@ namespace MedicalCentre.Services
 
             try
             {
-                Account account = accountDatabase.GetItemById(id).Result;
+                Account account = await accountDatabase.GetItemByIdAsync(id);
                 if(account.Password == password)
                 {
-                    LoggerService.CreateLog($"Login user {account.Id}", true);
+                    await LoggerService.CreateLog($"Login user {account.Id}", true);
                     return account;
                 }
 
@@ -52,43 +48,43 @@ namespace MedicalCentre.Services
             }
             catch(Exception ex)
             {
-                LoggerService.CreateLog(ex.Message, false);
+                await LoggerService.CreateLog(ex.Message, false);
                 return null;
             }
         }
 
-        public void CheckRole(Role role, Account currentAccount)
+        public async Task CheckRole(Role role, Account currentAccount)
         {
             switch (role.Title)
             {
                 case "Doctor":
                     DoctorWindow doctor = new();
                     doctor.Show();
-                    LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
+                    await LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
                     break;
                 case "SystemAdmin":
                     SystemAdminWindow sysAdmin = new();
                     sysAdmin.Show();
-                    LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
+                    await LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
                     break;
                 case "Admin":
                     AdminWindow admin = new();
                     admin.Show();
-                    LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
+                    await LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
                     break;
                 case "Operator":
                     OperatorWindow operatorWindow = new();
                     operatorWindow.Show();
-                    LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
+                    await LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
                     break;
                 case "JuniorPersonal":
                     JuniorPersonalWindow juniorPersonal = new JuniorPersonalWindow();
                     juniorPersonal.Show();
-                    LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
+                    await LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
                     break;
                 default:
-                    throw new Exception("Wrong role, please, try later and call System Admin");
-                    LoggerService.CreateLog("Неверно указана роль", false);
+                    await LoggerService.CreateLog("Неверно указана роль", false);
+                    MessageBox.Show("Проблемы с получением роли. Перезайдите и выполните вход заново или свяжитесь с сис.админом");
                     break;
             }
         }

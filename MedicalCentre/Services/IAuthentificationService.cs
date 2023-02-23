@@ -7,14 +7,17 @@ namespace MedicalCentre.Services
     {
         public async Task<Result> Register(uint id, string password, Employee employee)
         {
-            return Result.Success;
+            return await Task.Run(() => Result.Success);
         }
         public async Task<Account> Login(uint id, string password)
         {
-            return new Account(1000000, null, null);
+            return await Task.Run(() => new Account(1000000, 0, null));
         }
 
-        public void CheckRole(Role role, Account currentAccount);
+        public async Task CheckRole(Role role, Account currentAccount)
+        {
+
+        }
 
     }
 }

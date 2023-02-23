@@ -18,11 +18,11 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
     {
         public ObservableCollection<Employee> Employees { get; set; } = new();
         public ObservableCollection<Account> Accounts { get; set; } = new();    
-        public Employee SelectedEmployee { get; set; }
-        public ICommand ShowTableCommand { get; set; }
-        public ICommand RegisterCommand{ get; set; }
-        public ICommand EditCommand { get; set; }
-        public ICommand DeleteCommand { get; set; }
+        public Employee? SelectedEmployee { get; set; }
+        public ICommand? ShowTableCommand { get; set; }
+        public ICommand? RegisterCommand{ get; set; }
+        public ICommand? EditCommand { get; set; }
+        public ICommand? DeleteCommand { get; set; }
 
         private EmployeesManagement page;
         public EmployeeManagementViewModel(EmployeesManagement page)
@@ -30,12 +30,14 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
             this.page = page;
             ShowTableCommand = new RelayCommand(ShowTable);
             RegisterCommand = new RelayCommand(RegisterEmployee);
+            DeleteCommand = new RelayCommand(DeleteEmployee);
+            EditCommand = new RelayCommand(EditEmployee);
         }
-        private void ShowTable()
+        private async void ShowTable()
         {
             Database<Employee> empDb = new Database<Employee>();
             
-            var employees = empDb.GetTable().Result;
+            var employees = await empDb.GetTableAsync();
             Employees = new ObservableCollection<Employee>(employees);
 
             page.EmployeesGrid.ItemsSource = Employees; 
@@ -43,7 +45,7 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
 
             Database<Account> accDb = new Database<Account>();
 
-            var accounts = accDb.GetTable().Result;
+            var accounts = await accDb.GetTableAsync();
             Accounts = new ObservableCollection<Account>(accounts);
 
             page.AccountsGrid.ItemsSource = Accounts;
@@ -51,8 +53,19 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
         }
         private void RegisterEmployee()
         {
-            MessageBox.Show("регистр");
             RegisterEmployeeForm window = new RegisterEmployeeForm();
+            window.Show();
+        }
+
+        private void DeleteEmployee()
+        {
+            DeleteEmployee window = new DeleteEmployee();
+            window.Show();
+        }
+        private void EditEmployee()
+        {
+            MessageBox.Show("edit");
+            EditEmployee window = new EditEmployee();
             window.Show();
         }
     }
