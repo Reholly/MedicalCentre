@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,20 +8,49 @@ namespace MedicalCentre.DatabaseLayer
     public class Database<T> where T : class
     {
         private ApplicationContext context = new ApplicationContext();
-        public async void AddItem<T>(T newItem) where T : class 
+
+        public async Task AddItemAsync(T newItem)
         {
             await context.Set<T>().AddAsync(newItem);
-            context.SaveChangesAsync();
+            await context.SaveChangesAsync();
         }  
 
-        public async Task<List<T>> GetTable()
+        public async Task DeleteItemAsync(T newItem)
+        {
+            context.Set<T>().Remove(newItem);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task UpdateItemAsync(T item)
+        {
+            context.Set<T>().Update(item);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task<List<T>> GetTableAsync()
+        {
+            return await context.Set<T>().ToListAsync();
+        }
+
+        public async Task<T> GetItemByIdAsync(uint id)
+        {
+            return await context.Set<T>().FindAsync(id);
+        } 
+
+        public void AddItem(T newItem)
+        {
+            context.Set<T>().AddAsync(newItem);
+            context.SaveChangesAsync();
+        }
+
+        public List<T> GetTable()
         {
             return context.Set<T>().ToList();
         }
-
-        public async Task<T> GetItemById(uint id)
+        
+        public T GetItemById(uint id)
         {
             return context.Set<T>().Find(id);
-        }       
+        }
     }
 }
