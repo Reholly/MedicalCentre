@@ -1,27 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MedicalCentre.Pages.AdminWindowPages;
+using MedicalCentre.Pages.OperatorPages;
+using MedicalCentre.Services;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MedicalCentre.Windows
 {
-    /// <summary>
-    /// Логика взаимодействия для OperatorWindow.xaml
-    /// </summary>
     public partial class OperatorWindow : Window
     {
-        public OperatorWindow()
+        public OperatorWindow(uint employeeId)
         {
             InitializeComponent();
+
+            EmployeeNameBinderService.BindName(employeeId, RoleName, EmployeeName);
+
+            MainFrame.Content = new Analytics();
+        }
+
+        private void Open_Patients(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new Patients();
+        }
+
+        private void Open_AppointmentsManagement(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new AppointmentsManagement();
+        }
+
+        private void CloseIcon_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Close();
         }
     }
 }

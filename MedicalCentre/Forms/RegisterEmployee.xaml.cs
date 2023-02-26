@@ -41,7 +41,8 @@ namespace MedicalCentre.Forms
             }
             catch(Exception ex)
             {
-                await LoggerService.CreateLog("error while registering", false);
+                //MessageBox.Show("Что-то пошло не так. Неверные данные или сбой на стороне сервера, обратитесь к сис.админу и попробуйте позже.");
+                await LoggerService.CreateLog(ex.Message, false);
                 Close();
             }
         }

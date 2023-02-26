@@ -68,12 +68,12 @@ namespace MedicalCentre.Services
                     await LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
                     break;
                 case "Admin":
-                    AdminWindow admin = new();
+                    AdminWindow admin = new AdminWindow(currentAccount.EmployeeAccountId);
                     admin.Show();
                     await LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
                     break;
                 case "Operator":
-                    OperatorWindow operatorWindow = new();
+                    OperatorWindow operatorWindow = new OperatorWindow(currentAccount.EmployeeAccountId);
                     operatorWindow.Show();
                     await LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
                     break;

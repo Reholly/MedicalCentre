@@ -1,5 +1,7 @@
-﻿using MedicalCentre.Pages.AdminWindowPages;
-using MedicalCentre.Pages.GeneralPages;
+﻿using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Models;
+using MedicalCentre.Pages.AdminWindowPages;
+using MedicalCentre.Services;
 using System.Windows;
 using System.Windows.Input;
 
@@ -7,9 +9,11 @@ namespace MedicalCentre.Windows
 {
     public partial class AdminWindow : Window
     {
-        public AdminWindow()
+        public AdminWindow(uint employeeId)
         {
             InitializeComponent();
+
+            EmployeeNameBinderService.BindName(employeeId, RoleName, EmployeeName);
 
             MainFrame.Content = new Analytics();
         }

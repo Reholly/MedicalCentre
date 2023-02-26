@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Models;
 using MedicalCentre.ViewModels;
 
 namespace MedicalCentre.Windows

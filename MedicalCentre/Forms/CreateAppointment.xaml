@@ -1,0 +1,52 @@
+﻿<Window x:Class="MedicalCentre.Forms.CreateAppointment"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MedicalCentre.Forms"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="CreateAppointment" Height="200" Width="310">
+    <Grid>
+        <StackPanel VerticalAlignment="Top"
+                            Margin="20 0" >
+
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Name="Id"
+                                 Text=""
+                                 materialDesign:HintAssist.Hint="ID(приём)"
+                                 materialDesign:HintAssist.FloatingOffset="0, -20"
+                                 BorderBrush="#c5c8cc"
+                                 BorderThickness=" 0 0 0 1.5"/>
+           
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Name="DoctorId"
+                                 Text=""
+                                 materialDesign:HintAssist.Hint="ID(доктор)"
+                                 materialDesign:HintAssist.FloatingOffset="0, -20"
+                                 BorderBrush="#c5c8cc"
+                                 BorderThickness=" 0 0 0 1.5"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Name="AppointmentTime"
+                                 Text=""
+                                 materialDesign:HintAssist.Hint="Время приёма (yyyy-MM-dd HH:mm)"
+                                 materialDesign:HintAssist.FloatingOffset="0, -20"
+                                 BorderBrush="#c5c8cc"
+                                 BorderThickness=" 0 0 0 1.5"/>
+            
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Удалить"
+                                Margin="0 10"
+                                Background="#679ED2"
+                                Foreground="#ffffff"
+                                FontSize="14"
+                                Width="260"
+                                Height="45"
+                                materialDesign:ButtonAssist.CornerRadius="22"
+                                VerticalAlignment="Center"
+                                Click="Create"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
