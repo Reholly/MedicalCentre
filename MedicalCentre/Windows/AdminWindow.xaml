@@ -38,10 +38,10 @@
                         
                     </Border>
                     <StackPanel>
-                        <TextBlock Text="Евгений Юрьевич" FontSize="15"
+                        <TextBlock Name="EmployeeName" Text="ffff" FontSize="15"
                                    Margin="5 0 0 5" Foreground="#c2cfff" />
-                        <TextBlock Text="Администратор" FontSize="11"
-                                   Margin="5 0 0 0" Foreground="#7788bf"/>
+                        <TextBlock Name="RoleName" Text="fff" FontSize="11"
+                                   Margin="10 0 0 5" Foreground="#7788bf"/>
                     </StackPanel>
                 </StackPanel>
                 
@@ -95,18 +95,7 @@
                         <TextBlock Foreground="#c2cfff" Text="Складской учёт и оборот" FontSize="16" />
                     </StackPanel>
                 </Button>
-                <Button Margin="0 10 0 10" Background="Transparent" Height="40" BorderBrush="Transparent" 
-                        HorizontalAlignment="Left" VerticalAlignment="Center" Click="OpentSettingsPage">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Settings"
-                                                 Opacity="0.2" 
-                                                 Height="21" 
-                                                 Width="21"
-                                                 Margin="0 0 5 0"/>
-
-                        <TextBlock Foreground="#c2cfff" Text="Управление системой" FontSize="16" />
-                    </StackPanel>
-                </Button>
+                
             </StackPanel>
         </Border>
         

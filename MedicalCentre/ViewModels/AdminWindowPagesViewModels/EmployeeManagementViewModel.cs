@@ -1,26 +1,20 @@
 ﻿using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Forms;
 using MedicalCentre.Models;
 using MedicalCentre.Pages.AdminWindowPages;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows;
-using MedicalCentre.Forms;
+using System.Windows.Input;
 
 namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
 {
     internal class EmployeeManagementViewModel
     {
         public ObservableCollection<Employee> Employees { get; set; } = new();
-        public ObservableCollection<Account> Accounts { get; set; } = new();    
+        public ObservableCollection<Account> Accounts { get; set; } = new();
         public Employee? SelectedEmployee { get; set; }
         public ICommand? ShowTableCommand { get; set; }
-        public ICommand? RegisterCommand{ get; set; }
+        public ICommand? RegisterCommand { get; set; }
         public ICommand? EditCommand { get; set; }
         public ICommand? DeleteCommand { get; set; }
 
@@ -36,11 +30,11 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
         private async void ShowTable()
         {
             Database<Employee> empDb = new Database<Employee>();
-            
+
             var employees = await empDb.GetTableAsync();
             Employees = new ObservableCollection<Employee>(employees);
 
-            page.EmployeesGrid.ItemsSource = Employees; 
+            page.EmployeesGrid.ItemsSource = Employees;
             page.EmployeesGrid.Visibility = Visibility.Visible;
 
             Database<Account> accDb = new Database<Account>();
@@ -64,7 +58,6 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
         }
         private void EditEmployee()
         {
-            MessageBox.Show("edit");
             EditEmployee window = new EditEmployee();
             window.Show();
         }

@@ -1,4 +1,4 @@
-﻿using MedicalCentre.ViewModels.AdminWindowPagesViewModels;
+﻿using MedicalCentre.ViewModels.OperatorWindowPagesViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +14,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MedicalCentre.Pages.AdminWindowPages
+namespace MedicalCentre.Pages.OperatorPages
 {
-    /// <summary>
-    /// Логика взаимодействия для Patients.xaml
-    /// </summary>
-    public partial class Patients : Page
+    public partial class AppointmentsManagement : Page
     {
-        public Patients()
+        public AppointmentsManagement()
         {
             InitializeComponent();
-            DataContext = new PatientsViewModel(this);
+            DataContext = new AppointmentsManagementViewModel(this);
         }
     }
 }
