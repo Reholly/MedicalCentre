@@ -37,7 +37,7 @@
                             FontSize="18"
                             materialDesign:ButtonAssist.CornerRadius="22"
                             VerticalAlignment="Top" Content="Обновить"/>
-                <DataGrid Grid.Column="0" Grid.Row="0" Background="Transparent" AutoGenerateColumns="True" 
+                <DataGrid Grid.Column="0"  VerticalScrollBarVisibility="Auto" MaxHeight="800" Grid.Row="0" Background="Transparent" AutoGenerateColumns="True" 
                       ItemsSource="{Binding Patients}" 
                       Visibility="Collapsed" Name="PatientsGrid" CanUserResizeColumns="False" CanUserAddRows="False"
                       CanUserDeleteRows="False" CanUserReorderColumns="False" 

@@ -22,8 +22,9 @@ namespace MedicalCentre.Services
             {
                 CurrentAccount = await authentificationService.Login(id, password);
             }
-            catch(Exception)
+            catch(Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 CurrentAccount = null;
             }
 

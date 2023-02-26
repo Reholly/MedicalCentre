@@ -42,8 +42,8 @@
                       Visibility="Collapsed" Name="EmployeesGrid" CanUserResizeColumns="False" CanUserAddRows="False"
                       CanUserDeleteRows="False" CanUserReorderColumns="False" 
                       CanUserResizeRows="False" CanUserSortColumns="False" IsReadOnly="True" FontWeight="Bold"/>
-               
-                <DataGrid Grid.Column="0"  Background="Transparent" AutoGenerateColumns="True" 
+
+                <DataGrid Grid.Column="0"   VerticalScrollBarVisibility="Auto" MaxHeight="800" Background="Transparent" AutoGenerateColumns="True" 
                       ItemsSource="{Binding Accounts}" SelectedItem="{Binding SelectedAccount}"
                       Visibility="Collapsed" Name="AccountsGrid" CanUserResizeColumns="False" CanUserAddRows="False"
                       CanUserDeleteRows="False" CanUserReorderColumns="False" 
