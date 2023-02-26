@@ -49,9 +49,9 @@
                 <Separator Height="1" Margin="20 30" Background="#465589"/>
 
                 <Button Margin="0 10 0 10" Background="Transparent" Height="40" BorderBrush="Transparent" 
-                        HorizontalAlignment="Left" VerticalAlignment="Center" Click="Open_AppointmentsManagement">
+                        HorizontalAlignment="Left" VerticalAlignment="Center" Click="Open_DatabaseSettings">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="People"
+                        <materialDesign:PackIcon Kind="Settings"
                                                  Opacity="0.2" 
                                                  Height="21" 
                                                  Width="21"
@@ -62,9 +62,9 @@
                 </Button>
 
                 <Button Margin="0 10 0 10" Background="Transparent" Height="40" BorderBrush="Transparent"
-                        HorizontalAlignment="Left" VerticalAlignment="Center" Click="Open_Patients">
+                        HorizontalAlignment="Left" VerticalAlignment="Center" Click="Open_LogsPanel">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Analytics"
+                        <materialDesign:PackIcon Kind="Note"
                                                  Opacity="0.2" 
                                                  Height="21" 
                                                  Width="21"
