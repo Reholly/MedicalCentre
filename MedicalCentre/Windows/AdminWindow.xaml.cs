@@ -1,5 +1,6 @@
 using MedicalCentre.Pages.AdminWindowPages;
 using MedicalCentre.Pages.GeneralPages;
+using MedicalCentre.Services;
 using System.Windows;
 using System.Windows.Input;
 
@@ -40,6 +41,7 @@ namespace MedicalCentre.Windows
         {
             MainFrame.Content = new StoragePage();
         }
+
         private void OpentSettingsPage(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = new CentreSettings();

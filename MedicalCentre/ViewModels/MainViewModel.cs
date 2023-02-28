@@ -32,7 +32,7 @@ namespace MedicalCentre.ViewModels
             if (currentAccount != null)
             {
                 Employee id = await employeeDb.GetItemByIdAsync(currentAccount.Id);
-                currentAccount.EmployeeAccountId = id.Id;
+                currentAccount.Id = id.Id;
             }
             else
             {
@@ -41,7 +41,7 @@ namespace MedicalCentre.ViewModels
             }
 
             Database<Role> roleDb = new Database<Role>();
-            Employee currentEmployee = await employeeDb.GetItemByIdAsync(currentAccount.EmployeeAccountId);
+            Employee currentEmployee = await employeeDb.GetItemByIdAsync(currentAccount.Id);
             Role role = await roleDb.GetItemByIdAsync(currentEmployee.RoleId); 
 
             await authentificator.CheckRole(role, currentAccount);

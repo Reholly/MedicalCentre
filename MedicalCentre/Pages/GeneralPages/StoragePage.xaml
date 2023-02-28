@@ -27,6 +27,6 @@
             </TextBlock>
 
         </Border>
-
+        <DataGrid Visibility="Collapsed" x:Name="Items" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}"/>
     </Grid>
 </Page>
