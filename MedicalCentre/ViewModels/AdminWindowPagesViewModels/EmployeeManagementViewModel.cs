@@ -8,11 +8,12 @@ using System.Windows.Input;
 
 namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
 {
-    internal class EmployeeManagementViewModel
+    public class EmployeeManagementViewModel
     {
         public ObservableCollection<Employee> Employees { get; set; } = new();
         public ObservableCollection<Account> Accounts { get; set; } = new();
         public Employee? SelectedEmployee { get; set; }
+        public Account? SelectedAccount { get; set; }
         public ICommand? ShowTableCommand { get; set; }
         public ICommand? RegisterCommand { get; set; }
         public ICommand? EditCommand { get; set; }
