@@ -11,7 +11,7 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
 {
     internal class AppointmentCommand : Command, IListener
     {
-        public override string Name => "/appointment";
+        public override string Name => "Запись";
 
         public CommandExecutor Executor { get; }
 
@@ -26,12 +26,7 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
         {
             Message msg = update.Message;
             long chatId = msg.Chat.Id;
-            //client.SendTextMessageAsync();
-        }
-
-        public void GetUpdate(Update update, CommandExecutor listener)
-        {
-
+            client.SendTextMessageAsync(chatId, "");
         }
 
         public void GetUpdate(Update update)

@@ -20,7 +20,7 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
         private DateOnly? birthDate = null;
 
 
-        public override string Name => "/register";
+        public override string Name => "Регистрация";
 
         public CommandExecutor Executor { get; }
 
@@ -32,7 +32,7 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
         {
             long chatId = update.Message.Chat.Id;
             Executor.StartListen(this);
-            RequestContact(chatId, client);
+            RequestContact(chatId);
         }
 
         public void GetUpdate(Update update)
@@ -51,6 +51,7 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
                     {
                         client.SendTextMessageAsync(chatId, "Вы уже зарегестрированы!");
                         db.AutorizeUser(new Models.User(chatId, patient));
+                        ShowMenuBtn(chatId);
                         Executor.StopListen();
                         return;
                     }
@@ -99,23 +100,34 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
 
                 DatabaseTelegram db = new DatabaseTelegram();
                 db.RegisterUser(new Models.User(chatId, patient));
-                client.SendTextMessageAsync(chatId, $"Вы успешно зарегестрированны!");
+                client.SendTextMessageAsync(chatId, "Вы успешно зарегестрированны!");
+                ShowMenuBtn(chatId);
+
                 Logger.Log($"{patient.Name} registered by phone({patient.PhoneNumber}) in chat {chatId}");
                 Executor.StopListen();
             }
         }
 
-        private static async Task<Message> RequestContact(long chatId, TelegramBotClient client)
+        private void ShowMenuBtn(long chatId)
         {
-            ReplyKeyboardMarkup requestReplyKeyboard = new(
-               new[]
-               {
-                KeyboardButton.WithRequestContact("Отправить мой телефон"),
-               });
+            KeyboardButton menuBtn = new KeyboardButton("Меню");
+            var menuMarkup = new ReplyKeyboardMarkup(menuBtn)
+            {
+                ResizeKeyboard = true,
+                OneTimeKeyboard = true
+            };
+            client.SendTextMessageAsync(chatId, "Вы можете ознакомиться с фкнкциями бота в меню", replyMarkup: menuMarkup);
+        }
 
-            return await client.SendTextMessageAsync(chatId: chatId,
-                                                        text: "Для регистрации укажите свой номер",
-                                                        replyMarkup: requestReplyKeyboard);
+        private void RequestContact(long chatId)
+        {
+            KeyboardButton requestContactBtn = KeyboardButton.WithRequestContact("Отправить мой телефон");
+            var equestContactMarkup = new ReplyKeyboardMarkup(requestContactBtn)
+            {
+                ResizeKeyboard = true,
+                OneTimeKeyboard = true
+            };
+            client.SendTextMessageAsync(chatId, "Для регистрации укажите свой номер", replyMarkup: equestContactMarkup);
         }
     }
 }

@@ -25,7 +25,8 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController
                 new StartCommand(),
                 new RegisterCommand(this),
                 new NotifateCommand(),
-                new AppointmentCommand(this)
+                new AppointmentCommand(this),
+                new MenuCommand()
             };
         }
 
@@ -40,7 +41,7 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController
 
             if (listener == null)
             {
-                if (msg.Text != null && msg.Text.Contains("/"))
+                if (msg.Text != null)
                 {
                     ExecuteCommand(update);
                 }

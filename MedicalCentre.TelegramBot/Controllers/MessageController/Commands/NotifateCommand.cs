@@ -11,7 +11,7 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
 {
     internal class NotifateCommand : Command
     {
-        public override string Name => "/notifacate";
+        public override string Name => "Мои записи";
 
         protected override TelegramBotClient client => Bot.GetTelegramBot();
 

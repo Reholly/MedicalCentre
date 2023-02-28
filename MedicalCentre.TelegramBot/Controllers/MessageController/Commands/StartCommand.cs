@@ -16,8 +16,13 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
 
         public override void Execute(Update update)
         {
-            KeyboardButton regster = new KeyboardButton("Регистрация");
-            client.SendTextMessageAsync(update.Message.Chat.Id, hello);
+            KeyboardButton regsterBtn = new KeyboardButton("Регистрация");
+            var regsterMarkup = new ReplyKeyboardMarkup(regsterBtn)
+            {
+                ResizeKeyboard = true, 
+                OneTimeKeyboard = true 
+            };
+            client.SendTextMessageAsync(update.Message.Chat.Id, hello, replyMarkup: regsterMarkup);
         }
     }
 }

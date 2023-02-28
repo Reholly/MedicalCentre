@@ -10,10 +10,6 @@ using Telegram.Bot.Types;
 
 namespace MedicalCentre.TelegramBot.Controllers.UpdateDistributor
 {
-    /*
-     * Распределяет все апдейты от телеграма по экземплярам T,
-     * уникальным для каждого пользователя
-     */
     internal class UpdateDistributor<T> where T : ITelegramUpdateListener, new()
     {
         private Dictionary<long, T> listeners;
