@@ -34,9 +34,30 @@ namespace MedicalCentre.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeAccountId");
-
                     b.ToTable("Accounts");
+                });
+
+            modelBuilder.Entity("MedicalCentre.Models.Appointment", b =>
+                {
+                    b.Property<uint>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int unsigned");
+
+                    b.Property<DateTime>("AppointmentTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<uint>("DoctorId")
+                        .HasColumnType("int unsigned");
+
+                    b.Property<bool>("IsFinished")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<uint?>("PatientId")
+                        .HasColumnType("int unsigned");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("MedicalCentre.Models.Employee", b =>
@@ -44,6 +65,9 @@ namespace MedicalCentre.Migrations
                     b.Property<uint>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int unsigned");
+
+                    b.Property<bool>("IsOnline")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -92,6 +116,9 @@ namespace MedicalCentre.Migrations
                     b.Property<uint>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int unsigned");
+
+                    b.Property<bool>("IsSuccess")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("LogText")
                         .IsRequired()
@@ -209,6 +236,24 @@ namespace MedicalCentre.Migrations
                     b.ToTable("Roles");
                 });
 
+            modelBuilder.Entity("MedicalCentre.Models.StorageItem", b =>
+                {
+                    b.Property<uint>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int unsigned");
+
+                    b.Property<uint>("Amount")
+                        .HasColumnType("int unsigned");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StorageItems");
+                });
+
             modelBuilder.Entity("MedicalCentre.Models.Transaction", b =>
                 {
                     b.Property<uint>("Id")
@@ -224,17 +269,6 @@ namespace MedicalCentre.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Transactions");
-                });
-
-            modelBuilder.Entity("MedicalCentre.Models.Account", b =>
-                {
-                    b.HasOne("MedicalCentre.Models.Employee", "EmployeeAccount")
-                        .WithMany()
-                        .HasForeignKey("EmployeeAccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("EmployeeAccount");
                 });
 
             modelBuilder.Entity("MedicalCentre.Models.MedicalExamination", b =>

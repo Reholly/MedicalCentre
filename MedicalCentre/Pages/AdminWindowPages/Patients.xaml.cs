@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MedicalCentre.ViewModels.AdminWindowPagesViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace MedicalCentre.Pages.AdminWindowPages
         public Patients()
         {
             InitializeComponent();
+            DataContext = new PatientsViewModel(this);
         }
     }
 }

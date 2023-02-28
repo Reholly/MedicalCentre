@@ -6,21 +6,21 @@ namespace MedicalCentre.Models
     public class Account : INotifyPropertyChanged
     {
         public uint Id { get; set; }
-        public Employee EmployeeAccount { get; set; } = null!;
+        public uint EmployeeAccountId { get; set; } 
         public string Password { get; set; } = null!;
 
         public Account() { }
 
-        public Account(Employee employeeAccount, string password)
+        public Account(uint employeeAccount, string password)
         {
-            EmployeeAccount = employeeAccount;
+            EmployeeAccountId = employeeAccount;
             Password = password;
         }
 
-        public Account(uint id, Employee employeeAccount, string password)
+        public Account(uint id, uint employeeAccount, string password)
         {
             Id = id;
-            EmployeeAccount = employeeAccount;
+            EmployeeAccountId = employeeAccount;
             Password = password;
         }
 

@@ -7,16 +7,26 @@ namespace MedicalCentre.Models
     public class Appointment : INotifyPropertyChanged
     {
         public uint Id { get; set; }
-        public Patient Patient { get; set; } = null!;
-        public Employee Doctor { get; set; } = null!;
+        public uint? PatientId { get; set; } = null;
+        public uint DoctorId { get; set; }
         public DateTime AppointmentTime { get; set; }
         public bool IsFinished { get; set; } = false;
+
         public Appointment() { }
-        public Appointment(uint id, Patient patient, Employee doctor, DateTime appointmentTime)
+
+        public Appointment(uint id, uint? patient, uint doctor, DateTime appointmentTime)
         {
             Id = id;
-            Patient = patient;
-            Doctor = doctor;
+            PatientId = patient;
+            DoctorId = doctor;
+            AppointmentTime = appointmentTime;
+        }
+        
+        public Appointment(uint id, uint doctor, DateTime appointmentTime)
+        {
+            Id = id;
+            DoctorId = doctor;
+            PatientId = null;
             AppointmentTime = appointmentTime;
         }
 

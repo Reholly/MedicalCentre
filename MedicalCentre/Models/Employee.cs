@@ -13,6 +13,7 @@ namespace MedicalCentre.Models
         public double Salary { get; set; }
         public uint RoleId { get; set; }
 
+        public bool IsOnline { get; set; } = false;
         public Employee() { }
 
         public Employee(string name, string surname, string patronymic, string specialization, double salary, uint role)

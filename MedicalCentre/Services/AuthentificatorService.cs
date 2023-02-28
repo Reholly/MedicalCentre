@@ -1,6 +1,7 @@
 ﻿using MedicalCentre.Models;
 using System;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MedicalCentre.Services
 {
@@ -21,8 +22,9 @@ namespace MedicalCentre.Services
             {
                 CurrentAccount = await authentificationService.Login(id, password);
             }
-            catch(Exception)
+            catch(Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 CurrentAccount = null;
             }
 
@@ -34,9 +36,9 @@ namespace MedicalCentre.Services
             return await authentificationService.Register(id, password, employee);
         } 
 
-        public void CheckRole(Role role, Account currentAccount)
+        public async Task CheckRole(Role role, Account currentAccount)
         {
-            authentificationService.CheckRole(role, currentAccount);
+            await authentificationService.CheckRole(role, currentAccount);
         }
     }
 }
