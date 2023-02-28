@@ -1,5 +1,7 @@
-﻿using MedicalCentre.Models;
+﻿using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Models;
 using MedicalCentre.Pages.DoctorWindowPages;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
@@ -19,14 +21,13 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             this.page = page;
             ViewPatientsNotesCommand = new RelayCommand(ViewPatientsNotes);
             ViewPatientsExaminationsCommand = new RelayCommand(ViewPatientExaminations);
-            CreateNoteCommand = new RelayCommand(CreateNote);
-            CreateExaminationCommand = new RelayCommand(CreateExamination);
+            CreateNoteCommand = new RelayCommandAsync(CreateNote);
+            CreateExaminationCommand = new RelayCommandAsync(CreateExaminationAsync);
         }
 
         private void ViewPatientsNotes() => page.LeftFrame.Content = new PatientsNotesPage(CurrentPatient.Notes);
-
         private void ViewPatientExaminations() => page.LeftFrame.Content = new PatientExaminationsPage(CurrentPatient.Examinations);
-        private void CreateNote()
+        private async Task CreateNote()
         {
             CreateNotePage notePage = new();
             page.RightFrame.Content = notePage;
@@ -34,8 +35,10 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             if (notePage.IsCreated)
                 note = notePage.CreatedNote;
             CurrentPatient.Notes.Add(note);
+            Database<Patient> database = new();
+            await database.UpdateItemAsync(CurrentPatient);
         }
-        private void CreateExamination()
+        private async Task CreateExaminationAsync()
         {
             CreateExaminationPage Page = new(CurrentPatient);
             page.RightFrame.Content = Page;
@@ -43,6 +46,8 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             if (Page.IsCreated)
                 examination = Page.CreatedExamination;
             CurrentPatient.Examinations.Add(examination);
+            Database<Patient> database = new();
+            await database.UpdateItemAsync(CurrentPatient);
         }
     }
 }

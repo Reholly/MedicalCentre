@@ -30,10 +30,12 @@ namespace MedicalCentre.ViewModels.GeneralViewModels
             Database<StorageItem> database= new Database<StorageItem>();
             await database.AddItemAsync(storageItem);
         }
-        private void RemoveItem() 
+        private async void RemoveItem() 
         {
             Items.Remove(SelectedItem);
             LoggerService.CreateLog("Storage item deleted", true);
+            Database<StorageItem> database = new();
+            await database.DeleteItemAsync(SelectedItem);
         }
     }
 }

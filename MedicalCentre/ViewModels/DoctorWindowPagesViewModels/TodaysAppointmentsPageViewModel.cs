@@ -1,5 +1,7 @@
-﻿using MedicalCentre.Models;
+﻿using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Models;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
@@ -11,9 +13,15 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
         public ICommand DeleteAppointmentCommand { get; set; }
         public TodaysAppointmentsPageViewModel()
         {
-            DeleteAppointmentCommand = new RelayCommand(DeleteAppointment);
+            DeleteAppointmentCommand = new RelayCommandAsync(DeleteAppointment);
         }
 
-        private void DeleteAppointment() => Appointments.Remove(SelectedAppointment);
+        private async Task DeleteAppointment()
+        {
+            Appointment temp = SelectedAppointment;
+            Database<Appointment> database = new();
+            await database.DeleteItemAsync(temp);
+            Appointments.Remove(temp);
+        }
     }
 }
