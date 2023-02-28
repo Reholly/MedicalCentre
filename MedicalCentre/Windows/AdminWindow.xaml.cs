@@ -1,7 +1,5 @@
-﻿using MedicalCentre.DatabaseLayer;
-using MedicalCentre.Models;
 using MedicalCentre.Pages.AdminWindowPages;
-using MedicalCentre.Services;
+using MedicalCentre.Pages.GeneralPages;
 using System.Windows;
 using System.Windows.Input;
 

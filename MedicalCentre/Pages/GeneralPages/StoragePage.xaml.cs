@@ -12,14 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MedicalCentre.ViewModels.GeneralViewModels;
 
-namespace MedicalCentre.Pages.AdminWindowPages
+namespace MedicalCentre.Pages.GeneralPages
 {
     public partial class StoragePage : Page
     {
         public StoragePage()
         {
             InitializeComponent();
+            DataContext = new StoragePageViewModel();
         }
     }
 }
