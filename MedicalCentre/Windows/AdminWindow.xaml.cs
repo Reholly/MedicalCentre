@@ -1,4 +1,5 @@
 ﻿using MedicalCentre.Pages.AdminWindowPages;
+using MedicalCentre.Pages.GeneralPages;
 using System.Windows;
 using System.Windows.Input;
 

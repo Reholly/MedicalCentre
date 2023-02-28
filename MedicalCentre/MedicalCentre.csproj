@@ -34,4 +34,9 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\JuniorPersonalWindowPages\" />
+    <Folder Include="ViewModels\JuniorPersonalWindowPagesViewModels\" />
+  </ItemGroup>
+
 </Project>
