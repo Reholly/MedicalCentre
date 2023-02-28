@@ -1,5 +1,5 @@
-﻿using MedicalCentre.Pages.JuniorPersonalWindowPages;
-using MedicalCentre.ViewModels.JuniorPersonalWindowPagesViewModels;
+﻿using MedicalCentre.Pages.GeneralPages;
+using MedicalCentre.ViewModels.GeneralViewModels;
 using MedicalCentre.Windows;
 using System.Windows.Input;
 
@@ -15,6 +15,6 @@ namespace MedicalCentre.ViewModels
             ShowStorageItemsCommand = new RelayCommand(ShowStorageItems);
         }
 
-        private void ShowStorageItems() => window.frame.Content = new StorageItemsPage();
+        private void ShowStorageItems() => window.frame.Content = new StoragePage();
     }
 }

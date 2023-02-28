@@ -5,7 +5,7 @@ namespace MedicalCentre.ViewModels
 {
     public class RelayCommand : ICommand
     {
-        private Action action;
+        private readonly Action action;
         public RelayCommand(Action action) => this.action = action;
         public bool CanExecute(object parametr) => true;
 #pragma warning disable CS0067

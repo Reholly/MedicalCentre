@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:MedicalCentre.Windows"
         mc:Ignorable="d"
         Title="Окно Врачебного персонала" Height="450" Width="800" Background="Azure">
@@ -14,10 +15,7 @@
         </Grid.ColumnDefinitions>
         <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                       x:Name="Splitter"/>
-        <Menu Grid.ColumnSpan="3" VerticalAlignment="Top" Height="48">
-            <MenuItem Header="Create">
-                <MenuItem Header="Patient"/>
-            </MenuItem>
+        <Menu Grid.ColumnSpan="3" VerticalAlignment="Top" Height="45">
             <MenuItem Header="View">
                 <MenuItem Header="Today's appointments" Command="{Binding ShowTodaysAppointmentsCommand}"/>
                 <MenuItem Header="All patients" Command="{Binding ShowAllPatientsCommand}"/>
@@ -26,7 +24,7 @@
                 <MenuItem Header="Input" Command="{Binding ShowInputHelpCommand}"/>
             </MenuItem>
         </Menu>
-        <Frame Grid.Column="2" Margin="0 17.5 0 0" Name="DoctorRightFrame" NavigationUIVisibility="Hidden"/>
-        <Frame Grid.Column="0" Margin="0 17.5 0 0" Name="DoctorLeftFrame" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Column="2" Margin="0 45 0 0" Name="DoctorRightFrame" NavigationUIVisibility="Hidden" FontSize="30"/>
+        <Frame Grid.Column="0" Margin="0 45 0 0" Name="DoctorLeftFrame" NavigationUIVisibility="Hidden" FontSize="30"/>
     </Grid>
 </Window>
