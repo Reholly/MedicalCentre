@@ -11,10 +11,11 @@
       ShowsNavigationUI="False">
     <Grid>
         <DataGrid x:Name="todaysPatients" AutoGenerateColumns="True"
-                  Background="AliceBlue" Margin="0 17.5 0 0" CanUserAddRows="False" CanUserDeleteRows="True" 
+                  Background="#679ed2" Margin="0 40 0 0" CanUserAddRows="False" CanUserDeleteRows="True" 
                   CanUserReorderColumns="True" ItemsSource="{Binding Appointments}" SelectedItem="{Binding SelectedAppointment}"/>
-        <Menu Height="17.5" VerticalAlignment="Top">
-            <MenuItem Header="Delte Appointment" Command="{Binding DeleteAppointmentCommand}"/>
+        <Menu Height="40" VerticalAlignment="Top" Background="#26527c">
+            <MenuItem Header="Отменить приём" Command="{Binding DeleteAppointmentCommand}"
+                      MaxWidth="800"/>
             
         </Menu>
     </Grid>

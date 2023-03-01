@@ -10,7 +10,7 @@
       Background="Transparent"
       ShowsNavigationUI="False">
     <Grid Margin="20">
-        <DataGrid Background="AliceBlue" ItemsSource="{Binding Examinations}" 
+        <DataGrid Background="#679ed2" ItemsSource="{Binding Examinations}" 
                   Grid.Column="0" AutoGenerateColumns="True" CanUserAddRows="False" CanUserDeleteRows="False"/>
     </Grid>
 </Page>
