@@ -9,7 +9,7 @@
       Title="CreateExaminationPage"
       Background="Transparent"
       ShowsNavigationUI="False">
-    <Grid Background="AliceBlue">
+    <Grid Background="#679ed2">
         <StackPanel>
             <TextBlock Text="Title:"/>
             <TextBox x:Name="ExaminationTitleBox" Background="LightGray"/>

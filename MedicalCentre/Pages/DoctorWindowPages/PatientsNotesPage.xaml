@@ -9,8 +9,9 @@
       Title="Patient's Notes"
       Background="Transparent" 
       ShowsNavigationUI="False">
-    <Grid>
-        <DataGrid Background="AliceBlue" ItemsSource="{Binding Notes}" 
-                  Grid.Column="0" AutoGenerateColumns="True" CanUserAddRows="False" CanUserDeleteRows="False"/>
+    <Grid Background="#679ed2">
+        <DataGrid Background="#679ed2" ItemsSource="{Binding Notes}" 
+                  Grid.Column="0" AutoGenerateColumns="True" CanUserAddRows="False" CanUserDeleteRows="False"
+                  MaxWidth="600"/>
     </Grid>
 </Page>

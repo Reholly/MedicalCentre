@@ -16,14 +16,14 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Background="White"/>
-        <Menu Height="17.5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" Background="LightGray">
-            <MenuItem Header="View" Height="17.5">
-                <MenuItem Header="Patient's Notes" Command="{Binding ViewPatientsNotesCommand}"/>
-                <MenuItem Header="Patient's Examinations" Command="{Binding ViewPatientsExaminationsCommand}"/>
+        <Menu Height="17.5" VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" Background="#679ed2">
+            <MenuItem Header="Вид" Height="17">
+                <MenuItem Header="Записи" Command="{Binding ViewPatientsNotesCommand}"/>
+                <MenuItem Header="Обследования" Command="{Binding ViewPatientsExaminationsCommand}"/>
             </MenuItem>
-            <MenuItem Header="Create" Height="17.5">
-                <MenuItem Header="Note" Command="{Binding CreateNoteCommand}"/>
-                <MenuItem Header="Examination" Command="{Binding CreateExaminationCommand}"/>
+            <MenuItem Header="Создать" Height="17.5">
+                <MenuItem Header="Запись" Command="{Binding CreateNoteCommand}"/>
+                <MenuItem Header="Обследование" Command="{Binding CreateExaminationCommand}"/>
             </MenuItem>
         </Menu>
         <Frame Grid.Column="0" x:Name="LeftFrame" Margin="0 17.5 0 0" Background="AliceBlue" NavigationUIVisibility="Hidden"/>

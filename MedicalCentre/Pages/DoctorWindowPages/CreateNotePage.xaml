@@ -9,11 +9,11 @@
       Title="CreateNotePage"
       Background="Transparent"
       ShowsNavigationUI="False">
-    <Grid Background="AliceBlue">
+    <Grid Background="#679ed2">
         <StackPanel>
-            <TextBlock Text="Title:"/>
+            <TextBlock Text="Заголовок:"/>
             <TextBox x:Name="NoteTitleBox" Background="LightGray"/>
-            <TextBlock Text="Note Text:"/>
+            <TextBlock Text="Содержание:"/>
             <TextBox x:Name="NoteTextBox" Background="LightGray" TextWrapping="WrapWithOverflow"/>
         </StackPanel>
         <Button x:Name="SaveButton" Background="LightGray" Height="50" Width="200" VerticalAlignment="Bottom" 
