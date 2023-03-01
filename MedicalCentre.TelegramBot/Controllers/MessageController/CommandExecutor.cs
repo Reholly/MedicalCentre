@@ -24,7 +24,9 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController
             {
                 new StartCommand(),
                 new RegisterCommand(this),
-                new NotifateCommand(),
+                new AppoitmentListCommand(),
+                new AppoitmentHistoryCommand(),
+                new MedicalExaminationCommand(this),
                 new AppointmentCommand(this),
                 new MenuCommand()
             };
@@ -64,8 +66,6 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController
                 }
             }
         }
-
-
 
         public void StartListen(IListener newListener)
         {

@@ -14,14 +14,22 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
         public override void Execute(Update update)
         {
             string menu = "Выберите комманду для продолжения\n\n" +
-                          "Мои записи - Получить информацию о записях/результатах анализов\n\n" +
+                          "Анализы - Получить информацию о результатах анализов\n\n" +
+                          "Записи - Предстоящие записи\n\n" +
+                          "История - История посещений\n\n" +
                           "Запись - Записаться на прием\n\n" +
                           "Инфо - общая информация о поликлинике";
 
-            KeyboardButton notifyBtn = new KeyboardButton("Мои записи");
-            KeyboardButton appoitmentBtn = new KeyboardButton("Запись");
-            KeyboardButton infoBtn = new KeyboardButton("Инфо");
-            var menuMarkup = new ReplyKeyboardMarkup(new[] { notifyBtn, appoitmentBtn, infoBtn })
+            KeyboardButton[] buttons = new[]
+            {
+                new KeyboardButton("Анализы"),
+                new KeyboardButton("Записи"),
+                new KeyboardButton("История"),
+                new KeyboardButton("Запись"),
+                new KeyboardButton("Инфо"),
+            };
+
+            var menuMarkup = new ReplyKeyboardMarkup(buttons)
             {
                 ResizeKeyboard = true,
                 OneTimeKeyboard = true
