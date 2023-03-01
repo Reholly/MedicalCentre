@@ -15,20 +15,18 @@
         ResizeMode="NoResize"
         FontSize="18"
         FontFamily="{DynamicResource MeterialDesignFont}">
-
     <Grid Margin="20">
         <Grid.Effect>
             <DropShadowEffect BlurRadius="30"
                               ShadowDepth="1"
                               Opacity="0.4"/>
         </Grid.Effect>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Border Grid.Column="0"
                 Background="AliceBlue"
-                CornerRadius="10 10 10 10"
+                CornerRadius="10 10 10 10">
             <Grid>
                 <!-- Иконка закрытия -->
                 <materialDesign:PackIcon Kind="Close"
@@ -65,7 +63,7 @@
                              BorderBrush="#c5c8cc"
                              Margin="0 27"
                              BorderThickness=" 0 0 0 1.5"/>
-
+                    <StackPanel Orientation="Horizontal">
                         <Button Content="Войти"
                             Margin="10 10 10 10"
                             Background="#679ED2"
@@ -76,9 +74,8 @@
                             materialDesign:ButtonAssist.CornerRadius="22"
                             VerticalAlignment="Center"                        
                             Command="{Binding LoginCommand}"/>
-
+                    </StackPanel>
                 </StackPanel>
-
             </Grid>
         </Border>
     </Grid>
