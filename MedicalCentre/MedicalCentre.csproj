@@ -33,6 +33,9 @@
 			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
 		</None>
 	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include=ScottPlot.WPF" Version="4.1.27"/>
+	<ItemGroup/>								
 
 
   <ItemGroup>
