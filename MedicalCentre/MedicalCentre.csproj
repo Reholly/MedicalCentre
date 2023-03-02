@@ -35,7 +35,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include=ScottPlot.WPF" Version="4.1.27"/>
-	<ItemGroup/>								
+	</ItemGroup>								
 
 
   <ItemGroup>
