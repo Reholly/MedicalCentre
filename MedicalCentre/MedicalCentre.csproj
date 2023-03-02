@@ -33,5 +33,14 @@
 			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
 		</None>
 	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include=ScottPlot.WPF" Version="4.1.27"/>
+	<ItemGroup/>								
+
+
+  <ItemGroup>
+    <Folder Include="Pages\JuniorPersonalWindowPages\" />
+    <Folder Include="ViewModels\JuniorPersonalWindowPagesViewModels\" />
+  </ItemGroup>
 
 </Project>
