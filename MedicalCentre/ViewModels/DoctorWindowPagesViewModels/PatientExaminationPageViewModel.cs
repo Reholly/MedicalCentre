@@ -7,9 +7,9 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
     public class PatientExaminationPageViewModel
     {
         public ObservableCollection<MedicalExamination> Examinations { get; set; }
-        public PatientExaminationPageViewModel(IEnumerable<MedicalExamination> examinations)
+        public PatientExaminationPageViewModel(List<MedicalExamination> examinations)
         {
-            Examinations = (ObservableCollection<MedicalExamination>)examinations;
+            Examinations = new ObservableCollection<MedicalExamination>(examinations);
         }
     }
 }
