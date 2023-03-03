@@ -42,11 +42,11 @@ namespace MedicalCentre.TelegramBot.Notifacations
             }
         }
 
-        private void UpdateTimer(object sender, ElapsedEventArgs e)
+        private async void UpdateTimer(object sender, ElapsedEventArgs e)
         {
             Logger.Log("Timer was click!");
-            Notifayer notifayer = new Notifayer(DateOnly.Parse(dateTime.ToShortDateString()));
-            notifayer.SendAllNotifacates();
+            Notifayer notifayer = new Notifayer(dateTime);
+            await notifayer.SendAllNotifacates();
             dateTime.AddDays(1);
             timer = new Timer(TimeSpan.FromDays(1).TotalMilliseconds);
             timer.Elapsed += UpdateTimer;

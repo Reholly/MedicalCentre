@@ -113,11 +113,12 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
             {
                 appointmentTime = update.Message.Text;
                 Appointment? appointment = appointments.Find(x => x.AppointmentTime.ToString() == appointmentTime);
-                if(appointment == null)
+                if (appointment == null)
                 {
                     appointmentTime = null;
                     return;
                 }
+                appointment.Patient = DatabaseTelegram.Users.Find(x => x.ChatId == update.Message.Chat.Id).GetAsPatient();
                 Database<Appointment> db = new Database<Appointment>();
                 db.UpdateItemAsync(appointment);
 
