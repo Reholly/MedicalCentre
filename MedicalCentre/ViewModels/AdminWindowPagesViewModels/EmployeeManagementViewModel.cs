@@ -3,6 +3,7 @@ using MedicalCentre.Forms;
 using MedicalCentre.Models;
 using MedicalCentre.Pages.AdminWindowPages;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -23,12 +24,12 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
         public EmployeeManagementViewModel(EmployeesManagement page)
         {
             this.page = page;
-            ShowTableCommand = new RelayCommand(ShowTable);
+            ShowTableCommand = new RelayCommandAsync(ShowTable);
             RegisterCommand = new RelayCommand(RegisterEmployee);
             DeleteCommand = new RelayCommand(DeleteEmployee);
             EditCommand = new RelayCommand(EditEmployee);
         }
-        private async void ShowTable()
+        private async Task ShowTable()
         {
             Database<Employee> empDb = new Database<Employee>();
 
