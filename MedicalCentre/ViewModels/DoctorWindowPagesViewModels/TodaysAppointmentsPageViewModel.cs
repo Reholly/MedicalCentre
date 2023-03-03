@@ -8,12 +8,14 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {
     public class TodaysAppointmentsPageViewModel
     {
-        public ObservableCollection<Appointment> Appointments { get; set; } = new();
+        public ObservableCollection<Appointment> Appointments { get; set; } =
         public Appointment SelectedAppointment { get; set; }
         public ICommand DeleteAppointmentCommand { get; set; }
         public TodaysAppointmentsPageViewModel()
         {
             DeleteAppointmentCommand = new RelayCommandAsync(DeleteAppointment);
+            Database<Appointment> database = new();
+            Appointments = new ObservableCollection<Appointment>(database.GetTable());
         }
 
         private async Task DeleteAppointment()
