@@ -7,7 +7,7 @@ namespace MedicalCentre.Pages.DoctorWindowPages
 {
     public partial class PatientExaminationsPage : Page
     {
-        public PatientExaminationsPage(IEnumerable<MedicalExamination> examinations)
+        public PatientExaminationsPage(List<MedicalExamination> examinations)
         {
             InitializeComponent();
             DataContext = new PatientExaminationPageViewModel(examinations);

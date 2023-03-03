@@ -7,7 +7,7 @@ namespace MedicalCentre.Pages.DoctorWindowPages
 {
     public partial class PatientsNotesPage : Page
     {
-        public PatientsNotesPage(IEnumerable<Note>notes)
+        public PatientsNotesPage(List<Note>notes)
         {
             InitializeComponent();
             DataContext = new PatientNotesPageViewModel(notes);
