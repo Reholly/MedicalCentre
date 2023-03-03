@@ -11,7 +11,10 @@
             <MenuItem Header="Show" Height="17.5">
                 <MenuItem Header="Storage" Command="{Binding ShowStorageItemsCommand}"/>
             </MenuItem>
+            <MenuItem Header="Start" Height="17.5">
+                <MenuItem Header="Examination" Command="{Binding StartExaminationCommand}"/>
+            </MenuItem>
         </Menu>
-        <Frame NavigationUIVisibility="Hidden" Name="frame"/>
+        <Frame NavigationUIVisibility="Hidden" Name="frame" Margin="0 17.5 0 0"/>
     </Grid>
 </Window>

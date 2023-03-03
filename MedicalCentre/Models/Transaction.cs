@@ -9,6 +9,7 @@ namespace MedicalCentre.Models
         public uint Id { get; set; }
         public double Price { get; set; }
         public DateTime TransactionDate { get; set; }
+        public TransactionType Type { get; set; }
 
         public Transaction() { }
 
@@ -25,11 +26,25 @@ namespace MedicalCentre.Models
             TransactionDate = transactionDate;
         }
 
+        public Transaction(uint id, double price, DateTime Date, TransactionType type)
+        {
+            Id = id;
+            Price = price;
+            TransactionDate = Date;
+            Type = type;
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+    }
+
+    public enum TransactionType
+    {
+        Purchase,
+        Sale
     }
 }

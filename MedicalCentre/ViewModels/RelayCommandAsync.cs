@@ -15,4 +15,3 @@ namespace MedicalCentre.ViewModels
         public void Execute(object? parametr) => action();
     }
 }
-}
