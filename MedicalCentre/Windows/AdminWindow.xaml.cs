@@ -1,8 +1,7 @@
 using MedicalCentre.Pages.AdminWindowPages;
-using MedicalCentre.Pages.GeneralPages;
 using MedicalCentre.Services;
+using MedicalCentre.ViewModels;
 using System.Windows;
-using System.Windows.Input;
 
 namespace MedicalCentre.Windows
 {
@@ -15,36 +14,7 @@ namespace MedicalCentre.Windows
             EmployeeNameBinderService.BindName(employeeId, RoleName, EmployeeName);
 
             MainFrame.Content = new AnalyticsPage();
-        }
-
-        private void CloseIcon_DoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            Close();
-        }
-
-        public void OpenEmployeesPage(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new EmployeesManagement();
-        }
-
-        private void OpenPatientsPage(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new PatientsPage();
-        }
-
-        private void OpenAnalyticsPage(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new AnalyticsPage();
-        }
-
-        private void OpenStoragePage(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new StoragePage();
-        }
-
-        private void OpentSettingsPage(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new CentreSettings();
+            DataContext = new AdminViewModel();
         }
     }
 }
