@@ -11,7 +11,7 @@ namespace MedicalCentre.Services
     {
         public async Task<Result> Register(uint id, string password, Employee employee)
         {
-            Database<Account> accountDatabase = new Database<Account>();
+            ContextRepository<Account> accountDatabase = new ContextRepository<Account>();
             try
             {
                 await Task.Run(() => accountDatabase.AddItemAsync(new Account(id, employee.Id, password)));
@@ -23,7 +23,7 @@ namespace MedicalCentre.Services
                 return Result.Error;
             }
 
-            Database<Employee> employeeDatabase = new Database<Employee>();
+            ContextRepository<Employee> employeeDatabase = new ContextRepository<Employee>();
             await employeeDatabase.AddItemAsync(employee);
             Account account = new Account(id, employee.Id, password);
             await accountDatabase.AddItemAsync(account);
@@ -33,7 +33,7 @@ namespace MedicalCentre.Services
 
         public async Task<Account> Login(uint id, string password)
         {
-            Database<Account> accountDatabase = new Database<Account>();
+            ContextRepository<Account> accountDatabase = new ContextRepository<Account>();
 
             try
             {
@@ -58,7 +58,7 @@ namespace MedicalCentre.Services
             switch (role.Title)
             {
                 case "Doctor":
-                    DoctorWindow doctor = new();
+                    DoctorWindow doctor = new DoctorWindow(currentAccount.Id);
                     doctor.Show();
                     await LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
                     break;

@@ -34,8 +34,8 @@ namespace MedicalCentre.Forms
                 uint accountId = uint.Parse(AccountId.Text.ToString());
                 string password = Password.Password;
 
-                Database<Account> accDb = new Database<Account>();
-                Database<Employee> empDb = new Database<Employee>();
+                ContextRepository<Account> accDb = new ContextRepository<Account>();
+                ContextRepository<Employee> empDb = new ContextRepository<Employee>();
                 Account currentAccount = await accDb.GetItemByIdAsync(accountId);
                 Employee currentEmployee = empDb.GetItemById(currentAccount.EmployeeAccountId);
 

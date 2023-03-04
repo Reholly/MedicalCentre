@@ -27,7 +27,7 @@ namespace MedicalCentre.ViewModels
             AuthentificatorService authentificator = new AuthentificatorService(new AuthentificationService());
             Account currentAccount = await authentificator.Login(uint.Parse(login), password);
             
-            Database<Employee> employeeDb = new Database<Employee>();
+            ContextRepository<Employee> employeeDb = new ContextRepository<Employee>();
 
             if (currentAccount != null)
             {
@@ -40,7 +40,7 @@ namespace MedicalCentre.ViewModels
                 return;
             }
 
-            Database<Role> roleDb = new Database<Role>();
+            ContextRepository<Role> roleDb = new ContextRepository<Role>();
             Employee currentEmployee = await employeeDb.GetItemByIdAsync(currentAccount.Id);
             Role role = await roleDb.GetItemByIdAsync(currentEmployee.RoleId); 
 

@@ -47,7 +47,7 @@
                 
                 <Separator Height="1" Margin="20 30" Background="#465589"/>
 
-                <Button Margin="0 10 0 10" Background="Transparent" Height="40" BorderBrush="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Click="OpenEmployeesPage"   >
+                <Button Margin="0 10 0 10" Background="Transparent" Height="40" BorderBrush="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding OpenEmployeesCommand}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="People"
                                                  Opacity="0.2" 
@@ -60,7 +60,7 @@
                 </Button>
                 <Button Margin="0 10 0 10" Background="Transparent" Height="40" BorderBrush="Transparent" 
                         HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Click="OpenPatientsPage">
+                        Command="{Binding OpenPatientsCommand}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Medicine"
                                                  Opacity="0.2" 
@@ -72,7 +72,7 @@
                     </StackPanel>
                 </Button>
                 <Button Margin="0 10 0 10" Background="Transparent" Height="40" BorderBrush="Transparent"
-                        HorizontalAlignment="Left" VerticalAlignment="Center" Click="OpenAnalyticsPage">
+                        HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding OpenAnalyticsCommand}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Analytics"
                                                  Opacity="0.2" 
@@ -84,7 +84,7 @@
                     </StackPanel>
                 </Button>
                 <Button Margin="0 10 0 10" Background="Transparent" Height="40" BorderBrush="Transparent" 
-                        HorizontalAlignment="Left" VerticalAlignment="Center" Click="OpenStoragePage">
+                        HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding OpenStorageCommand}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Storage"
                                                  Opacity="0.2" 
@@ -108,7 +108,15 @@
             </Border.Background>
             <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden"  />
         </Border>
-            
+        <Button VerticalAlignment="Top"
+                        Width="20"
+                        Height="20"
+                        HorizontalAlignment="Right"
+                        Opacity="0.3"
+                        Margin="0 13 14 0"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding CloseCommand}"/>
         <materialDesign:PackIcon Kind="Close"   
                                 Grid.Column="2"
                                 VerticalAlignment="Top"
@@ -116,6 +124,8 @@
                                 Height="20"
                                 HorizontalAlignment="Right"
                                 Opacity="0.3"
-                                Margin="0 13 14 0" MouseDoubleClick="CloseIcon_DoubleClick"/>
+                                Margin="0 13 14 0" />
+     
+        
     </Grid>
 </Window>

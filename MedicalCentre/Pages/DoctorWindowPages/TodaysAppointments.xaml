@@ -10,13 +10,24 @@
       Background="Transparent"
       ShowsNavigationUI="False">
     <Grid>
-        <DataGrid x:Name="todaysPatients" AutoGenerateColumns="True"
-                  Background="#679ed2" Margin="0 40 0 0" CanUserAddRows="False" CanUserDeleteRows="True" 
-                  CanUserReorderColumns="True" ItemsSource="{Binding Appointments}" SelectedItem="{Binding SelectedAppointment}"/>
-        <Menu Height="40" VerticalAlignment="Top" Background="#26527c">
-            <MenuItem Header="Отменить приём" Command="{Binding DeleteAppointmentCommand}"
-                      MaxWidth="800"/>
+        <Border>
             
-        </Menu>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
+                    <GradientStop Color="AliceBlue" Offset="0"/>
+                    <GradientStop Color="#26527c" Offset="1.3"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <DataGrid x:Name="todaysPatients" AutoGenerateColumns="True"
+                  Background="Transparent" Margin="0 40 0 0" CanUserAddRows="False" CanUserDeleteRows="True" 
+                  CanUserReorderColumns="True" ItemsSource="{Binding Appointments}" SelectedItem="{Binding SelectedAppointment}"/>
+                <Menu Height="40" VerticalAlignment="Top" Background="#26527c">
+                    <MenuItem Header="Отменить приём" Command="{Binding DeleteAppointmentCommand}"
+                      MaxWidth="800"/>
+
+                </Menu>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

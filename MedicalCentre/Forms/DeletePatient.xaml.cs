@@ -28,7 +28,7 @@ namespace MedicalCentre.Forms
         }
         public async void Delete(object sender, RoutedEventArgs e)
         {
-            Database<Patient> patientDb = new Database<Patient>();
+            ContextRepository<Patient> patientDb = new ContextRepository<Patient>();
 
             try
             {

@@ -16,8 +16,8 @@ namespace MedicalCentre.Forms
         {
             try
             {
-                Database<Appointment> appointmetnDb = new();
-                Database<Patient> patientDb = new();
+                ContextRepository<Appointment> appointmetnDb = new();
+                ContextRepository<Patient> patientDb = new();
 
                 Patient patient = await patientDb.GetItemByIdAsync(uint.Parse(PatientId.Text));
                 Appointment appointment = await appointmetnDb.GetItemByIdAsync(uint.Parse(AppointmentId.Text));

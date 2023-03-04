@@ -14,12 +14,12 @@ namespace MedicalCentre.Windows
 
             EmployeeNameBinderService.BindName(employeeId, RoleName, EmployeeName);
 
-            MainFrame.Content = new Analytics();
+            MainFrame.Content = new AnalyticsPage();
         }
 
         private void Open_Patients(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Patients();
+            MainFrame.Content = new PatientsPage();
         }
 
         private void Open_AppointmentsManagement(object sender, RoutedEventArgs e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MedicalCentre.ViewModels.AdminWindowPagesViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +17,14 @@ using System.Windows.Shapes;
 namespace MedicalCentre.Pages.AdminWindowPages
 {
     /// <summary>
-    /// Логика взаимодействия для CentreSettings.xaml
+    /// Логика взаимодействия для Patients.xaml
     /// </summary>
-    public partial class CentreSettings : Page
+    public partial class PatientsPage : Page
     {
-        public CentreSettings()
+        public PatientsPage()
         {
             InitializeComponent();
+            DataContext = new PatientsViewModel(this);
         }
     }
 }

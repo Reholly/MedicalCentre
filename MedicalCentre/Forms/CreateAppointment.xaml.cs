@@ -32,8 +32,8 @@ namespace MedicalCentre.Forms
         {
             try
             {
-                Database<Appointment> appointmentDb = new();
-                Database<Employee> doctorDb = new();
+                ContextRepository<Appointment> appointmentDb = new();
+                ContextRepository<Employee> doctorDb = new();
 
 
                 uint id = uint.Parse(Id.Text);

@@ -33,8 +33,8 @@ namespace MedicalCentre.Forms
             {
 
 
-                Database<Account> accDb = new Database<Account>();
-                Database<Employee> empDb = new Database<Employee>();
+                ContextRepository<Account> accDb = new ContextRepository<Account>();
+                ContextRepository<Employee> empDb = new ContextRepository<Employee>();
                 Account currentAccount = accDb.GetItemById(uint.Parse(AccountId.Text.ToString()));
                 Employee currentEmployee = empDb.GetItemById(currentAccount.EmployeeAccountId);
 

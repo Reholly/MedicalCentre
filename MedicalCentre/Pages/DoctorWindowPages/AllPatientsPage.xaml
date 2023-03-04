@@ -9,14 +9,24 @@
       Title="All Patients"
       Background="Transparent"
       ShowsNavigationUI="False">
-    <Grid>
-        <Menu Height="50" VerticalAlignment="Top" Background="LightGray">
-            <MenuItem Header="Добавить" Command="{Binding AddPatientCommand}"/>
-            <MenuItem Header="Удалить" Command="{Binding DeletePatientCommand}"/>
-            <MenuItem Header="Сводка" Command="{Binding ShowPatientInfoCommand}"/>
-        </Menu>
-        <DataGrid Grid.Column="0" AutoGenerateColumns="True"
-                  Background="AliceBlue" Margin="0,40,0,0" CanUserAddRows="True" CanUserDeleteRows="True" 
+    <Border>
+
+        <Border.Background>
+            <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
+                <GradientStop Color="AliceBlue" Offset="0"/>
+                <GradientStop Color="#26527c" Offset="1.3"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid>
+
+            <Menu Height="40" VerticalAlignment="Top" Background="#26527c">
+                <MenuItem Header="Добавить" Command="{Binding AddPatientCommand}"/>
+                <MenuItem Header="Удалить" Command="{Binding DeletePatientCommand}"/>
+                <MenuItem Header="Сводка" Command="{Binding ShowPatientInfoCommand}"/>
+            </Menu>
+            <DataGrid Grid.Column="0" AutoGenerateColumns="True"
+                  Background="Transparent" Margin="0,40,0,0" CanUserAddRows="True" CanUserDeleteRows="True" 
                   CanUserReorderColumns="True" ItemsSource="{Binding Patients}" SelectedItem="{Binding SelectedPatient}"/>
-    </Grid>
+        </Grid>
+    </Border>
 </Page>
