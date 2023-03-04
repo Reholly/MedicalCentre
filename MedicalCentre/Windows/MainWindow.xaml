@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow"
         Height="340"
-        Width="340"
+        Width="500"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -15,18 +15,20 @@
         ResizeMode="NoResize"
         FontSize="18"
         FontFamily="{DynamicResource MeterialDesignFont}">
-    <Grid Margin="20">
+    <Grid>
         <Grid.Effect>
             <DropShadowEffect BlurRadius="30"
                               ShadowDepth="1"
                               Opacity="0.4"/>
         </Grid.Effect>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="250"/>
         </Grid.ColumnDefinitions>
-        <Border Grid.Column="0"
-                Background="AliceBlue"
-                CornerRadius="10 10 10 10">
+
+        <Border Grid.Column="1"
+                Background="#0f2630"
+                CornerRadius="0 10 10 0">
             <Grid>
                 <!-- Иконка закрытия -->
                 <materialDesign:PackIcon Kind="Close"
@@ -45,38 +47,97 @@
                         Background="Transparent"
                         BorderBrush="Transparent"
                         Command="{Binding CloseCommand}"/>
+                <materialDesign:PackIcon Kind="Lock" Height="40" Width="40" Background="#112a35" Foreground="#1d353f" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 35 40 0" Panel.ZIndex="10"/>
+                <materialDesign:PackIcon Kind="Person" Height="47" Width="40" Background="#112a35" Foreground="#1d353f" HorizontalAlignment="Right" Margin="0,86,40,0" Panel.ZIndex="10"/>
                 <!-- Ввод данных -->
                 <StackPanel VerticalAlignment="Center"
                             Margin="40 ">
+                    <TextBlock Foreground="#3b515a"
+                               Style="{StaticResource MaterialDesignBody1TextBlock}"
+                               Text="Вход в систему"
+                               HorizontalAlignment="Center"
+                               Margin="0 10 0 10"/>
                     <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Name="Login"
-                             Text="2"
-                             materialDesign:HintAssist.Hint="Логин"
+                             Text="2"  
+                             Foreground="AliceBlue"
                              materialDesign:HintAssist.FloatingOffset="0, -20"
                              BorderBrush="#c5c8cc"
-                             BorderThickness=" 0 0 0 1.5"/>
-                    <PasswordBox Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
-                             Name="Password"
-                             Password="admin"
-                             materialDesign:HintAssist.Hint="Пароль"
-                             materialDesign:HintAssist.FloatingOffset="0, -20"
-                             BorderBrush="#c5c8cc"
-                             Margin="0 27"
-                             BorderThickness=" 0 0 0 1.5"/>
+                             Background="#112a35"
+                             BorderThickness=" 0 0 0 1.5">
+                        <materialDesign:HintAssist.Hint>
+                            <TextBlock Foreground="#3b515a">Логин</TextBlock>
+                        </materialDesign:HintAssist.Hint>
+
+                    </TextBox>
+
+                    <PasswordBox Grid.Column="0" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
+                            DockPanel.Dock="Left"
+                            Name="Password"
+                            Password="admin"                                                   
+                            BorderBrush="#c5c8cc"
+                            Foreground="AliceBlue"
+                            Background="#112a35"
+                            Margin="0 27"
+                            BorderThickness=" 0 0 0 1.5">
+                        <materialDesign:HintAssist.Hint>
+                            <TextBlock Foreground="#3b515a">Пароль</TextBlock>
+                        </materialDesign:HintAssist.Hint>
+
+
+                    </PasswordBox>
+
+
                     <StackPanel Orientation="Horizontal">
                         <Button Content="Войти"
                             Margin="10 10 10 10"
-                            Background="#679ED2"
-                            Foreground="#ffffff"
+                            Background="Transparent"
+                            Foreground="AliceBlue"
                             FontSize="18"
-                            Width="200"
+                            Width="150"
                             Height="45"
+                            BorderBrush="#16363f"
                             materialDesign:ButtonAssist.CornerRadius="22"
                             VerticalAlignment="Center"                        
                             Command="{Binding LoginCommand}"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
+        </Border>
+        <Border Grid.Column="0" Background="#112a35" CornerRadius="10 0 0 10">
+            <Grid>
+                <Ellipse Width="200" Height="200" Fill="AliceBlue" Margin="100 -200 0 0" Opacity="0.05"/>
+                <Ellipse Width="150" Height="150" Fill="AliceBlue" Margin="80 -300 0 0" Opacity="0.01"/>
+                <Ellipse Width="250" Height="250" Fill="AliceBlue" Margin="-200 200 0 0" Opacity="0.05"/>
+                <Ellipse Width="500" Height="500" Fill="AliceBlue" Margin="-17 95 0 -255" Opacity="0.07"/>
+                <Ellipse Width="500" Height="500" Fill="AliceBlue" Margin="-317,-270,67,110" Opacity="0.02"/>
+                <StackPanel>
+                    <materialDesign:PackIcon Kind="HospitalBuilding" 
+                                         Height="150"
+                                         Width="150" 
+                                         Margin="0 50 0 0"
+                                         Foreground="AliceBlue"
+                                         VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                    <TextBlock FontSize="70"
+                           Foreground="AliceBlue" 
+                           FontFamily="Calibry" 
+                           TextAlignment="Center"
+                           VerticalAlignment="Center" 
+                           Margin="0 10 0 10"
+                           Text="MC"/>
+                    <TextBlock FontSize="10"
+                           Foreground="AliceBlue" 
+                           FontFamily="Calibry" 
+                           TextAlignment="Center"
+                           VerticalAlignment="Center" 
+                           Margin="0 10 0 10"
+                           Text="(C) Copyright 2023"
+                               Opacity="0.1"/>
+                </StackPanel>
+            </Grid>
+
+
         </Border>
     </Grid>
 </Window>
