@@ -23,7 +23,7 @@ namespace MedicalCentre.ViewModels.JuniorPersonalWindowPagesViewModels
 
         private async Task Check()
         {
-            Database<Patient> db = new();
+            ContextRepository<Patient> db = new();
             List<Patient> patients = await db.GetTableAsync();
             uint id = uint.Parse(page.Id.Text);
             foreach (Patient pat in patients)

@@ -28,7 +28,7 @@ namespace MedicalCentre.DatabaseLayer
             await context.SaveChangesAsync();
         }
 
-        public async Task<IList<T>> GetTableAsync()
+        public async Task<List<T>> GetTableAsync()
         {
             return await context.Set<T>().ToListAsync();
         }
@@ -50,7 +50,7 @@ namespace MedicalCentre.DatabaseLayer
             context.SaveChangesAsync();
         }
 
-        public IList<T> GetTable()
+        public List<T> GetTable()
         {
             return context.Set<T>().ToList();
         }
