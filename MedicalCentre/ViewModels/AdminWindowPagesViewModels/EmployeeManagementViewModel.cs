@@ -20,8 +20,8 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
         public ICommand? EditCommand { get; set; }
         public ICommand? DeleteCommand { get; set; }
 
-        private EmployeesManagement page;
-        public EmployeeManagementViewModel(EmployeesManagement page)
+        private EmployeesManagementPage page;
+        public EmployeeManagementViewModel(EmployeesManagementPage page)
         {
             this.page = page;
             ShowTableCommand = new RelayCommandAsync(ShowTable);
@@ -31,7 +31,7 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
         }
         private async Task ShowTable()
         {
-            Database<Employee> empDb = new Database<Employee>();
+            ContextRepository<Employee> empDb = new ContextRepository<Employee>();
 
             var employees = await empDb.GetTableAsync();
             Employees = new ObservableCollection<Employee>(employees);
@@ -39,7 +39,7 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
             page.EmployeesGrid.ItemsSource = Employees;
             page.EmployeesGrid.Visibility = Visibility.Visible;
 
-            Database<Account> accDb = new Database<Account>();
+            ContextRepository<Account> accDb = new ContextRepository<Account>();
 
             var accounts = await accDb.GetTableAsync();
             Accounts = new ObservableCollection<Account>(accounts);

@@ -25,11 +25,10 @@ namespace MedicalCentre.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("server=koquuguda.beget.app;user=MedicalCentre;password=Admin@_1234;database=Medic" +
-            "alCentre;")]
-        public string DatabaseSettings {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConnStr {
             get {
-                return ((string)(this["DatabaseSettings"]));
+                return ((string)(this["ConnStr"]));
             }
         }
     }

@@ -8,8 +8,8 @@ namespace MedicalCentre.Services
     {
         public static void BindName(uint employeeId, TextBlock RoleName, TextBlock EmployeeName)
         {
-            Database<Role> roleDb = new Database<Role>();
-            Database<Employee> employeeDb = new Database<Employee>();
+            ContextRepository<Role> roleDb = new ContextRepository<Role>();
+            ContextRepository<Employee> employeeDb = new ContextRepository<Employee>();
             Employee currentEmployee = employeeDb.GetItemById(employeeId);
             string role = roleDb.GetItemById(currentEmployee.RoleId).Title;
 

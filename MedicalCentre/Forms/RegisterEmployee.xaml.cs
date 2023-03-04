@@ -21,8 +21,8 @@ namespace MedicalCentre.Forms
             {
                 AuthentificatorService auth = new AuthentificatorService(new AuthentificationService());
 
-                Database<Employee> empDb = new Database<Employee>();
-                Database<Account> accDb = new Database<Account>();
+                ContextRepository<Employee> empDb = new ContextRepository<Employee>();
+                ContextRepository<Account> accDb = new ContextRepository<Account>();
 
                 Employee newEmployee = new Employee(uint.Parse(EmployeeId.Text),
                                             EmployeeName.Text,

@@ -13,8 +13,8 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
         public ObservableCollection<Patient> Patients { get; set; } = new();
         public ICommand? ShowTableCommand { get; set; }
         public ICommand? DeleteCommand { get; set; }
-        private Patients page;
-        public PatientsViewModel(Patients page)
+        private PatientsPage page;
+        public PatientsViewModel(PatientsPage page)
         {
             this.page = page;
             ShowTableCommand = new RelayCommand(ShowTable);
@@ -23,7 +23,7 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
 
         private async void ShowTable()
         {
-            Database<Patient> patientDb = new Database<Patient>();
+            ContextRepository<Patient> patientDb = new ContextRepository<Patient>();
 
             var patients = await patientDb.GetTableAsync();
             Patients = new ObservableCollection<Patient>(patients);

@@ -31,7 +31,7 @@ namespace MedicalCentre.ViewModels.OperatorWindowPagesViewModels
 
         private async void ShowTable()
         {
-            Database<Appointment> appointmentDb = new Database<Appointment>();
+            ContextRepository<Appointment> appointmentDb = new ContextRepository<Appointment>();
 
             var appointments = await appointmentDb.GetTableAsync();
             Appointments = new ObservableCollection<Appointment>(appointments);

@@ -35,7 +35,7 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             if (notePage.IsCreated)
                 note = notePage.CreatedNote;
             CurrentPatient.Notes.Add(note);
-            Database<Patient> database = new();
+            ContextRepository<Patient> database = new();
             await database.UpdateItemAsync(CurrentPatient);
         }
         private async Task CreateExaminationAsync()
@@ -46,7 +46,7 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             if (Page.IsCreated)
                 examination = Page.CreatedExamination;
             CurrentPatient.Examinations.Add(examination);
-            Database<Patient> database = new();
+            ContextRepository<Patient> database = new();
             await database.UpdateItemAsync(CurrentPatient);
         }
     }

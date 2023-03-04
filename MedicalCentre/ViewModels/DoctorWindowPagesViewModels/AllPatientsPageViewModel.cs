@@ -26,12 +26,12 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
         {
             Patient tempPatient = new();
             Patients.Add(tempPatient);
-            Database <Patient> database = new();
+            ContextRepository <Patient> database = new();
             await database.AddItemAsync(tempPatient);
         }
         private async Task DeletePatient()
         {
-            Database<Patient> database = new();
+            ContextRepository<Patient> database = new();
             Patient tempPatient = SelectedPatient;
             await database.DeleteItemAsync(tempPatient);
             Patients.Remove(tempPatient);

@@ -27,14 +27,14 @@ namespace MedicalCentre.ViewModels.GeneralViewModels
             StorageItem storageItem = new();
             Items.Add(storageItem);
             LoggerService.CreateLog("Storage item added", true);
-            Database<StorageItem> database= new Database<StorageItem>();
+            ContextRepository<StorageItem> database= new ContextRepository<StorageItem>();
             await database.AddItemAsync(storageItem);
         }
         private async void RemoveItem() 
         {
             Items.Remove(SelectedItem);
             LoggerService.CreateLog("Storage item deleted", true);
-            Database<StorageItem> database = new();
+            ContextRepository<StorageItem> database = new();
             await database.DeleteItemAsync(SelectedItem);
         }
     }

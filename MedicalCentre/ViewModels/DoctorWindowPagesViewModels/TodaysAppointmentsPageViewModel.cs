@@ -21,7 +21,7 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
         private async Task DeleteAppointment()
         {
             Appointment temp = SelectedAppointment;
-            Database<Appointment> database = new();
+            ContextRepository<Appointment> database = new();
             await database.DeleteItemAsync(temp);
             Appointments.Remove(temp);
         }

@@ -8,7 +8,7 @@ namespace MedicalCentre.Services
     {
         public static async Task CreateLog(string log, bool isSuccess)
         {
-            Database<Log> db = new Database<Log>();
+            ContextRepository<Log> db = new ContextRepository<Log>();
             await db.AddItemAsync(new Log(log, isSuccess));
         }
     }

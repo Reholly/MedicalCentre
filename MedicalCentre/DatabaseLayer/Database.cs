@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace MedicalCentre.DatabaseLayer
 { 
-    public class Database<T> where T : class
+    public class ContextRepository<T> :IRepository<T>
+        where T : class 
     {
-        private ApplicationContext context = new ApplicationContext();
+        private ApplicationContext context = new();
 
         public async Task AddItemAsync(T newItem)
         {
@@ -27,15 +28,21 @@ namespace MedicalCentre.DatabaseLayer
             await context.SaveChangesAsync();
         }
 
-        public async Task<List<T>> GetTableAsync()
+        public async Task<IList<T>> GetTableAsync()
         {
             return await context.Set<T>().ToListAsync();
         }
 
-        public async Task<T> GetItemByIdAsync(uint id)
+        public async Task<T?> GetItemByIdAsync(uint id)
         {
             return await context.Set<T>().FindAsync(id);
         } 
+
+        public void DeleteItem(T newItem)
+        {
+            context.Set<T>().Remove(newItem);
+            context.SaveChanges();
+        }
 
         public void AddItem(T newItem)
         {
@@ -43,7 +50,7 @@ namespace MedicalCentre.DatabaseLayer
             context.SaveChangesAsync();
         }
 
-        public List<T> GetTable()
+        public IList<T> GetTable()
         {
             return context.Set<T>().ToList();
         }

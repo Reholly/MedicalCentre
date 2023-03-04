@@ -27,7 +27,7 @@ namespace MedicalCentre.Pages.SystemAdminPages
 
         private void Send_Click(object sender, RoutedEventArgs e)
         {
-            ConnectionString.Text = Properties.Settings.Default.DatabaseSettings;
+            ConnectionString.Text = Properties.Settings.Default.ConnStr;
   
         }
     }

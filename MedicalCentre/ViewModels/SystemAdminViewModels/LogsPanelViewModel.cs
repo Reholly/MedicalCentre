@@ -21,7 +21,7 @@ namespace MedicalCentre.ViewModels.SystemAdminViewModels
 
         private async void ShowTable()
         {
-            Database<Log> logDb = new Database<Log>();  
+            ContextRepository<Log> logDb = new ContextRepository<Log>();  
             var logs = await logDb.GetTableAsync();
             Logs = new ObservableCollection<Log>(logs);
 

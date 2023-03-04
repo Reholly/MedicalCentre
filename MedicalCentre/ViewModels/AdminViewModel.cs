@@ -1,16 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MedicalCentre.Pages.AdminWindowPages;
+using MedicalCentre.Pages.GeneralPages;
+using MedicalCentre.Windows;
+using System.Windows.Input;
 
 namespace MedicalCentre.ViewModels
 {
     public class AdminViewModel
     {
-        public AdminViewModel()
+        private AdminWindow adminWindow;
+        public ICommand? CloseCommand { get; set; }
+        public ICommand? OpenEmployeesCommand { get; set; }
+        public ICommand? OpenPatientsCommand { get; set; }
+        public ICommand? OpenAnalyticsCommand { get; set; }
+        public ICommand? OpenStorageCommand { get; set; }
+        public ICommand? OpenSettingsCommand { get; set; }
+        public AdminViewModel(AdminWindow window)
         {
+            adminWindow = window;
+            CloseCommand = new RelayCommand(Close);
+            OpenEmployeesCommand = new RelayCommand(OpenEmployeesPage);
+            OpenPatientsCommand = new RelayCommand(OpenPatientsPage);
+            OpenAnalyticsCommand = new RelayCommand(OpenAnalyticsPage);
+            OpenStorageCommand = new RelayCommand(OpenStoragePage);
+            OpenSettingsCommand = new RelayCommand(OpentSettingsPage);
+        }   
 
+        private void Close()
+        {
+            adminWindow.Close();
+        }
+
+        private void OpenEmployeesPage()
+        {
+            adminWindow.MainFrame.Content = new EmployeesManagementPage();
+        }
+
+        private void OpenPatientsPage()
+        {
+            adminWindow.MainFrame.Content = new PatientsPage();
+        }
+
+        private void OpenAnalyticsPage()
+        {
+            adminWindow.MainFrame.Content = new AnalyticsPage();
+        }
+
+        private void OpenStoragePage()
+        {
+            adminWindow.MainFrame.Content = new StoragePage();
+        }
+
+        private void OpentSettingsPage()
+        {
+            adminWindow.MainFrame.Content = new CentreSettingsPage();
         }
     }
 }
