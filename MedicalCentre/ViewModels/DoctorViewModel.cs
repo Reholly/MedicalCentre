@@ -11,6 +11,7 @@ namespace MedicalCentre.ViewModels
         public ICommand ShowInputHelpCommand { get; set; }
         public ICommand ShowTodaysAppointmentsCommand { get; set; }
         public ICommand ShowAllPatientsCommand { get; set; }
+        public ICommand CloseWindowCommand { get; set; }
 
         public DoctorViewModel(DoctorWindow window)
         {
@@ -18,26 +19,21 @@ namespace MedicalCentre.ViewModels
             ShowInputHelpCommand = new RelayCommand(ShowInputHelp);
             ShowTodaysAppointmentsCommand = new RelayCommand(ShowTodaysAppointments);
             ShowAllPatientsCommand = new RelayCommand(ShowAllPatients);
+            CloseWindowCommand = new RelayCommand(CloseWindow);
         }
 
         private void ShowInputHelp() => MessageBox.Show("DateTime input foramt: MM/DD/YYYY HH:MM:SS AM (or PM)");
 
-        private void CheckFrames()
-        {
-            if (window.DoctorLeftFrame.Content != null)
-                window.DoctorRightFrame.Content = window.DoctorLeftFrame.Content;
-        }
-
         private void ShowTodaysAppointments()
         {
-            CheckFrames();
-            window.DoctorLeftFrame.Content = new TodaysAppointments();
+            window.MainFrame.Content = new TodaysAppointmentsPage();
         }
 
         private void ShowAllPatients()
         {
-            CheckFrames();
-            window.DoctorLeftFrame.Content = new AllPatientsPage();
+            window.MainFrame.Content = new AllPatientsPage();
         }
+
+        private void CloseWindow() => window.Close();
     }
 }

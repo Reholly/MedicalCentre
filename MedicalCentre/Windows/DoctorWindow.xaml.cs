@@ -11,11 +11,5 @@ namespace MedicalCentre.Windows
             InitializeComponent();
             DataContext = new DoctorViewModel(this);
         }
-
-        private void CloseIcon_DoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            Close();
-        }
-
     }
 }

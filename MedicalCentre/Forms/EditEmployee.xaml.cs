@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Models;
+using MedicalCentre.Services;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using MedicalCentre.Models;
-using MedicalCentre.DatabaseLayer;
-using MedicalCentre.Services;
 
 namespace MedicalCentre.Forms
 {
@@ -27,7 +17,7 @@ namespace MedicalCentre.Forms
             InitializeComponent();
         }
 
-        public async void Edit(object sendet, RoutedEventArgs e)
+        public async Task Edit(object sendet, RoutedEventArgs e)
         {
             try
             {
@@ -53,7 +43,7 @@ namespace MedicalCentre.Forms
 
                 LoggerService.CreateLog($"Account {accountId} with Employee {currentEmployee.Id} was edit.", true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 //MessageBox.Show("Что-то пошло не так. Ошибка в данных или сбой на стороне сервера, попробуйте позже и обратитесь к сис.админу.");
                 LoggerService.CreateLog($"{ex.Message}", false);

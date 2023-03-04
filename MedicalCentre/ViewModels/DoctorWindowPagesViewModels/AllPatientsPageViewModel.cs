@@ -2,6 +2,7 @@
 using MedicalCentre.Models;
 using MedicalCentre.Pages.DoctorWindowPages;
 using System.Collections.ObjectModel;
+using System.Data.Common;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Navigation;
@@ -10,30 +11,36 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {
     public class AllPatientsPageViewModel
     {
-        public ObservableCollection<Patient> Patients { get; set; } = new();
+        private readonly Database<Patient> db = new();
+        public ObservableCollection<Patient> Patients { get; set; }
         public Patient SelectedPatient { get; set; }
         public ICommand AddPatientCommand { get; set; }
         public ICommand DeletePatientCommand { get; set; }
         public ICommand ShowPatientInfoCommand { get; set; }
+        public ICommand ShowTableCommand { get; set; }
         public AllPatientsPageViewModel()
         {
+            ShowTableCommand = new RelayCommandAsync(ShowTable);
             AddPatientCommand = new RelayCommandAsync(AddPatient);
             DeletePatientCommand = new RelayCommandAsync(DeletePatient);
             ShowPatientInfoCommand = new RelayCommand(ShowPatientInfo);
         }
 
+        private async Task ShowTable() => Patients = new(await db.GetTableAsync());
+
         private async Task AddPatient()
         {
+            Patients = new(await db.GetTableAsync());
             Patient tempPatient = new();
             Patients.Add(tempPatient);
-            Database <Patient> database = new();
-            await database.AddItemAsync(tempPatient);
+            await db.AddItemAsync(tempPatient);
         }
+
         private async Task DeletePatient()
         {
-            Database<Patient> database = new();
+            Patients = new(await db.GetTableAsync());
             Patient tempPatient = SelectedPatient;
-            await database.DeleteItemAsync(tempPatient);
+            await db.DeleteItemAsync(tempPatient);
             Patients.Remove(tempPatient);
         }
 

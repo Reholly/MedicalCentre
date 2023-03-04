@@ -90,13 +90,12 @@
         <Border Grid.Column="1" CornerRadius="0 10 10 0">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    
+
                     <ColumnDefinition/>
                     <ColumnDefinition Width="2"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Frame Grid.Column="2" Margin="0 45 0 0" Name="DoctorRightFrame" NavigationUIVisibility="Hidden" FontSize="30"/>
-                <Frame Grid.Column="0" Margin="0 45 0 0" Name="DoctorLeftFrame" NavigationUIVisibility="Hidden" FontSize="30"/>
+                <Frame Grid.Column="2" Margin="0 45 0 0" Name="MainFrame" NavigationUIVisibility="Hidden" FontSize="30"/>
             </Grid>
             <Border.Background>
                 <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
@@ -104,17 +103,22 @@
                     <GradientStop Color="#26527c" Offset="1.3"/>
                 </LinearGradientBrush>
             </Border.Background>
-          
+
         </Border>
 
-        <materialDesign:PackIcon Kind="Close"   
-                                Grid.Column="2"
-                                VerticalAlignment="Top"
-                                Width="20"
-                                Height="20"
-                                HorizontalAlignment="Right"
+        <Button Background="Transparent" 
+                Command="{Binding CloseWindowCommand}" 
+                Grid.Column="2" 
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right" 
+                Margin="0 13 14 0" 
+                BorderBrush="Transparent">
+            <StackPanel>
+                <materialDesign:PackIcon Kind="Close"   
                                 Opacity="0.3"
-                                Margin="0 13 14 0" MouseDoubleClick="CloseIcon_DoubleClick"/>
-        
+                                Width="20" Height="20" />
+            </StackPanel>
+        </Button>
+
     </Grid>
 </Window>

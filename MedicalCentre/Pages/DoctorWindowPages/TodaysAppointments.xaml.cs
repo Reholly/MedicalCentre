@@ -3,9 +3,9 @@ using System.Windows.Controls;
 
 namespace MedicalCentre.Pages.DoctorWindowPages
 {
-    public partial class TodaysAppointments : Page
+    public partial class TodaysAppointmentsPage : Page
     {
-        public TodaysAppointments()
+        public TodaysAppointmentsPage()
         {
             InitializeComponent();
             DataContext = new TodaysAppointmentsPageViewModel();

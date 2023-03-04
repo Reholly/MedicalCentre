@@ -81,8 +81,7 @@
                             Width="220"
                             Height="45"
                             materialDesign:ButtonAssist.CornerRadius="22"
-                            VerticalAlignment="Center"
-                            Click="Edit"/>
+                            VerticalAlignment="Center"/>
             </StackPanel>
         </StackPanel>
     </Grid>

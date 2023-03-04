@@ -13,8 +13,9 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
     public class CreateExaminationPageViewModel
     {
         private readonly CreateExaminationPage page;
-        private ImageData Images = new();
+        private readonly ImageData Images = new();
         public ICommand SaveExaminationCommand { get; set; }
+        public ICommand AddImageCommand { get; set; }
         public CreateExaminationPageViewModel(CreateExaminationPage page)
         {
             this.page = page;

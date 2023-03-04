@@ -11,6 +11,6 @@
         <TextBox Name="Id" Width="300" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" 
                  Background="LightGray"/>
         <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="25" Width="100" Background="DimGray"
-                Content="Check" Command="{Binding CheckCommand}"/>
+                Content="Check" Command="{Binding CheckCommand}" BorderBrush="Transparent"/>
     </Grid>
 </Window>
