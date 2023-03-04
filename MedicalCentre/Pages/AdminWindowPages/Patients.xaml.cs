@@ -19,9 +19,9 @@ namespace MedicalCentre.Pages.AdminWindowPages
     /// <summary>
     /// Логика взаимодействия для Patients.xaml
     /// </summary>
-    public partial class Patients : Page
+    public partial class PatientsPage : Page
     {
-        public Patients()
+        public PatientsPage()
         {
             InitializeComponent();
             DataContext = new PatientsViewModel(this);

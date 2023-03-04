@@ -2,13 +2,14 @@
 using MedicalCentre.Models;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {
     public class TodaysAppointmentsPageViewModel
     {
-        public ObservableCollection<Appointment> Appointments { get; set; } =
+        public ObservableCollection<Appointment> Appointments { get; set; }
         public Appointment SelectedAppointment { get; set; }
         public ICommand DeleteAppointmentCommand { get; set; }
         public TodaysAppointmentsPageViewModel()
@@ -20,10 +21,9 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 
         private async Task DeleteAppointment()
         {
-            Appointment temp = SelectedAppointment;
             Database<Appointment> database = new();
-            await database.DeleteItemAsync(temp);
-            Appointments.Remove(temp);
+            await database.DeleteItemAsync(SelectedAppointment);
+            Appointments.Remove(SelectedAppointment);
         }
     }
 }

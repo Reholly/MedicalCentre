@@ -14,7 +14,7 @@ namespace MedicalCentre.Windows
 
             EmployeeNameBinderService.BindName(employeeId, RoleName, EmployeeName);
 
-            MainFrame.Content = new Analytics();
+            MainFrame.Content = new AnalyticsPage();
         }
 
         private void CloseIcon_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -29,12 +29,12 @@ namespace MedicalCentre.Windows
 
         private void OpenPatientsPage(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Patients();
+            MainFrame.Content = new PatientsPage();
         }
 
         private void OpenAnalyticsPage(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Analytics();
+            MainFrame.Content = new AnalyticsPage();
         }
 
         private void OpenStoragePage(object sender, RoutedEventArgs e)

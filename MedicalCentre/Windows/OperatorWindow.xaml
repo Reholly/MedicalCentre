@@ -48,7 +48,7 @@
                 <Separator Height="1" Margin="20 30" Background="#465589"/>
 
                 <Button Margin="0 10 0 10" Background="Transparent" Height="40" BorderBrush="Transparent" 
-                        HorizontalAlignment="Left" VerticalAlignment="Center" Click="Open_AppointmentsManagement">
+                        HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding OpenAppointmentsManagementPageCommand}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Pen"
                                                  Opacity="0.2" 
@@ -61,7 +61,7 @@
                 </Button>
                
                 <Button Margin="0 10 0 10" Background="Transparent" Height="40" BorderBrush="Transparent"
-                        HorizontalAlignment="Left" VerticalAlignment="Center" Click="Open_Patients">
+                        HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding OpenPatientsPageCommand}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="People"
                                                  Opacity="0.2" 
@@ -87,13 +87,15 @@
             <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden"  />
         </Border>
 
-        <materialDesign:PackIcon Kind="Close"   
-                                Grid.Column="2"
-                                VerticalAlignment="Top"
-                                Width="20"
-                                Height="20"
-                                HorizontalAlignment="Right"
+        <Button Background="Transparent" Command="{Binding CloseWindowCommand}" Grid.Column="2" 
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right" Margin="0 13 14 0" BorderBrush="Transparent">
+            <StackPanel>
+                <materialDesign:PackIcon Kind="Close"   
                                 Opacity="0.3"
-                                Margin="0 13 14 0" MouseDoubleClick="CloseIcon_DoubleClick"/>
+                                Width="20" Height="20" />
+            </StackPanel>
+        </Button>
+        
     </Grid>
 </Window>

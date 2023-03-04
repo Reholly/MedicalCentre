@@ -73,7 +73,7 @@ namespace MedicalCentre.Services
                     await LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
                     break;
                 case "Operator":
-                    OperatorWindow operatorWindow = new OperatorWindow(currentAccount.Id);
+                    OperatorWindow operatorWindow = new(currentAccount.Id);
                     operatorWindow.Show();
                     await LoggerService.CreateLog($"Вошел в систему {currentAccount.Id}", true);
                     break;

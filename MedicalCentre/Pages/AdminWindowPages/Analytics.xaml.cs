@@ -19,9 +19,9 @@ namespace MedicalCentre.Pages.AdminWindowPages
     /// <summary>
     /// Логика взаимодействия для Analytics.xaml
     /// </summary>
-    public partial class Analytics : Page
+    public partial class AnalyticsPage : Page
     {
-        public Analytics()
+        public AnalyticsPage()
         {
             InitializeComponent();
             

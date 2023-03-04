@@ -17,11 +17,11 @@ namespace MedicalCentre.ViewModels.OperatorWindowPagesViewModels
     internal class AppointmentsManagementViewModel
     {
         public ObservableCollection<Appointment> Appointments { get; set; } = new();
-        public ICommand? ShowTableCommand { get; set; }
-        public ICommand? CreateCommand { get; set; }
-        public ICommand? WriteCommand { get; set; }
-        private AppointmentsManagement page;
-        public AppointmentsManagementViewModel(AppointmentsManagement page)
+        public ICommand ShowTableCommand { get; set; }
+        public ICommand CreateCommand { get; set; }
+        public ICommand WriteCommand { get; set; }
+        private readonly AppointmentsManagementPage page;
+        public AppointmentsManagementViewModel(AppointmentsManagementPage page)
         {
             this.page = page;
             ShowTableCommand = new RelayCommand(ShowTable);
