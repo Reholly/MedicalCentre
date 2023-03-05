@@ -3,9 +3,6 @@ using System.Windows.Controls;
 
 namespace MedicalCentre.Pages.AdminWindowPages
 {
-    /// <summary>
-    /// Логика взаимодействия для Analytics.xaml
-    /// </summary>
     public partial class AnalyticsPage : Page
     {
         public AnalyticsPage()
