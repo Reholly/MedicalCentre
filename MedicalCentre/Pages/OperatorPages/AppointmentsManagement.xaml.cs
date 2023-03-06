@@ -16,9 +16,9 @@ using System.Windows.Shapes;
 
 namespace MedicalCentre.Pages.OperatorPages
 {
-    public partial class AppointmentsManagement : Page
+    public partial class AppointmentsManagementPage : Page
     {
-        public AppointmentsManagement()
+        public AppointmentsManagementPage()
         {
             InitializeComponent();
             DataContext = new AppointmentsManagementViewModel(this);

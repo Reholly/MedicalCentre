@@ -20,8 +20,8 @@ namespace MedicalCentre.ViewModels.OperatorWindowPagesViewModels
         public ICommand? ShowTableCommand { get; set; }
         public ICommand? CreateCommand { get; set; }
         public ICommand? WriteCommand { get; set; }
-        private AppointmentsManagement page;
-        public AppointmentsManagementViewModel(AppointmentsManagement page)
+        private AppointmentsManagementPage page;
+        public AppointmentsManagementViewModel(AppointmentsManagementPage page)
         {
             this.page = page;
             ShowTableCommand = new RelayCommand(ShowTable);
