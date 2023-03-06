@@ -12,7 +12,6 @@ namespace MedicalCentre.Models
         public string Specialization { get; set; } = null!;
         public double Salary { get; set; }
         public uint RoleId { get; set; }
-
         public bool IsOnline { get; set; } = false;
         public Employee() { }
 
