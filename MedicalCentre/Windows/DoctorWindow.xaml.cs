@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Input;
 using MedicalCentre.Models;
 using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
@@ -8,19 +7,12 @@ namespace MedicalCentre.Windows
 {
     public partial class DoctorWindow : Window
     {
-        public DoctorWindow(uint employeeId)
+        public DoctorWindow(Account account)
         {
             InitializeComponent();
 
-
-            EmployeeNameBinderService.BindName(employeeId, RoleName, EmployeeName);
+            EmployeeNameBinderService.BindName(account, RoleName, EmployeeName);
             DataContext = new DoctorViewModel(this);
         }
-
-        private void CloseIcon_DoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            Close();
-        }
-
     }
 }

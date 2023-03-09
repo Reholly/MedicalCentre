@@ -1,22 +1,27 @@
-﻿using MedicalCentre.DatabaseLayer;
-using MedicalCentre.Models;
-using MedicalCentre.Pages.AdminWindowPages;
-using MedicalCentre.Services;
+﻿using MedicalCentre.Models;
 using MedicalCentre.ViewModels;
 using System.Windows;
+using MedicalCentre.Pages.AdminWindowPages;
+using System.Threading;
+using MedicalCentre.Services;
 
 namespace MedicalCentre.Windows
 {
     public partial class AdminWindow : Window
-    {
-        public AdminWindow(uint employeeId)
+    {     
+        public AdminWindow(Account account)
         {
             InitializeComponent();
 
-            EmployeeNameBinderService.BindName(employeeId, RoleName, EmployeeName);
+            if (Thread.CurrentPrincipal == null || !Thread.CurrentPrincipal.IsInRole("Admin"))
+            {
+                Close();
+            }
+
+            EmployeeNameBinderService.BindName(account, RoleName, EmployeeName);
 
             MainFrame.Content = new AnalyticsPage();
-            DataContext = new AdminViewModel(this);
+            DataContext = new AdminViewModel(this, account);
         }      
     }
 }

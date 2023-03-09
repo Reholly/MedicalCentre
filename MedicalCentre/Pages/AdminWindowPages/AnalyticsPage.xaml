@@ -12,15 +12,10 @@
       ShowsNavigationUI="False">
 
     <Grid>
-        <Border >
-            <Border.Background>
-                <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
-                    <GradientStop Color="AliceBlue" Offset="0"/>
-                    <GradientStop Color="#26527c" Offset="1.3"/>
-                </LinearGradientBrush>
-            </Border.Background>
+        <Border Background="#112a35 ">
+
             <Grid>
-                <WpfPlot Name="MainChart" VerticalAlignment="Top"/>
+                <WpfPlot Name="MainChart" VerticalAlignment="Top" Background="#0f2630 " Height="1070" HorizontalAlignment="Center" Width="1610"/>
             </Grid>
         </Border>
     </Grid>

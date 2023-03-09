@@ -1,54 +1,54 @@
-﻿using MedicalCentre.DatabaseLayer;
-using MedicalCentre.Models;
-using MedicalCentre.Services;
+﻿using MedicalCentre.Models;
 using MedicalCentre.Windows;
 using System.Windows.Input;
 using System.Windows;
+using System.Threading.Tasks;
+using System;
+using System.Threading;
+using MedicalCentre.Authentification;
 
 namespace MedicalCentre.ViewModels
 {
     public class MainViewModel
     {
-        private MainWindow window;
         public ICommand LoginCommand { get; set; }
         public ICommand CloseCommand { get; set; }
+
+        private MainWindow window;
+
         public MainViewModel(MainWindow window)
         {
             this.window = window;
-            LoginCommand = new RelayCommand(Login);
+            LoginCommand = new RelayCommandAsync(Authentificate);
             CloseCommand = new RelayCommand(Close);
         }
 
-        private async void Login()
+        private async Task Authentificate()
         {
             string login = window.Login.Text;
             string password = window.Password.Password;
+            AuthentificationService authService = new AuthentificationService();
 
-            AuthentificatorService authentificator = new AuthentificatorService(new AuthentificationService());
-            Account currentAccount = await authentificator.Login(uint.Parse(login), password);
-            
-            ContextRepository<Employee> employeeDb = new ContextRepository<Employee>();
-
-            if (currentAccount != null)
+            try
             {
-                Employee id = await employeeDb.GetItemByIdAsync(currentAccount.Id);
-                currentAccount.Id = id.Id;
+                Account account = await authService.AuthenticateUser(login, password);
+                AccountPrincipal accountPrincipal = Thread.CurrentPrincipal as AccountPrincipal;
+
+                if (accountPrincipal == null)
+                {
+                    throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
+                }
+                accountPrincipal.Identity = new AccountIdentity(account.Username, account.Role);
+
+                await authService.OpenWindowByRole(account);
+                Close();
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show("Какие-то данные неверны, попробуйте снова");
-                return;
-            }
-
-            ContextRepository<Role> roleDb = new ContextRepository<Role>();
-            Employee currentEmployee = await employeeDb.GetItemByIdAsync(currentAccount.Id);
-            Role role = await roleDb.GetItemByIdAsync(currentEmployee.RoleId); 
-
-            await authentificator.CheckRole(role, currentAccount);
-
-            window.Close();
+                MessageBox.Show(ex.Message);
+            }    
         }
-
+     
         private void Close() => window.Close();
     }
 }
