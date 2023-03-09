@@ -43,8 +43,7 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             CreateExaminationPage Page = new(CurrentPatient);
             page.RightFrame.Content = Page;
             MedicalExamination examination = new();
-            if (Page.IsCreated)
-                examination = Page.CreatedExamination;
+            //examination = Page.CreatedExamination;
             CurrentPatient.Examinations.Add(examination);
             ContextRepository<Patient> database = new();
             await database.UpdateItemAsync(CurrentPatient);
