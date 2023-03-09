@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading;
+using System.Windows;
 using MedicalCentre.Models;
 using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
@@ -11,8 +12,13 @@ namespace MedicalCentre.Windows
         {
             InitializeComponent();
 
+            if (Thread.CurrentPrincipal == null || !Thread.CurrentPrincipal.IsInRole("Doctor"))
+            {
+                Close();
+            }
+
             EmployeeNameBinderService.BindName(account, RoleName, EmployeeName);
-            DataContext = new DoctorViewModel(this);
+            DataContext = new DoctorViewModel(this, account);
         }
     }
 }
