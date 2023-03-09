@@ -22,22 +22,14 @@ namespace MedicalCentre.ViewModels
 
         private void ShowInputHelp() => MessageBox.Show("DateTime input foramt: MM/DD/YYYY HH:MM:SS AM (or PM)");
 
-        private void CheckFrames()
-        {
-            if (window.DoctorLeftFrame.Content != null)
-                window.DoctorRightFrame.Content = window.DoctorLeftFrame.Content;
-        }
-
         private void ShowTodaysAppointments()
         {
-            CheckFrames();
-            window.DoctorLeftFrame.Content = new TodaysAppointments();
+            window.MainFrame.Content = new TodaysAppointments();
         }
 
         private void ShowAllPatients()
         {
-            CheckFrames();
-            window.DoctorLeftFrame.Content = new AllPatientsPage();
+            window.MainFrame.Content = new AllPatientsPage();
         }
     }
 }
