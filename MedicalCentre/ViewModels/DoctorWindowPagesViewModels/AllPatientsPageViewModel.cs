@@ -1,6 +1,7 @@
 ﻿using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
 using MedicalCentre.Pages.DoctorWindowPages;
+using SciChart.Core.Extensions;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -10,16 +11,24 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {
     public class AllPatientsPageViewModel
     {
-        public ObservableCollection<Patient> Patients { get; set; } = new();
-        public Patient SelectedPatient { get; set; }
+        public ObservableCollection<Patient> Patients { get; set; } = null!;
+        public Patient? SelectedPatient { get; set; }
         public ICommand AddPatientCommand { get; set; }
         public ICommand DeletePatientCommand { get; set; }
         public ICommand ShowPatientInfoCommand { get; set; }
+        public ICommand InitializeTableCommand { get; set; }
         public AllPatientsPageViewModel()
         {
             AddPatientCommand = new RelayCommandAsync(AddPatient);
             DeletePatientCommand = new RelayCommandAsync(DeletePatient);
             ShowPatientInfoCommand = new RelayCommand(ShowPatientInfo);
+            InitializeTableCommand = new RelayCommandAsync(InitializeTable);
+        }
+
+        private async Task InitializeTable()
+        {
+            ContextRepository<Patient> repository = new();
+            Patients = new ObservableCollection<Patient>(await repository.GetTableAsync());
         }
 
         private async Task AddPatient()
@@ -32,7 +41,7 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
         private async Task DeletePatient()
         {
             ContextRepository<Patient> database = new();
-            Patient tempPatient = SelectedPatient;
+            Patient? tempPatient = SelectedPatient;
             await database.DeleteItemAsync(tempPatient);
             Patients.Remove(tempPatient);
         }
@@ -41,8 +50,10 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
         {
             if (SelectedPatient != null)
             {
-                NavigationWindow window = new();
-                window.Content = new PatientInfoPage(SelectedPatient);
+                NavigationWindow window = new()
+                {
+                    Content = new PatientInfoPage(SelectedPatient)
+                };
                 window.Show();
             }
         }

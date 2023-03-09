@@ -14,9 +14,6 @@
             <ColumnDefinition Width="250"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                      x:Name="Splitter"/>
-
         <Border CornerRadius="10 0 0 10">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
@@ -89,14 +86,7 @@
 
         <Border Grid.Column="1" CornerRadius="0 10 10 0">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="2"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Frame Grid.Column="2" Margin="0 0 0 0" Name="DoctorRightFrame" NavigationUIVisibility="Hidden" FontSize="30"/>
-                <Frame Grid.Column="0" Margin="0 0 0 0" Name="DoctorLeftFrame" NavigationUIVisibility="Hidden" FontSize="30"/>
+                <Frame Grid.Column="1"  Name="MainFrame" NavigationUIVisibility="Hidden" FontSize="30"/>
             </Grid>
             <Border.Background>
                 <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
@@ -108,7 +98,7 @@
         </Border>
 
         <materialDesign:PackIcon Kind="Close"   
-                                Grid.Column="2"
+                                Grid.Column="1"
                                 VerticalAlignment="Top"
                                 Width="20"
                                 Height="20"
