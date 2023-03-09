@@ -24,7 +24,7 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
         {
             ContextRepository<MedicalExamination> tempRepository = new();
             List<MedicalExamination> examinations = await tempRepository.GetTableAsync();
-            MedicalExamination examination = new((uint)examinations.Count, DateTime.Now, patient, page.ExaminationTitleBox.Text, page.ExaminationTextBox.Text, null);
+            MedicalExamination examination = new((uint)examinations.Count + 1, DateTime.Now, patient, page.ExaminationTitleBox.Text, page.ExaminationTextBox.Text, null);
             ContextRepository<Patient> repository = new();
             patient.Examinations.Add(examination);
             await repository.UpdateItemAsync(patient);
