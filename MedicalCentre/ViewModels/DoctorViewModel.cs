@@ -24,7 +24,7 @@ namespace MedicalCentre.ViewModels
             ShowInputHelpCommand = new RelayCommand(ShowInputHelp);
             ShowTodaysAppointmentsCommand = new RelayCommand(ShowTodaysAppointments);
             ShowAllPatientsCommand = new RelayCommand(ShowAllPatients);
-            WindowClosingCommand = new RelayCommandAsync(Close);
+            WindowClosingCommand = new RelayCommand(Close);
         }
 
         private void ShowInputHelp() => MessageBox.Show("DateTime input foramt: MM/DD/YYYY HH:MM:SS AM (or PM)");
@@ -39,9 +39,9 @@ namespace MedicalCentre.ViewModels
             window.MainFrame.Content = new AllPatientsPage();
         }
 
-        private async Task Close() //метод для LogOut кнопки
+        private void Close() //метод для LogOut кнопки
         {
-            await new AuthentificationService().LogOut(window, account);
+            new AuthentificationService().LogOut(window, account);
             window.Close();
         }
     }
