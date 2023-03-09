@@ -34,8 +34,8 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
 
         private void DeletePatient()
         {
-            DeletePatient window = new DeletePatient();
-            window.Show();
+           // DeletePatient window = new DeletePatient();
+            //window.Show();
         }
     }
 }

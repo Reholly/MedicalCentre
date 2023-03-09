@@ -11,7 +11,7 @@ namespace MedicalCentre.Windows
         {
             InitializeComponent();
 
-            EmployeeNameBinderService.BindName(employeeId, RoleName, EmployeeName);
+            //EmployeeNameBinderService.BindName(employeeId, RoleName, EmployeeName);
 
             MainFrame.Content = new AnalyticsPage();
             DataContext = new OperatorWindowViewModel(this);

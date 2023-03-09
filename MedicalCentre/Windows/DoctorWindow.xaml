@@ -114,7 +114,7 @@
                                 Height="20"
                                 HorizontalAlignment="Right"
                                 Opacity="0.3"
-                                Margin="0 13 14 0" MouseDoubleClick="CloseIcon_DoubleClick"/>
+                                Margin="0 13 14 0"/>
         
     </Grid>
 </Window>

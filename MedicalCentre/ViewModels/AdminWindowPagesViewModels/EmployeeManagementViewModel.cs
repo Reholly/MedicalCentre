@@ -2,9 +2,13 @@
 using MedicalCentre.Forms;
 using MedicalCentre.Models;
 using MedicalCentre.Pages.AdminWindowPages;
+using MedicalCentre.Services;
+using MedicalCentre.UserControls;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
@@ -12,56 +16,50 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
     public class EmployeeManagementViewModel
     {
         public ObservableCollection<Employee> Employees { get; set; } = new();
-        public ObservableCollection<Account> Accounts { get; set; } = new();
-        public Employee? SelectedEmployee { get; set; }
-        public Account? SelectedAccount { get; set; }
-        public ICommand? ShowTableCommand { get; set; }
-        public ICommand? RegisterCommand { get; set; }
-        public ICommand? EditCommand { get; set; }
-        public ICommand? DeleteCommand { get; set; }
+        public ICommand? SearchCommand { get; set; }
+        public ICommand? OpenRegistrationCommand { get; set; }
+        public ICommand? OpenNewsCommand { get; set; }
 
         private EmployeesManagementPage page;
         public EmployeeManagementViewModel(EmployeesManagementPage page)
         {
             this.page = page;
-            ShowTableCommand = new RelayCommandAsync(ShowTable);
-            RegisterCommand = new RelayCommand(RegisterEmployee);
-            DeleteCommand = new RelayCommand(DeleteEmployee);
-            EditCommand = new RelayCommand(EditEmployee);
-        }
-        private async Task ShowTable()
-        {
-            ContextRepository<Employee> empDb = new ContextRepository<Employee>();
+            SearchCommand = new RelayCommandAsync(SearchItems);
 
-            var employees = await empDb.GetTableAsync();
-            Employees = new ObservableCollection<Employee>(employees);
+            OpenRegistrationCommand = new RelayCommand(OpenRegistration);        
+            OpenNewsCommand = new RelayCommand(OpenNews);
+            page.Search.TextChanged += OnTextChanged;
 
-            page.EmployeesGrid.ItemsSource = Employees;
-            page.EmployeesGrid.Visibility = Visibility.Visible;
-
-            ContextRepository<Account> accDb = new ContextRepository<Account>();
-
-            var accounts = await accDb.GetTableAsync();
-            Accounts = new ObservableCollection<Account>(accounts);
-
-            page.AccountsGrid.ItemsSource = Accounts;
-            page.AccountsGrid.Visibility = Visibility.Visible;
-        }
-        private void RegisterEmployee()
-        {
-            RegisterEmployeeForm window = new RegisterEmployeeForm();
-            window.Show();
+            
+            SearchItems();
         }
 
-        private void DeleteEmployee()
+        public void OpenNews()
         {
-            DeleteEmployee window = new DeleteEmployee();
-            window.Show();
+            MessageBox.Show("ЭТО ЗАГЛУШКА");
         }
-        private void EditEmployee()
+
+        public void OpenRegistration()
         {
-            EditEmployee window = new EditEmployee();
-            window.Show();
+            EmployeeRegistration employeeRegistration = new();
+            employeeRegistration.Show();
+        }
+
+        public async Task SearchItems()
+        {
+            ContextRepository<Employee> empDb = new();
+            Employees = new ObservableCollection<Employee>( await empDb.GetTableAsync());
+            Employees = new ObservableCollection<Employee>(SearchFilterService<Employee>.GetFilteredList(Employees.ToList(), page.Search.Text));
+            page.EmployeesCards.Children.Clear();
+            foreach(var employee in Employees)
+            {
+                page.EmployeesCards.Children.Insert(0, new HumanCard(employee));
+            }     
+        }
+
+        private void OnTextChanged(object sender, TextChangedEventArgs args)
+        {
+            SearchItems();      
         }
     }
 }

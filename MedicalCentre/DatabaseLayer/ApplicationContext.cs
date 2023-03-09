@@ -1,6 +1,7 @@
 ﻿using MedicalCentre.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.IO;
 
@@ -23,16 +24,13 @@ public class ApplicationContext : DbContext
     public DbSet<MedicalExamination> MedicalExaminations { get; set; }
     public DbSet<Note> Notes { get; set; }
     public DbSet<Patient> Patients { get; set; }
-    public DbSet<Role> Roles { get; set; }
     public DbSet<Appointment> Appointments { get; set; }
     public DbSet<StorageItem> StorageItems { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         string connstr = s_config.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("WHERE CONNSTR");
-
-        optionsBuilder.UseMySql(connstr, ServerVersion.AutoDetect(connstr));
-    }
-
-   
+        string zaglush = "server=koquuguda.beget.app;user=MedicalCentre;password=Admin@_1234;database=MedicalCentre;";
+        optionsBuilder.UseMySql(zaglush, ServerVersion.AutoDetect(zaglush));
+    }  
 }

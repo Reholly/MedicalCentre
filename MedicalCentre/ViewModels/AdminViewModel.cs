@@ -1,4 +1,6 @@
-﻿using MedicalCentre.Pages.AdminWindowPages;
+﻿using MedicalCentre.Authentification;
+using MedicalCentre.Models;
+using MedicalCentre.Pages.AdminWindowPages;
 using MedicalCentre.Pages.GeneralPages;
 using MedicalCentre.Windows;
 using System.Windows.Input;
@@ -8,15 +10,17 @@ namespace MedicalCentre.ViewModels
     public class AdminViewModel
     {
         private AdminWindow adminWindow;
+        private Account currentAccount;
         public ICommand? CloseCommand { get; set; }
         public ICommand? OpenEmployeesCommand { get; set; }
         public ICommand? OpenPatientsCommand { get; set; }
         public ICommand? OpenAnalyticsCommand { get; set; }
         public ICommand? OpenStorageCommand { get; set; }
         public ICommand? OpenSettingsCommand { get; set; }
-        public AdminViewModel(AdminWindow window)
+        public AdminViewModel(AdminWindow window, Account account)
         {
             adminWindow = window;
+            currentAccount = account;
             CloseCommand = new RelayCommand(Close);
             OpenEmployeesCommand = new RelayCommand(OpenEmployeesPage);
             OpenPatientsCommand = new RelayCommand(OpenPatientsPage);
@@ -27,6 +31,8 @@ namespace MedicalCentre.ViewModels
 
         private void Close()
         {
+            var auth = new AuthentificationService();
+            auth.LogOut(adminWindow, currentAccount);
             adminWindow.Close();
         }
 

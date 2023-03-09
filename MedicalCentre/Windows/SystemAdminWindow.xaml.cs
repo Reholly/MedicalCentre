@@ -11,7 +11,7 @@ namespace MedicalCentre.Windows
         {
             InitializeComponent();
 
-            EmployeeNameBinderService.BindName(employeeId, RoleName, EmployeeName);
+           // EmployeeNameBinderService.BindName(employeeId, RoleName, EmployeeName);
         }
         private void CloseIcon_DoubleClick(object sender, MouseButtonEventArgs e)
         {
