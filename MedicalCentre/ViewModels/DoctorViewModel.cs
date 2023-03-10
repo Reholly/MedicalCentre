@@ -1,10 +1,9 @@
-﻿using MedicalCentre.Pages.DoctorWindowPages;
+﻿using MedicalCentre.Authentification;
+using MedicalCentre.Models;
+using MedicalCentre.Pages.DoctorWindowPages;
 using MedicalCentre.Windows;
 using System.Windows;
 using System.Windows.Input;
-using MedicalCentre.Models;
-using MedicalCentre.Authentification;
-using System.Threading.Tasks;
 
 namespace MedicalCentre.ViewModels
 {
@@ -29,15 +28,11 @@ namespace MedicalCentre.ViewModels
 
         private void ShowInputHelp() => MessageBox.Show("DateTime input foramt: MM/DD/YYYY HH:MM:SS AM (or PM)");
 
-        private void ShowTodaysAppointments() //показать список приёмов на сегодня
-        {
-            window.MainFrame.Content = new TodaysAppointments();
-        }
+        private void ShowTodaysAppointments() => window.MainFrame.Content = new TodaysAppointments();
+        //показать список приёмов на сегодня
 
-        private void ShowAllPatients() //показать список всех пациентов
-        {
-            window.MainFrame.Content = new AllPatientsPage();
-        }
+        private void ShowAllPatients() => window.MainFrame.Content = new AllPatientsPage();
+        //показать список всех пациентов
 
         private void Close() //метод для LogOut кнопки
         {

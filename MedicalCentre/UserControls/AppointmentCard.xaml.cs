@@ -1,6 +1,4 @@
-﻿using MedicalCentre.Forms;
-using MedicalCentre.Models;
-using MedicalCentre.UserControls.ViewModels;
+﻿using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +16,12 @@ using System.Windows.Shapes;
 
 namespace MedicalCentre.UserControls
 {
-    public partial class HumanCard : UserControl
+    public partial class AppointmentCard : UserControl
     {
-        public HumanCard(Employee employee)
+        public AppointmentCard()
         {
             InitializeComponent();
-            DataContext = new HumanCardViewModel(this, employee);
+            DataContext = new object();
         }
     }
 }
