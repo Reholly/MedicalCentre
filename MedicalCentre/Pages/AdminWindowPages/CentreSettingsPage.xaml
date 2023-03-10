@@ -4,29 +4,109 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MedicalCentre.Pages.AdminWindowPages"
+     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-          d:DesignHeight="1080" d:DesignWidth="1610"
+      d:Height="1080" d:Width="1340"
       Title="Аналитика"
       ShowsNavigationUI="False">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+        <Grid Background="#c9d0d8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" ></ColumnDefinition>
+                <ColumnDefinition Width="2"></ColumnDefinition>
+                <ColumnDefinition Width="500"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1080"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!-- Бразуер -->
+            
+            <StackPanel Margin="30 5 30 0">
+                <TextBlock Text="Администратор >> Настройки" FontSize="18" Margin="30 15 0 30"/>
+                <Border Background="Black" Opacity="0.8" Height="2" Width="720" Margin="0 -15 0 10"/>
+                
+                <Border CornerRadius="20 20 20 20" Width="730" Height="180" Margin="0 0 0 20 ">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                            <GradientStop Color="#0c5aa6" Offset="0"/>
+                            <GradientStop Color="#679ed2" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.Clip>
+                        <RectangleGeometry RadiusX="15" RadiusY="15" Rect="0,0,730,180"/>
+                    </Border.Clip>
+                    <Grid>
+                        <Ellipse Margin="472,0,0,0" Height="400" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="386">
+                            <Ellipse.Fill>
+                                <LinearGradientBrush StartPoint="1,0" EndPoint="0,1" Opacity="0.3">
+                                    <GradientStop Color="#26527c" Offset="0"/>
+                                </LinearGradientBrush>
+                            </Ellipse.Fill>
 
-        <Border Grid.ColumnSpan="2">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
-                    <GradientStop Color="AliceBlue" Offset="0"/>
-                    <GradientStop Color="#26527c" Offset="1.3"/>
-                </LinearGradientBrush>
-            </Border.Background>
-            <TextBlock HorizontalAlignment="Center" Foreground="Black" FontSize="55" VerticalAlignment="Center">
-                <TextBlock.Text>Настройки блять</TextBlock.Text>
-            </TextBlock>
+                        </Ellipse>
+                        <materialDesign:PackIcon Kind="Database" Width="150" Height="150" Foreground="#fafafafa" HorizontalAlignment="Right" Opacity="0.8" Margin="0,0,29,0"/>
 
-        </Border>
+                        <StackPanel Margin="20 20 20 20" VerticalAlignment="Top" Height="140" >
+                            <TextBlock Margin="0 15 0 0" Text="Настройки базы данных" Foreground="#fafafafa" FontSize="26" FontFamily="Bold" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
 
+                            <Button 
+                        Width="200" Height="50" Background="Transparent" FontSize="18" Command="{Binding OpenDbCommand}" Content="Открыть" Foreground="#fafafa" HorizontalAlignment="Left" Margin="3 33" BorderBrush="#0c5aa6" materialDesign:ButtonAssist.CornerRadius="22" BorderThickness="1"/>
+
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                              
+                <Border CornerRadius="20 20 20 20" Width="730" Height="180" Margin="0 0 0 20 ">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                            <GradientStop Color="#0c5aa6" Offset="0"/>
+                            <GradientStop Color="#679ed2" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.Clip>
+                        <RectangleGeometry RadiusX="15" RadiusY="15" Rect="0,0,730,180"/>
+                    </Border.Clip>
+                    <Grid>
+                        <Ellipse Margin="472,0,0,0" Height="400" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="386">
+                            <Ellipse.Fill>
+                                <LinearGradientBrush StartPoint="1,0" EndPoint="0,1" Opacity="0.3">
+                                    <GradientStop Color="#26527c" Offset="0"/>
+                                </LinearGradientBrush>
+                            </Ellipse.Fill>
+
+                        </Ellipse>
+                        <materialDesign:PackIcon Kind="Sitemap" Width="150" Height="150" Foreground="#fafafafa" HorizontalAlignment="Right" Opacity="0.8" Margin="0,0,29,0"/>
+
+                        <StackPanel Margin="20 20 20 20" VerticalAlignment="Top" Height="140" >
+                            <TextBlock Margin="0 15 0 0" Text="Сайт-хостинг" Foreground="#fafafafa" FontSize="26" FontFamily="Bold" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                            <Button Width="200" Height="50" Background="Transparent" FontSize="18" Command="{Binding OpenHostCommand}" Content="Открыть" Foreground="#fafafa" HorizontalAlignment="Left" Margin="3 33" BorderBrush="#0c5aa6" materialDesign:ButtonAssist.CornerRadius="22" BorderThickness="1"/>
+
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2">
+                <Border BorderThickness="0" Background="#252934" BorderBrush="Black">
+                    <TextBlock Text="Панель логов" 
+                           Style="{StaticResource MaterialDesignBody1TextBlock}"                        
+                           Height="30" 
+                           FontSize="18" 
+                           Foreground="#fafafafa" 
+                           TextAlignment="Center"/>
+                </Border>
+                <DataGrid VerticalScrollBarVisibility="Auto" MaxHeight="835" HorizontalScrollBarVisibility="Auto"    Background="Transparent" AutoGenerateColumns="True" 
+                      ItemsSource="{Binding Logs}" 
+                      Visibility="Collapsed" Name="Logs" CanUserResizeColumns="False" CanUserAddRows="False"
+                      CanUserDeleteRows="False" CanUserReorderColumns="False" 
+                      CanUserResizeRows="False" CanUserSortColumns="False" IsReadOnly="True"/>
+
+                <StackPanel Width="600" Name="PatientsCards"/>
+            </StackPanel>
+            <Border Grid.Column="1" Background="#252934"/>
+        </Grid>
     </Grid>
 </Page>
+
+

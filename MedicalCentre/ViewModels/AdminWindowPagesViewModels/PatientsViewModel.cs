@@ -2,8 +2,13 @@
 using MedicalCentre.Forms;
 using MedicalCentre.Models;
 using MedicalCentre.Pages.AdminWindowPages;
+using MedicalCentre.Services;
+using MedicalCentre.UserControls;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
@@ -11,31 +16,49 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
     public class PatientsViewModel
     {
         public ObservableCollection<Patient> Patients { get; set; } = new();
-        public ICommand? ShowTableCommand { get; set; }
-        public ICommand? DeleteCommand { get; set; }
+        public ICommand? SearchCommand { get; set; }
+        public ICommand? OpenRegistrationCommand { get; set; }
+        public ICommand? OpenNewsCommand { get; set; }
+
         private PatientsPage page;
         public PatientsViewModel(PatientsPage page)
         {
             this.page = page;
-            ShowTableCommand = new RelayCommand(ShowTable);
-            DeleteCommand = new RelayCommand(DeletePatient);
+            SearchCommand = new RelayCommandAsync(SearchItems);
+
+            OpenRegistrationCommand = new RelayCommand(OpenRegistration);
+            OpenNewsCommand = new RelayCommand(OpenNews);
+            page.Search.TextChanged += OnTextChanged;
+
+            SearchItems();
         }
 
-        private async void ShowTable()
+        public void OpenNews()
         {
-            ContextRepository<Patient> patientDb = new ContextRepository<Patient>();
-
-            var patients = await patientDb.GetTableAsync();
-            Patients = new ObservableCollection<Patient>(patients);
-
-            page.PatientsGrid.ItemsSource = Patients;
-            page.PatientsGrid.Visibility = Visibility.Visible;
+            MessageBox.Show("ЭТО ЗАГЛУШКА");
         }
 
-        private void DeletePatient()
+        public void OpenRegistration()
         {
-           // DeletePatient window = new DeletePatient();
-            //window.Show();
+            PatientRegistration patientRegister = new();
+            patientRegister.Show();
+        }
+
+        public async Task SearchItems()
+        {
+            ContextRepository<Patient> patientsDb = new();
+            Patients = new ObservableCollection<Patient>(await patientsDb.GetTableAsync());
+            Patients = new ObservableCollection<Patient>(SearchFilterService<Patient>.GetFilteredList(Patients.ToList(), page.Search.Text));
+            page.PatientsCards.Children.Clear();
+            foreach (var patient in Patients)
+            {
+                page.PatientsCards.Children.Insert(0, new PatientCard(patient));
+            }
+        }
+
+        private void OnTextChanged(object sender, TextChangedEventArgs args)
+        {
+            SearchItems();
         }
     }
 }

@@ -3,6 +3,7 @@ using MedicalCentre.Models;
 using MedicalCentre.Pages.AdminWindowPages;
 using MedicalCentre.Pages.GeneralPages;
 using MedicalCentre.Windows;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MedicalCentre.ViewModels
@@ -14,22 +15,20 @@ namespace MedicalCentre.ViewModels
         public ICommand? CloseCommand { get; set; }
         public ICommand? OpenEmployeesCommand { get; set; }
         public ICommand? OpenPatientsCommand { get; set; }
-        public ICommand? OpenAnalyticsCommand { get; set; }
-        public ICommand? OpenStorageCommand { get; set; }
-        public ICommand? OpenSettingsCommand { get; set; }
+        public ICommand? OpenMainCommand { get; set; }
+        public ICommand? OpenCentreSettings { get; set; }
         public AdminViewModel(AdminWindow window, Account account)
         {
             adminWindow = window;
             currentAccount = account;
-            CloseCommand = new RelayCommand(Close);
+            CloseCommand = new RelayCommandAsync(Close);
             OpenEmployeesCommand = new RelayCommand(OpenEmployeesPage);
             OpenPatientsCommand = new RelayCommand(OpenPatientsPage);
-            OpenAnalyticsCommand = new RelayCommand(OpenAnalyticsPage);
-            OpenStorageCommand = new RelayCommand(OpenStoragePage);
-            OpenSettingsCommand = new RelayCommand(OpentSettingsPage);
+            OpenMainCommand = new RelayCommand(OpenMainPage);
+            OpenCentreSettings = new RelayCommand(OpentSettingsPage);
         }   
 
-        private void Close()
+        private async Task Close()
         {
             var auth = new AuthentificationService();
             auth.LogOut(adminWindow, currentAccount);
@@ -46,14 +45,9 @@ namespace MedicalCentre.ViewModels
             adminWindow.MainFrame.Content = new PatientsPage();
         }
 
-        private void OpenAnalyticsPage()
+        private void OpenMainPage()
         {
-            adminWindow.MainFrame.Content = new AnalyticsPage();
-        }
-
-        private void OpenStoragePage()
-        {
-            adminWindow.MainFrame.Content = new StoragePage();
+            adminWindow.MainFrame.Content = new MainPage();
         }
 
         private void OpentSettingsPage()

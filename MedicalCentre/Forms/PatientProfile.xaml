@@ -1,4 +1,4 @@
-﻿<Window x:Class="MedicalCentre.Forms.EmployeeProfile"
+﻿<Window x:Class="MedicalCentre.Forms.PatientProfile"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,18 +6,19 @@
         xmlns:local="clr-namespace:MedicalCentre.Forms"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
+        
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
          AllowsTransparency="True"
         Background="Transparent"
-        Title="EmployeeProfile" Height="594" Width="590">
+        Title="EmployeeProfile" Height="330" Width="590">
     <Border Background="#c9d0d8" BorderBrush="#252934" CornerRadius="20 20 20 20" BorderThickness="1">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="160"></RowDefinition>
-                <RowDefinition Height="384"></RowDefinition>
-                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="120"></RowDefinition>
+                <RowDefinition Height="65"></RowDefinition>
             </Grid.RowDefinitions>
             <materialDesign:PackIcon Kind="Close"
                                          VerticalAlignment="Top"
@@ -36,7 +37,7 @@
                         BorderBrush="Transparent"
                         Command="{Binding CloseCommand}"/>
             <DockPanel Width="550" HorizontalAlignment="Left">
-                <materialDesign:PackIcon Kind="User" Width="183" Height="183" DockPanel.Dock="Left"/>
+                <materialDesign:PackIcon Kind="Patient" Width="175" Height="175" DockPanel.Dock="Left"/>
                 <StackPanel>
                     <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Name="Surname"
@@ -46,7 +47,7 @@
                              Background="#c9d0d8"
                              FontSize="18"
                              BorderThickness=" 0 0 0 1.5">
-                                
+
                         <materialDesign:HintAssist.Hint>
                             <TextBlock Foreground="#3b515a">Фамилия</TextBlock>
                         </materialDesign:HintAssist.Hint>
@@ -83,11 +84,9 @@
 
                 </StackPanel>
             </DockPanel>
-            <StackPanel Grid.Row="1" Width="520" Height="330" Margin="29 10 0 0" HorizontalAlignment="Left">
-               
-                <CheckBox Name="IsOnline" Width="200" Height="30" HorizontalAlignment="Left" Content="Онлайн" FontSize="18" Style="{StaticResource MaterialDesignCheckBox}"/>
+            <StackPanel Grid.Row="1" Width="520" Height="114" VerticalAlignment="Top" Margin="29 10 0 0" HorizontalAlignment="Left">
                 <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Name="Login"
+                             Name="PhoneNumber"
                              Text="2"  
                                 MaxHeight="57"
                              TextWrapping="Wrap"
@@ -99,12 +98,12 @@
                              BorderThickness=" 0 0 0 1.5">
 
                     <materialDesign:HintAssist.Hint>
-                        <TextBlock Foreground="#3b515a">Логин</TextBlock>
+                        <TextBlock Foreground="#3b515a">Телефон</TextBlock>
                     </materialDesign:HintAssist.Hint>
 
                 </TextBox>
                 <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Name="Password"
+                             Name="BirthDate"
                              Text="2"  
                              MaxHeight="57"
                              TextWrapping="Wrap"
@@ -116,56 +115,20 @@
                              BorderThickness=" 0 0 0 1.5">
 
                     <materialDesign:HintAssist.Hint>
-                        <TextBlock Foreground="#3b515a">Пароль</TextBlock>
+                        <TextBlock Foreground="#3b515a">Дата рождения(dd.mm.yyyy)</TextBlock>
                     </materialDesign:HintAssist.Hint>
 
                 </TextBox>
-                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Name="Salary"
-                             Text="2"  
-                                MaxHeight="57"
-                             TextWrapping="Wrap"
-                             MaxWidth="530"
-                             materialDesign:HintAssist.FloatingOffset="0, -20"
-                             BorderBrush="#c5c8cc"
-                             Background="#c9d0d8"
-                             FontSize="18"
-                             BorderThickness=" 0 0 0 1.5">
 
-                    <materialDesign:HintAssist.Hint>
-                        <TextBlock Foreground="#3b515a">Зарплата</TextBlock>
-                    </materialDesign:HintAssist.Hint>
-
-                </TextBox>
-                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Name="Description"
-                             Text="2"  
-                             
-                             MaxHeight="150"
-                             MaxWidth="530"
-                         TextWrapping="Wrap"
-                             VerticalContentAlignment="Center"
-                             materialDesign:HintAssist.FloatingOffset="0, -20"
-                             BorderBrush="#c5c8cc"
-                             Background="#c9d0d8"
-                             FontSize="18"
-                             BorderThickness=" 0 0 0 1.5">
-
-                    <materialDesign:HintAssist.Hint>
-                        <TextBlock Foreground="#3b515a"
-                                   >Описание</TextBlock>
-                    </materialDesign:HintAssist.Hint>
-
-                </TextBox>
-               
             </StackPanel>
             <DockPanel Grid.Row="2" VerticalAlignment="Top">
-                <Button Width="295" HorizontalAlignment="Left" Height="50" materialDesign:ButtonAssist.CornerRadius="0 0 0 20" FontSize="18" Background="#252934" Foreground="#fafafafa" Command="{Binding SaveCommand}">
-                        Сохранить
+                <Button Width="295" HorizontalAlignment="Left" Height="50" materialDesign:ButtonAssist.CornerRadius="0 0 0 20" FontSize="18" Background="#252934" Foreground="#fafafafa" Command="{Binding DeleteCommand}">
+                    Сохранить
                 </Button>
                 <Button Width="295" HorizontalAlignment="Left" Height="50" materialDesign:ButtonAssist.CornerRadius="0 0 20 0" FontSize="18" Background="Red" Foreground="#fafafafa" Command="{Binding DeleteCommand}">
-                        Удалить
+                    Удалить
                 </Button>
+
             </DockPanel>
         </Grid>
     </Border>

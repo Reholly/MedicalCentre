@@ -28,6 +28,9 @@ namespace MedicalCentre.Forms.ViewModels
             DeleteCommand = new RelayCommandAsync(Delete);
             SaveCommand = new RelayCommandAsync(Save);
 
+            if (accDb.GetItemById(employee.AccountId).IsOnline) this.profile.IsOnline.IsChecked = true;
+            else this.profile.IsOnline.IsChecked = false;
+
             this.profile.Password.Text = accDb.GetItemById(employee.AccountId).Password;
             this.profile.Login.Text = accDb.GetItemById(employee.AccountId).Username;
             this.profile.Name.Text = employee.Name;
@@ -56,6 +59,8 @@ namespace MedicalCentre.Forms.ViewModels
             Account account = await accDb.GetItemByIdAsync(employee.AccountId);
             account.Password = profile.Password.Text;
             account.Username = profile.Login.Text;
+
+            account.IsOnline = profile.IsOnline.IsChecked.Value;
 
             employee.Name = profile.Name.Text;
             employee.Surname = profile.Surname.Text;

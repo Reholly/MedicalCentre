@@ -13,7 +13,7 @@ namespace MedicalCentre.Windows
 
             //EmployeeNameBinderService.BindName(employeeId, RoleName, EmployeeName);
 
-            MainFrame.Content = new AnalyticsPage();
+            MainFrame.Content = new MainPage();
             DataContext = new OperatorWindowViewModel(this);
         }
     }

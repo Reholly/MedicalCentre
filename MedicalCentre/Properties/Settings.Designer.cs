@@ -12,7 +12,7 @@ namespace MedicalCentre.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.3.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -29,6 +29,67 @@ namespace MedicalCentre.Properties {
         public string ConnStr {
             get {
                 return ((string)(this["ConnStr"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://koquuguda.beget.app/index.php?route=/sql&server=1&db=MedicalCentre&table=" +
+            "Accounts&pos=0")]
+        public string PhpMyAdmin {
+            get {
+                return ((string)(this["PhpMyAdmin"]));
+            }
+            set {
+                this["PhpMyAdmin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://cp.beget.com/cloud/databases/medicalcentre")]
+        public string Host {
+            get {
+                return ((string)(this["Host"]));
+            }
+            set {
+                this["Host"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://mail.yandex.ru")]
+        public string MainMail {
+            get {
+                return ((string)(this["MainMail"]));
+            }
+            set {
+                this["MainMail"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://doctor.rambler.ru/news/")]
+        public string OpenHealthNews {
+            get {
+                return ((string)(this["OpenHealthNews"]));
+            }
+            set {
+                this["OpenHealthNews"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/EuUst/MedicalCentre/blob/master/README.md")]
+        public string NewFeatures {
+            get {
+                return ((string)(this["NewFeatures"]));
+            }
+            set {
+                this["NewFeatures"] = value;
             }
         }
     }

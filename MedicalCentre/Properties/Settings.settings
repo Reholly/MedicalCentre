@@ -5,5 +5,20 @@
     <Setting Name="ConnStr" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="PhpMyAdmin" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://koquuguda.beget.app/index.php?route=/sql&amp;server=1&amp;db=MedicalCentre&amp;table=Accounts&amp;pos=0</Value>
+    </Setting>
+    <Setting Name="Host" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://cp.beget.com/cloud/databases/medicalcentre</Value>
+    </Setting>
+    <Setting Name="MainMail" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://mail.yandex.ru</Value>
+    </Setting>
+    <Setting Name="OpenHealthNews" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://doctor.rambler.ru/news/</Value>
+    </Setting>
+    <Setting Name="NewFeatures" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://github.com/EuUst/MedicalCentre/blob/master/README.md</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

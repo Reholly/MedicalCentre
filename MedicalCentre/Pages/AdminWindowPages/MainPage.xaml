@@ -1,0 +1,157 @@
+﻿<Page x:Class="MedicalCentre.Pages.AdminWindowPages.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MedicalCentre.Pages.AdminWindowPages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      mc:Ignorable="d" 
+      d:Height="850" d:Width="1340"
+      Title="Аналитика"
+      ShowsNavigationUI="False">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="920"></ColumnDefinition>
+            <ColumnDefinition Width="430"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Border Background="#c9d0d8" Grid.ColumnSpan="2">
+            <Grid Grid.Column="0">
+                <Border Grid.Column="0" Background="Black" Opacity="0.8" Height="2" Width="1300" Margin="60,64,30,0" VerticalAlignment="Top"/>
+                <TextBlock Text="Администратор >> Главная" FontSize="18" Margin="60,20,0,0"/>
+                <Border CornerRadius="20" Padding="0"  Width="858" Height="553" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="60,75,0,0">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                            <GradientStop Color="#0c5aa6" Offset="0"/>
+                            <GradientStop Color="#679ed2" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Grid>
+                        <TextBlock Text="Общая статистика" Foreground="#fafafafa" FontSize="24" HorizontalAlignment="Center" Margin="10 20 0 0" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+
+                        <lvc:CartesianChart Name="series" Series="{Binding SeriesCollection}" LegendLocation="Right" Margin="0,72,0,0" >
+                            <lvc:CartesianChart.ChartLegend>
+                                <lvc:DefaultLegend BulletSize="20" Foreground="#fafafafa"></lvc:DefaultLegend>
+                            </lvc:CartesianChart.ChartLegend>
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis Title="Sales" Name="labelFormatter" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis Title="Month" Name="labels" Labels="{Binding Labels}"></lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                        </lvc:CartesianChart>
+
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+        <Border Grid.Column="1"  Width="370" Height="370"  CornerRadius="20" Margin="0 75 0 0" VerticalAlignment="Top">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                    <GradientStop Color="#0c5aa6" Offset="0"/>
+                    <GradientStop Color="#679ed2" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <TextBlock FontSize="24" HorizontalAlignment="Center" Margin="0 25 0 0" Foreground="#fafafafa"   Text="Диаграмма"/>
+
+                <lvc:PieChart Name="Chart" Series="{Binding SeriesCollection}" Height="320" Width="320"
+                      LegendLocation="Right" InnerRadius="0" Margin="50,50,0,0" >
+                    <lvc:PieChart.ChartLegend>
+                        <lvc:DefaultLegend BulletSize="20" Foreground="#fafafafa"></lvc:DefaultLegend>
+                    </lvc:PieChart.ChartLegend>
+                    <lvc:PieChart.DataTooltip>
+                        <lvc:DefaultTooltip BulletSize="20"></lvc:DefaultTooltip>
+                    </lvc:PieChart.DataTooltip>
+                </lvc:PieChart>
+            </Grid>
+        </Border>
+        <Border Width="370"  CornerRadius="20" Margin="30,471,30,14" Grid.Column="1">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                    <GradientStop Color="#0c5aa6" Offset="0"/>
+                    <GradientStop Color="#679ed2" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Border.Clip>
+                <RectangleGeometry RadiusX="15" RadiusY="15" Rect="0,0,370,370"/>
+            </Border.Clip>
+            <Grid>
+              
+                <materialDesign:PackIcon Kind="HospitalBuilding" Width="150" Height="150" Foreground="#fafafafa" HorizontalAlignment="Center" Opacity="0.8" Margin="0,11,0,0"/>
+
+                <StackPanel Margin="20 20 20 20" VerticalAlignment="Top" Height="340" >
+
+                    <TextBlock Margin="0 150 0 0" Width="310" TextWrapping="Wrap" MaxWidth="300" Text="Здравствуйте! А вы знали, что в новой версии MC доступно еще больше новых функций? " Foreground="#fafafafa" FontSize="24" FontFamily="Bold" Style="{StaticResource MaterialDesignBody1TextBlock}" Height="119"/>
+
+
+                    <Button 
+                        Width="320" Height="50" Background="Transparent" FontSize="18" Command="{Binding OpenNewFeaturesCommand}" Content="Удиви меня" Foreground="#fafafa" HorizontalAlignment="Left" Margin="3 5" BorderBrush="#0c5aa6" materialDesign:ButtonAssist.CornerRadius="22" BorderThickness="1"/>
+
+                </StackPanel>
+            </Grid>
+
+        </Border>
+        <Border CornerRadius="20 20 20 20" Height="180" Margin="59,656,449,14" Grid.Column="0">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                    <GradientStop Color="#0c5aa6" Offset="0"/>
+                    <GradientStop Color="#679ed2" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Border.Clip>
+                <RectangleGeometry RadiusX="15" RadiusY="15" Rect="0,0,730,180"/>
+            </Border.Clip>
+            <Grid>
+                <Ellipse Margin="206,0,0,-62" Height="400" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="386">
+                    <Ellipse.Fill>
+                        <LinearGradientBrush StartPoint="1,0" EndPoint="0,1" Opacity="0.3">
+                            <GradientStop Color="#26527c" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Ellipse.Fill>
+
+                </Ellipse>
+                <materialDesign:PackIcon Kind="Newspaper" Width="150" Height="150" Foreground="#fafafafa" HorizontalAlignment="Right" Opacity="0.8" Margin="0,0,29,0"/>
+
+                <StackPanel Margin="20 20 20 20" VerticalAlignment="Top" Height="140" >
+                    <TextBlock Margin="0 15 0 0" Text="Новости" Foreground="#fafafafa" FontSize="26" FontFamily="Bold" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+
+                    <Button 
+                        Width="200" Height="50" Background="Transparent" FontSize="18" Command="{Binding OpenNewsCommand}" Content="Открыть" Foreground="#fafafa" HorizontalAlignment="Left" Margin="3 33" BorderBrush="#0c5aa6" materialDesign:ButtonAssist.CornerRadius="22" BorderThickness="1"/>
+
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border CornerRadius="20 20 20 20" Height="180" Margin="502,656,0,14" Grid.Column="0">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                    <GradientStop Color="#0c5aa6" Offset="0"/>
+                    <GradientStop Color="#679ed2" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Border.Clip>
+                <RectangleGeometry RadiusX="15" RadiusY="15" Rect="0,0,730,180"/>
+            </Border.Clip>
+            <Grid>
+                <Ellipse Margin="199,0,0,-29" Height="400" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="386">
+                    <Ellipse.Fill>
+                        <LinearGradientBrush StartPoint="1,0" EndPoint="0,1" Opacity="0.3">
+                            <GradientStop Color="#26527c" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Ellipse.Fill>
+
+                </Ellipse>
+                <materialDesign:PackIcon Kind="Email" Width="150" Height="150" Foreground="#fafafafa" HorizontalAlignment="Right" Opacity="0.8" Margin="0,0,29,0"/>
+                <StackPanel Margin="20 20 20 20" VerticalAlignment="Top" Height="140" >
+                    <TextBlock Margin="0 15 0 0" Text="Почта" Foreground="#fafafafa" FontSize="26" FontFamily="Bold" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+
+                    <Button 
+                        Width="200" Height="50" Background="Transparent" FontSize="18" Command="{Binding OpenManageCommand}" Content="Открыть" Foreground="#fafafa" HorizontalAlignment="Left" Margin="3 33" BorderBrush="#0c5aa6" materialDesign:ButtonAssist.CornerRadius="22" BorderThickness="1"/>
+
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>
