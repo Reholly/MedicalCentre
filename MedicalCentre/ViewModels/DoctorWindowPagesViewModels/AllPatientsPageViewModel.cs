@@ -25,20 +25,20 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             InitializeTableCommand = new RelayCommandAsync(InitializeTable);
         }
 
-        private async Task InitializeTable()
+        private async Task InitializeTable() //обновление таблицы
         {
             ContextRepository<Patient> repository = new();
             Patients = new ObservableCollection<Patient>(await repository.GetTableAsync());
         }
 
-        private async Task AddPatient()
+        private async Task AddPatient() //добавление пациента
         {
             Patient tempPatient = new();
             Patients.Add(tempPatient);
             ContextRepository <Patient> database = new();
             await database.AddItemAsync(tempPatient);
         }
-        private async Task DeletePatient()
+        private async Task DeletePatient() //удаление пациента
         {
             ContextRepository<Patient> database = new();
             Patient? tempPatient = SelectedPatient;
