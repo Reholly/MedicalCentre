@@ -13,7 +13,7 @@
          AllowsTransparency="True"
         Background="Transparent"
         Title="EmployeeProfile" Height="621" Width="590">
-    <Border Background="#fafafa" BorderBrush="#252934" CornerRadius="20 20 20 20" BorderThickness="1">
+    <Border Background="#c9d0d8" BorderBrush="#252934" CornerRadius="20 20 20 20" BorderThickness="1">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="160"></RowDefinition>
@@ -41,10 +41,10 @@
                 <StackPanel>
                     <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Name="Surname"
-                             Text="2"  
+                             Text=""  
                              materialDesign:HintAssist.FloatingOffset="0, -20"
                              BorderBrush="#c5c8cc"
-                             Background="#fafafa"
+                             Background="#c9d0d8"
                              FontSize="18"
                              BorderThickness=" 0 0 0 1.5">
 
@@ -55,10 +55,10 @@
                     </TextBox>
                     <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Name="Name"
-                             Text="2"  
+                             Text=""  
                              materialDesign:HintAssist.FloatingOffset="0, -20"
                              BorderBrush="#c5c8cc"
-                             Background="#fafafafa"
+                             Background="#c9d0d8"
                              FontSize="18"
                              BorderThickness=" 0 0 0 1.5">
 
@@ -69,10 +69,10 @@
                     </TextBox>
                     <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Name="Patronymic"
-                             Text="2"  
+                             Text=""  
                              materialDesign:HintAssist.FloatingOffset="0, -20"
                              BorderBrush="#c5c8cc"
-                             Background="#fafafafa"
+                             Background="#c9d0d8"
                              FontSize="18"
                              BorderThickness=" 0 0 0 1.5">
 
@@ -87,13 +87,13 @@
             <StackPanel Grid.Row="1" Width="520" Height="414" Margin="29 10 0 0" HorizontalAlignment="Left">
                 <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Name="Login"
-                             Text="2"  
+                             Text=""  
                                 MaxHeight="57"
                              TextWrapping="Wrap"
                              MaxWidth="530"
                              materialDesign:HintAssist.FloatingOffset="0, -20"
                              BorderBrush="#c5c8cc"
-                             Background="#fafafafa"
+                             Background="#c9d0d8"
                              FontSize="18"
                              BorderThickness=" 0 0 0 1.5">
 
@@ -104,13 +104,13 @@
                 </TextBox>
                 <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Name="Password"
-                             Text="2"  
+                             Text=""  
                              MaxHeight="57"
                              TextWrapping="Wrap"
                              MaxWidth="530"
                              materialDesign:HintAssist.FloatingOffset="0, -20"
                              BorderBrush="#c5c8cc"
-                             Background="#fafafafa"
+                             Background="#c9d0d8"
                              FontSize="18"
                              BorderThickness=" 0 0 0 1.5">
 
@@ -121,13 +121,13 @@
                 </TextBox>
                 <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Name="Role"
-                             Text="2"  
+                             Text=""  
                                 MaxHeight="57"
                              TextWrapping="Wrap"
                              MaxWidth="530"
                              materialDesign:HintAssist.FloatingOffset="0, -20"
                              BorderBrush="#c5c8cc"
-                             Background="#fafafafa"
+                             Background="#c9d0d8"
                              FontSize="18"
                              BorderThickness=" 0 0 0 1.5">
 
@@ -138,13 +138,13 @@
                 </TextBox>
                 <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Name="Salary"
-                             Text="2"  
+                             Text=""  
                                 MaxHeight="57"
                              TextWrapping="Wrap"
                              MaxWidth="530"
                              materialDesign:HintAssist.FloatingOffset="0, -20"
                              BorderBrush="#c5c8cc"
-                             Background="#fafafafa"
+                             Background="#c9d0d8"
                              FontSize="18"
                              BorderThickness=" 0 0 0 1.5">
 
@@ -155,13 +155,13 @@
                 </TextBox>
                 <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Name="Specialization"
-                             Text="2"  
+                             Text=""  
                              MaxHeight="57"
                              TextWrapping="Wrap"
                              MaxWidth="530"
                              materialDesign:HintAssist.FloatingOffset="0, -20"
                              BorderBrush="#c5c8cc"
-                             Background="#fafafafa"
+                             Background="#c9d0d8"
                              FontSize="18"
                              BorderThickness=" 0 0 0 1.5">
 
@@ -172,7 +172,7 @@
                 </TextBox>
                 <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Name="Description"
-                             Text="2"  
+                             Text=""  
                              
                              MaxHeight="150"
                              MaxWidth="530"
@@ -180,7 +180,7 @@
                              VerticalContentAlignment="Center"
                              materialDesign:HintAssist.FloatingOffset="0, -20"
                              BorderBrush="#c5c8cc"
-                             Background="#fafafafa"
+                             Background="#c9d0d8"
                              FontSize="18"
                              BorderThickness=" 0 0 0 1.5">
 

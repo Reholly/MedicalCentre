@@ -30,7 +30,6 @@ public class ApplicationContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         string connstr = s_config.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("WHERE CONNSTR");
-        string zaglush = "server=koquuguda.beget.app;user=MedicalCentre;password=Admin@_1234;database=MedicalCentre;";
-        optionsBuilder.UseMySql(zaglush, ServerVersion.AutoDetect(zaglush));
+        optionsBuilder.UseMySql(connstr, ServerVersion.AutoDetect(connstr));
     }  
 }

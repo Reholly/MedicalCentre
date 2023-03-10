@@ -20,7 +20,7 @@ namespace MedicalCentre.Windows
 
             EmployeeNameBinderService.BindName(account, RoleName, EmployeeName);
 
-            MainFrame.Content = new AnalyticsPage();
+            MainFrame.Content = new MainPage();
             DataContext = new AdminViewModel(this, account);
         }      
     }

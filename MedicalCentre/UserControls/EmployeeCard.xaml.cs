@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MedicalCentre.Forms;
+using MedicalCentre.Models;
+using MedicalCentre.UserControls.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,22 +16,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MedicalCentre.Pages.SystemAdminPages
+namespace MedicalCentre.UserControls
 {
     /// <summary>
-    /// Логика взаимодействия для DatabaseSettings.xaml
+    /// Логика взаимодействия для HumanCard.xaml
     /// </summary>
-    public partial class DatabaseSettings : Page
+    public partial class EmployeeCard : UserControl
     {
-        public DatabaseSettings()
+        public EmployeeCard(Employee employee)
         {
             InitializeComponent();
-        }
-
-        private void Send_Click(object sender, RoutedEventArgs e)
-        {
-            ConnectionString.Text = Properties.Settings.Default.ConnStr;
-  
+            DataContext = new EmployeeCardViewModel(this, employee);
         }
     }
 }

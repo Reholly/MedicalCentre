@@ -51,5 +51,10 @@ namespace MedicalCentre.Models
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+
+        public override string ToString()
+        {
+            return $"{Name[0]}.{Patronymic[0]}.{Surname} - {BirthDate.ToString()} - {PhoneNumber}";
+        }
     }
 }

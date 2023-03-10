@@ -5,11 +5,11 @@ using System.Windows.Input;
 
 namespace MedicalCentre.UserControls.ViewModels
 {
-    internal class HumanCardViewModel
+    internal class EmployeeCardViewModel
     {
         public ICommand? ProfileCommand { get; set; }
         private Employee currentEmployee;
-        public HumanCardViewModel(HumanCard card, Employee employee)
+        public EmployeeCardViewModel(EmployeeCard card, Employee employee)
         {
             currentEmployee = employee;
             ProfileCommand = new RelayCommand(OpenProfile);

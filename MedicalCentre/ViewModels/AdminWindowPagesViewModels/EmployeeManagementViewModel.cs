@@ -53,7 +53,7 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
             page.EmployeesCards.Children.Clear();
             foreach(var employee in Employees)
             {
-                page.EmployeesCards.Children.Insert(0, new HumanCard(employee));
+                page.EmployeesCards.Children.Insert(0, new EmployeeCard(employee));
             }     
         }
 

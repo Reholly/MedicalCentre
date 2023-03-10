@@ -13,6 +13,7 @@ namespace MedicalCentre.Forms.ViewModels
     internal class EmployeeRegistrationViewModel
     {
         public ICommand? RegisterCommand { get; set; }
+        public ICommand? CloseCommand { get; set; }
 
         private EmployeeRegistration profile;
 
@@ -20,6 +21,7 @@ namespace MedicalCentre.Forms.ViewModels
         {
             this.profile = profile;
             RegisterCommand = new RelayCommandAsync(Register);
+            CloseCommand = new RelayCommand(()=> profile.Close());
         }
 
         private async Task Register()
@@ -30,6 +32,10 @@ namespace MedicalCentre.Forms.ViewModels
             Random random = new Random();
             uint empId = uint.Parse(random.Next(1, int.MaxValue).ToString());
             uint accId = uint.Parse(random.Next(1, int.MaxValue).ToString());
+            if(accDb.GetItemByIdAsync != null || empDb.GetItemByIdAsync != null)
+            {
+                Register();
+            }
 
             Employee employee = new Employee(empId, profile.Name.Text, accId, profile.Surname.Text,
                                             profile.Patronymic.Text, profile.Specialization.Text,

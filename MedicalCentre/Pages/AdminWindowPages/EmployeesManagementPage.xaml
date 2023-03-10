@@ -14,7 +14,7 @@
 
     <Grid>
 
-        <Grid Background="#fafafa">
+        <Grid Background="#c9d0d8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" ></ColumnDefinition>
                 <ColumnDefinition Width="2"></ColumnDefinition>
@@ -107,7 +107,7 @@
                              Width="400"
                              Foreground="#252934"
                              BorderBrush="#c5c8cc"
-                             Background="#fafafafa"
+                             Background="#c9d0d8"
                              BorderThickness=" 0 0 0 1.5"                     
                              materialDesign:HintAssist.FloatingOffset="0, -10">
                         <materialDesign:HintAssist.Hint>
