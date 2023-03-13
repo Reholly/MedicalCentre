@@ -1,7 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-using MedicalCentre.Models;
-using MedicalCentre.UserControls.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,14 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MedicalCentre.UserControls
+namespace MedicalCentre.Pages.DoctorWindowPages
 {
-    public partial class AppointmentCard : UserControl
+    /// <summary>
+    /// Логика взаимодействия для AppointmentPage.xaml
+    /// </summary>
+    public partial class AppointmentPage : Page
     {
-        public AppointmentCard(Appointment appointment)
+        public AppointmentPage()
         {
             InitializeComponent();
-            DataContext = new AppointmentCardViewModel(this, appointment);
         }
     }
 }
