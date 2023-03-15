@@ -20,6 +20,6 @@ namespace MedicalCentre.UserControls.ViewModels
             AppointmentStartingCommand = new RelayCommand(StartAppointment);
         }
 
-        private void StartAppointment() => window.MainFrame.Content = new AppointmentPage();
+        private void StartAppointment() => window.MainFrame.Content = new AppointmentPage(appointment);
     }
 }

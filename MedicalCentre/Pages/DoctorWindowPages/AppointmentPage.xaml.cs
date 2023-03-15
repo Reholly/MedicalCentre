@@ -12,15 +12,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MedicalCentre.Models;
 
 namespace MedicalCentre.Pages.DoctorWindowPages
 {
-    /// <summary>
-    /// Логика взаимодействия для AppointmentPage.xaml
-    /// </summary>
     public partial class AppointmentPage : Page
     {
-        public AppointmentPage()
+        public AppointmentPage(Appointment appointment)
         {
             InitializeComponent();
         }
