@@ -28,7 +28,7 @@ namespace MedicalCentre.ViewModels
 
         private void ShowInputHelp() => MessageBox.Show("DateTime input foramt: MM/DD/YYYY HH:MM:SS AM (or PM)");
 
-        private void ShowTodaysAppointments() => window.MainFrame.Content = new TodaysAppointments();
+        private void ShowTodaysAppointments() => window.MainFrame.Content = new TodaysAppointments(window);
         //показать список приёмов на сегодня
 
         private void ShowAllPatients() => window.MainFrame.Content = new AllPatientsPage();

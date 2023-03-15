@@ -37,14 +37,5 @@ namespace MedicalCentre.Models
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
-
-        public override string ToString()
-        {
-            ContextRepository<Patient> repository1 = new();
-            Patient patient = repository1.GetItemById((uint)PatientId);
-            ContextRepository<Employee> repository2 = new();
-            Employee doctor = repository2.GetItemById(DoctorId);
-            return $"{Id} - {patient.Name} - {doctor.Surname}";
-        }
     }
 }
