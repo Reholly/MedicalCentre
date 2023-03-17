@@ -8,7 +8,7 @@ namespace MedicalCentre.Pages.DoctorWindowPages
         public MainPage()
         {
             InitializeComponent();
-            DataContext = new MainPageViewModel(this);
+            DataContext = new DoctorMainPageViewModel(this);
         }
     }
 }
