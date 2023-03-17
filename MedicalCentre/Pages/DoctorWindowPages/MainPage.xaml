@@ -22,11 +22,11 @@
                 <ColumnDefinition Width="2"></ColumnDefinition>
                 <ColumnDefinition Width="300"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="850"></RowDefinition>
             </Grid.RowDefinitions>
-            
+
             <StackPanel Grid.Column="0">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -58,10 +58,10 @@
                         Foreground="#fafafafa" 
                         TextAlignment="Center"/>
                 </Border>
-                    
+
             </Grid>
 
-          
+
 
             <StackPanel Grid.Column="4">
                 <Grid>
@@ -88,7 +88,7 @@
                            TextAlignment="Center"/>
                     </Border>
                 </Grid>
-               
+
             </StackPanel>
             <Border Grid.Column="3" Background="#252934"/>
             <Border Grid.Column="1" Background="#252934"/>
