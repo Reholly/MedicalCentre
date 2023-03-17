@@ -13,7 +13,7 @@
             <TextBlock Height="30" 
                        Name="Card"
                        Width="360"
-                       Text="Default text Default - TextTextTextText"
+                       Text="Приём Питона, мама"
                        HorizontalAlignment="Left" 
                        FontSize="18" 
                        Style="{StaticResource MaterialDesignBody1TextBlock}"/>
