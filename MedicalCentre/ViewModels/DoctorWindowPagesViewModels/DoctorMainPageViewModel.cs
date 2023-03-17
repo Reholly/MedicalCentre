@@ -5,6 +5,8 @@ using MedicalCentre.UserControls;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System;
+using MedicalCentre.Services;
+using System.Linq;
 
 namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {
@@ -24,6 +26,7 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             ContextRepository<Patient> patientRepository = new();
             ContextRepository<Employee> employeeRepository = new();
             Appointments = new ObservableCollection<Appointment>(await appointmentRepository.GetTableAsync());
+            Appointments = new ObservableCollection<Appointment>(SearchFilterService<Appointment>.GetFilteredList(Appointments.ToList(), ""));
             int count = 0;
             page.AppointmentCards.Children.Clear();
             foreach (Appointment appointment in Appointments)

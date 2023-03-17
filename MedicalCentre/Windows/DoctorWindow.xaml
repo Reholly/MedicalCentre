@@ -43,7 +43,7 @@
                     </StackPanel>
                 </StackPanel>
                 <Separator Height="1" Margin="20 30" Background="#465589"/>
-                <Button Margin="0 10 0 10" Background="Transparent" Height="40" BorderBrush="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding ShowTodaysAppointmentsCommand}"   >
+                <Button Margin="0 10 0 10" Background="Transparent" Height="40" BorderBrush="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Cursor="Hand">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Patient"
                                                  Opacity="0.2" 
@@ -55,9 +55,7 @@
                     </StackPanel>
                 </Button>
                 <Button Margin="0 10 0 10" Background="Transparent" Height="40" BorderBrush="Transparent" 
-                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                        
-                        Command="{Binding ShowAllPatientsCommand}">
+                        HorizontalAlignment="Left" VerticalAlignment="Center">
                     
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="People"
@@ -70,7 +68,7 @@
                     </StackPanel>
                 </Button>
                 <Button Margin="0 10 0 10" Background="Transparent" Height="40" BorderBrush="Transparent"
-                        HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding ShowInputHelpCommand}">
+                        HorizontalAlignment="Left" VerticalAlignment="Center">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="QuestionAnswer"
                                                  Opacity="0.2" 
@@ -86,7 +84,7 @@
 
         <Border Grid.Column="1" CornerRadius="0 10 10 0">
             <Grid>
-                <Frame Grid.Column="1"  Name="MainFrame" NavigationUIVisibility="Hidden"/>
+                <Frame Grid.Column="1"  Name="MainFrame" NavigationUIVisibility="Automatic"/>
             </Grid>
             <Border.Background>
                 <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">

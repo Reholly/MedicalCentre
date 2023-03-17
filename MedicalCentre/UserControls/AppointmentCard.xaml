@@ -17,7 +17,7 @@
                        HorizontalAlignment="Left" 
                        FontSize="18" 
                        Style="{StaticResource MaterialDesignBody1TextBlock}"/>
-            <Button Name="StartAppointment" HorizontalAlignment="Left" DockPanel.Dock="Left" Command="{Binding }" Height="30" Width="110" Content="Начать" Foreground="#252934" Background="Transparent" FontSize="18" BorderBrush="Transparent"/>
+            <Button Name="StartAppointment" HorizontalAlignment="Left" DockPanel.Dock="Left" Height="30" Width="110" Content="Начать" Foreground="#252934" Background="Transparent" FontSize="18" BorderBrush="Transparent"/>
         </DockPanel>
     </Grid>
 </UserControl>
