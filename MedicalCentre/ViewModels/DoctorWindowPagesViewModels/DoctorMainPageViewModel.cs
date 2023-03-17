@@ -25,17 +25,16 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             ContextRepository<Appointment> appointmentRepository = new();
             ContextRepository<Patient> patientRepository = new();
             ContextRepository<Employee> employeeRepository = new();
-            Appointments = new ObservableCollection<Appointment>(await appointmentRepository.GetTableAsync());
-            Appointments = new ObservableCollection<Appointment>(SearchFilterService<Appointment>.GetFilteredList(Appointments.ToList(), ""));
-            int count = 0;
-            page.AppointmentCards.Children.Clear();
-            foreach (Appointment appointment in Appointments)
-            {
-                string patient = patientRepository.GetItemByIdAsync((uint)appointment.PatientId).Result.ToStringForAppointment();
-                string doctor = employeeRepository.GetItemByIdAsync(appointment.DoctorId).Result.ToString();
-                page.AppointmentCards.Children.Insert(count, new AppointmentCard(appointment, page, patient, doctor));
-                count++;
-            }
+            page.AppointmentCards.Children.Insert(0, new AppointmentCard(new Appointment(), page, "123", "123"));
+            //Appointments = new ObservableCollection<Appointment>(await appointmentRepository.GetTableAsync());
+            //Appointments = new ObservableCollection<Appointment>(SearchFilterService<Appointment>.GetFilteredList(Appointments.ToList(), ""));
+            //page.AppointmentCards.Children.Clear();
+            //foreach (Appointment appointment in Appointments)
+            //{
+            //    string patient = patientRepository.GetItemByIdAsync((uint)appointment.PatientId).Result.ToStringForAppointment();
+            //    string doctor = employeeRepository.GetItemByIdAsync(appointment.DoctorId).Result.ToString();
+            //    page.AppointmentCards.Children.Insert(0, new AppointmentCard(appointment, page, patient, doctor));
+            //}
         }
     }
 }

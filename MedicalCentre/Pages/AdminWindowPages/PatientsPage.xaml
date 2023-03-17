@@ -89,7 +89,7 @@
             <StackPanel Grid.Column="2">
                 <Border BorderThickness="0" Background="#252934" BorderBrush="Black">
                     <TextBlock Text="Управление пациентами" 
-                           Style="{StaticResource MaterialDesignBody1TextBlock}"                        
+                           Style="{StaticResource MaterialDesignBody1TextBlock}"                       
                            Height="30" 
                            FontSize="18" 
                            Foreground="#fafafafa" 
