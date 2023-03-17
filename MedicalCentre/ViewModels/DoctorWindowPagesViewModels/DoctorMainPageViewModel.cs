@@ -4,14 +4,15 @@ using MedicalCentre.Pages.DoctorWindowPages;
 using MedicalCentre.UserControls;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System;
 
 namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {
-    public class MainPageViewModel
+    public class DoctorMainPageViewModel
     {
         private readonly MainPage page;
         public ObservableCollection<Appointment> Appointments { get; set; } = new();
-        public MainPageViewModel(MainPage page)
+        public DoctorMainPageViewModel(MainPage page)
         {
             this.page = page;
             ShowCards();
@@ -23,11 +24,14 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             ContextRepository<Patient> patientRepository = new();
             ContextRepository<Employee> employeeRepository = new();
             Appointments = new ObservableCollection<Appointment>(await appointmentRepository.GetTableAsync());
+            int count = 0;
+            page.AppointmentCards.Children.Clear();
             foreach (Appointment appointment in Appointments)
             {
                 string patient = patientRepository.GetItemByIdAsync((uint)appointment.PatientId).Result.ToStringForAppointment();
                 string doctor = employeeRepository.GetItemByIdAsync(appointment.DoctorId).Result.ToString();
-                page.AppointmentCards.Children.Insert(0, new AppointmentCard(appointment, page, patient, doctor));
+                page.AppointmentCards.Children.Insert(count, new AppointmentCard(appointment, page, patient, doctor));
+                count++;
             }
         }
     }
