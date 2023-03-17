@@ -9,7 +9,7 @@
         
       mc:Ignorable="d" 
       d:Height="850" d:Width="1340"
-      Title="Управление персоналом" 
+      Title="Приёмы на сегодня" 
       ShowsNavigationUI="False">
 
     <Grid>
@@ -42,7 +42,7 @@
                            TextAlignment="Center"/>
                     </Border>
                 </Grid>
-                <StackPanel x:Name="AppointmentCards" Width="600"/>
+                <StackPanel Name="AppointmentCards" Width="500" Grid.Column="0"/>
             </StackPanel>
 
             <Grid Grid.Column="2">

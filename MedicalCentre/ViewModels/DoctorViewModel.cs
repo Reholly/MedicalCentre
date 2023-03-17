@@ -26,7 +26,6 @@ namespace MedicalCentre.ViewModels
         {
             AuthentificationService authentification = new();
             authentification.LogOut(window, account);
-            //window.Close();
         }
 
         private void OpenMainPage() => window.MainFrame.Content = new MainPage();
