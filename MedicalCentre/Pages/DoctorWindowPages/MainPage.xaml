@@ -1,0 +1,97 @@
+﻿<Page x:Class="MedicalCentre.Pages.DoctorWindowPages.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MedicalCentre.Pages.DoctorWindowPages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:ucc="clr-namespace:MedicalCentre.UserControls"
+        
+      mc:Ignorable="d" 
+      d:Height="850" d:Width="1340"
+      Title="Управление персоналом" 
+      ShowsNavigationUI="False">
+
+    <Grid>
+
+        <Grid Background="#c9d0d8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="500"/>
+                <ColumnDefinition Width="2"></ColumnDefinition>
+                <ColumnDefinition Width="*" ></ColumnDefinition>
+                <ColumnDefinition Width="2"></ColumnDefinition>
+                <ColumnDefinition Width="300"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="850"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <StackPanel Grid.Column="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border BorderThickness="0" Background="#252934" BorderBrush="Black">
+                        <TextBlock Text="Приёмы" 
+                           Style="{StaticResource MaterialDesignBody1TextBlock}"                        
+                           Height="30" 
+                           FontSize="18" 
+                           Foreground="#fafafafa" 
+                           TextAlignment="Center"/>
+                    </Border>
+                </Grid>
+
+            </StackPanel>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border BorderThickness="0" Background="#252934" BorderBrush="Black">
+                    <TextBlock Text="Рабочее пространство" 
+                        Style="{StaticResource MaterialDesignBody1TextBlock}"                        
+                        Height="30" 
+                        FontSize="18" 
+                        Foreground="#fafafafa" 
+                        TextAlignment="Center"/>
+                </Border>
+                    
+            </Grid>
+
+          
+
+            <StackPanel Grid.Column="4">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="395"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="395"/>
+                    </Grid.RowDefinitions>
+                    <Border BorderThickness="0" Background="#252934" BorderBrush="Black">
+                        <TextBlock Text="Записи" 
+                           Style="{StaticResource MaterialDesignBody1TextBlock}"                        
+                           Height="30" 
+                           FontSize="18" 
+                           Foreground="#fafafafa" 
+                           TextAlignment="Center"/>
+                    </Border>
+                    <Border BorderThickness="0" Grid.Row="2" Background="#252934" BorderBrush="Black">
+                        <TextBlock Text="Обследования" 
+                           Style="{StaticResource MaterialDesignBody1TextBlock}"                        
+                           Height="30" 
+                           FontSize="18" 
+                           Foreground="#fafafafa" 
+                           TextAlignment="Center"/>
+                    </Border>
+                </Grid>
+               
+            </StackPanel>
+            <Border Grid.Column="3" Background="#252934"/>
+            <Border Grid.Column="1" Background="#252934"/>
+        </Grid>
+    </Grid>
+</Page>
