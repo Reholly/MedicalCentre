@@ -3,6 +3,7 @@ using MedicalCentre.Models;
 using MedicalCentre.Pages.DoctorWindowPages;
 using MedicalCentre.ViewModels;
 using MedicalCentre.Windows;
+using System.Text;
 using System.Windows.Input;
 
 namespace MedicalCentre.UserControls.ViewModels
@@ -10,16 +11,12 @@ namespace MedicalCentre.UserControls.ViewModels
     public class AppointmentCardViewModel
     {
         private readonly Appointment appointment;
-        private DoctorWindow window;
-        public ICommand AppointmentStartingCommand { get; set; }
-        public AppointmentCardViewModel(AppointmentCard card, Appointment appointment)
+        private readonly MainPage page;
+        public AppointmentCardViewModel(AppointmentCard card, Appointment appointment, MainPage page, string patient, string doctor)
         {
+            this.page = page;
             this.appointment = appointment;
-            ContextRepository<Patient> repository = new();
-            card.Card.Text = repository.GetItemById((uint)appointment.PatientId).ToString();
-            AppointmentStartingCommand = new RelayCommand(StartAppointment);
+            card.Card.Text = doctor + ": " + patient;
         }
-
-        private void StartAppointment() => window.MainFrame.Content = new AppointmentPage(appointment);
     }
 }

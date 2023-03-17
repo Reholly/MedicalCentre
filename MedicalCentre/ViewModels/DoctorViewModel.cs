@@ -1,9 +1,9 @@
 ﻿using MedicalCentre.Authentification;
 using MedicalCentre.Models;
-using MedicalCentre.Pages.DoctorWindowPages;
 using MedicalCentre.Windows;
-using System.Windows;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using MedicalCentre.Pages.DoctorWindowPages;
 
 namespace MedicalCentre.ViewModels
 {
@@ -12,18 +12,23 @@ namespace MedicalCentre.ViewModels
         private readonly DoctorWindow window;
         private readonly Account account;
         public ICommand WindowClosingCommand { get; set; }
+        public ICommand OpeningMainPageCommand { get; set; }
 
         public DoctorViewModel(DoctorWindow window, Account account)
         {
             this.window = window;
             this.account = account;
-            WindowClosingCommand = new RelayCommand(Close);
+            WindowClosingCommand = new RelayCommandAsync(Close);
+            OpeningMainPageCommand = new RelayCommand(OpenMainPage);
         }
 
-        private void Close() //метод для LogOut кнопки
+        private async Task Close() //метод для LogOut кнопки
         {
-            new AuthentificationService().LogOut(window, account);
+            AuthentificationService authentification = new();
+            authentification.LogOut(window, account);
             window.Close();
         }
+
+        private void OpenMainPage() => window.MainFrame.Content = new MainPage();
     }
 }
