@@ -9,7 +9,7 @@ namespace MedicalCentre.Pages.DoctorWindowPages
         public TodaysAppointments(DoctorWindow window)
         {
             InitializeComponent();
-            DataContext = new TodaysAppointmentsPageViewModel(window);
+            //DataContext = new TodaysAppointmentsPageViewModel();
         }
     }
 }

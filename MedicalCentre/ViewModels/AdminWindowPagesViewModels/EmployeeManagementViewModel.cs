@@ -36,7 +36,7 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
 
         public void OpenNews()
         {
-            MessageBox.Show("ЭТО ЗАГЛУШКА");
+            OpenBrowserService.OpenPageInBrowser("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
         }
 
         public void OpenRegistration()
