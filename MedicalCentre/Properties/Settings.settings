@@ -20,5 +20,8 @@
     <Setting Name="NewFeatures" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://github.com/EuUst/MedicalCentre/blob/master/README.md</Value>
     </Setting>
+    <Setting Name="OpenInvalidSite" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://chelyabinsk.bezformata.com/word/invalidov/2089/</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

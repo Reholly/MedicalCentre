@@ -92,5 +92,17 @@ namespace MedicalCentre.Properties {
                 this["NewFeatures"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://chelyabinsk.bezformata.com/word/invalidov/2089/")]
+        public string OpenInvalidSite {
+            get {
+                return ((string)(this["OpenInvalidSite"]));
+            }
+            set {
+                this["OpenInvalidSite"] = value;
+            }
+        }
     }
 }

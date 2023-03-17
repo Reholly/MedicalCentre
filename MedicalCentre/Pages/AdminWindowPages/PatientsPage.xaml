@@ -46,7 +46,7 @@
                         <materialDesign:PackIcon Kind="Patient" Width="150" Height="150" Foreground="#fafafafa" HorizontalAlignment="Right" Opacity="0.8" Margin="0,0,29,0"/>
 
                         <StackPanel Margin="20 20 20 20" VerticalAlignment="Top" Height="140" >
-                            <TextBlock Margin="0 15 0 0" Text="Добавление поциента" Foreground="#fafafafa" FontSize="26" FontFamily="Bold" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                            <TextBlock Margin="0 15 0 0" Text="Добавление пациента" Foreground="#fafafafa" FontSize="26" FontFamily="Bold" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
 
                             <Button 
                         Width="200" Height="50" Background="Transparent" FontSize="18" Command="{Binding OpenRegistrationCommand}" Content="Зарегистрировать" Foreground="#fafafa" HorizontalAlignment="Left" Margin="3 33" BorderBrush="#0c5aa6" materialDesign:ButtonAssist.CornerRadius="22" BorderThickness="1"/>

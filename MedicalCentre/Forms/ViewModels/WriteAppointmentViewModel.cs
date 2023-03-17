@@ -1,0 +1,50 @@
+﻿using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Models;
+using MedicalCentre.Services;
+using MedicalCentre.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Policy;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+
+namespace MedicalCentre.Forms.ViewModels
+{ 
+  
+    internal class WriteAppointmentViewModel
+    {
+        public ICommand WriteCommand { get; set; }
+        public ICommand CloseCommand { get; set; }
+        private WriteAppointment currentPage;
+
+        public WriteAppointmentViewModel(WriteAppointment page)
+        {
+            currentPage = page;
+            WriteCommand = new RelayCommandAsync(Write);
+            CloseCommand = new RelayCommand(() => currentPage.Close());
+        }
+        public async Task Write()
+        {
+            try
+            {
+                ContextRepository<Appointment> appointmetnDb = new();
+                ContextRepository<Patient> patientDb = new();
+
+                Patient patient = await patientDb.GetItemByIdAsync(uint.Parse(currentPage.PatientId.Text));
+                Appointment appointment = await appointmetnDb.GetItemByIdAsync(uint.Parse(currentPage.AppointmentId.Text));
+
+                appointment.PatientId = patient.Id;
+                appointmetnDb.UpdateItemAsync(appointment);
+                LoggerService.CreateLog($"patient {patient.Id} was recorded on {appointment.Id}", true);
+            }
+            catch (Exception ex)
+            {
+                LoggerService.CreateLog(ex.Message, false);
+            }
+            currentPage.Close();
+        }
+    }
+}

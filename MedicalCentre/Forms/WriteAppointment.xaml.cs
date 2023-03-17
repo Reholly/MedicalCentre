@@ -1,4 +1,5 @@
 ﻿using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Forms.ViewModels;
 using MedicalCentre.Models;
 using MedicalCentre.Services;
 using System;
@@ -11,26 +12,7 @@ namespace MedicalCentre.Forms
         public WriteAppointment()
         {
             InitializeComponent();
-        }
-        public async void Write(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                ContextRepository<Appointment> appointmetnDb = new();
-                ContextRepository<Patient> patientDb = new();
-
-                Patient patient = await patientDb.GetItemByIdAsync(uint.Parse(PatientId.Text));
-                Appointment appointment = await appointmetnDb.GetItemByIdAsync(uint.Parse(AppointmentId.Text));
-
-                appointment.PatientId = patient.Id;
-                appointmetnDb.UpdateItemAsync(appointment);
-                LoggerService.CreateLog($"patient {patient.Id} was recorded on {appointment.Id}", true);
-            }
-            catch(Exception ex)
-            {
-                LoggerService.CreateLog(ex.Message, false);
-            }
-            Close();
+            DataContext = new WriteAppointmentViewModel(this);
         }
     }
 }

@@ -16,12 +16,15 @@ using System.Windows.Shapes;
 
 namespace MedicalCentre.Pages.OperatorPages
 {
-    public partial class AppointmentsManagementPage : Page
+    /// <summary>
+    /// Логика взаимодействия для MainPage.xaml
+    /// </summary>
+    public partial class MainPage : Page
     {
-        public AppointmentsManagementPage()
+        public MainPage()
         {
             InitializeComponent();
-            DataContext = new AppointmentsManagementViewModel(this);
+            DataContext = new MainPageViewModel(this);
         }
     }
 }

@@ -64,7 +64,7 @@ namespace MedicalCentre.Authentification
                     admin.Show();
                     break;
                 case "Operator":
-                    OperatorWindow operatorWindow = new OperatorWindow(currentAccount.Id);
+                    OperatorWindow operatorWindow = new OperatorWindow(currentAccount);
                     operatorWindow.Show();
                     break;
                 case "JuniorPersonal":
