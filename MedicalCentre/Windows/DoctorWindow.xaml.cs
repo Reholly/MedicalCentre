@@ -1,8 +1,9 @@
-﻿using System.Threading;
-using System.Windows;
-using MedicalCentre.Models;
+﻿using MedicalCentre.Models;
+using MedicalCentre.Pages.DoctorWindowPages;
 using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
+using System.Threading;
+using System.Windows;
 
 namespace MedicalCentre.Windows
 {
@@ -17,6 +18,7 @@ namespace MedicalCentre.Windows
                 Close();
             }
 
+            MainFrame.Content = new MainPage();
             EmployeeNameBinderService.BindName(account, RoleName, EmployeeName);
             DataContext = new DoctorViewModel(this, account);
         }

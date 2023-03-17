@@ -42,7 +42,7 @@
                            TextAlignment="Center"/>
                     </Border>
                 </Grid>
-
+                <StackPanel Name="AppointmentCards" Width="500"/>
             </StackPanel>
 
             <Grid Grid.Column="2">

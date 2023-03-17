@@ -55,8 +55,4 @@
 			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
 		</None>
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="ViewModels\DoctorWindowPagesViewModels\" />
-	</ItemGroup>
 </Project>

@@ -86,7 +86,7 @@
 
         <Border Grid.Column="1" CornerRadius="0 10 10 0">
             <Grid>
-                <Frame Grid.Column="1"  Name="MainFrame" NavigationUIVisibility="Hidden" FontSize="30"/>
+                <Frame Grid.Column="1"  Name="MainFrame" NavigationUIVisibility="Hidden"/>
             </Grid>
             <Border.Background>
                 <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
