@@ -19,11 +19,24 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 
         private void ShowCards()
         {
-            ContextRepository<Appointment> repository = new();
-            List<Appointment> appointments = repository.GetTable();
+            ContextRepository<Appointment> appointmentRepository = new();
+            ContextRepository<Patient> patientRepository = new();
+            ContextRepository<Employee> employeeRepository = new();
+            List<Appointment> appointments = appointmentRepository.GetTable();
             foreach (Appointment appointment in appointments)
             {
-                page.AppointmentCards.Children.Insert(0, new AppointmentCard(appointment, page, "testP", "testD"));
+                string patient;
+                if (appointment.PatientId == null)
+                    patient = "*Тут должен быть пациент*";
+                else
+                    patient = patientRepository.GetItemById((uint)appointment.PatientId).ToStringForAppointment();
+                Employee employee = employeeRepository.GetItemById(appointment.DoctorId);
+                string doctor;
+                if (employee == null)
+                    doctor = "*Тут должен быть врач*";
+                else
+                    doctor = employee.ToString();
+                page.AppointmentCards.Children.Insert(0, new AppointmentCard(appointment, page, patient, doctor));
             }
         }
     }
