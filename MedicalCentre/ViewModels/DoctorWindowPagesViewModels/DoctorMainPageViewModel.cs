@@ -4,13 +4,13 @@ using MedicalCentre.Pages.DoctorWindowPages;
 using MedicalCentre.UserControls;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {
     public class DoctorMainPageViewModel
     {
         private readonly MainPage page;
-        public ObservableCollection<Appointment> Appointments { get; set; } = new();
         public DoctorMainPageViewModel(MainPage page)
         {
             this.page = page;
@@ -19,24 +19,29 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 
         private void ShowCards()
         {
-            ContextRepository<Appointment> appointmentRepository = new();
-            ContextRepository<Patient> patientRepository = new();
-            ContextRepository<Employee> employeeRepository = new();
-            List<Appointment> appointments = appointmentRepository.GetTable();
+            List<Appointment> appointments = new ContextRepository<Appointment>().GetTable();
             foreach (Appointment appointment in appointments)
             {
-                string patient;
-                if (appointment.PatientId == null)
-                    patient = "*Тут должен быть пациент*";
+                Patient patient;
+                string patientString;
+
+                if (appointment.PatientId != null)
+                {
+                    patient = new ContextRepository<Patient>().GetItemById((uint)appointment.PatientId);
+                    patientString = patient.ToStringForAppointment();
+                }
                 else
-                    patient = patientRepository.GetItemById((uint)appointment.PatientId).ToStringForAppointment();
-                Employee employee = employeeRepository.GetItemById(appointment.DoctorId);
-                string doctor;
-                if (employee == null)
-                    doctor = "*Тут должен быть врач*";
+                    patientString = "Тут_должен_быть_пациент";
+
+                Employee doctor = new ContextRepository<Employee>().GetItemById(appointment.DoctorId);
+                string doctorString;
+
+                if (doctor == null)
+                    doctorString = "Тут_должен_быть_врач";
                 else
-                    doctor = employee.ToString();
-                page.AppointmentCards.Children.Insert(0, new AppointmentCard(appointment, page, patient, doctor));
+                    doctorString = doctor.ToString();
+
+                page.AppointmentCards.Children.Insert(0, new AppointmentCard(appointment, page, patientString, doctorString));
             }
         }
     }
