@@ -3,7 +3,7 @@
     "MedicalCentre": {
       "commandName": "Project",
       "environmentVariables": {
-        "ConnectionStrings__DefaultConnection": "server=koquuguda.beget.app;user=MedicalCentre;password=Admin@_1234;database=MedicalCentre;"
+        "ConnectionStrings__DefaultConnection": "server=koquuguda.beget.app;user=MedicalCentre;password=Admin@_1234;database=MedicalCentre;AllowZeroDateTime=True;"
       }
     }
   }
