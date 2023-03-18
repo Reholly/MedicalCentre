@@ -13,7 +13,6 @@
       ShowsNavigationUI="False">
 
     <Grid>
-
         <Grid Background="#c9d0d8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="500"/>
@@ -50,7 +49,7 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Border BorderThickness="0" Background="#252934" BorderBrush="Black">
+                <Border BorderThickness="0" Background="#252934" BorderBrush="Black" Grid.Row="0">
                     <TextBlock Text="Рабочее пространство" 
                         Style="{StaticResource MaterialDesignBody1TextBlock}"                        
                         Height="30" 
@@ -58,10 +57,10 @@
                         Foreground="#fafafafa" 
                         TextAlignment="Center"/>
                 </Border>
-
+                <StackPanel>
+                    <Frame Name="WorkspaceFrame" Grid.Row="1" Width="535"/>
+                </StackPanel>
             </Grid>
-
-
 
             <StackPanel Grid.Column="4">
                 <Grid>
