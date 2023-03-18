@@ -2,11 +2,8 @@
 using MedicalCentre.Models;
 using MedicalCentre.Pages.DoctorWindowPages;
 using MedicalCentre.UserControls;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using System;
-using MedicalCentre.Services;
-using System.Linq;
 
 namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {
@@ -20,21 +17,14 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             ShowCards();
         }
 
-        private async Task ShowCards()
+        private void ShowCards()
         {
-            ContextRepository<Appointment> appointmentRepository = new();
-            ContextRepository<Patient> patientRepository = new();
-            ContextRepository<Employee> employeeRepository = new();
-            page.AppointmentCards.Children.Insert(0, new AppointmentCard(new Appointment(), page, "123", "123"));
-            //Appointments = new ObservableCollection<Appointment>(await appointmentRepository.GetTableAsync());
-            //Appointments = new ObservableCollection<Appointment>(SearchFilterService<Appointment>.GetFilteredList(Appointments.ToList(), ""));
-            //page.AppointmentCards.Children.Clear();
-            //foreach (Appointment appointment in Appointments)
-            //{
-            //    string patient = patientRepository.GetItemByIdAsync((uint)appointment.PatientId).Result.ToStringForAppointment();
-            //    string doctor = employeeRepository.GetItemByIdAsync(appointment.DoctorId).Result.ToString();
-            //    page.AppointmentCards.Children.Insert(0, new AppointmentCard(appointment, page, patient, doctor));
-            //}
+            ContextRepository<Appointment> repository = new();
+            List<Appointment> appointments = repository.GetTable();
+            foreach (Appointment appointment in appointments)
+            {
+                page.AppointmentCards.Children.Insert(0, new AppointmentCard(appointment, page, "testP", "testD"));
+            }
         }
     }
 }
