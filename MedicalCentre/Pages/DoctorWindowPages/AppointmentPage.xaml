@@ -14,10 +14,10 @@
                 <Button HorizontalAlignment="Left"/>
                 <Button HorizontalAlignment="Right"/>
             </StackPanel>
-            <TextBox TextWrapping="WrapWithOverflow">
+            <TextBox TextWrapping="WrapWithOverflow" Name="AppointmentTitleBox">
                 Заголовок приёма
             </TextBox>
-            <TextBox TextWrapping="WrapWithOverflow">
+            <TextBox TextWrapping="WrapWithOverflow" Name="AppointmentTextBox">
                 Содержание приёма
             </TextBox>
             <TextBlock Name="PatientsSNP"/>

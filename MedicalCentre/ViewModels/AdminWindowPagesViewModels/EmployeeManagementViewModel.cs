@@ -48,7 +48,7 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
         public async Task SearchItems()
         {
             ContextRepository<Employee> empDb = new();
-            Employees = new ObservableCollection<Employee>( await empDb.GetTableAsync());
+            Employees = new ObservableCollection<Employee>(await empDb.GetTableAsync());
             Employees = new ObservableCollection<Employee>(SearchFilterService<Employee>.GetFilteredList(Employees.ToList(), page.Search.Text));
             page.EmployeesCards.Children.Clear();
             foreach(var employee in Employees)
