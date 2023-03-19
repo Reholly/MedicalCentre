@@ -10,8 +10,8 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {
     public class DoctorMainPageViewModel
     {
-        private readonly MainPage page;
-        public DoctorMainPageViewModel(MainPage page)
+        private readonly DoctorMainPage page;
+        public DoctorMainPageViewModel(DoctorMainPage page)
         {
             this.page = page;
             ShowCards();

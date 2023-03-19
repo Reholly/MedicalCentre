@@ -6,10 +6,10 @@ namespace MedicalCentre.Pages.DoctorWindowPages
 {
     public partial class AppointmentPage : Page
     {
-        public AppointmentPage(Appointment appointment)
+        public AppointmentPage(Appointment appointment, DoctorMainPage mainPage)
         {
             InitializeComponent();
-            DataContext = new AppointmentPageViewModel(appointment);
+            DataContext = new AppointmentPageViewModel(appointment, this, mainPage);
         }
     }
 }

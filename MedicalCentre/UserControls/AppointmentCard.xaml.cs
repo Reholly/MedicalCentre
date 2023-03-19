@@ -7,7 +7,7 @@ namespace MedicalCentre.UserControls
 {
     public partial class AppointmentCard : UserControl
     {
-        public AppointmentCard(Appointment appointment, MainPage page, string patient, string doctor)
+        public AppointmentCard(Appointment appointment, DoctorMainPage page, string patient, string doctor)
         {
             InitializeComponent();
             DataContext = new AppointmentCardViewModel(this, appointment, page, patient, doctor);

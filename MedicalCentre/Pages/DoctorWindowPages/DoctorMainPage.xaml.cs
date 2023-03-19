@@ -3,9 +3,9 @@ using System.Windows.Controls;
 
 namespace MedicalCentre.Pages.DoctorWindowPages
 {
-    public partial class MainPage : Page
+    public partial class DoctorMainPage : Page
     {
-        public MainPage()
+        public DoctorMainPage()
         {
             InitializeComponent();
             DataContext = new DoctorMainPageViewModel(this);
