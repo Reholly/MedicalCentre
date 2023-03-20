@@ -5,14 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using MedicalCentre.TelegramBot.Models;
-using MedicalCentre.TelegramBot.DataBaseLayer;
 using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
 using MedicalCentre.TelegramBot.Controllers.MessageController.Commands;
 
 namespace MedicalCentre.TelegramBot.Notifacations
 {
-    internal class Notifayer
+    public class Notifayer
     {
         private TelegramBotClient client = Bot.GetTelegramBot();
 
@@ -20,25 +19,29 @@ namespace MedicalCentre.TelegramBot.Notifacations
         {
             Logger.Log("Notification sended to all users");
 
-            Database<Appointment> dbAppointment = new Database<Appointment>();
+            ContextRepository<Appointment> dbAppointment = new ContextRepository<Appointment>();
 
-            Database<Employee> dbEmployee = new Database<Employee>();
-            Database<Patient> dbPatient = new Database<Patient>();
+            ContextRepository<Employee> dbEmployee = new ContextRepository<Employee>();
+            ContextRepository<Patient> dbPatient = new ContextRepository<Patient>();
 
-            List<Appointment> appointments = dbAppointment.GetTable()
+            List<Appointment> appointments = dbAppointment.GetTableAsync().Result
                                                           .Where(x => (x.AppointmentTime.Date.Day - DateTime.Now.Day == 1 && x.AppointmentTime.Month == DateTime.Now.Month)).ToList();
             foreach(var appointment in appointments)
             {
                 if (appointment.PatientId == null)
+                {
                     continue;
+                }
 
-                User? user = DatabaseTelegram.Users.Find(x => x.PhoneNumber == dbPatient.GetItemById((uint)appointment.PatientId).PhoneNumber);
+                string phone = dbPatient.GetItemByIdAsync((uint)appointment.PatientId).Result.PhoneNumber;
+                User? user = UserManager.GetUserByPhone(phone);
+
                 if(user == null) 
                 {
                     continue;
                 }
 
-                await client.SendTextMessageAsync(user.ChatId, $"У вас запись у {dbEmployee.GetItemById(appointment.DoctorId).Name} " +
+                await client.SendTextMessageAsync(user.ChatId, $"У вас запись у {dbEmployee.GetItemByIdAsync(appointment.DoctorId).Result.Surname} " +
                                                                $"({dbEmployee.GetItemById(appointment.DoctorId).Specialization}) на " +
                                                                $"{appointment.AppointmentTime}!");
             }

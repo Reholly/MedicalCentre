@@ -1,6 +1,5 @@
 ﻿using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
-using MedicalCentre.TelegramBot.DataBaseLayer;
 using MedicalCentre.TelegramBot.Models;
 using System;
 using System.Collections.Generic;
@@ -14,13 +13,15 @@ using User = MedicalCentre.TelegramBot.Models.User;
 
 namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
 {
-    internal class AppointmentCommand : Command, IListener
+    internal class AppointmentCommand : ICommand, IListener
     {
-        public override string Name => "Запись";
+        public string Name => "Запись";
 
         public CommandExecutor Executor { get; }
 
-        protected override TelegramBotClient client => Bot.GetTelegramBot();
+        public TelegramBotClient client => Bot.GetTelegramBot();
+
+        public bool NeedAutorization => true;
 
         public AppointmentCommand(CommandExecutor executor)
         {
@@ -33,90 +34,94 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
 
         private List<Appointment> appointments;
 
-        public override void Execute(Update update)
+        private KeyboardButton[][] ToRows(KeyboardButton[] buttons)
+        {
+            var res = new KeyboardButton[buttons.Length % 3 == 0 ? buttons.Length / 3 : buttons.Length / 3 + 1][];
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                if(i % 3 == 0)
+                {
+                    res[i / 3] = new KeyboardButton[3];
+                }
+                res[i / 3][i % 3] = buttons[i];
+            }
+            return res;
+        }
+
+        public async Task Execute(Update update)
         {
             Message msg = update.Message;
             long chatId = msg.Chat.Id;
             client.SendTextMessageAsync(chatId, "");
 
-            User? user = DatabaseTelegram.Users.Find(x => x.ChatId == chatId);
-            if (user == null)
-            {
-                KeyboardButton regsterBtn = new KeyboardButton("Регистрация");
-                var regsterMarkup = new ReplyKeyboardMarkup(regsterBtn)
-                {
-                    ResizeKeyboard = true,
-                    OneTimeKeyboard = true
-                };
-                client.SendTextMessageAsync(update.Message.Chat.Id, "Для начала работы зарегестрируйтесь или авторизуйтесь!", replyMarkup: regsterMarkup);
-                return;
-            }
+            ContextRepository<Employee> dbEmployee = new ContextRepository<Employee>();
+            ContextRepository<Patient> dbPatient = new ContextRepository<Patient>();
+            ContextRepository<Appointment> dbAppointment = new ContextRepository<Appointment>();
 
-            Database<Employee> dbEmployee = new Database<Employee>();
-            Database<Patient> dbPatient = new Database<Patient>();
-
-            Database<Appointment> dbAppointment = new Database<Appointment>();
             appointments = dbAppointment.GetTable().Where(x => x.PatientId == null).ToList();
             if (appointments.Count == 0)
             {
-                client.SendTextMessageAsync(chatId, "На данный момент нет записей!");
+                await client.SendTextMessageAsync(chatId, "На данный момент нет записей!");
                 Executor.StopListen();
                 return;
             }
 
             var specializationsBtn = appointments.Select(x => dbEmployee.GetItemById(x.DoctorId).Specialization)
-                                                 //.Distinct()
+                                                 .ToHashSet()
                                                  .Select(x => new KeyboardButton(x))
                                                  .ToArray();
 
-            var specializationMarkup = new ReplyKeyboardMarkup(specializationsBtn)
+            var specializationMarkup = new ReplyKeyboardMarkup(ToRows(specializationsBtn))
             {
                 ResizeKeyboard = true,
                 OneTimeKeyboard = true
             };
-            client.SendTextMessageAsync(update.Message.Chat.Id, "Выеберите специальность врача", replyMarkup: specializationMarkup);
+            await client.SendTextMessageAsync(update.Message.Chat.Id, "Выеберите специальность врача (Для отмены напишите Меню)", replyMarkup: specializationMarkup);
+
             Executor.StartListen(this);
         }
 
-        public void GetUpdate(Update update)
+        public async Task GetUpdate(Update update)
         {
-            Database<Employee> dbEmployee = new Database<Employee>();
-            Database<Patient> dbPatient = new Database<Patient>();
+            ContextRepository<Employee> dbEmployee = new ContextRepository<Employee>();
+            ContextRepository<Patient> dbPatient = new ContextRepository<Patient>();
+
             if (doctorSpecialization == null)
             {
                 doctorSpecialization = update.Message.Text;
                 var appointmentsTmp = appointments.Where(x => dbEmployee.GetItemById(x.DoctorId).Specialization == doctorSpecialization).ToList();
                 if(appointmentsTmp.Count == 0)
                 {
-                    client.SendTextMessageAsync(update.Message.Chat.Id, "На данную специализацию нет записей!");
+                    await client.SendTextMessageAsync(update.Message.Chat.Id, "На данную специализацию нет записей!");
                 }
                 appointments = appointmentsTmp;
 
                 var specializationBtn = appointments.Select(x => new KeyboardButton(dbEmployee.GetItemById(x.DoctorId).Surname)).ToArray();
-                var specializationMarkup = new ReplyKeyboardMarkup(specializationBtn)
+                var specializationMarkup = new ReplyKeyboardMarkup(ToRows(specializationBtn))
                 {
                     ResizeKeyboard = true,
                     OneTimeKeyboard = true
                 };
-                client.SendTextMessageAsync(update.Message.Chat.Id, "Выеберите врача", replyMarkup: specializationMarkup);
+                await client.SendTextMessageAsync(update.Message.Chat.Id, "Выеберите врача", replyMarkup: specializationMarkup);
             }
             else if(doctorSurname == null)
             {
                 doctorSurname = update.Message.Text;
+
                 var appointmentsTmp = appointments.Where(x => dbEmployee.GetItemById(x.DoctorId).Surname == doctorSurname).ToList();
                 if (appointmentsTmp.Count == 0)
                 {
-                    client.SendTextMessageAsync(update.Message.Chat.Id, "К данному врачу нет записей!");
+                    await client.SendTextMessageAsync(update.Message.Chat.Id, "К данному врачу нет записей!");
                 }
                 appointments = appointmentsTmp;
 
                 var doctorsBtn = appointments.Select(x => new KeyboardButton(x.AppointmentTime.ToString())).ToArray();
-                var doctorsMarkup = new ReplyKeyboardMarkup(doctorsBtn)
+                var doctorsMarkup = new ReplyKeyboardMarkup(ToRows(doctorsBtn))
                 {
                     ResizeKeyboard = true,
                     OneTimeKeyboard = true
                 };
-                client.SendTextMessageAsync(update.Message.Chat.Id, "Выеберите время", replyMarkup: doctorsMarkup);
+                await client.SendTextMessageAsync(update.Message.Chat.Id, "Выеберите время", replyMarkup: doctorsMarkup);
             }
             else
             {
@@ -124,13 +129,13 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
                 Appointment? appointment = appointments.Find(x => x.AppointmentTime.ToString() == appointmentTime);
                 if (appointment == null)
                 {
-                    client.SendTextMessageAsync(update.Message.Chat.Id, "На данное время нет записей!");
+                    await client.SendTextMessageAsync(update.Message.Chat.Id, "На данное время нет записей!");
                 }
-                appointment.PatientId = DatabaseTelegram.Users.Find(x => x.ChatId == update.Message.Chat.Id).Id;
-                Database<Appointment> db = new Database<Appointment>();
-                db.UpdateItemAsync(appointment);
+                appointment.PatientId = UserManager.GetUserByChatId(update.Message.Chat.Id).Id;
+                ContextRepository<Appointment> db = new ContextRepository<Appointment>();
+                await db.UpdateItemAsync(appointment);
 
-                client.SendTextMessageAsync(update.Message.Chat.Id, "Вы успешно записанны");
+                await client.SendTextMessageAsync(update.Message.Chat.Id, "Вы успешно записанны");
                 Executor.StopListen();
             }
         }

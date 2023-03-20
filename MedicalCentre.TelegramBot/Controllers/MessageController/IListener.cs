@@ -9,7 +9,7 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController
 {
     internal interface IListener
     {
-        public void GetUpdate(Update update);
+        public async Task GetUpdate(Update update) { }
 
         public CommandExecutor Executor { get; }
     }

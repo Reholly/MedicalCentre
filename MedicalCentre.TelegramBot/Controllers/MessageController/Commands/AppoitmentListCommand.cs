@@ -1,6 +1,5 @@
 ﻿using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
-using MedicalCentre.TelegramBot.DataBaseLayer;
 using MedicalCentre.TelegramBot.Models;
 using System.Collections;
 using System.Text;
@@ -12,33 +11,24 @@ using User = MedicalCentre.TelegramBot.Models.User;
 
 namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
 {
-    internal class AppoitmentListCommand : Command
+    internal class AppoitmentListCommand : ICommand
     {
-        public override string Name => "Записи";
+        public string Name => "Записи";
 
-        protected override TelegramBotClient client => Bot.GetTelegramBot();
+        public TelegramBotClient client => Bot.GetTelegramBot();
 
-        public override void Execute(Update update)
+        public bool NeedAutorization => true;
+
+        public async Task Execute(Update update)
         {
             var chatId = update.Message.Chat.Id;
-            Database<Appointment> dbAppointment = new Database<Appointment>();
-            List<Appointment> appointments = dbAppointment.GetTable();
+            ContextRepository<Appointment> dbAppointment = new ContextRepository<Appointment>();
+            List<Appointment> appointments = dbAppointment.GetTableAsync().Result;
 
-            User? user = DatabaseTelegram.Users.Find(x => x.ChatId == chatId);
-            if(user == null)
-            {
-                KeyboardButton regsterBtn = new KeyboardButton("Регистрация");
-                var regsterMarkup = new ReplyKeyboardMarkup(regsterBtn)
-                {
-                    ResizeKeyboard = true,
-                    OneTimeKeyboard = true
-                };
-                client.SendTextMessageAsync(update.Message.Chat.Id, "Для начала работы зарегестрируйтесь или авторизуйтесь!", replyMarkup: regsterMarkup);
-                return;
-            }
+            User? user = UserManager.GetUserByChatId(chatId);
 
-            Database<Employee> dbEmployee = new Database<Employee>();
-            Database<Patient> dbPatient = new Database<Patient>();
+            ContextRepository<Employee> dbEmployee = new ContextRepository<Employee>();
+            ContextRepository<Patient> dbPatient = new ContextRepository<Patient>();
 
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Предстоящие записи");
@@ -55,7 +45,8 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
                 }
             }
 
-            client.SendTextMessageAsync(chatId, sb.ToString());
+            await client.SendTextMessageAsync(chatId, sb.ToString());
+            await new MenuCommand().Execute(update);
         }
     }
 }

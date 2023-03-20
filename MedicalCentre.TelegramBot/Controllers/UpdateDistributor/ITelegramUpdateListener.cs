@@ -9,6 +9,6 @@ namespace MedicalCentre.TelegramBot.Controllers.UpdateDistributor
 {
     internal interface ITelegramUpdateListener
     {
-        public void GetUpdate(Update update);
+        public async Task GetUpdate(Update update) { }
     }
 }

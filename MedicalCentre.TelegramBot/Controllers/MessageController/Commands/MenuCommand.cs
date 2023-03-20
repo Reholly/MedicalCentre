@@ -5,13 +5,15 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
 {
-    internal class MenuCommand : Command
+    internal class MenuCommand : ICommand
     {
-        public override string Name => "Меню";
+        public string Name => "Меню";
 
-        protected override TelegramBotClient client => Bot.GetTelegramBot();
+        public TelegramBotClient client => Bot.GetTelegramBot();
 
-        public override void Execute(Update update)
+        public bool NeedAutorization => false;
+
+        public async Task Execute(Update update)
         {
             string menu = "Выберите комманду для продолжения\n\n" +
                           "Анализы - Получить информацию о результатах анализов\n\n" +
@@ -34,7 +36,7 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
                 ResizeKeyboard = true,
                 OneTimeKeyboard = true
             };
-            client.SendTextMessageAsync(update.Message.Chat.Id, menu, replyMarkup: menuMarkup);
+            await client.SendTextMessageAsync(update.Message.Chat.Id, menu, replyMarkup: menuMarkup);
         }
     }
 }

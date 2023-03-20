@@ -4,18 +4,21 @@ using Telegram.Bot.Types;
 
 namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
 {
-    internal class InfoCommand : Command
+    public class InfoCommand : ICommand
     {
-        public override string Name => "Инфо";
+        public string Name => "Инфо";
 
-        protected override TelegramBotClient client => Bot.GetTelegramBot();
+        public TelegramBotClient client => Bot.GetTelegramBot();
 
-        public override void Execute(Update update)
+        public bool NeedAutorization => false;
+
+        public async Task Execute(Update update)
         {
             string info = "ООО \"Медицинский центр\"\n" +
                           "Адрес: г. Мозырь, улица Кирсанова, дом 312\n" +
                           "Номер: 8 800 555 3535";
-            client.SendTextMessageAsync(update.Message.Chat.Id, info);
+            await client.SendTextMessageAsync(update.Message.Chat.Id, info);
+            await new MenuCommand().Execute(update);
         }
     }
 }
