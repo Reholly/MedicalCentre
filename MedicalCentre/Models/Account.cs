@@ -19,7 +19,7 @@ namespace MedicalCentre.Models
             EmployeeAccountId = employeeAccount;
             Username = username;
             Password = password;
-            Role = role;    
+            Role = role;
         }
 
         public Account(uint id, uint employeeAccount, string username, string password, string role)

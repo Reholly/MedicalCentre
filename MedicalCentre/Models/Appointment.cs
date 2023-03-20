@@ -1,5 +1,4 @@
-﻿using MedicalCentre.DatabaseLayer;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -22,7 +21,7 @@ namespace MedicalCentre.Models
             DoctorId = doctor;
             AppointmentTime = appointmentTime;
         }
-        
+
         public Appointment(uint id, uint doctor, DateTime appointmentTime)
         {
             Id = id;

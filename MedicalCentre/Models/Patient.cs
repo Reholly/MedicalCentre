@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 namespace MedicalCentre.Models
 {
     public class Patient : INotifyPropertyChanged
-    { 
+    {
         public uint Id { get; set; }
         public string PhoneNumber { get; set; } = null!;
         public string Name { get; set; } = null!;
