@@ -1,6 +1,5 @@
 ﻿using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
-using MedicalCentre.TelegramBot.DataBaseLayer;
 using MedicalCentre.TelegramBot.Models;
 using Microsoft.VisualBasic.ApplicationServices;
 using System.Text;
@@ -11,9 +10,11 @@ using User = MedicalCentre.TelegramBot.Models.User;
 
 namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
 {
-    internal class MedicalExaminationCommand : Command, IListener
+    internal class MedicalExaminationCommand : ICommand, IListener
     {
-        public override string Name => "Анализы";
+        public string Name => "Анализы";
+
+        public bool NeedAutorization => true;
 
         public CommandExecutor Executor { get; }
 
@@ -22,28 +23,17 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
             Executor = executor;
         }
 
-        protected override TelegramBotClient client => Bot.GetTelegramBot();
+        public TelegramBotClient client => Bot.GetTelegramBot();
 
         private List<MedicalExamination> medicalExaminations = new List<MedicalExamination>();
 
-        public override void Execute(Update update)
+        public async Task Execute(Update update)
         {
             long chatId = update.Message.Chat.Id;
-            Database<MedicalExamination> dbMedEx = new Database<MedicalExamination>();
-            List<MedicalExamination> medicalExaminationsAll = dbMedEx.GetTable();
+            ContextRepository<MedicalExamination> dbMedEx = new ContextRepository<MedicalExamination>();
+            List<MedicalExamination> medicalExaminationsAll = dbMedEx.GetTableAsync().Result;
 
-            User? user = DatabaseTelegram.Users.Find(x => x.ChatId == chatId);
-            if (user == null)
-            {
-                KeyboardButton regsterBtn = new KeyboardButton("Регистрация");
-                var regsterMarkup = new ReplyKeyboardMarkup(regsterBtn)
-                {
-                    ResizeKeyboard = true,
-                    OneTimeKeyboard = true
-                };
-                client.SendTextMessageAsync(update.Message.Chat.Id, "Для начала работы зарегестрируйтесь или авторизуйтесь!", replyMarkup: regsterMarkup);
-                return;
-            }
+            User? user = UserManager.GetUserByChatId(chatId);
 
             Executor.StartListen(this);
 
@@ -62,7 +52,7 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
 
             if(medicalExaminations.Count == 0)
             {
-                client.SendTextMessageAsync(chatId, "У вас нет результотов анализов!");
+                await client.SendTextMessageAsync(chatId, "У вас нет результотов анализов!");
                 Executor.StopListen();
                 return;
             }
@@ -73,10 +63,10 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
                 OneTimeKeyboard = true
             };
 
-            client.SendTextMessageAsync(chatId, sb.ToString(), replyMarkup: selectMarkup);
+            await client.SendTextMessageAsync(chatId, sb.ToString(), replyMarkup: selectMarkup);
         }
 
-        public void GetUpdate(Update update)
+        public async Task GetUpdate(Update update)
         {
             long chatId = update.Message.Chat.Id;
             string input = update.Message.Text;
@@ -94,19 +84,20 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
             {
                 if(select == i)
                 {
-                    client.SendTextMessageAsync(chatId, $"{medicalExaminations[i].Title} - {medicalExaminations[i].Conclusion}");
+                    await client.SendTextMessageAsync(chatId, $"{medicalExaminations[i].Title} - {medicalExaminations[i].Conclusion}");
                     var photo = new InputMedia(new MemoryStream(medicalExaminations[i].AttachedImage.ImageBytes), "photo.jpg");
-                    client.SendPhotoAsync(chatId, photo);
+                    await client.SendPhotoAsync(chatId, photo);
 
-                    KeyboardButton backBtn = new KeyboardButton("Назад");
+                    KeyboardButton backBtn = new KeyboardButton("Меню");
                     var backMarkup = new ReplyKeyboardMarkup(backBtn)
                     {
                         ResizeKeyboard = true,
                         OneTimeKeyboard = true
                     };
-                    client.SendTextMessageAsync(chatId, "Чтобы выйти напишите Назад", replyMarkup: backMarkup);
+                    await client.SendTextMessageAsync(chatId, "Чтобы выйти напишите Меню", replyMarkup: backMarkup);
                 }
             }
+            await new MenuCommand().Execute(update);
         }
     }
 }

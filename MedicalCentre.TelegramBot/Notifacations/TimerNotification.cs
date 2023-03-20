@@ -5,7 +5,7 @@ using Timer = System.Timers.Timer;
 
 namespace MedicalCentre.TelegramBot.Notifacations
 {
-    internal class TimerNotification
+    public class TimerNotification
     {
         private Timer timer { get; set; }
         private DateTime dateTime { get; set; }

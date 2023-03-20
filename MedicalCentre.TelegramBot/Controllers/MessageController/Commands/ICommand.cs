@@ -8,14 +8,14 @@ using Telegram.Bot.Types;
 
 namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
 {
-    abstract class Command
+    public interface ICommand
     {
-        protected abstract TelegramBotClient client { get; }
+        public TelegramBotClient client { get; }
 
-        public abstract string Name { get; }
+        public string Name { get; }
 
-        public abstract void Execute(Update update);
+        public bool NeedAutorization { get; }
+
+        public async Task Execute(Update update) { }
     }
-
-
 }

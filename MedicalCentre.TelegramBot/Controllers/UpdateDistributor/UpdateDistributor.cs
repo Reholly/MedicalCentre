@@ -14,25 +14,23 @@ namespace MedicalCentre.TelegramBot.Controllers.UpdateDistributor
     {
         private Dictionary<long, T> listeners;
 
-        public UpdateDistributor(TelegramBotClient client)
+        public UpdateDistributor()
         {
             listeners = new Dictionary<long, T>();
         }
 
-        public void Update(Update update)
+        public async Task Update(Update update)
         {
             long chatId = update.Message.Chat.Id;
-            foreach (var listener in listeners)
+            T? listener = listeners.GetValueOrDefault(chatId);
+            if (listener is null)
             {
-                if (chatId == listener.Key)
-                {
-                    listener.Value.GetUpdate(update);
-                    return;
-                }
+                listener = new T();
+                listeners.Add(chatId, listener);
+                await listener.GetUpdate(update);
+                return;
             }
-            T newListener = new T();
-            listeners.Add(chatId, newListener);
-            newListener.GetUpdate(update);
+            await listener.GetUpdate(update);
         }
     }
 }

@@ -11,19 +11,18 @@ namespace MedicalCentre.TelegramBot.Controllers
     [Route("api/bot")]
     public class BotController : ControllerBase
     {
-        private static UpdateDistributor<CommandExecutor> distributor = new(Bot.GetTelegramBot());
+        private static UpdateDistributor<CommandExecutor> distributor = new();
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Update update)
+        public async Task Post([FromBody] Update update)
         {
-            distributor.Update(update);
-            return Ok();
+            await distributor.Update(update);
         }
 
         [HttpGet]
         public string Get()
         {
-            return "Telegram Bot started";
+            return "Telegram bot was started";
         }
     }
 }
