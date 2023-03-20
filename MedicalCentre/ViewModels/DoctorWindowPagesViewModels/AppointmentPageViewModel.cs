@@ -5,6 +5,7 @@ using MedicalCentre.Services;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System;
+using MedicalCentre.Windows;
 
 namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {
@@ -12,22 +13,24 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
     {
         private readonly Appointment appointment;
         private readonly AppointmentPage page;
-        private readonly DoctorMainPage mainPage;
+        private readonly DoctorWindow window;
+        private readonly Account account;
         public ICommand NotePrintingCommand { get; set; }
         public ICommand AppointmentEndingCommand { get; set; }
-        public AppointmentPageViewModel(Appointment appointment, AppointmentPage page, DoctorMainPage mainPage)
+        public AppointmentPageViewModel(Appointment appointment, AppointmentPage page, DoctorWindow window, Account account)
         {
             this.appointment = appointment;
             this.page = page;
-            this.mainPage = mainPage;
+            this.window = window;
             NotePrintingCommand = new RelayCommand(PrintNote);
             AppointmentEndingCommand = new RelayCommandAsync(EndAppointment);
             Initialize();
+            this.account = account;
         }
 
         private void Initialize()
         {
-            string patient = new ContextRepository<Patient>().GetItemById((uint) appointment.PatientId).ToStringForAppointment();
+            string patient = new ContextRepository<Patient>().GetItemById((uint)appointment.PatientId).ToStringForAppointment();
             page.PatientsSNP.Text = patient;
         }
 
@@ -38,7 +41,7 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             patient.Notes.Add(note);
             await new ContextRepository<Patient>().UpdateItemAsync(patient);
 
-            mainPage.WorkspaceFrame.Content = null;
+            window.MainFrame.Content = new DoctorMainPage(window, account);
         }
 
         private void PrintNote() => OpenBrowserService.OpenPageInBrowser("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
