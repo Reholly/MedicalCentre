@@ -36,13 +36,13 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 
         private async Task EndAppointment()
         {
-            Note note = new(page.AppointmentTitleBox.Text, page.AppointmentTextBox.Text, DateTime.Now);
+            Note note = new((uint)appointment.PatientId, page.AppointmentTitleBox.Text, page.AppointmentTextBox.Text, DateTime.Now);
             Patient patient = await new ContextRepository<Patient>().GetItemByIdAsync((uint)appointment.PatientId);
             patient.Notes.Add(note);
             await new ContextRepository<Patient>().UpdateItemAsync(patient);
 
             appointment.IsFinished = true;
-            //await new ContextRepository<Appointment>().UpdateItemAsync(appointment);
+            await new ContextRepository<Appointment>().UpdateItemAsync(appointment);
 
             window.MainFrame.Content = new DoctorMainPage(window, account);
         }

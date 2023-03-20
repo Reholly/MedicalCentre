@@ -6,14 +6,14 @@
              xmlns:local="clr-namespace:MedicalCentre.UserControls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="40" d:DesignWidth="500">
+             d:DesignHeight="40" d:DesignWidth="300">
     <Grid>
         <DockPanel Margin="0 5 0 5">
             <materialDesign:PackIcon Kind="Paper" Height="30" Width="30" HorizontalAlignment="Left"/>
             <TextBlock Height="30" 
                        Name="Card"
-                       Width="360"
-                       Text="Default text Default - TextTextTextText"
+                       Width="160"
+                       Text="Default text Default"
                        HorizontalAlignment="Left" 
                        FontSize="18" 
                        Style="{StaticResource MaterialDesignBody1TextBlock}"/>
