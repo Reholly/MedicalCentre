@@ -5,6 +5,8 @@ using System.Windows;
 using System.Windows.Input;
 using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Windows;
+using System.Windows.Documents;
+using System.Collections.Generic;
 
 namespace MedicalCentre.UserControls.ViewModels
 {
@@ -44,8 +46,10 @@ namespace MedicalCentre.UserControls.ViewModels
 
         private void ShowNotes(Patient patient)
         {
-            foreach (Note note in patient.Notes)
+            List<Note> notes = new ContextRepository<Note>().GetTable();
+            foreach (Note note in notes)
             {
+                if (note.)
                 page.PatientsNotes.Children.Insert(0, new NoteCard(note));
             }
         }

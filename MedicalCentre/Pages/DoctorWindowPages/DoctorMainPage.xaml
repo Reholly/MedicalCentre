@@ -44,23 +44,23 @@
                 <StackPanel Name="AppointmentCards" Width="500" Grid.Column="0"/>
             </StackPanel>
 
-            <Grid Grid.Column="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Border BorderThickness="0" Background="#252934" BorderBrush="Black" Grid.Row="0">
-                    <TextBlock Text="Рабочее пространство" 
+            <StackPanel Grid.Column="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border BorderThickness="0" Background="#252934" BorderBrush="Black" Grid.Row="0">
+                        <TextBlock Text="Рабочее пространство" 
                         Style="{StaticResource MaterialDesignBody1TextBlock}"                        
                         Height="30" 
                         FontSize="18" 
                         Foreground="#fafafafa" 
                         TextAlignment="Center"/>
-                </Border>
-                <StackPanel>
-                    <Frame Name="WorkspaceFrame" Grid.Row="1" Width="535"/>
-                </StackPanel>
-            </Grid>
+                    </Border>
+                </Grid>
+                <Frame Name="WorkspaceFrame"/>
+            </StackPanel>
 
             <StackPanel Grid.Column="4">
                 <Grid>
@@ -78,7 +78,7 @@
                            Foreground="#fafafafa" 
                            TextAlignment="Center"/>
                     </Border>
-                    <StackPanel Name="PatientsNotes"/>
+                    <StackPanel Name="PatientsNotes" Grid.Row="1"/>
                     <Border BorderThickness="0" Grid.Row="2" Background="#252934" BorderBrush="Black">
                         <TextBlock Text="Обследования" 
                            Style="{StaticResource MaterialDesignBody1TextBlock}"                        
@@ -87,7 +87,7 @@
                            Foreground="#fafafafa" 
                            TextAlignment="Center"/>
                     </Border>
-                    <StackPanel Name="PatientsExaminations"/>
+                    <StackPanel Name="PatientsExaminations" Grid.Row="3"/>
                 </Grid>
 
             </StackPanel>
