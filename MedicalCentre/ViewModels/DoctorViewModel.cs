@@ -28,6 +28,6 @@ namespace MedicalCentre.ViewModels
             authentification.LogOut(window, account);
         }
 
-        private void OpenMainPage() => window.MainFrame.Content = new MainPage();
+        private void OpenMainPage() => window.MainFrame.Content = new DoctorMainPage(window, account);
     }
 }

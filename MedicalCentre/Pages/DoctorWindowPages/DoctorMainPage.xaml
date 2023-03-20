@@ -78,6 +78,7 @@
                            Foreground="#fafafafa" 
                            TextAlignment="Center"/>
                     </Border>
+                    <StackPanel Name="PatientsNotes"/>
                     <Border BorderThickness="0" Grid.Row="2" Background="#252934" BorderBrush="Black">
                         <TextBlock Text="Обследования" 
                            Style="{StaticResource MaterialDesignBody1TextBlock}"                        
@@ -86,6 +87,7 @@
                            Foreground="#fafafafa" 
                            TextAlignment="Center"/>
                     </Border>
+                    <StackPanel Name="PatientsExaminations"/>
                 </Grid>
 
             </StackPanel>
