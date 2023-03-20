@@ -1,7 +1,6 @@
 ﻿using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
 using MedicalCentre.TelegramBot.Models;
-using System;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
