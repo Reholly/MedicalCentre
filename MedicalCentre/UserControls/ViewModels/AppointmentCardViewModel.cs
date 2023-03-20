@@ -7,6 +7,7 @@ using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Windows;
 using System.Windows.Documents;
 using System.Collections.Generic;
+using MedicalCentre.Services;
 
 namespace MedicalCentre.UserControls.ViewModels
 {
@@ -17,7 +18,6 @@ namespace MedicalCentre.UserControls.ViewModels
         private readonly DoctorWindow window;
         private readonly Account account;
         private readonly string patient;
-        private readonly string doctor;
         public ICommand AppointmentStartingCommand { get; set; }
         public AppointmentCardViewModel(AppointmentCard card, Appointment appointment, DoctorMainPage page, string patient, string doctor, DoctorWindow window, Account account)
         {
@@ -25,7 +25,6 @@ namespace MedicalCentre.UserControls.ViewModels
             this.appointment = appointment;
             this.window = window;
             this.patient = patient;
-            this.doctor = doctor;
             card.Card.Text = doctor + ": " + patient;
             AppointmentStartingCommand = new RelayCommand(StartAppointment);
             this.account = account;
@@ -39,9 +38,12 @@ namespace MedicalCentre.UserControls.ViewModels
                 page.WorkspaceFrame.Content = new AppointmentPage(appointment, window, account);
                 ShowNotes(patient);
                 ShowExaminations(patient);
+                LoggerService.CreateLog($"Приём {appointment.Id} был начат", true);
             }
             else
+            {
                 MessageBox.Show("Ты как приём без пациента начнёшь, шизоид?");
+            }
         }
 
         private void ShowNotes(Patient patient)

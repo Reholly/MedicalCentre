@@ -5,6 +5,7 @@ using MedicalCentre.UserControls;
 using MedicalCentre.Windows;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {
@@ -22,9 +23,9 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             ShowCards();
         }
 
-        private void ShowCards()
+        private async Task ShowCards()
         {
-            List<Appointment> appointments = new ContextRepository<Appointment>().GetTable();
+            List<Appointment> appointments = await new ContextRepository<Appointment>().GetTableAsync();
             foreach (Appointment appointment in appointments)
             {
                 if (appointment.IsFinished == false)

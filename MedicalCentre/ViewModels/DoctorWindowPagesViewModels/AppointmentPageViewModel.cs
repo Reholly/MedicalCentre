@@ -42,9 +42,9 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             await new ContextRepository<Patient>().UpdateItemAsync(patient);
 
             appointment.IsFinished = true;
-            await new ContextRepository<Appointment>().UpdateItemAsync(appointment);
-
             window.MainFrame.Content = new DoctorMainPage(window, account);
+            await new ContextRepository<Appointment>().UpdateItemAsync(appointment);
+            LoggerService.CreateLog($"Приём {appointment.Id} был закончен", true);
         }
 
         private void PrintNote() => OpenBrowserService.OpenPageInBrowser("https://www.youtube.com/watch?v=dQw4w9WgXcQ");

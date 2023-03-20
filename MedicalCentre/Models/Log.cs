@@ -17,7 +17,8 @@ namespace MedicalCentre.Models
             IsSuccess = isSuccess;
         }
 
-        public Log(uint id, string logText, bool isSuccess)        {
+        public Log(uint id, string logText, bool isSuccess)
+        {
             Id = id;
             LogText = logText;
             IsSuccess = isSuccess;

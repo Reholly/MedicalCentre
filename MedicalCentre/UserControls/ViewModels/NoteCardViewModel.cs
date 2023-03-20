@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using MedicalCentre.Forms;
+﻿using MedicalCentre.Forms;
 using MedicalCentre.Models;
 using MedicalCentre.ViewModels;
+using System.Windows.Input;
 
 namespace MedicalCentre.UserControls.ViewModels
 {

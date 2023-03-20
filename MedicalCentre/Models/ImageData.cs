@@ -7,7 +7,7 @@ namespace MedicalCentre.Models
     {
         public uint Id { get; set; }
         public byte[] ImageBytes { get; set; }
-        
+
         public ImageData() { }
 
         public ImageData(byte[] image)
