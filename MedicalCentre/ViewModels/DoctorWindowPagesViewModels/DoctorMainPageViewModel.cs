@@ -28,7 +28,7 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             List<Appointment> appointments = await new ContextRepository<Appointment>().GetTableAsync();
             foreach (Appointment appointment in appointments)
             {
-                if (appointment.IsFinished == false)
+                if (appointment.IsFinished == false && appointment.AppointmentTime == DateTime.Today)
                 {
                     Patient patient;
                     string patientString;
