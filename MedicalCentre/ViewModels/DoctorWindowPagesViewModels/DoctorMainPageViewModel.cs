@@ -25,9 +25,6 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
         private void ShowCards()
         {
             List<Appointment> appointments = new ContextRepository<Appointment>().GetTable();
-            appointments.Add(new Appointment(0, 10, 1399370851, DateTime.Now));
-            appointments.Add(new Appointment(1, 10, 1399370851, DateTime.Now));
-            appointments.Add(new Appointment(2, 10, 1399370851, DateTime.Now));
             foreach (Appointment appointment in appointments)
             {
                 if (appointment.IsFinished == false)

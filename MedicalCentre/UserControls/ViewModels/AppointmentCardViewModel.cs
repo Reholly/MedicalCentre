@@ -49,16 +49,22 @@ namespace MedicalCentre.UserControls.ViewModels
             List<Note> notes = new ContextRepository<Note>().GetTable();
             foreach (Note note in notes)
             {
-                if (note.)
-                page.PatientsNotes.Children.Insert(0, new NoteCard(note));
+                if (note.PatientId == patient.Id)
+                {
+                    page.PatientsNotes.Children.Insert(0, new NoteCard(note));
+                }
             }
         }
 
         private void ShowExaminations(Patient patient)
         {
+            List<MedicalExamination> examinations = new ContextRepository<MedicalExamination>().GetTable();
             foreach (MedicalExamination examination in patient.Examinations)
             {
-                page.PatientsExaminations.Children.Insert(0, new ExaminationCard(examination));
+                if (examination.Patient.Id == patient.Id)
+                {
+                    page.PatientsExaminations.Children.Insert(0, new ExaminationCard(examination));
+                }
             }
         }
     }
