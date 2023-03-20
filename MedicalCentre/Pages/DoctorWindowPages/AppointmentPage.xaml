@@ -11,8 +11,8 @@
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button HorizontalAlignment="Left"/>
-                <Button HorizontalAlignment="Right"/>
+                <Button HorizontalAlignment="Left" Content="Закончить приём" Command="{Binding AppointmentEndingCommand}"/>
+                <Button HorizontalAlignment="Right" Content="Печать" Command="{Binding NotePrintingCommand}"/>
             </StackPanel>
             <TextBox TextWrapping="WrapWithOverflow" Name="AppointmentTitleBox">
                 Заголовок приёма

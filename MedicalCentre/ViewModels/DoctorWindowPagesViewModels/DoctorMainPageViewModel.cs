@@ -3,9 +3,8 @@ using MedicalCentre.Models;
 using MedicalCentre.Pages.DoctorWindowPages;
 using MedicalCentre.UserControls;
 using MedicalCentre.Windows;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 
 namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {
@@ -26,27 +25,33 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
         private void ShowCards()
         {
             List<Appointment> appointments = new ContextRepository<Appointment>().GetTable();
+            appointments.Add(new Appointment(0, 10, 1399370851, DateTime.Now));
+            appointments.Add(new Appointment(1, 10, 1399370851, DateTime.Now));
+            appointments.Add(new Appointment(2, 10, 1399370851, DateTime.Now));
             foreach (Appointment appointment in appointments)
             {
-                Patient patient;
-                string patientString;
-
-                if (appointment.PatientId != null)
+                if (appointment.IsFinished == false)
                 {
-                    patient = new ContextRepository<Patient>().GetItemById((uint)appointment.PatientId);
-                    patientString = patient.ToStringForAppointment();
-                }
-                else
-                {
-                    patientString = "Тут_должен_быть_пациент";
-                }
+                    Patient patient;
+                    string patientString;
 
-                Employee doctor = new ContextRepository<Employee>().GetItemById(appointment.DoctorId);
-                string doctorString = doctor.ToString();
+                    if (appointment.PatientId != null)
+                    {
+                        patient = new ContextRepository<Patient>().GetItemById((uint)appointment.PatientId);
+                        patientString = patient.ToStringForAppointment();
+                    }
+                    else
+                    {
+                        patientString = "Тут_должен_быть_пациент";
+                    }
 
-                if (account.EmployeeAccountId == appointment.DoctorId)
-                {
-                    page.AppointmentCards.Children.Insert(0, new AppointmentCard(appointment, page, patientString, doctorString, window, account));
+                    Employee doctor = new ContextRepository<Employee>().GetItemById(appointment.DoctorId);
+                    string doctorString = doctor.ToString();
+
+                    if (account.EmployeeAccountId == appointment.DoctorId)
+                    {
+                        page.AppointmentCards.Children.Insert(0, new AppointmentCard(appointment, page, patientString, doctorString, window, account));
+                    }
                 }
             }
         }

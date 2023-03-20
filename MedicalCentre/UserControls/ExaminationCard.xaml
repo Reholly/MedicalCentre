@@ -17,7 +17,7 @@
                        HorizontalAlignment="Left" 
                        FontSize="18" 
                        Style="{StaticResource MaterialDesignBody1TextBlock}"/>
-            <Button Name="OpenProfile" HorizontalAlignment="Left" DockPanel.Dock="Left" Command="{Binding NoteShowingCommand}" Height="30" Width="110" Content="Открыть" Foreground="#252934" Background="Transparent" FontSize="18" BorderBrush="Transparent"/>
+            <Button Name="OpenProfile" HorizontalAlignment="Left" DockPanel.Dock="Left" Command="{Binding ExaminationShowingCommand}" Height="30" Width="110" Content="Открыть" Foreground="#252934" Background="Transparent" FontSize="18" BorderBrush="Transparent"/>
         </DockPanel>
     </Grid>
 </UserControl>

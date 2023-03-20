@@ -41,6 +41,9 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             patient.Notes.Add(note);
             await new ContextRepository<Patient>().UpdateItemAsync(patient);
 
+            appointment.IsFinished = true;
+            //await new ContextRepository<Appointment>().UpdateItemAsync(appointment);
+
             window.MainFrame.Content = new DoctorMainPage(window, account);
         }
 
