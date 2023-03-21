@@ -2,6 +2,7 @@
 using MedicalCentre.Pages.OperatorPages;
 using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
+using System.Threading;
 using System.Windows;
 
 namespace MedicalCentre.Windows
@@ -10,6 +11,12 @@ namespace MedicalCentre.Windows
     {
         public OperatorWindow(Account account)
         {
+
+            if (Thread.CurrentPrincipal == null || !Thread.CurrentPrincipal.IsInRole("Doctor"))
+            {
+                Close();
+            }
+
             InitializeComponent();
 
             EmployeeNameBinderService.BindName(account, RoleName, EmployeeName);

@@ -7,7 +7,6 @@ using MedicalCentre.UserControls;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -24,10 +23,11 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
         public PatientsViewModel(PatientsPage page)
         {
             this.page = page;
-            SearchCommand = new RelayCommandAsync(SearchItems);
 
+            SearchCommand = new RelayCommandAsync(SearchItems);
             OpenRegistrationCommand = new RelayCommand(OpenRegistration);
             OpenNewsCommand = new RelayCommand(OpenNews);
+
             page.Search.TextChanged += OnTextChanged;
 
             SearchItems();
@@ -35,7 +35,7 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
 
         public void OpenNews()
         {
-            MessageBox.Show("ЭТО ЗАГЛУШКА");
+            OpenBrowserService.OpenPageInBrowser(Properties.Settings.Default.OpenHealthNews);
         }
 
         public void OpenRegistration()
@@ -49,7 +49,9 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
             ContextRepository<Patient> patientsDb = new();
             Patients = new ObservableCollection<Patient>(await patientsDb.GetTableAsync());
             Patients = new ObservableCollection<Patient>(SearchFilterService<Patient>.GetFilteredList(Patients.ToList(), page.Search.Text));
+
             page.PatientsCards.Children.Clear();
+
             foreach (var patient in Patients)
             {
                 page.PatientsCards.Children.Insert(0, new PatientCard(patient));

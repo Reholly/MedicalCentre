@@ -24,19 +24,19 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
         public EmployeeManagementViewModel(EmployeesManagementPage page)
         {
             this.page = page;
-            SearchCommand = new RelayCommandAsync(SearchItems);
 
+            SearchCommand = new RelayCommandAsync(SearchItems);
             OpenRegistrationCommand = new RelayCommand(OpenRegistration);        
             OpenNewsCommand = new RelayCommand(OpenNews);
-            page.Search.TextChanged += OnTextChanged;
 
+            page.Search.TextChanged += OnTextChanged;
             
             SearchItems();
         }
 
         public void OpenNews()
         {
-            OpenBrowserService.OpenPageInBrowser("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+            OpenBrowserService.OpenPageInBrowser(Properties.Settings.Default.RickRoll);
         }
 
         public void OpenRegistration()
@@ -48,9 +48,12 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
         public async Task SearchItems()
         {
             ContextRepository<Employee> empDb = new();
+
             Employees = new ObservableCollection<Employee>(await empDb.GetTableAsync());
             Employees = new ObservableCollection<Employee>(SearchFilterService<Employee>.GetFilteredList(Employees.ToList(), page.Search.Text));
+
             page.EmployeesCards.Children.Clear();
+
             foreach(var employee in Employees)
             {
                 page.EmployeesCards.Children.Insert(0, new EmployeeCard(employee));
