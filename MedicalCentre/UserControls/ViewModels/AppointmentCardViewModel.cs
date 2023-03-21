@@ -8,6 +8,7 @@ using MedicalCentre.Windows;
 using System.Windows.Documents;
 using System.Collections.Generic;
 using MedicalCentre.Services;
+using System.Threading.Tasks;
 
 namespace MedicalCentre.UserControls.ViewModels
 {
@@ -26,11 +27,11 @@ namespace MedicalCentre.UserControls.ViewModels
             this.window = window;
             this.patient = patient;
             card.Card.Text = doctor + ": " + patient;
-            AppointmentStartingCommand = new RelayCommand(StartAppointment);
+            AppointmentStartingCommand = new RelayCommandAsync(StartAppointment);
             this.account = account;
         }
 
-        private void StartAppointment()
+        private async Task StartAppointment()
         {
             if (patient != "Тут_должен_быть_пациент")
             {
@@ -38,7 +39,7 @@ namespace MedicalCentre.UserControls.ViewModels
                 page.WorkspaceFrame.Content = new AppointmentPage(appointment, window, account);
                 ShowNotes(patient);
                 ShowExaminations(patient);
-                LoggerService.CreateLog($"Приём {appointment.Id} был начат", true);
+                await LoggerService.CreateLog($"Приём {appointment.Id} был начат", true);
             }
             else
             {

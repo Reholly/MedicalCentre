@@ -14,10 +14,10 @@
                 <Button HorizontalAlignment="Left" Content="Закончить приём" Command="{Binding AppointmentEndingCommand}"/>
                 <Button HorizontalAlignment="Right" Content="Печать" Command="{Binding NotePrintingCommand}"/>
             </StackPanel>
-            <TextBox TextWrapping="WrapWithOverflow" Name="AppointmentTitleBox">
+            <TextBox TextWrapping="Wrap" Name="AppointmentTitleBox">
                 Заголовок приёма
             </TextBox>
-            <TextBox TextWrapping="WrapWithOverflow" Name="AppointmentTextBox">
+            <TextBox TextWrapping="Wrap" Name="AppointmentTextBox">
                 Содержание приёма
             </TextBox>
             <TextBlock Name="PatientsSNP"/>
