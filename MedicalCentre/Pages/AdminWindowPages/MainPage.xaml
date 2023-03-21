@@ -20,7 +20,7 @@
         <Border Background="#c9d0d8" Grid.ColumnSpan="2">
             <Grid Grid.Column="0">
                 <Border Grid.Column="0" Background="Black" Opacity="0.8" Height="2" Width="1300" Margin="60,64,30,0" VerticalAlignment="Top"/>
-                <TextBlock Text="Администратор >> Главная" FontSize="18" Margin="60,20,0,0"/>
+                <TextBlock Text=">> Главная" FontSize="18" Margin="60,20,0,0"/>
                 <Border CornerRadius="20" Padding="0"  Width="858" Height="553" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="60,75,0,0">
                     <Border.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">

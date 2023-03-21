@@ -104,5 +104,17 @@ namespace MedicalCentre.Properties {
                 this["OpenInvalidSite"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.youtube.com/watch?v=dQw4w9WgXcQ")]
+        public string RickRoll {
+            get {
+                return ((string)(this["RickRoll"]));
+            }
+            set {
+                this["RickRoll"] = value;
+            }
+        }
     }
 }

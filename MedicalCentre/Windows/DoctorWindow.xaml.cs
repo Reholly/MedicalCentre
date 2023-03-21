@@ -19,7 +19,13 @@ namespace MedicalCentre.Windows
             }
 
             EmployeeNameBinderService.BindName(account, RoleName, EmployeeName);
+            MainFrame.Content = new DoctorMainPage(this, account);
             DataContext = new DoctorViewModel(this, account);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

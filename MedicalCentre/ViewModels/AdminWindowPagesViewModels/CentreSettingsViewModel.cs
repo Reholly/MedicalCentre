@@ -2,12 +2,7 @@
 using MedicalCentre.Models;
 using MedicalCentre.Pages.AdminWindowPages;
 using MedicalCentre.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -20,21 +15,22 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
         public ICommand? OpenDbCommand { get; set; }
         public ICommand? OpenHostCommand { get; set; }
 
+
         private CentreSettingsPage settingsPage;
 
         public CentreSettingsViewModel(CentreSettingsPage page)
         {
             settingsPage = page;
+
             OpenDbCommand = new RelayCommand(OpenDatabaseMenu);
             OpenHostCommand = new RelayCommand(OpenHostSite);
 
             Update();
-
         }
+
         private async Task Update()
         {
             var logDb = new ContextRepository<Log>();
-
             Logs = new ObservableCollection<Log>(await logDb.GetTableAsync());
 
             settingsPage.Logs.ItemsSource = Logs;
@@ -49,8 +45,6 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
         public void OpenHostSite()
         {
             OpenBrowserService.OpenPageInBrowser(Properties.Settings.Default.Host);
-        }
-
-       
+        }      
     }
 }

@@ -25,7 +25,7 @@
             </Grid.RowDefinitions>
             <!-- Бразуер -->
             <StackPanel Margin="30 5 30 0">
-                <TextBlock Text="Администратор >> Персонал" FontSize="18" Margin="30 15 0 30"/>
+                <TextBlock Text=">> Персонал" FontSize="18" Margin="30 15 0 30"/>
                 
                 <Border Background="Black" Opacity="0.8" Height="2" Width="720" Margin="0 -15 0 10"/>
                 <Border CornerRadius="20 20 20 20" Width="730" Height="180" Margin="0 0 0 20 ">

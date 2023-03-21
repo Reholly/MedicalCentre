@@ -23,5 +23,8 @@
     <Setting Name="OpenInvalidSite" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://chelyabinsk.bezformata.com/word/invalidov/2089/</Value>
     </Setting>
+    <Setting Name="RickRoll" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://www.youtube.com/watch?v=dQw4w9WgXcQ</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
