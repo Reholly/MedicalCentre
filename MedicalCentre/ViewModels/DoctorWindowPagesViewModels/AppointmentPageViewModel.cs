@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System;
 using MedicalCentre.Windows;
+using System.IO;
+using System.Printing;
+using System.Windows.Controls;
+using System.Windows;
+using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {
@@ -48,6 +54,15 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             await LoggerService.CreateLog($"Приём {appointment.Id} был закончен", true);
         }
 
-        private void PrintNote() => OpenBrowserService.OpenPageInBrowser("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+        private void PrintNote()
+        {
+            //OpenBrowserService.OpenPageInBrowser("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+            PrintDialog printDialog = new();
+            if (printDialog.ShowDialog() == true)
+            {
+
+                printDialog.PrintVisual(text, "");
+            }
+        }
     }
 }
