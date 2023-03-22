@@ -1,17 +1,8 @@
 ﻿using MedicalCentre.TelegramBot.Controllers.MessageController.Commands;
 using MedicalCentre.TelegramBot.Controllers.UpdateDistributor;
 using MedicalCentre.TelegramBot.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Telegram.Bot;
-using Telegram.Bot.Requests.Abstractions;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.ReplyMarkups;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using User = MedicalCentre.TelegramBot.Models.User;
 
 namespace MedicalCentre.TelegramBot.Controllers.MessageController
@@ -21,6 +12,7 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController
         private TelegramBotClient client => Bot.GetTelegramBot();
         private IListener? listener = null;
         private User? user = null;
+
         public List<ICommand> Commands { get; }
 
         private List<ICommand> GetCommands()
@@ -67,27 +59,30 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController
             long chatId = msg.Chat.Id;
             Logger.Log($"Received a '{msg.Text}' message in chat {chatId}.");
 
-            if (listener == null)
-            {
-                foreach (var command in Commands)
-                {
-                    if (command.Name == msg.Text)
-                    {
-                        if(command.NeedAutorization && user == null)
-                        {
-                            await new StartCommand().Execute(update);
-                        }
-                        else
-                        {
-                            await command.Execute(update);
-                        }
-                        return;
-                    }
-                }
-            }
-            else
+            if (listener != null)
             {
                 await listener.GetUpdate(update);
+                return;
+            }
+
+            await ExecuteCommand(update, msg);
+        }
+
+        private async Task ExecuteCommand(Update update, Message? msg)
+        {
+            foreach (var command in Commands)
+            {
+                if (command.Name == msg.Text)
+                {
+                    if (command.NeedAutorization && user == null)
+                    {
+                        await new StartCommand().Execute(update);
+                    }
+                    else
+                    {
+                        await command.Execute(update);
+                    }
+                }
             }
         }
 
