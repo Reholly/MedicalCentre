@@ -2,14 +2,13 @@
 using MedicalCentre.Models;
 using System.Threading.Tasks;
 
-namespace MedicalCentre.Services
+namespace MedicalCentre.Services;
+
+public static class LoggerService
 {
-    public static class LoggerService
+    public static async Task CreateLog(string log, bool isSuccess)
     {
-        public static async Task CreateLog(string log, bool isSuccess)
-        {
-            ContextRepository<Log> db = new ContextRepository<Log>();
-            await db.AddItemAsync(new Log(log, isSuccess));
-        }
+        ContextRepository<Log> db = new ContextRepository<Log>();
+        await db.AddItemAsync(new Log(log, isSuccess));
     }
 }

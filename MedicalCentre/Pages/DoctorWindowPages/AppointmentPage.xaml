@@ -5,22 +5,37 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MedicalCentre.Pages.DoctorWindowPages"
       mc:Ignorable="d" 
+      xmlns:materialDesign ="http://materialdesigninxaml.net/winfx/xaml/themes"
       d:DesignHeight="820" d:DesignWidth="530"
       Title="AppointmentPage">
 
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button HorizontalAlignment="Left" Content="Закончить приём" Command="{Binding AppointmentEndingCommand}"/>
-                <Button HorizontalAlignment="Right" Content="Печать" Command="{Binding NotePrintingCommand}"/>
+                
+                <Button HorizontalAlignment="Right" Width="265"  Content="Печать"  Height="40" FontSize="18" Background="#252934" Foreground="#fafafa" Command="{Binding NotePrintingCommand}"/>
+                <Button HorizontalAlignment="Left" Width="265" FontSize="18" Height="40" Background="Red" Foreground="#fafafa" Content="Закончить приём" Command="{Binding AppointmentEndingCommand}"/>
             </StackPanel>
-            <TextBox TextWrapping="Wrap" Name="AppointmentTitleBox">
-                Заголовок приёма
-            </TextBox>
-            <TextBox TextWrapping="Wrap" Name="AppointmentTextBox">
-                Содержание приёма
-            </TextBox>
-            <TextBlock Name="PatientsSNP"/>
+            
+            <TextBlock Name="PatientsSNP" Height="40" FontSize="18" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Name="AppointmentTitleBox"
+                                 Text=""
+                                 TextWrapping="Wrap"
+                                 materialDesign:HintAssist.Hint="Заголовок"
+                                 FontSize="18"
+                                 materialDesign:HintAssist.FloatingOffset="0, -20"
+                                 BorderBrush="#c5c8cc"
+                                 BorderThickness=" 0 0 0 1.5"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Name="AppointmentTextBox"
+                                 Text=""
+                                 TextWrapping="Wrap"
+                                 materialDesign:HintAssist.Hint="Текст приёма"
+                                 FontSize="18"
+                                 materialDesign:HintAssist.FloatingOffset="0, -20"
+                                 BorderBrush="#c5c8cc"
+                                 BorderThickness=" 0 0 0 1.5"/>
         </StackPanel>
     </Grid>
 </Page>
