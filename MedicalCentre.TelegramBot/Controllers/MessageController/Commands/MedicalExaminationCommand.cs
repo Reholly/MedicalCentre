@@ -62,7 +62,6 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
                 ResizeKeyboard = true,
                 OneTimeKeyboard = true
             };
-
             await client.SendTextMessageAsync(chatId, sb.ToString(), replyMarkup: selectMarkup);
         }
 

@@ -67,7 +67,7 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
             }
 
             var specializationsBtn = appointments.Select(x => dbEmployee.GetItemById(x.DoctorId).Specialization)
-                                                 .ToHashSet()
+                                                 //.Distinct()
                                                  .Select(x => new KeyboardButton(x))
                                                  .ToArray();
 

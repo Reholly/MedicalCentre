@@ -5,6 +5,7 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using User = MedicalCentre.TelegramBot.Models.User;
 
 namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
 {
@@ -121,16 +122,18 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
         {
             if (msg.Type == MessageType.Contact && msg.Contact != null)
             {
-                phone = msg.Contact.PhoneNumber;
+                phone = msg.Contact.PhoneNumber.Replace("+", "");
                 ContextRepository<Patient> db = new ContextRepository<Patient>();
                 var table = await db.GetTableAsync();
                 Patient? patient = table.Find(patient => patient.PhoneNumber == phone);
                 if (patient != null)
                 {
                     await client.SendTextMessageAsync(chatId, "Вы уже зарегестрированы!");
-                    UserManager.AutorizeUser(new Models.User(chatId, patient));
-                    ShowMenuBtn(chatId);
+                    User user = new User(chatId, patient);
+                    UserManager.AutorizeUser(user);
+                    Executor.UpdateUser(chatId);
                     Executor.StopListen();
+                    ShowMenuBtn(chatId);
                     return;
                 }
                 await client.SendTextMessageAsync(chatId, "Укажите ваши ФИО в формате \"Иванов Иван Иванович\"");
