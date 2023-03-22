@@ -44,7 +44,7 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             appointment.IsFinished = true;
             window.MainFrame.Content = new DoctorMainPage(window, account);
 
-            await new ContextRepository<Appointment>().UpdateItemAsync(appointment);
+            new ContextRepository<Appointment>().UpdateItemAsync(appointment);
             await LoggerService.CreateLog($"Приём {appointment.Id} был закончен", true);
         }
 
