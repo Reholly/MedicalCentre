@@ -5,9 +5,15 @@
 		<TargetFramework>net6.0-windows</TargetFramework>
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
+		<ApplicationIcon>Resources\reel_add_instagram_icon_250097.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Content Include="Resources\reel_add_instagram_icon_250097.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Aspose.PDF" Version="23.3.0" />
 		<PackageReference Include="DotNetProjects.WpfToolkit.DataVisualization" Version="6.1.94" />
 		<PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
 		<PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />

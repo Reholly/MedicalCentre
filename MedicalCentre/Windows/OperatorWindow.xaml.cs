@@ -11,13 +11,13 @@ namespace MedicalCentre.Windows
     {
         public OperatorWindow(Account account)
         {
+            InitializeComponent();
 
-            if (Thread.CurrentPrincipal == null || !Thread.CurrentPrincipal.IsInRole("Doctor"))
+
+            if (Thread.CurrentPrincipal == null || !Thread.CurrentPrincipal.IsInRole("Operator"))
             {
                 Close();
             }
-
-            InitializeComponent();
 
             EmployeeNameBinderService.BindName(account, RoleName, EmployeeName);
 

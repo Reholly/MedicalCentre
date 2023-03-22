@@ -2,17 +2,16 @@
 using MedicalCentre.Models;
 using System.Windows.Controls;
 
-namespace MedicalCentre.Services
-{
-    public static class EmployeeNameBinderService
-    {
-        public static void BindName(Account account, TextBlock RoleName, TextBlock EmployeeName)
-        {
-            ContextRepository<Employee> employeeDb = new ContextRepository<Employee>();
-            Employee currentEmployee = employeeDb.GetItemById(account.EmployeeAccountId);
+namespace MedicalCentre.Services;
 
-            RoleName.Text = account.Role;
-            EmployeeName.Text = $" {currentEmployee.Name} {currentEmployee.Patronymic}";
-        }
+public static class EmployeeNameBinderService
+{
+    public static void BindName(Account account, TextBlock RoleName, TextBlock EmployeeName)
+    {
+        ContextRepository<Employee> employeeDb = new ContextRepository<Employee>();
+        Employee currentEmployee = employeeDb.GetItemById(account.EmployeeAccountId);
+
+        RoleName.Text = account.Role;
+        EmployeeName.Text = $" {currentEmployee.Name} {currentEmployee.Patronymic}";
     }
 }
