@@ -3,11 +3,11 @@ using System.Windows;
 
 namespace MedicalCentre.Services;
 
-internal static class PDFFileCreatorService
+public static class PDFFileCreatorService
 {
     public static void CreatePdf(string path, string title, string text)
     {
-        Document document = new Document();
+        Document document = new();
         
         Page page = document.Pages.Add();
 

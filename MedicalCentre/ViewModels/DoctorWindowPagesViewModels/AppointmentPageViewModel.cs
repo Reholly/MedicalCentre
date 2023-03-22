@@ -60,8 +60,24 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             PrintDialog printDialog = new();
             if (printDialog.ShowDialog() == true)
             {
+                Run title = new(page.AppointmentTitleBox.Text);
+                Run text = new(page.AppointmentTextBox.Text);
 
-                printDialog.PrintVisual(text, "");
+                TextBlock textBlock = new();
+                textBlock.Inlines.Add(title);
+                textBlock.Inlines.Add("\n");
+                textBlock.Inlines.Add(text);
+
+                textBlock.TextAlignment = TextAlignment.Center;
+                textBlock.Margin = new Thickness(5);
+                textBlock.TextWrapping = TextWrapping.Wrap;
+                textBlock.LayoutTransform = new ScaleTransform(2, 2);
+
+                Size pageSize = new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight);
+                textBlock.Measure(pageSize);
+                textBlock.Arrange(new Rect(0, 0, pageSize.Width, pageSize.Height));
+
+                printDialog.PrintVisual(textBlock, "");
             }
         }
     }
