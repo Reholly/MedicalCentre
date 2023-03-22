@@ -72,7 +72,7 @@ namespace MedicalCentre.Authentification
                     juniorPersonal.Show();
                     break;
                 default:
-                    LoggerService.CreateLog("Неверно указана роль.", false);
+                    await LoggerService.CreateLog("Неверно указана роль.", false);
                     MessageBox.Show("Проблемы с получением роли. Перезайдите и выполните вход заново или свяжитесь с сис.админом");
                     break;
             }
