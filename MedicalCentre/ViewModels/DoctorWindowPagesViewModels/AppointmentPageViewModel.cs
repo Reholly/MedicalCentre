@@ -2,16 +2,15 @@
 using MedicalCentre.Models;
 using MedicalCentre.Pages.DoctorWindowPages;
 using MedicalCentre.Services;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using System;
 using MedicalCentre.Windows;
-using System.IO;
-using System.Printing;
-using System.Windows.Controls;
+using System;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {
@@ -71,9 +70,9 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
                 textBlock.TextAlignment = TextAlignment.Center;
                 textBlock.Margin = new Thickness(5);
                 textBlock.TextWrapping = TextWrapping.Wrap;
-                textBlock.LayoutTransform = new ScaleTransform(2, 2);
+                textBlock.LayoutTransform = new ScaleTransform(1.5, 1.5);
 
-                Size pageSize = new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight);
+                Size pageSize = new(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight);
                 textBlock.Measure(pageSize);
                 textBlock.Arrange(new Rect(0, 0, pageSize.Width, pageSize.Height));
 

@@ -15,7 +15,7 @@ public static class PDFFileCreatorService
        
         page.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment(text));
 
-        document.Save($"{path}" + $"{title}.pdf");
+        document.Save($"{path}\\{title}.pdf");
         MessageBox.Show("Created");
     }
 }
