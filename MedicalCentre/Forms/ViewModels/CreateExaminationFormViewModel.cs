@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Models;
+using MedicalCentre.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,11 +17,18 @@ namespace MedicalCentre.Forms.ViewModels
         public CreateExaminationFormViewModel(CreateExaminationForm form)
         {
             this.form = form;
+            ChangesSavingCommand = new RelayCommandAsync(SaveChanges);
         }
 
         private async Task SaveChanges()
         {
-
+            MedicalExamination examination = new MedicalExamination(
+                uint.Parse(form.PatientsId.Text), 
+                form.Title.Text,
+                form.Conclusion.Text,
+                null,
+                DateTime.Now);
+            await new ContextRepository<MedicalExamination>().AddItemAsync(examination);
         }
     }
 }

@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="CreateExaminationForm" Height="450" Width="800">
     <Grid>
-
+        <TextBox Name="Title"/>
+        <TextBox Name="Conclusion"/>
+        <TextBox Name="PatientsId"/>
+        <Button Command="{Binding }"/>
     </Grid>
 </Window>

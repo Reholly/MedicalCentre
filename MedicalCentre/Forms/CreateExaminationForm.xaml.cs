@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MedicalCentre.Forms.ViewModels;
 
 namespace MedicalCentre.Forms
 {
@@ -19,6 +20,7 @@ namespace MedicalCentre.Forms
         public CreateExaminationForm()
         {
             InitializeComponent();
+            DataContext = new CreateExaminationFormViewModel(this);
         }
     }
 }
