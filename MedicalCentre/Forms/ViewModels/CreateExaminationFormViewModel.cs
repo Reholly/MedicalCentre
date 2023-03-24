@@ -14,10 +14,12 @@ namespace MedicalCentre.Forms.ViewModels
     {
         private readonly CreateExaminationForm form;
         public ICommand ChangesSavingCommand { get; set; }
+        public ICommand ClosingCommand { get; set; }
         public CreateExaminationFormViewModel(CreateExaminationForm form)
         {
             this.form = form;
             ChangesSavingCommand = new RelayCommandAsync(SaveChanges);
+            ClosingCommand = new RelayCommand(Close);
         }
 
         private async Task SaveChanges()
@@ -30,5 +32,7 @@ namespace MedicalCentre.Forms.ViewModels
                 DateTime.Now);
             await new ContextRepository<MedicalExamination>().AddItemAsync(examination);
         }
+
+        private void Close() => form.Close();
     }
 }
