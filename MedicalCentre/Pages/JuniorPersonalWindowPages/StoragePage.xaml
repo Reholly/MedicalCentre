@@ -21,17 +21,68 @@
                 <RowDefinition Height="850"></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel VerticalAlignment="Top">
-                <Button Background="Red" Command="{Binding ItemAddingCommand}" Content="Добавить предмет"/>
-                <Button Background="Red" Command="{Binding SavingChangesCommand}" Content="Сохранить"/>
+                <Button Background="#252934" Foreground="#fafafa" Command="{Binding ItemAddingCommand}" Content="Добавить предмет"/>
+                <Button Background="#252934" Foreground="#fafafa" Command="{Binding SavingChangesCommand}" Content="Сохранить"/>
                 <DataGrid Grid.Column="0"  x:Name="Items"
                       ItemsSource="{Binding Items}"
-                      SelectedItem="{Binding SelectedItem}"
-                     Background="Transparent"
+                      SelectedItem="{Binding SelectedItem}"                   
+                      Background="Transparent"
                       Style="{StaticResource MaterialDesignDataGrid}"/>
             </StackPanel>
-            
-          
-           
+
+            <Border Width="370"  CornerRadius="20" HorizontalAlignment="Center" Margin="0,48,0,436" Grid.Column="2">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                        <GradientStop Color="#0c5aa6" Offset="0"/>
+                        <GradientStop Color="#679ed2" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.Clip>
+                    <RectangleGeometry RadiusX="15" RadiusY="15" Rect="0,0,370,370"/>
+                </Border.Clip>
+                <Grid>
+
+                    <materialDesign:PackIcon Kind="HospitalBuilding" Width="150" Height="150" Foreground="#fafafafa" HorizontalAlignment="Center" Opacity="0.8" Margin="0,11,0,0"/>
+
+                    <StackPanel Margin="20 20 20 20" VerticalAlignment="Top" Height="340" >
+
+                        <TextBlock Margin="0 150 0 0" Width="310" TextWrapping="Wrap" MaxWidth="300" Text="Здравствуйте! А вы знали, что в новой версии MC доступно еще больше новых функций? " Foreground="#fafafafa" FontSize="24" FontFamily="Bold" Style="{StaticResource MaterialDesignBody1TextBlock}" Height="119"/>
+
+
+                        <Button 
+                        Width="320" Height="50" Background="Transparent" FontSize="18"  Content="Удиви меня" Foreground="#fafafa" HorizontalAlignment="Left" Margin="3 5" BorderBrush="#0c5aa6" materialDesign:ButtonAssist.CornerRadius="22" BorderThickness="1"/>
+
+                    </StackPanel>
+                </Grid>
+
+            </Border>
+            <Border Width="370"  CornerRadius="20" HorizontalAlignment="Center" Margin="0,474,0,10" Grid.Column="2">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                        <GradientStop Color="#0c5aa6" Offset="0"/>
+                        <GradientStop Color="#679ed2" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.Clip>
+                    <RectangleGeometry RadiusX="15" RadiusY="15" Rect="0,0,370,370"/>
+                </Border.Clip>
+                <Grid>
+
+                    <materialDesign:PackIcon Kind="Hospital" Width="150" Height="150" Foreground="#fafafafa" HorizontalAlignment="Center" Opacity="0.8" Margin="0,11,0,0"/>
+
+                    <StackPanel Margin="20 20 20 20" VerticalAlignment="Top" Height="340" >
+
+                        <TextBlock Margin="0 150 0 0" Width="310" TextWrapping="Wrap" MaxWidth="300" Text="Проводите обследования различных видов еще быстрее с MC! Опробовать? " Foreground="#fafafafa" FontSize="24" FontFamily="Bold" Style="{StaticResource MaterialDesignBody1TextBlock}" Height="119"/>
+
+
+                        <Button 
+                        Width="320" Height="50" Background="Transparent" FontSize="18" Command="{Binding ExaminationStartingCommand}" Content="Провести обследование" Foreground="#fafafa" HorizontalAlignment="Left" Margin="3 5" BorderBrush="#0c5aa6" materialDesign:ButtonAssist.CornerRadius="22" BorderThickness="1"/>
+
+                    </StackPanel>
+                </Grid>
+
+            </Border>
+
             <Border Grid.Column="1" Background="#252934"/>
         </Grid>
     </Grid>
