@@ -21,7 +21,7 @@ namespace MedicalCentre.Pages.GeneralPages
         public StoragePage()
         {
             InitializeComponent();
-            DataContext = new JuniorPersonalMainPageViewModel(this);
+            DataContext = new JuniorPersonalMainPageViewModel();
         }
     }
 }

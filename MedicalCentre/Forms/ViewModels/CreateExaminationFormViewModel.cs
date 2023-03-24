@@ -1,4 +1,5 @@
-﻿using MedicalCentre.DatabaseLayer;
+﻿using Aspose.Pdf.Annotations;
+using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
 using MedicalCentre.ViewModels;
 using System;
@@ -30,7 +31,8 @@ namespace MedicalCentre.Forms.ViewModels
                 form.Conclusion.Text,
                 null,
                 DateTime.Now);
-            new ContextRepository<MedicalExamination>().AddItem(examination);
+            ContextRepository<MedicalExamination> repository = new(); 
+            repository.AddItem(examination);
             form.Close();
         }
 
