@@ -25,6 +25,7 @@ namespace MedicalCentre.Forms.ViewModels
 
         private void SaveChanges()
         {
+            ContextRepository<MedicalExamination> repository = new();
             MedicalExamination examination = new MedicalExamination(
                 uint.Parse(form.PatientsId.Text), 
                 form.Title.Text,
