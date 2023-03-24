@@ -8,7 +8,7 @@ namespace MedicalCentre.Models
     {
         public uint Id { get; set; } = default!;
         public DateTime ExaminationDate { get; set; } = default!;
-        public Patient Patient { get; set; }
+        public uint PatientId { get; set; }
         public string Title { get; set; } = null!;
         public string Conclusion { get; set; } = null!;
         public ImageData AttachedImage { get; set; } = null!;
@@ -16,19 +16,19 @@ namespace MedicalCentre.Models
 
         public MedicalExamination() { }
 
-        public MedicalExamination(Patient patient, string title, string conclusion, ImageData attachedImage, DateTime date)
+        public MedicalExamination(uint patient, string title, string conclusion, ImageData attachedImage, DateTime date)
         {
-            Patient = patient;
+            PatientId = patient;
             Title = title;
             Conclusion = conclusion;
             AttachedImage = attachedImage;
             ExaminationDate = date;
         }
-        public MedicalExamination(uint id, DateTime examinationDate, Patient patient, string title, string conclusion, ImageData attachedImage)
+        public MedicalExamination(uint id, DateTime examinationDate, uint patient, string title, string conclusion, ImageData attachedImage)
         {
             Id = id;
             ExaminationDate = examinationDate;
-            Patient = patient;
+            PatientId = patient;
             Title = title;
             Conclusion = conclusion;
             AttachedImage = attachedImage;
