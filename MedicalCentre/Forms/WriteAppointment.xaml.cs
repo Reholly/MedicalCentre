@@ -1,8 +1,4 @@
-﻿using MedicalCentre.DatabaseLayer;
-using MedicalCentre.Forms.ViewModels;
-using MedicalCentre.Models;
-using MedicalCentre.Services;
-using System;
+﻿using MedicalCentre.Forms.ViewModels;
 using System.Windows;
 
 namespace MedicalCentre.Forms

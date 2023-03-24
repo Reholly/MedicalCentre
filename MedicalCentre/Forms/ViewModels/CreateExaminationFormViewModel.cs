@@ -1,12 +1,7 @@
-﻿using Aspose.Pdf.Annotations;
-using MedicalCentre.DatabaseLayer;
+﻿using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
 using MedicalCentre.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MedicalCentre.Forms.ViewModels
@@ -27,10 +22,10 @@ namespace MedicalCentre.Forms.ViewModels
         {
             ContextRepository<MedicalExamination> repository = new();
             MedicalExamination examination = new MedicalExamination(
-                uint.Parse(form.PatientsId.Text), 
+                uint.Parse(form.PatientsId.Text),
                 form.Title.Text,
                 form.Conclusion.Text,
-                DateTime.Now); 
+                DateTime.Now);
             repository.AddItem(examination);
             form.Close();
         }

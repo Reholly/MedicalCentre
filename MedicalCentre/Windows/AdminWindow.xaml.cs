@@ -1,14 +1,14 @@
 ﻿using MedicalCentre.Models;
-using MedicalCentre.ViewModels;
-using System.Windows;
 using MedicalCentre.Pages.AdminWindowPages;
-using System.Threading;
 using MedicalCentre.Services;
+using MedicalCentre.ViewModels;
+using System.Threading;
+using System.Windows;
 
 namespace MedicalCentre.Windows
 {
     public partial class AdminWindow : Window
-    {     
+    {
         public AdminWindow(Account account)
         {
             InitializeComponent();
@@ -22,6 +22,6 @@ namespace MedicalCentre.Windows
 
             MainFrame.Content = new MainPage();
             DataContext = new AdminViewModel(this, account);
-        }      
+        }
     }
 }

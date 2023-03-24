@@ -21,11 +21,11 @@ namespace MedicalCentre.Forms.ViewModels
         {
             this.profile = profile;
             RegisterCommand = new RelayCommandAsync(Register);
-            CloseCommand = new RelayCommand(()=> profile.Close());
+            CloseCommand = new RelayCommand(() => profile.Close());
         }
 
         private async Task Register()
-        {         
+        {
             var accDb = new ContextRepository<Account>();
             var empDb = new ContextRepository<Employee>();
 
@@ -45,14 +45,14 @@ namespace MedicalCentre.Forms.ViewModels
                 await empDb.AddItemAsync(employee);
                 LoggerService.CreateLog($"Регистрация нового сотрудника {account.Id} - {account.Username}", true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Неизвестная ошибка в создании аккаунта, попробуйте еще раз");
                 LoggerService.CreateLog($"Ошибка в регистрации нового сотрудника {account.Id} - {account.Username}", false);
                 profile.Close();
             }
-           
-            profile.Close();           
+
+            profile.Close();
         }
     }
 }

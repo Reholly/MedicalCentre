@@ -10,7 +10,7 @@ namespace MedicalCentre.UserControls.ViewModels
         private readonly MedicalExamination examination;
         public ICommand ExaminationShowingCommand { get; set; }
 
-        public ExaminationCardViewModel(ExaminationCard card,MedicalExamination examination)
+        public ExaminationCardViewModel(ExaminationCard card, MedicalExamination examination)
         {
             this.examination = examination;
             card.Card.Text = examination.Title;

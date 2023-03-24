@@ -45,6 +45,6 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
         public void OpenHostSite()
         {
             OpenBrowserService.OpenPageInBrowser(Properties.Settings.Default.Host);
-        }      
+        }
     }
 }

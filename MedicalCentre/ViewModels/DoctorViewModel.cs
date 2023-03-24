@@ -1,9 +1,9 @@
 ﻿using MedicalCentre.Authentification;
 using MedicalCentre.Models;
+using MedicalCentre.Pages.DoctorWindowPages;
 using MedicalCentre.Windows;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using MedicalCentre.Pages.DoctorWindowPages;
 
 namespace MedicalCentre.ViewModels
 {

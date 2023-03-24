@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace MedicalCentre.Forms
 {
- public partial class EmployeeProfile : Window
+    public partial class EmployeeProfile : Window
     {
         public EmployeeProfile(Employee employee)
         {

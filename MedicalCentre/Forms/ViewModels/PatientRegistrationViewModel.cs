@@ -1,12 +1,8 @@
 ﻿using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
 using MedicalCentre.ViewModels;
-using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -32,7 +28,7 @@ namespace MedicalCentre.Forms.ViewModels
             string surname = profile.Surname.Text;
             string patronymic = profile.Patronymic.Text;
             string phoneNumber = profile.PhoneNumber.Text;
-            
+
             DateOnly birthDate = DateOnly.ParseExact(profile.BirthDate.Text, "d", CultureInfo.InvariantCulture);
 
             var patientDb = new ContextRepository<Patient>();

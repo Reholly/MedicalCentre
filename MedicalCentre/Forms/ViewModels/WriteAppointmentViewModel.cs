@@ -3,17 +3,12 @@ using MedicalCentre.Models;
 using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace MedicalCentre.Forms.ViewModels
-{ 
-  
+{
+
     internal class WriteAppointmentViewModel
     {
         public ICommand WriteCommand { get; set; }

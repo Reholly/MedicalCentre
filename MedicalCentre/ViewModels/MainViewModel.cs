@@ -1,11 +1,11 @@
-﻿using MedicalCentre.Models;
+﻿using MedicalCentre.Authentification;
+using MedicalCentre.Models;
 using MedicalCentre.Windows;
-using System.Windows.Input;
-using System.Windows;
-using System.Threading.Tasks;
 using System;
 using System.Threading;
-using MedicalCentre.Authentification;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace MedicalCentre.ViewModels
 {
@@ -43,12 +43,12 @@ namespace MedicalCentre.ViewModels
                 await authService.OpenWindowByRole(account);
                 Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }    
+            }
         }
-     
+
         private void Close() => window.Close();
     }
 }

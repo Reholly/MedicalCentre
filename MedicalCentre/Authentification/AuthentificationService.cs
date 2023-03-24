@@ -3,13 +3,12 @@ using MedicalCentre.Models;
 using MedicalCentre.Services;
 using MedicalCentre.Windows;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Collections.Generic;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace MedicalCentre.Authentification
 {
@@ -24,7 +23,7 @@ namespace MedicalCentre.Authentification
             if (account == null)
             {
                 LoggerService.CreateLog($"Доступ с адреса: {GetCurrentUserIp()} запрещен", false);
-                throw new UnauthorizedAccessException("Доступ запрещен. Пользователя не существует или введенные данные не верны.");              
+                throw new UnauthorizedAccessException("Доступ запрещен. Пользователя не существует или введенные данные не верны.");
             }
             if (account.IsOnline)
             {
@@ -44,11 +43,11 @@ namespace MedicalCentre.Authentification
 
         public async Task LogOut(Window window, Account currentAccount)
         {
-            ContextRepository<Account> accDb = new();           
+            ContextRepository<Account> accDb = new();
             currentAccount.IsOnline = false;
             accDb.UpdateItemAsync(currentAccount);
             LoggerService.CreateLog($"Пользователь {currentAccount.Username} вышел из системы.", true);
-            window.Close();          
+            window.Close();
         }
 
         public async Task OpenWindowByRole(Account currentAccount)
@@ -58,7 +57,7 @@ namespace MedicalCentre.Authentification
                 case "Doctor":
                     DoctorWindow doctor = new DoctorWindow(currentAccount);
                     doctor.Show();
-                    break;            
+                    break;
                 case "Admin":
                     AdminWindow admin = new AdminWindow(currentAccount);
                     admin.Show();
@@ -84,7 +83,7 @@ namespace MedicalCentre.Authentification
             ContextRepository<Account> accDb = new();
             List<Account> accounts = new();
 
-            if(accounts.FirstOrDefault(o => o.Username == account.Username) != null)
+            if (accounts.FirstOrDefault(o => o.Username == account.Username) != null)
             {
                 throw new Exception($"Аккаунт с именем: {account.Username} уже существует.");
             }

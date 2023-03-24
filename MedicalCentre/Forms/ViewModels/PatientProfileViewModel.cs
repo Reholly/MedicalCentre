@@ -1,7 +1,6 @@
 ﻿using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
 using MedicalCentre.ViewModels;
-using ScottPlot.Renderable;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,7 +32,7 @@ namespace MedicalCentre.Forms.ViewModels
             this.profile.Surname.Text = patient.Surname;
             this.profile.Patronymic.Text = patient.Patronymic;
             this.profile.PhoneNumber.Text = patient.PhoneNumber;
-            this.profile.BirthDate.Text = patient.BirthDate.ToString();           
+            this.profile.BirthDate.Text = patient.BirthDate.ToString();
         }
 
         private async Task Delete()
@@ -62,7 +61,7 @@ namespace MedicalCentre.Forms.ViewModels
 
                 currentPatient.BirthDate = DateOnly.ParseExact(profile.BirthDate.Text, "d");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Дата в неправильном формате!");
             }

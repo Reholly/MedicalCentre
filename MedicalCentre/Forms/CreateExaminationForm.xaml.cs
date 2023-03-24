@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using MedicalCentre.Forms.ViewModels;
+﻿using MedicalCentre.Forms.ViewModels;
+using System.Windows;
 
 namespace MedicalCentre.Forms
 {

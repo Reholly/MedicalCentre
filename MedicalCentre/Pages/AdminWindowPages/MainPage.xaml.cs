@@ -1,5 +1,5 @@
-﻿using System.Windows.Controls;
-using MedicalCentre.ViewModels.AdminWindowPagesViewModels;
+﻿using MedicalCentre.ViewModels.AdminWindowPagesViewModels;
+using System.Windows.Controls;
 
 namespace MedicalCentre.Pages.AdminWindowPages
 {
@@ -7,10 +7,10 @@ namespace MedicalCentre.Pages.AdminWindowPages
     {
         public MainPage()
         {
-            InitializeComponent();;
+            InitializeComponent(); ;
 
             DataContext = new MainPageViewModel(this);
-        }    
+        }
     }
 }
 

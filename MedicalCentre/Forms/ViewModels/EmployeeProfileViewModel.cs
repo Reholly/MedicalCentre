@@ -50,7 +50,7 @@ namespace MedicalCentre.Forms.ViewModels
             accDb.DeleteItemAsync(account);
             empDb.DeleteItemAsync(employee);
 
-            Close();            
+            Close();
         }
 
         private async Task Save()
