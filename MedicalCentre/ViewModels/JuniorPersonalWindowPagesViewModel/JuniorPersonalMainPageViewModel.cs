@@ -11,16 +11,14 @@ namespace MedicalCentre.ViewModels.JuniorPersonalWindowPagesViewModel
 {
     public class JuniorPersonalMainPageViewModel
     {
-        private readonly StoragePage page;
         private bool isSaved = true;
         public ObservableCollection<StorageItem> Items { get; set; }
         public StorageItem? SelectedItem { get; set; }
         public ICommand ItemAddingCommand { get; set; }
         public ICommand SavingChangesCommand { get; set; }
         public ICommand ExaminationStartingCommand { get; set; }
-        public JuniorPersonalMainPageViewModel(StoragePage page)
+        public JuniorPersonalMainPageViewModel()
         {
-            this.page = page;
             Items = new(new ContextRepository<StorageItem>().GetTable());
             ItemAddingCommand = new RelayCommand(AddItem);
             SavingChangesCommand = new RelayCommand(SaveChanges);
