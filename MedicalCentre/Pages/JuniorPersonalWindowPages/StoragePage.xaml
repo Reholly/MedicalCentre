@@ -20,14 +20,17 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="850"></RowDefinition>
             </Grid.RowDefinitions>
-            <DataGrid Grid.Column="0"  x:Name="Items"
-                      ItemsSource="{Binding Items}"
-                      SelectedItem="{Binding SelectedItem}"
-                      Style="{StaticResource MaterialDesignDataGrid}"/>
-            <StackPanel VerticalAlignment="Bottom">
+            <StackPanel VerticalAlignment="Top">
                 <Button Background="Red" Command="{Binding ItemAddingCommand}" Content="Добавить предмет"/>
                 <Button Background="Red" Command="{Binding SavingChangesCommand}" Content="Сохранить"/>
+                <DataGrid Grid.Column="0"  x:Name="Items"
+                      ItemsSource="{Binding Items}"
+                      SelectedItem="{Binding SelectedItem}"
+                     Background="Transparent"
+                      Style="{StaticResource MaterialDesignDataGrid}"/>
             </StackPanel>
+            
+          
            
             <Border Grid.Column="1" Background="#252934"/>
         </Grid>

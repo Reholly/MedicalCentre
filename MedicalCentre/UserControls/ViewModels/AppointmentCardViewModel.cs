@@ -64,7 +64,7 @@ namespace MedicalCentre.UserControls.ViewModels
             List<MedicalExamination> examinations = new ContextRepository<MedicalExamination>().GetTable();
             foreach (MedicalExamination examination in patient.Examinations)
             {
-                if (examination.Patient.Id == patient.Id)
+                if (examination.PatientId == patient.Id)
                 {
                     page.PatientsExaminations.Children.Insert(0, new ExaminationCard(examination));
                 }

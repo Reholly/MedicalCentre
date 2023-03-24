@@ -28,7 +28,7 @@ public class ApplicationContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        string connstr = s_config.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("WHERE CONNSTR");      
+        string connstr = s_config.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("WHERE CONNSTR");
         optionsBuilder.UseMySql(connstr, ServerVersion.AutoDetect(connstr));
     }  
 }
