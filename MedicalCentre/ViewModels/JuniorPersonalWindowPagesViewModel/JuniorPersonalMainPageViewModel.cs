@@ -24,7 +24,7 @@ namespace MedicalCentre.ViewModels.JuniorPersonalWindowPagesViewModel
             Items = new(new ContextRepository<StorageItem>().GetTable());
             ItemAddingCommand = new RelayCommand(AddItem);
             SavingChangesCommand = new RelayCommand(SaveChanges);
-            ExaminationStartingCommand = new RelayCommand();
+            ExaminationStartingCommand = new RelayCommand(StartExamination);
         }
 
         private void AddItem()
