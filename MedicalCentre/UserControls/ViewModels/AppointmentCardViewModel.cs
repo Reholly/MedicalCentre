@@ -49,6 +49,7 @@ namespace MedicalCentre.UserControls.ViewModels
 
         private void ShowNotes(Patient patient)
         {
+            page.PatientsNotes.Children.Clear();
             List<Note> notes = new ContextRepository<Note>().GetTable();
             foreach (Note note in notes)
             {
@@ -61,8 +62,9 @@ namespace MedicalCentre.UserControls.ViewModels
 
         private void ShowExaminations(Patient patient)
         {
+            page.PatientsExaminations.Children.Clear();
             List<MedicalExamination> examinations = new ContextRepository<MedicalExamination>().GetTable();
-            foreach (MedicalExamination examination in patient.Examinations)
+            foreach (MedicalExamination examination in examinations)
             {
                 if (examination.PatientId == patient.Id)
                 {
