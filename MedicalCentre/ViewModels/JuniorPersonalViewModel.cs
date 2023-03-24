@@ -1,23 +1,34 @@
 ﻿using MedicalCentre.Pages.GeneralPages;
-using MedicalCentre.Pages.JuniorPersonalWindowPages;
+using MedicalCentre.Services;
+using MedicalCentre.Models;
+using MedicalCentre.Pages;
 using MedicalCentre.Windows;
 using System.Windows.Input;
+using System.Threading.Tasks;
+using MedicalCentre.Authentification;
 
 namespace MedicalCentre.ViewModels
 {
     public class JuniorPersonalViewModel
     {
-        private JuniorPersonalWindow window;
+        private readonly JuniorPersonalWindow window;
+        private readonly Account account;
         public ICommand ShowStorageItemsCommand { get; set; }
-        public ICommand StartExaminationCommand { get; set; }
-        public JuniorPersonalViewModel(JuniorPersonalWindow window)
+        public ICommand LogoutCommand { get; set; }
+        public JuniorPersonalViewModel(JuniorPersonalWindow window, Account account)
         {
             this.window = window;
+            this.account = account;
             ShowStorageItemsCommand = new RelayCommand(ShowStorageItems);
-            StartExaminationCommand = new RelayCommand(StartExamination);
+            LogoutCommand = new RelayCommandAsync(Close);
         }
 
         private void ShowStorageItems() => window.frame.Content = new StoragePage();
-        private void StartExamination() => window.frame.Content = new ExaminationPage();
+
+        private async Task Close()
+        {
+            AuthentificationService authentification = new();
+            await authentification.LogOut(window, account);
+        }
     }
 }

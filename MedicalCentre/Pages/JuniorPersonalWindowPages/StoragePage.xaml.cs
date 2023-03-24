@@ -12,16 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MedicalCentre.ViewModels.JuniorPersonalWindowPagesViewModels;
+using MedicalCentre.ViewModels.JuniorPersonalWindowPagesViewModel;
 
-namespace MedicalCentre.Pages.JuniorPersonalWindowPages
+namespace MedicalCentre.Pages.GeneralPages
 {
-    public partial class ExaminationPage : Page
+    public partial class StoragePage : Page
     {
-        public ExaminationPage()
+        public StoragePage()
         {
             InitializeComponent();
-            DataContext = new ExaminationPageViewModel(this);
+            DataContext = new JuniorPersonalMainPageViewModel(this);
         }
     }
 }
