@@ -32,10 +32,6 @@ namespace MedicalCentre.Forms.ViewModels
             Random random = new Random();
             uint empId = uint.Parse(random.Next(1, int.MaxValue).ToString());
             uint accId = uint.Parse(random.Next(1, int.MaxValue).ToString());
-            if(accDb.GetItemByIdAsync != null || empDb.GetItemByIdAsync != null)
-            {
-                Register();
-            }
 
             Employee employee = new Employee(empId, profile.Name.Text, accId, profile.Surname.Text,
                                             profile.Patronymic.Text, profile.Specialization.Text,
@@ -45,8 +41,8 @@ namespace MedicalCentre.Forms.ViewModels
             try
             {
                 AuthentificationService authentificationService = new();
-                authentificationService.RegisterUser(account);
-                empDb.AddItemAsync(employee);
+                await authentificationService.RegisterUser(account);
+                await empDb.AddItemAsync(employee);
                 LoggerService.CreateLog($"Регистрация нового сотрудника {account.Id} - {account.Username}", true);
             }
             catch(Exception ex)
