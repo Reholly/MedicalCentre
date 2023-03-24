@@ -11,5 +11,7 @@ namespace MedicalCentre.Forms
             Title.Text = examination.Title;
             Text.Text = examination.Conclusion;
         }
+
+        private void Close_Click(object sender, RoutedEventArgs e) => Close();
     }
 }
