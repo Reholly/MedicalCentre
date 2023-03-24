@@ -53,7 +53,7 @@
                                  BorderThickness=" 0 0 0 1.5"/>
             </StackPanel>
             <DockPanel  VerticalAlignment="Bottom">
-                <Button Width="310" HorizontalAlignment="Left" Height="50" materialDesign:ButtonAssist.CornerRadius="0 0 20 20" FontSize="18" Background="#252934" Foreground="#fafafafa" Command="{Binding CreateCommand}">
+                <Button Width="310" HorizontalAlignment="Left" Height="50" materialDesign:ButtonAssist.CornerRadius="0 0 20 20" FontSize="18" Background="#252934" Foreground="#fafafafa" Command="{Binding ChangesSavingCommand}">
                     Создать
                 </Button>
             </DockPanel>
