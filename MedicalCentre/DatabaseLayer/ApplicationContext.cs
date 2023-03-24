@@ -19,7 +19,6 @@ public class ApplicationContext : DbContext
     public DbSet<Transaction> Transactions { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Log> Logs { get; set; }
-    public DbSet<ImageData> Images { get; set; }
     public DbSet<MedicalExamination> MedicalExaminations { get; set; }
     public DbSet<Note> Notes { get; set; }
     public DbSet<Patient> Patients { get; set; }
@@ -29,7 +28,7 @@ public class ApplicationContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         string connstr = s_config.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("WHERE CONNSTR");
-       
-        optionsBuilder.UseMySql(connstr, ServerVersion.AutoDetect(connstr));
+        var hui = "server=koquuguda.beget.app;user=MedicalCentre;password=Admin@_1234;database=MedicalCentre;AllowZeroDateTime=True;";
+        optionsBuilder.UseMySql(hui, ServerVersion.AutoDetect(hui));
     }  
 }

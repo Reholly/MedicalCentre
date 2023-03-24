@@ -29,7 +29,6 @@ namespace MedicalCentre.Forms.ViewModels
                 uint.Parse(form.PatientsId.Text), 
                 form.Title.Text,
                 form.Conclusion.Text,
-                null,
                 DateTime.Now);
             ContextRepository<MedicalExamination> repository = new(); 
             repository.AddItem(examination);
