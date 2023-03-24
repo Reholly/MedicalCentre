@@ -30,7 +30,6 @@ namespace MedicalCentre.Forms.ViewModels
                 form.Conclusion.Text,
                 null,
                 DateTime.Now);
-            form.Close();
             await new ContextRepository<MedicalExamination>().AddItemAsync(examination);
             form.Close();
         }
