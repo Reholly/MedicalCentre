@@ -22,7 +22,7 @@ namespace MedicalCentre.Windows
         {
             InitializeComponent();
             DataContext = new JuniorPersonalViewModel(this, account);
-            frame.Content = new JuniorPersonalWindow(account);
+            //frame.Content = new JuniorPersonalWindow(account);
         }
     }
 }
