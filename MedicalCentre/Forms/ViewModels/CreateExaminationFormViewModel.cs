@@ -18,11 +18,11 @@ namespace MedicalCentre.Forms.ViewModels
         public CreateExaminationFormViewModel(CreateExaminationForm form)
         {
             this.form = form;
-            ChangesSavingCommand = new RelayCommandAsync(SaveChanges);
+            ChangesSavingCommand = new RelayCommand(SaveChanges);
             ClosingCommand = new RelayCommand(Close);
         }
 
-        private async Task SaveChanges()
+        private void SaveChanges()
         {
             MedicalExamination examination = new MedicalExamination(
                 uint.Parse(form.PatientsId.Text), 
@@ -30,7 +30,7 @@ namespace MedicalCentre.Forms.ViewModels
                 form.Conclusion.Text,
                 null,
                 DateTime.Now);
-            await new ContextRepository<MedicalExamination>().AddItemAsync(examination);
+            new ContextRepository<MedicalExamination>().AddItem(examination);
             form.Close();
         }
 
