@@ -68,7 +68,7 @@ namespace MedicalCentre.Authentification
                     operatorWindow.Show();
                     break;
                 case "JuniorPersonal":
-                    JuniorPersonalWindow juniorPersonal = new JuniorPersonalWindow();
+                    JuniorPersonalWindow juniorPersonal = new JuniorPersonalWindow(currentAccount);
                     juniorPersonal.Show();
                     break;
                 default:

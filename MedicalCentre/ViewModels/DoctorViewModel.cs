@@ -25,7 +25,7 @@ namespace MedicalCentre.ViewModels
         private async Task Close() //метод для LogOut кнопки
         {
             AuthentificationService authentification = new();
-            authentification.LogOut(window, account);
+            await authentification.LogOut(window, account);
         }
 
         private void OpenMainPage() => window.MainFrame.Content = new DoctorMainPage(window, account);

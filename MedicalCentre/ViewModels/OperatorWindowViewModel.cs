@@ -30,8 +30,7 @@ namespace MedicalCentre.ViewModels
         private async Task Close()
         {
             var auth = new AuthentificationService();
-            auth.LogOut(window, currentAccount);
-            window.Close();
+            await auth.LogOut(window, currentAccount);
         }
     }
 }

@@ -11,16 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MedicalCentre.Models;
 using MedicalCentre.ViewModels;
 
 namespace MedicalCentre.Windows
 {
     public partial class JuniorPersonalWindow : Window
     {
-        public JuniorPersonalWindow()
+        public JuniorPersonalWindow(Account account)
         {
             InitializeComponent();
-            DataContext = new JuniorPersonalViewModel(this);
+            DataContext = new JuniorPersonalViewModel(this, account);
         }
     }
 }

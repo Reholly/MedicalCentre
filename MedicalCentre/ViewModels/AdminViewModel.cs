@@ -31,8 +31,7 @@ namespace MedicalCentre.ViewModels
         private async Task Close()
         {
             var auth = new AuthentificationService();
-            auth.LogOut(adminWindow, currentAccount);
-            adminWindow.Close();
+            await auth.LogOut(adminWindow, currentAccount);
         }
 
         private void OpenEmployeesPage()
