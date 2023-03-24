@@ -44,7 +44,7 @@ namespace MedicalCentre.ViewModels.JuniorPersonalWindowPagesViewModel
             {
                 StorageItem item = Items[^1];
                 isSaved = true;
-                await new ContextRepository<StorageItem>().AddItemAsync(item);
+                new ContextRepository<StorageItem>().AddItem(item);
             }
             else
             {
