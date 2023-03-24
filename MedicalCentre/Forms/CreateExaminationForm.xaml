@@ -3,13 +3,60 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MedicalCentre.Forms"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+         AllowsTransparency="True"
+        Background="Transparent"
         mc:Ignorable="d"
-        Title="CreateExaminationForm" Height="450" Width="800">
-    <Grid>
-        <TextBox Name="Title"/>
-        <TextBox Name="Conclusion"/>
-        <TextBox Name="PatientsId"/>
-        <Button Command="{Binding }"/>
-    </Grid>
+        Title="CreateAppointment" Height="180" Width="310">
+    <Border Background="#c9d0d8" BorderBrush="#252934" CornerRadius="20 20 20 20" BorderThickness="1">
+        <Grid>
+            <materialDesign:PackIcon Kind="Close"
+                                         VerticalAlignment="Top"
+                                         Width="20"
+                                         Height="20"
+                                         HorizontalAlignment="Right"
+                                         Opacity="0.3"
+                                         Margin="0 13 14 0"/>
+            <Button VerticalAlignment="Top"
+                        Width="20"
+                        Height="20"
+                        HorizontalAlignment="Right"
+                        Opacity="0.3"
+                        Margin="0 13 14 0"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding ClosingCommand}"/>
+            <StackPanel VerticalAlignment="Top" Margin="20 0" Width="250" HorizontalAlignment="Left" >
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Name="PatientsId"
+                                 Text=""
+                                 materialDesign:HintAssist.Hint="Пациент(Id)"
+                                 materialDesign:HintAssist.FloatingOffset="0, -20"
+                                 BorderBrush="#c5c8cc"
+                                 BorderThickness=" 0 0 0 1.5"/>
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Name="Title"
+                                 Text=""
+                                 materialDesign:HintAssist.Hint="Заголовок"
+                                 materialDesign:HintAssist.FloatingOffset="0, -20"
+                                 BorderBrush="#c5c8cc"
+                                 BorderThickness=" 0 0 0 1.5"/>
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Name="Conclusion"
+                                 Text=""
+                                 materialDesign:HintAssist.Hint="Заключение"
+                                 materialDesign:HintAssist.FloatingOffset="0, -20"
+                                 BorderBrush="#c5c8cc"
+                                 BorderThickness=" 0 0 0 1.5"/>
+            </StackPanel>
+            <DockPanel  VerticalAlignment="Bottom">
+                <Button Width="310" HorizontalAlignment="Left" Height="50" materialDesign:ButtonAssist.CornerRadius="0 0 20 20" FontSize="18" Background="#252934" Foreground="#fafafafa" Command="{Binding CreateCommand}">
+                    Создать
+                </Button>
+            </DockPanel>
+        </Grid>
+    </Border>
 </Window>
