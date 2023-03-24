@@ -4,15 +4,9 @@ using LiveCharts.Wpf;
 using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
 using MedicalCentre.Pages.AdminWindowPages;
-using MedicalCentre.Properties;
 using MedicalCentre.Services;
-using SciChart.Charting.Visuals;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
@@ -102,7 +96,7 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
             double salaryTrans = 0;
             double addItemTrans = 0;
 
-            foreach(Transaction item in transactions)
+            foreach (Transaction item in transactions)
             {
                 if (item.Type == TransactionType.SalaryTransaction) salaryTrans += item.Price;
                 if (item.Type == TransactionType.AppointmentTransaction) appontmentsTrans += item.Price;
@@ -127,7 +121,7 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
                 new PieSeries
                 {
                     Title = "Услуги",
-                    
+
                     Values =  new ChartValues<ObservableValue> { new ObservableValue(examsTrans) },
                     DataLabels = true
                 },

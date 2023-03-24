@@ -1,10 +1,8 @@
 ﻿using MedicalCentre.Authentification;
 using MedicalCentre.Models;
 using MedicalCentre.Pages.AdminWindowPages;
-using MedicalCentre.Pages.OperatorPages;
 using MedicalCentre.Windows;
 using System.Threading.Tasks;
-using System.Windows.Automation.Peers;
 using System.Windows.Input;
 
 namespace MedicalCentre.ViewModels

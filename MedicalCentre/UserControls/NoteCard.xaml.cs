@@ -1,6 +1,6 @@
-﻿using MedicalCentre.UserControls.ViewModels;
+﻿using MedicalCentre.Models;
+using MedicalCentre.UserControls.ViewModels;
 using System.Windows.Controls;
-using MedicalCentre.Models;
 
 namespace MedicalCentre.UserControls
 {

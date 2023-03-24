@@ -1,11 +1,9 @@
-﻿using MedicalCentre.Pages.GeneralPages;
-using MedicalCentre.Services;
+﻿using MedicalCentre.Authentification;
 using MedicalCentre.Models;
-using MedicalCentre.Pages;
+using MedicalCentre.Pages.GeneralPages;
 using MedicalCentre.Windows;
-using System.Windows.Input;
 using System.Threading.Tasks;
-using MedicalCentre.Authentification;
+using System.Windows.Input;
 
 namespace MedicalCentre.ViewModels
 {

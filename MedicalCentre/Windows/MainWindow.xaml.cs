@@ -1,6 +1,4 @@
-﻿using MedicalCentre.DatabaseLayer;
-using MedicalCentre.Models;
-using MedicalCentre.ViewModels;
+﻿using MedicalCentre.ViewModels;
 using System.Windows;
 
 namespace MedicalCentre.Windows
@@ -13,4 +11,4 @@ namespace MedicalCentre.Windows
             DataContext = new MainViewModel(this);
         }
     }
-}   
+}

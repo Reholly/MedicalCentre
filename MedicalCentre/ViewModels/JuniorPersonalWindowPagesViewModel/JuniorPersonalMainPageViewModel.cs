@@ -1,9 +1,7 @@
 ﻿using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Forms;
 using MedicalCentre.Models;
-using MedicalCentre.Pages.GeneralPages;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 

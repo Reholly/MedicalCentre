@@ -1,7 +1,6 @@
 ﻿using MedicalCentre.Authentification;
 using MedicalCentre.Models;
 using MedicalCentre.Pages.AdminWindowPages;
-using MedicalCentre.Pages.GeneralPages;
 using MedicalCentre.Windows;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -26,7 +25,7 @@ namespace MedicalCentre.ViewModels
             OpenPatientsCommand = new RelayCommand(OpenPatientsPage);
             OpenMainCommand = new RelayCommand(OpenMainPage);
             OpenCentreSettings = new RelayCommand(OpentSettingsPage);
-        }   
+        }
 
         private async Task Close()
         {

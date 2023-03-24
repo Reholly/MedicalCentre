@@ -7,7 +7,6 @@ using MedicalCentre.UserControls;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -26,11 +25,11 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
             this.page = page;
 
             SearchCommand = new RelayCommandAsync(SearchItems);
-            OpenRegistrationCommand = new RelayCommand(OpenRegistration);        
+            OpenRegistrationCommand = new RelayCommand(OpenRegistration);
             OpenNewsCommand = new RelayCommand(OpenNews);
 
             page.Search.TextChanged += OnTextChanged;
-            
+
             SearchItems();
         }
 
@@ -54,15 +53,15 @@ namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels
 
             page.EmployeesCards.Children.Clear();
 
-            foreach(var employee in Employees)
+            foreach (var employee in Employees)
             {
                 page.EmployeesCards.Children.Insert(0, new EmployeeCard(employee));
-            }     
+            }
         }
 
         private void OnTextChanged(object sender, TextChangedEventArgs args)
         {
-            SearchItems();      
+            SearchItems();
         }
     }
 }

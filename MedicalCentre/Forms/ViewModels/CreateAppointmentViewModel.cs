@@ -5,7 +5,6 @@ using MedicalCentre.ViewModels;
 using System;
 using System.Globalization;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace MedicalCentre.Forms.ViewModels

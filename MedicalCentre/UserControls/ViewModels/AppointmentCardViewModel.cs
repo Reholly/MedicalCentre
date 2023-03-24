@@ -1,14 +1,13 @@
-﻿using MedicalCentre.Models;
+﻿using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Models;
 using MedicalCentre.Pages.DoctorWindowPages;
+using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
+using MedicalCentre.Windows;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using MedicalCentre.DatabaseLayer;
-using MedicalCentre.Windows;
-using System.Windows.Documents;
-using System.Collections.Generic;
-using MedicalCentre.Services;
-using System.Threading.Tasks;
 
 namespace MedicalCentre.UserControls.ViewModels
 {
