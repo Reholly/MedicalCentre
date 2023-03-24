@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:MedicalCentre.Pages.GeneralPages"
      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:Height="1080" d:Width="1340"
+      d:Height="850" d:Width="1340"
       Title="Аналитика"
       ShowsNavigationUI="False">
 
@@ -18,14 +18,17 @@
                 <ColumnDefinition Width="500"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1080"></RowDefinition>
+                <RowDefinition Height="850"></RowDefinition>
             </Grid.RowDefinitions>
-            <DataGrid Grid.Column="0" Visibility="Collapsed" x:Name="Items"
+            <DataGrid Grid.Column="0"  x:Name="Items"
                       ItemsSource="{Binding Items}"
                       SelectedItem="{Binding SelectedItem}"
                       Style="{StaticResource MaterialDesignDataGrid}"/>
-
-
+            <StackPanel VerticalAlignment="Bottom">
+                <Button Background="Red" Command="{Binding ItemAddingCommand}" Content="Добавить предмет"/>
+                <Button Background="Red" Command="{Binding SavingChangesCommand}" Content="Сохранить"/>
+            </StackPanel>
+           
             <Border Grid.Column="1" Background="#252934"/>
         </Grid>
     </Grid>

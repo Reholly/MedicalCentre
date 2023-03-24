@@ -11,6 +11,15 @@ namespace MedicalCentre.Models
         public decimal Cost { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
+        public StorageItem() { }
+        public StorageItem(uint id, string name, uint amount, decimal cost)
+        {
+            Id = id;
+            Name = name;
+            Amount = amount;
+            Cost = cost;
+        }
+
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
