@@ -30,8 +30,7 @@ namespace MedicalCentre.Forms.ViewModels
                 uint.Parse(form.PatientsId.Text), 
                 form.Title.Text,
                 form.Conclusion.Text,
-                DateTime.Now);
-            ContextRepository<MedicalExamination> repository = new(); 
+                DateTime.Now); 
             repository.AddItem(examination);
             form.Close();
         }
