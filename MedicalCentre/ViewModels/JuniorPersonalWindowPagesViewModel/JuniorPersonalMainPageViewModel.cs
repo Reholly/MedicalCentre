@@ -21,7 +21,7 @@ namespace MedicalCentre.ViewModels.JuniorPersonalWindowPagesViewModel
             this.page = page;
             Items = new(new ContextRepository<StorageItem>().GetTable());
             ItemAddingCommand = new RelayCommand(AddItem);
-            SavingChangesCommand = new RelayCommandAsync(SaveChanges);
+            SavingChangesCommand = new RelayCommand(SaveChanges);
         }
 
         private void AddItem()
@@ -38,7 +38,7 @@ namespace MedicalCentre.ViewModels.JuniorPersonalWindowPagesViewModel
             }
         }
 
-        private async Task SaveChanges()
+        private void SaveChanges()
         {
             if (!isSaved)
             {
