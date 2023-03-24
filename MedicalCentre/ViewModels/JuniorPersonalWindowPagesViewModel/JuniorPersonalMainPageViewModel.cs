@@ -1,4 +1,5 @@
 ﻿using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Forms;
 using MedicalCentre.Models;
 using MedicalCentre.Pages.GeneralPages;
 using System.Collections.ObjectModel;
@@ -16,12 +17,14 @@ namespace MedicalCentre.ViewModels.JuniorPersonalWindowPagesViewModel
         public StorageItem? SelectedItem { get; set; }
         public ICommand ItemAddingCommand { get; set; }
         public ICommand SavingChangesCommand { get; set; }
+        public ICommand ExaminationStartingCommand { get; set; }
         public JuniorPersonalMainPageViewModel(StoragePage page)
         {
             this.page = page;
             Items = new(new ContextRepository<StorageItem>().GetTable());
             ItemAddingCommand = new RelayCommand(AddItem);
             SavingChangesCommand = new RelayCommand(SaveChanges);
+            ExaminationStartingCommand = new RelayCommand();
         }
 
         private void AddItem()
@@ -51,5 +54,7 @@ namespace MedicalCentre.ViewModels.JuniorPersonalWindowPagesViewModel
                 MessageBox.Show("Мужик, тебе сохранять нечего");
             }
         }
+
+        private void StartExamination() => new CreateExaminationForm().Show();
     }
 }
