@@ -15,41 +15,46 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {
     public class AppointmentPageViewModel
     {
-        private readonly Appointment appointment;
-        private readonly AppointmentPage page;
-        private readonly DoctorWindow window;
-        private readonly Account account;
+        private readonly Appointment _appointment;
+        private readonly AppointmentPage _page;
+        private readonly DoctorWindow _window;
+        private readonly Account _account;
+        private readonly ContextRepository<Patient> _repositoryPatients;
+        private readonly ContextRepository<Appointment> _repositoryAppointments;
         public ICommand NotePrintingCommand { get; set; }
         public ICommand AppointmentEndingCommand { get; set; }
         public AppointmentPageViewModel(Appointment appointment, AppointmentPage page, DoctorWindow window, Account account)
         {
-            this.appointment = appointment;
-            this.page = page;
-            this.window = window;
+            this._appointment = appointment;
+            this._page = page;
+            this._window = window;
             NotePrintingCommand = new RelayCommand(PrintNote);
             AppointmentEndingCommand = new RelayCommandAsync(EndAppointment);
             Initialize();
-            this.account = account;
+            this._account = account;
+            _repositoryPatients = new ContextRepository<Patient>();
+            _repositoryAppointments = new ContextRepository<Appointment>();
         }
 
-        private void Initialize()
+        private async Task Initialize()
         {
-            string patient = new ContextRepository<Patient>().GetItemById((uint)appointment.PatientId).ToStringForAppointment();
-            page.PatientsSNP.Text = patient;
+            Patient patient = await _repositoryPatients.GetItemByIdAsync((uint)_appointment.PatientId);
+            var patientString = patient.ToStringForAppointment();
+            _page.PatientsSNP.Text = patientString;
         }
 
         private async Task EndAppointment()
         {
-            Note note = new((uint)appointment.PatientId, page.AppointmentTitleBox.Text, page.AppointmentTextBox.Text, DateTime.Now);
-            Patient patient = await new ContextRepository<Patient>().GetItemByIdAsync((uint)appointment.PatientId);
+            Note note = new((uint)_appointment.PatientId, _page.AppointmentTitleBox.Text, _page.AppointmentTextBox.Text, DateTime.Now);
+            Patient patient = await _repositoryPatients.GetItemByIdAsync((uint)_appointment.PatientId);
             patient.Notes.Add(note);
-            await new ContextRepository<Patient>().UpdateItemAsync(patient);
+            await _repositoryPatients.UpdateItemAsync(patient);
 
-            appointment.IsFinished = true;
-            window.MainFrame.Content = new DoctorMainPage(window, account);
+            _appointment.IsFinished = true;
+            _window.MainFrame.Content = new DoctorMainPage(_window, _account);
 
-            new ContextRepository<Appointment>().UpdateItemAsync(appointment);
-            await LoggerService.CreateLog($"Приём {appointment.Id} был закончен", true);
+            await _repositoryAppointments.UpdateItemAsync(_appointment);
+            await LoggerService.CreateLog($"Приём {_appointment.Id} был закончен", true);
         }
 
         private void PrintNote()
@@ -58,8 +63,8 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
             PrintDialog printDialog = new();
             if (printDialog.ShowDialog() == true)
             {
-                Run title = new(page.AppointmentTitleBox.Text);
-                Run text = new(page.AppointmentTextBox.Text);
+                Run title = new(_page.AppointmentTitleBox.Text);
+                Run text = new(_page.AppointmentTextBox.Text);
 
                 TextBlock textBlock = new();
                 textBlock.Inlines.Add(title);

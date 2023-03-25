@@ -9,25 +9,25 @@ namespace MedicalCentre.ViewModels
 {
     public class DoctorViewModel
     {
-        private readonly DoctorWindow window;
-        private readonly Account account;
+        private readonly DoctorWindow _window;
+        private readonly Account _account;
         public ICommand WindowClosingCommand { get; set; }
         public ICommand OpeningMainPageCommand { get; set; }
 
         public DoctorViewModel(DoctorWindow window, Account account)
         {
-            this.window = window;
-            this.account = account;
+            this._window = window;
+            this._account = account;
             WindowClosingCommand = new RelayCommandAsync(Close);
             OpeningMainPageCommand = new RelayCommand(OpenMainPage);
         }
 
-        private async Task Close() //метод для LogOut кнопки
+        private async Task Close()
         {
-            AuthentificationService authentification = new();
-            await authentification.LogOut(window, account);
+            AuthentificationService auth = new();
+            await auth.LogOut(_window, _account);
         }
 
-        private void OpenMainPage() => window.MainFrame.Content = new DoctorMainPage(window, account);
+        private void OpenMainPage() => _window.MainFrame.Content = new DoctorMainPage(_window, _account);
     }
 }

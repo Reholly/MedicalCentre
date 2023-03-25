@@ -11,21 +11,27 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 {
     public class DoctorMainPageViewModel
     {
-        private readonly DoctorMainPage page;
-        private readonly DoctorWindow window;
-        private readonly Account account;
+        private readonly DoctorMainPage _page;
+        private readonly DoctorWindow _window;
+        private readonly Account _account;
+        private readonly ContextRepository<Patient> _repositoryPatients;
+        private readonly ContextRepository<Employee> _repositoryEmployees;
+        private readonly ContextRepository<Appointment> _repositoryAppointments;
 
         public DoctorMainPageViewModel(DoctorMainPage page, DoctorWindow window, Account account)
         {
-            this.page = page;
-            this.window = window;
-            this.account = account;
+            this._page = page;
+            this._window = window;
+            this._account = account;
+            _repositoryPatients = new ContextRepository<Patient>();
+            _repositoryEmployees = new ContextRepository<Employee>();
+            _repositoryAppointments = new ContextRepository<Appointment>();
             ShowCards();
         }
 
         private async Task ShowCards()
         {
-            List<Appointment> appointments = await new ContextRepository<Appointment>().GetTableAsync();
+            List<Appointment> appointments = await _repositoryAppointments.GetTableAsync();
             foreach (Appointment appointment in appointments)
             {
                 if (appointment.IsFinished == false && appointment.AppointmentTime.Date == DateTime.Today.Date)
@@ -35,7 +41,7 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
 
                     if (appointment.PatientId != null)
                     {
-                        patient = new ContextRepository<Patient>().GetItemById((uint)appointment.PatientId);
+                        patient = await _repositoryPatients.GetItemByIdAsync((uint)appointment.PatientId);
                         patientString = patient.ToStringForAppointment();
                     }
                     else
@@ -43,12 +49,12 @@ namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels
                         patientString = "Тут_должен_быть_пациент";
                     }
 
-                    Employee doctor = new ContextRepository<Employee>().GetItemById(appointment.DoctorId);
+                    Employee doctor = await _repositoryEmployees.GetItemByIdAsync(appointment.DoctorId);
                     string doctorString = doctor.ToString();
 
-                    if (account.EmployeeAccountId == appointment.DoctorId)
+                    if (_account.EmployeeAccountId == appointment.DoctorId)
                     {
-                        page.AppointmentCards.Children.Insert(0, new AppointmentCard(appointment, page, patientString, doctorString, window, account));
+                        _page.AppointmentCards.Children.Insert(0, new AppointmentCard(appointment, _page, patientString, doctorString, _window, _account));
                     }
                 }
             }
