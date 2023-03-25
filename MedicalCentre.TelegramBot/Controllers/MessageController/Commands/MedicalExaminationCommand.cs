@@ -84,8 +84,8 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
                 if(select == i)
                 {
                     await client.SendTextMessageAsync(chatId, $"{medicalExaminations[i].Title} - {medicalExaminations[i].Conclusion}");
-                    var photo = new InputMedia(new MemoryStream(medicalExaminations[i].AttachedImage.ImageBytes), "photo.jpg");
-                    await client.SendPhotoAsync(chatId, photo);
+                    //var photo = new InputMedia(new MemoryStream(medicalExaminations[i].AttachedImage.ImageBytes), "photo.jpg");
+                   // await client.SendPhotoAsync(chatId, photo);
 
                     KeyboardButton backBtn = new KeyboardButton("Меню");
                     var backMarkup = new ReplyKeyboardMarkup(backBtn)

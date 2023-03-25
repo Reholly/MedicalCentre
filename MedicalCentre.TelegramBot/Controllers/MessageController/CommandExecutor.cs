@@ -56,6 +56,9 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController
             if (msg == null)
                 return;
 
+            if (msg.Text == "Меню")
+                new MenuCommand().Execute(update);
+
             long chatId = msg.Chat.Id;
             Logger.Log($"Received a '{msg.Text}' message in chat {chatId}.");
 
