@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MedicalCentre.Migrations;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
