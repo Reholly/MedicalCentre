@@ -18,6 +18,9 @@ namespace MedicalCentre.UserControls.ViewModels
         private readonly DoctorWindow window;
         private readonly Account account;
         private readonly string patient;
+        private readonly ContextRepository<Patient> _repositoryPatients;
+        private readonly ContextRepository<Note> _repositoyrNotes;
+        private readonly ContextRepository<MedicalExamination> _repositoryExaminations;
         public ICommand AppointmentStartingCommand { get; set; }
         public AppointmentCardViewModel(AppointmentCard card, Appointment appointment, DoctorMainPage page, string patient, string doctor, DoctorWindow window, Account account)
         {
@@ -28,13 +31,16 @@ namespace MedicalCentre.UserControls.ViewModels
             card.Card.Text = doctor + ": " + patient;
             AppointmentStartingCommand = new RelayCommandAsync(StartAppointment);
             this.account = account;
+            _repositoryPatients= new ContextRepository<Patient>();
+            _repositoyrNotes = new ContextRepository<Note>();
+            _repositoryExaminations = new ContextRepository<MedicalExamination>();
         }
 
         private async Task StartAppointment()
         {
             if (patient != "Тут_должен_быть_пациент")
             {
-                Patient patient = new ContextRepository<Patient>().GetItemById((uint)appointment.PatientId);
+                Patient patient = await _repositoryPatients.GetItemByIdAsync((uint)appointment.PatientId);
                 page.WorkspaceFrame.Content = new AppointmentPage(appointment, window, account);
                 ShowNotes(patient);
                 ShowExaminations(patient);
@@ -46,10 +52,10 @@ namespace MedicalCentre.UserControls.ViewModels
             }
         }
 
-        private void ShowNotes(Patient patient)
+        private async Task ShowNotes(Patient patient)
         {
             page.PatientsNotes.Children.Clear();
-            List<Note> notes = new ContextRepository<Note>().GetTable();
+            List<Note> notes = await _repositoyrNotes.GetTableAsync();
             foreach (Note note in notes)
             {
                 if (note.PatientId == patient.Id)
@@ -59,10 +65,10 @@ namespace MedicalCentre.UserControls.ViewModels
             }
         }
 
-        private void ShowExaminations(Patient patient)
+        private async Task ShowExaminations(Patient patient)
         {
             page.PatientsExaminations.Children.Clear();
-            List<MedicalExamination> examinations = new ContextRepository<MedicalExamination>().GetTable();
+            List<MedicalExamination> examinations = await _repositoryExaminations.GetTableAsync();
             foreach (MedicalExamination examination in examinations)
             {
                 if (examination.PatientId == patient.Id)

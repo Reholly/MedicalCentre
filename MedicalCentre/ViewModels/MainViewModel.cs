@@ -14,19 +14,19 @@ namespace MedicalCentre.ViewModels
         public ICommand LoginCommand { get; set; }
         public ICommand CloseCommand { get; set; }
 
-        private MainWindow window;
+        private readonly MainWindow _window;
 
         public MainViewModel(MainWindow window)
         {
-            this.window = window;
+            this._window = window;
             LoginCommand = new RelayCommandAsync(Authentificate);
             CloseCommand = new RelayCommand(Close);
         }
 
         private async Task Authentificate()
         {
-            string login = window.Login.Text;
-            string password = window.Password.Password;
+            string login = _window.Login.Text;
+            string password = _window.Password.Password;
             AuthentificationService authService = new AuthentificationService();
 
             try
@@ -49,6 +49,6 @@ namespace MedicalCentre.ViewModels
             }
         }
 
-        private void Close() => window.Close();
+        private void Close() => _window.Close();
     }
 }
