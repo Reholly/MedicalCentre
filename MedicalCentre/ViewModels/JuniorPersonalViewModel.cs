@@ -9,24 +9,24 @@ namespace MedicalCentre.ViewModels
 {
     public class JuniorPersonalViewModel
     {
-        private readonly JuniorPersonalWindow window;
-        private readonly Account account;
+        private readonly JuniorPersonalWindow _window;
+        private readonly Account _account;
         public ICommand ShowStorageItemsCommand { get; set; }
         public ICommand LogoutCommand { get; set; }
         public JuniorPersonalViewModel(JuniorPersonalWindow window, Account account)
         {
-            this.window = window;
-            this.account = account;
+            this._window = window;
+            this._account = account;
             ShowStorageItemsCommand = new RelayCommand(ShowStorageItems);
             LogoutCommand = new RelayCommandAsync(Close);
         }
 
-        private void ShowStorageItems() => window.frame.Content = new StoragePage();
+        private void ShowStorageItems() => _window.frame.Content = new StoragePage();
 
         private async Task Close()
         {
             AuthentificationService authentification = new();
-            await authentification.LogOut(window, account);
+            await authentification.LogOut(_window, _account);
         }
     }
 }

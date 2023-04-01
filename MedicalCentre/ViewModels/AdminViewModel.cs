@@ -9,8 +9,8 @@ namespace MedicalCentre.ViewModels
 {
     public class AdminViewModel
     {
-        private AdminWindow adminWindow;
-        private Account currentAccount;
+        private readonly AdminWindow _adminWindow;
+        private readonly Account _currentAccount;
         public ICommand? CloseCommand { get; set; }
         public ICommand? OpenEmployeesCommand { get; set; }
         public ICommand? OpenPatientsCommand { get; set; }
@@ -18,8 +18,8 @@ namespace MedicalCentre.ViewModels
         public ICommand? OpenCentreSettings { get; set; }
         public AdminViewModel(AdminWindow window, Account account)
         {
-            adminWindow = window;
-            currentAccount = account;
+            _adminWindow = window;
+            _currentAccount = account;
             CloseCommand = new RelayCommandAsync(Close);
             OpenEmployeesCommand = new RelayCommand(OpenEmployeesPage);
             OpenPatientsCommand = new RelayCommand(OpenPatientsPage);
@@ -30,27 +30,27 @@ namespace MedicalCentre.ViewModels
         private async Task Close()
         {
             var auth = new AuthentificationService();
-            await auth.LogOut(adminWindow, currentAccount);
+            await auth.LogOut(_adminWindow, _currentAccount);
         }
 
         private void OpenEmployeesPage()
         {
-            adminWindow.MainFrame.Content = new EmployeesManagementPage();
+            _adminWindow.MainFrame.Content = new EmployeesManagementPage();
         }
 
         private void OpenPatientsPage()
         {
-            adminWindow.MainFrame.Content = new PatientsPage();
+            _adminWindow.MainFrame.Content = new PatientsPage();
         }
 
         private void OpenMainPage()
         {
-            adminWindow.MainFrame.Content = new MainPage();
+            _adminWindow.MainFrame.Content = new MainPage();
         }
 
         private void OpentSettingsPage()
         {
-            adminWindow.MainFrame.Content = new CentreSettingsPage();
+            _adminWindow.MainFrame.Content = new CentreSettingsPage();
         }
     }
 }
