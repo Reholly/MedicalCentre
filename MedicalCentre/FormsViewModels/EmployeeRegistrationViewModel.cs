@@ -15,7 +15,7 @@ namespace MedicalCentre.Forms.ViewModels
         public ICommand? RegisterCommand { get; set; }
         public ICommand? CloseCommand { get; set; }
 
-        private EmployeeRegistration profile;
+        private readonly EmployeeRegistration profile;
 
         public EmployeeRegistrationViewModel(EmployeeRegistration profile)
         {
@@ -26,7 +26,6 @@ namespace MedicalCentre.Forms.ViewModels
 
         private async Task Register()
         {
-            var accDb = new ContextRepository<Account>();
             var empDb = new ContextRepository<Employee>();
 
             Random random = new Random();
@@ -43,12 +42,12 @@ namespace MedicalCentre.Forms.ViewModels
                 AuthentificationService authentificationService = new();
                 await authentificationService.RegisterUser(account);
                 await empDb.AddItemAsync(employee);
-                LoggerService.CreateLog($"Регистрация нового сотрудника {account.Id} - {account.Username}", true);
+                await LoggerService.CreateLog($"Регистрация нового сотрудника {account.Id} - {account.Username}", true);
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("Неизвестная ошибка в создании аккаунта, попробуйте еще раз");
-                LoggerService.CreateLog($"Ошибка в регистрации нового сотрудника {account.Id} - {account.Username}", false);
+                await LoggerService.CreateLog($"Ошибка в регистрации нового сотрудника {account.Id} - {account.Username}", false);
                 profile.Close();
             }
 

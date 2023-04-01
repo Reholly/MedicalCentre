@@ -14,8 +14,9 @@ namespace MedicalCentre.Forms.ViewModels
         public ICommand? SaveCommand { get; set; }
         public ICommand? DeleteCommand { get; set; }
 
-        private PatientProfile profile;
-        private Patient currentPatient;
+        private readonly PatientProfile profile;
+        private readonly Patient currentPatient;
+        private readonly ContextRepository<Patient> _repositoryPatients;
 
         public PatientProfileViewModel(PatientProfile profile, Patient patient)
         {
@@ -23,6 +24,7 @@ namespace MedicalCentre.Forms.ViewModels
             this.currentPatient = patient;
 
             var accDb = new ContextRepository<Account>();
+            _repositoryPatients = new ContextRepository<Patient>();
 
             CloseCommand = new RelayCommand(Close);
             DeleteCommand = new RelayCommandAsync(Delete);
@@ -37,19 +39,16 @@ namespace MedicalCentre.Forms.ViewModels
 
         private async Task Delete()
         {
-            var patientDb = new ContextRepository<Patient>();
+            Patient patient = await _repositoryPatients.GetItemByIdAsync(currentPatient.Id);
 
-            Patient patient = await patientDb.GetItemByIdAsync(currentPatient.Id);
-
-            patientDb.DeleteItemAsync(patient);
+            _repositoryPatients.DeleteItemAsync(patient);
 
             Close();
         }
 
         private async Task Save()
         {
-            var accDb = new ContextRepository<Patient>();
-            Patient patient = await accDb.GetItemByIdAsync(currentPatient.Id);
+            Patient patient = await _repositoryPatients.GetItemByIdAsync(currentPatient.Id);
 
             currentPatient.Name = profile.Name.Text;
             currentPatient.Surname = profile.Surname.Text;
@@ -61,12 +60,12 @@ namespace MedicalCentre.Forms.ViewModels
 
                 currentPatient.BirthDate = DateOnly.ParseExact(profile.BirthDate.Text, "d");
             }
-            catch (Exception ex)
+            catch 
             {
                 MessageBox.Show("Дата в неправильном формате!");
             }
 
-            accDb.UpdateItemAsync(patient);
+            _repositoryPatients.UpdateItemAsync(patient);
 
             Close();
         }

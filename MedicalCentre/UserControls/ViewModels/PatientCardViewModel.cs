@@ -8,7 +8,7 @@ namespace MedicalCentre.UserControls.ViewModels
     internal class PatientCardViewModel
     {
         public ICommand? ProfileCommand { get; set; }
-        private Patient currentPatient;
+        private readonly Patient currentPatient;
         public PatientCardViewModel(PatientCard card, Patient patient)
         {
             currentPatient = patient;

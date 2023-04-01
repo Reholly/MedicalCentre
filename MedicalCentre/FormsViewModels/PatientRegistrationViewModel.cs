@@ -13,7 +13,7 @@ namespace MedicalCentre.Forms.ViewModels
         public ICommand? RegisterCommand { get; set; }
         public ICommand? CloseCommand { get; set; }
 
-        private PatientRegistration profile;
+        private readonly PatientRegistration profile;
 
         public PatientRegistrationViewModel(PatientRegistration profile)
         {
@@ -32,7 +32,7 @@ namespace MedicalCentre.Forms.ViewModels
             DateOnly birthDate = DateOnly.ParseExact(profile.BirthDate.Text, "d", CultureInfo.InvariantCulture);
 
             var patientDb = new ContextRepository<Patient>();
-            patientDb.AddItemAsync(new Patient(phoneNumber, name, surname, patronymic, birthDate, null, null));
+            await patientDb.AddItemAsync(new Patient(phoneNumber, name, surname, patronymic, birthDate, null, null));
         }
 
         public void Close()

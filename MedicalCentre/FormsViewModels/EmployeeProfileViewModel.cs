@@ -14,8 +14,8 @@ namespace MedicalCentre.Forms.ViewModels
         public ICommand? SaveCommand { get; set; }
         public ICommand? DeleteCommand { get; set; }
 
-        private EmployeeProfile profile;
-        private Employee employee;
+        private readonly EmployeeProfile profile;
+        private readonly Employee employee;
 
         public EmployeeProfileViewModel(EmployeeProfile profile, Employee employee)
         {
@@ -28,8 +28,7 @@ namespace MedicalCentre.Forms.ViewModels
             DeleteCommand = new RelayCommandAsync(Delete);
             SaveCommand = new RelayCommandAsync(Save);
 
-            if (accDb.GetItemById(employee.AccountId).IsOnline) this.profile.IsOnline.IsChecked = true;
-            else this.profile.IsOnline.IsChecked = false;
+            this.profile.IsOnline.IsChecked = accDb.GetItemById(employee.AccountId).IsOnline;
 
             this.profile.Password.Text = accDb.GetItemById(employee.AccountId).Password;
             this.profile.Login.Text = accDb.GetItemById(employee.AccountId).Username;
@@ -47,8 +46,8 @@ namespace MedicalCentre.Forms.ViewModels
 
             Account account = await accDb.GetItemByIdAsync(employee.AccountId);
 
-            accDb.DeleteItemAsync(account);
-            empDb.DeleteItemAsync(employee);
+            await accDb.DeleteItemAsync(account);
+            await empDb.DeleteItemAsync(employee);
 
             Close();
         }
@@ -78,8 +77,8 @@ namespace MedicalCentre.Forms.ViewModels
 
             var empDb = new ContextRepository<Employee>();
 
-            accDb.UpdateItemAsync(account);
-            empDb.UpdateItemAsync(employee);
+            await accDb.UpdateItemAsync(account);
+            await empDb.UpdateItemAsync(employee);
 
             Close();
         }

@@ -11,7 +11,7 @@ namespace MedicalCentre.Forms.ViewModels
 {
     internal class CreateAppointmentViewModel
     {
-        private CreateAppointment currentPage;
+        private readonly CreateAppointment currentPage;
         public ICommand CreateCommand { get; set; }
         public ICommand CloseCommand { get; set; }
         public CreateAppointmentViewModel(CreateAppointment page)

@@ -13,7 +13,7 @@ namespace MedicalCentre.Forms.ViewModels
     {
         public ICommand WriteCommand { get; set; }
         public ICommand CloseCommand { get; set; }
-        private WriteAppointment currentPage;
+        private readonly WriteAppointment currentPage;
 
         public WriteAppointmentViewModel(WriteAppointment page)
         {
@@ -32,12 +32,12 @@ namespace MedicalCentre.Forms.ViewModels
                 Appointment appointment = await appointmetnDb.GetItemByIdAsync(uint.Parse(currentPage.AppointmentId.Text));
 
                 appointment.PatientId = patient.Id;
-                appointmetnDb.UpdateItemAsync(appointment);
-                LoggerService.CreateLog($"patient {patient.Id} was recorded on {appointment.Id}", true);
+                await appointmetnDb.UpdateItemAsync(appointment);
+                await LoggerService.CreateLog($"patient {patient.Id} was recorded on {appointment.Id}", true);
             }
             catch (Exception ex)
             {
-                LoggerService.CreateLog(ex.Message, false);
+                await LoggerService.CreateLog(ex.Message, false);
             }
             currentPage.Close();
         }
