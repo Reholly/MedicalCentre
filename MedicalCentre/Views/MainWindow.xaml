@@ -1,4 +1,4 @@
-﻿<Window x:Class="MedicalCentre.Windows.MainWindow"
+﻿<Window x:Class="MedicalCentre.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -59,7 +59,7 @@
                                Margin="0 10 0 10"/>
                     <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Name="Login"
-                             Text="2"  
+                             Text=""  
                              Foreground="AliceBlue"
                              materialDesign:HintAssist.FloatingOffset="0, -20"
                              BorderBrush="#c5c8cc"
@@ -74,7 +74,7 @@
                     <PasswordBox Grid.Column="0" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
                             DockPanel.Dock="Left"
                             Name="Password"
-                            Password="admin"                                                   
+                            Password=""                                                   
                             BorderBrush="#c5c8cc"
                             Foreground="AliceBlue"
                             Background="#112a35"

@@ -1,7 +1,7 @@
 ﻿using MedicalCentre.Authentification;
 using MedicalCentre.Models;
 using MedicalCentre.Pages.DoctorWindowPages;
-using MedicalCentre.Windows;
+using MedicalCentre.Views;
 using System.Threading.Tasks;
 using System.Windows.Input;
 

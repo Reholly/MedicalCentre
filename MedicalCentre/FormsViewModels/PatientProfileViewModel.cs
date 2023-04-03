@@ -1,4 +1,5 @@
 ﻿using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Forms;
 using MedicalCentre.Models;
 using MedicalCentre.ViewModels;
 using System;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace MedicalCentre.Forms.ViewModels
+namespace MedicalCentre.FormsViewModels
 {
     internal class PatientProfileViewModel
     {
@@ -41,7 +42,7 @@ namespace MedicalCentre.Forms.ViewModels
 
             Patient patient = await patientDb.GetItemByIdAsync(currentPatient.Id);
 
-            patientDb.DeleteItemAsync(patient);
+            await patientDb.DeleteItemAsync(patient);
 
             Close();
         }
@@ -66,7 +67,7 @@ namespace MedicalCentre.Forms.ViewModels
                 MessageBox.Show("Дата в неправильном формате!");
             }
 
-            accDb.UpdateItemAsync(patient);
+            await accDb.UpdateItemAsync(patient);
 
             Close();
         }

@@ -11,7 +11,7 @@ public static class EmployeeNameBinderService
         ContextRepository<Employee> employeeDb = new ContextRepository<Employee>();
         Employee currentEmployee = employeeDb.GetItemById(account.EmployeeAccountId);
 
-        RoleName.Text = account.Role;
+        RoleName.Text = account.Role.ToString();
         EmployeeName.Text = $" {currentEmployee.Name} {currentEmployee.Patronymic}";
     }
 }

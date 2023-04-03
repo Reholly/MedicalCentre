@@ -1,4 +1,5 @@
 ﻿using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Forms;
 using MedicalCentre.Models;
 using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
@@ -7,7 +8,7 @@ using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MedicalCentre.Forms.ViewModels
+namespace MedicalCentre.FormsViewModels
 {
     internal class CreateAppointmentViewModel
     {

@@ -1,4 +1,5 @@
 ﻿using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Forms;
 using MedicalCentre.Models;
 using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
@@ -6,7 +7,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MedicalCentre.Forms.ViewModels
+namespace MedicalCentre.FormsViewModels
 {
 
     internal class WriteAppointmentViewModel
@@ -32,12 +33,12 @@ namespace MedicalCentre.Forms.ViewModels
                 Appointment appointment = await appointmetnDb.GetItemByIdAsync(uint.Parse(currentPage.AppointmentId.Text));
 
                 appointment.PatientId = patient.Id;
-                appointmetnDb.UpdateItemAsync(appointment);
-                LoggerService.CreateLog($"patient {patient.Id} was recorded on {appointment.Id}", true);
+                await appointmetnDb.UpdateItemAsync(appointment);
+                await LoggerService.CreateLog($"patient {patient.Id} was recorded on {appointment.Id}", true);
             }
             catch (Exception ex)
             {
-                LoggerService.CreateLog(ex.Message, false);
+                await LoggerService.CreateLog(ex.Message, false);
             }
             currentPage.Close();
         }

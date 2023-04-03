@@ -1,10 +1,12 @@
 ﻿using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Forms;
 using MedicalCentre.Models;
 using MedicalCentre.ViewModels;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MedicalCentre.Forms.ViewModels
+namespace MedicalCentre.FormsViewModels
 {
     public class CreateExaminationFormViewModel
     {
@@ -14,11 +16,11 @@ namespace MedicalCentre.Forms.ViewModels
         public CreateExaminationFormViewModel(CreateExaminationForm form)
         {
             this.form = form;
-            ChangesSavingCommand = new RelayCommand(SaveChanges);
+            ChangesSavingCommand = new RelayCommandAsync(SaveChanges);
             ClosingCommand = new RelayCommand(Close);
         }
 
-        private void SaveChanges()
+        private async Task SaveChanges()
         {
             ContextRepository<MedicalExamination> repository = new();
             MedicalExamination examination = new MedicalExamination(
@@ -26,7 +28,7 @@ namespace MedicalCentre.Forms.ViewModels
                 form.Title.Text,
                 form.Conclusion.Text,
                 DateTime.Now);
-            repository.AddItem(examination);
+            await repository.AddItemAsync(examination);
             form.Close();
         }
 

@@ -1,7 +1,7 @@
 ﻿using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
 using MedicalCentre.Services;
-using MedicalCentre.Windows;
+using MedicalCentre.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,27 +14,28 @@ namespace MedicalCentre.Authentification
 {
     internal class AuthentificationService : IAuthentificationService
     {
+        private ContextRepository<Account> accountRepository = new ContextRepository<Account>();
+     
         public async Task<Account> AuthenticateUser(string username, string password)
-        {
-            ContextRepository<Account> accDb = new();
-            List<Account> accounts = await accDb.GetTableAsync();
+        {       
+            List<Account> accounts = await accountRepository.GetTableAsync();
             Account? account = accounts.FirstOrDefault(o => o.Username == username);
 
             if (account == null)
             {
-                LoggerService.CreateLog($"Доступ с адреса: {GetCurrentUserIp()} запрещен", false);
+                await LoggerService.CreateLog($"Доступ с адреса: {GetCurrentUserIp()} запрещен", false);
                 throw new UnauthorizedAccessException("Доступ запрещен. Пользователя не существует или введенные данные не верны.");
             }
             if (account.IsOnline)
             {
-                LoggerService.CreateLog($"Попытка входа в аккаунт {account.Username} отклонена. Пользователь уже в сети.", false);
+                await LoggerService.CreateLog($"Попытка входа в аккаунт {account.Username} отклонена. Пользователь уже в сети.", false);
                 throw new UnauthorizedAccessException("Пользователь уже в сети");
             }
             if (account != null && account.Password == CalculateHash(password, account.Id.ToString()))
             {
-                LoggerService.CreateLog($"Доступ разрешен. Пользователь {account.Username} вошел в систему.", true);
+                await LoggerService.CreateLog($"Доступ разрешен. Пользователь {account.Username} вошел в систему.", true);
                 account.IsOnline = true;
-                accDb.UpdateItemAsync(account);
+                await accountRepository.UpdateItemAsync(account);
                 return account;
             }
 
@@ -43,10 +44,9 @@ namespace MedicalCentre.Authentification
 
         public async Task LogOut(Window window, Account currentAccount)
         {
-            ContextRepository<Account> accDb = new();
             currentAccount.IsOnline = false;
-            accDb.UpdateItemAsync(currentAccount);
-            LoggerService.CreateLog($"Пользователь {currentAccount.Username} вышел из системы.", true);
+            await accountRepository.UpdateItemAsync(currentAccount);
+            await LoggerService.CreateLog($"Пользователь {currentAccount.Username} вышел из системы.", true);
             window.Close();
         }
 
@@ -54,19 +54,19 @@ namespace MedicalCentre.Authentification
         {
             switch (currentAccount.Role)
             {
-                case "Doctor":
+                case Roles.Doctor:
                     DoctorWindow doctor = new DoctorWindow(currentAccount);
                     doctor.Show();
                     break;
-                case "Admin":
+                case Roles.Admin:
                     AdminWindow admin = new AdminWindow(currentAccount);
                     admin.Show();
                     break;
-                case "Operator":
+                case Roles.Operator:
                     OperatorWindow operatorWindow = new OperatorWindow(currentAccount);
                     operatorWindow.Show();
                     break;
-                case "JuniorPersonal":
+                case Roles.JuniorPersonal:
                     JuniorPersonalWindow juniorPersonal = new JuniorPersonalWindow(currentAccount);
                     juniorPersonal.Show();
                     break;
@@ -80,7 +80,7 @@ namespace MedicalCentre.Authentification
         public async Task<Account> RegisterUser(Account account)
         {
             account.Password = CalculateHash(account.Password, account.Id.ToString());
-            ContextRepository<Account> accDb = new();
+            
             List<Account> accounts = new();
 
             if (accounts.FirstOrDefault(o => o.Username == account.Username) != null)
@@ -88,7 +88,7 @@ namespace MedicalCentre.Authentification
                 throw new Exception($"Аккаунт с именем: {account.Username} уже существует.");
             }
 
-            accDb.AddItemAsync(account);
+            await accountRepository.AddItemAsync(account);
 
             return account;
         }
@@ -107,5 +107,13 @@ namespace MedicalCentre.Authentification
             System.Net.IPAddress ip = System.Net.Dns.GetHostByName(host).AddressList[0];
             return ip.ToString();
         }
+    }
+
+    public enum Roles
+    {
+        Doctor,
+        Admin,
+        Operator,
+        JuniorPersonal
     }
 }

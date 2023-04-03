@@ -1,4 +1,5 @@
 ﻿using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Forms;
 using MedicalCentre.Models;
 using MedicalCentre.ViewModels;
 using System;
@@ -6,7 +7,7 @@ using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MedicalCentre.Forms.ViewModels
+namespace MedicalCentre.FormsViewModels
 {
     internal class PatientRegistrationViewModel
     {
@@ -32,7 +33,7 @@ namespace MedicalCentre.Forms.ViewModels
             DateOnly birthDate = DateOnly.ParseExact(profile.BirthDate.Text, "d", CultureInfo.InvariantCulture);
 
             var patientDb = new ContextRepository<Patient>();
-            patientDb.AddItemAsync(new Patient(phoneNumber, name, surname, patronymic, birthDate, null, null));
+            await patientDb.AddItemAsync(new Patient(phoneNumber, name, surname, patronymic, birthDate, null, null));
         }
 
         public void Close()

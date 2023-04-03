@@ -1,5 +1,6 @@
 ﻿using MedicalCentre.Authentification;
 using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Forms;
 using MedicalCentre.Models;
 using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace MedicalCentre.Forms.ViewModels
+namespace MedicalCentre.FormsViewModels
 {
     internal class EmployeeRegistrationViewModel
     {
@@ -26,7 +27,6 @@ namespace MedicalCentre.Forms.ViewModels
 
         private async Task Register()
         {
-            var accDb = new ContextRepository<Account>();
             var empDb = new ContextRepository<Employee>();
 
             Random random = new Random();
@@ -36,19 +36,21 @@ namespace MedicalCentre.Forms.ViewModels
             Employee employee = new Employee(empId, profile.Name.Text, accId, profile.Surname.Text,
                                             profile.Patronymic.Text, profile.Specialization.Text,
                                             profile.Description.Text, double.Parse(profile.Salary.Text));
-            Account account = new Account(accId, empId, profile.Login.Text, profile.Password.Text, profile.Role.Text);
+            //TO DO create norm 
+            Enum.TryParse(profile.Role.Text, out Roles result);
+            Account account = new Account(accId, empId, profile.Login.Text, profile.Password.Text, result);
 
             try
             {
                 AuthentificationService authentificationService = new();
                 await authentificationService.RegisterUser(account);
                 await empDb.AddItemAsync(employee);
-                LoggerService.CreateLog($"Регистрация нового сотрудника {account.Id} - {account.Username}", true);
+                await LoggerService.CreateLog($"Регистрация нового сотрудника {account.Id} - {account.Username}", true);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Неизвестная ошибка в создании аккаунта, попробуйте еще раз");
-                LoggerService.CreateLog($"Ошибка в регистрации нового сотрудника {account.Id} - {account.Username}", false);
+                await LoggerService.CreateLog($"Ошибка в регистрации нового сотрудника {account.Id} - {account.Username}", false);
                 profile.Close();
             }
 

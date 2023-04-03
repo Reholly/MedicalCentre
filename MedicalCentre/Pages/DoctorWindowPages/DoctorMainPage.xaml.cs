@@ -1,6 +1,6 @@
 ﻿using MedicalCentre.Models;
 using MedicalCentre.ViewModels.DoctorWindowPagesViewModels;
-using MedicalCentre.Windows;
+using MedicalCentre.Views;
 using System.Windows.Controls;
 
 namespace MedicalCentre.Pages.DoctorWindowPages

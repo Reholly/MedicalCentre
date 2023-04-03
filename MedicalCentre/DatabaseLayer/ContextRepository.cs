@@ -33,7 +33,7 @@ namespace MedicalCentre.DatabaseLayer
             return await context.Set<T>().ToListAsync();
         }
 
-        public async Task<T?> GetItemByIdAsync(uint id)
+        public async Task<T> GetItemByIdAsync(uint id)
         {
             return await context.Set<T>().FindAsync(id);
         }

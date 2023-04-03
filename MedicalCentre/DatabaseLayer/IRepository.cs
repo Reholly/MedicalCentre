@@ -11,7 +11,7 @@ internal interface IRepository<T> where T : class
 
     public Task<List<T>> GetTableAsync();
 
-    public Task<T?> GetItemByIdAsync(uint id);
+    public Task<T> GetItemByIdAsync(uint id);
 
     public void DeleteItem(T newItem);
 
@@ -19,5 +19,5 @@ internal interface IRepository<T> where T : class
 
     public List<T> GetTable();
 
-    public T? GetItemById(uint id);
+    public T GetItemById(uint id);
 }

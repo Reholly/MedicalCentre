@@ -1,7 +1,7 @@
 ﻿using MedicalCentre.Models;
 using MedicalCentre.Pages.DoctorWindowPages;
 using MedicalCentre.UserControls.ViewModels;
-using MedicalCentre.Windows;
+using MedicalCentre.Views;
 using System.Windows.Controls;
 
 namespace MedicalCentre.UserControls

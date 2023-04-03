@@ -1,6 +1,6 @@
 ﻿using MedicalCentre.Authentification;
 using MedicalCentre.Models;
-using MedicalCentre.Windows;
+using MedicalCentre.Views;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -38,7 +38,7 @@ namespace MedicalCentre.ViewModels
                 {
                     throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
                 }
-                accountPrincipal.Identity = new AccountIdentity(account.Username, account.Role);
+                accountPrincipal.Identity = new AccountIdentity(account.Username, account.Role.ToString());
 
                 await authService.OpenWindowByRole(account);
                 Close();

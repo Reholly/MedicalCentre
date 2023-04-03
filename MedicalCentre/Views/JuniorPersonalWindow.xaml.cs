@@ -2,7 +2,7 @@
 using MedicalCentre.ViewModels;
 using System.Windows;
 
-namespace MedicalCentre.Windows
+namespace MedicalCentre.Views
 {
     public partial class JuniorPersonalWindow : Window
     {

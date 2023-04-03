@@ -5,7 +5,7 @@ using MedicalCentre.ViewModels;
 using System.Threading;
 using System.Windows;
 
-namespace MedicalCentre.Windows
+namespace MedicalCentre.Views
 {
     public partial class DoctorWindow : Window
     {

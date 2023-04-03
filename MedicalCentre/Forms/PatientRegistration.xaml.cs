@@ -1,4 +1,4 @@
-﻿using MedicalCentre.Forms.ViewModels;
+﻿using MedicalCentre.FormsViewModels;
 using System.Windows;
 
 

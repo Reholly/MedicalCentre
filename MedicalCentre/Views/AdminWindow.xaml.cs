@@ -1,20 +1,19 @@
 ﻿using MedicalCentre.Models;
-using MedicalCentre.Pages.OperatorPages;
+using MedicalCentre.Pages.AdminWindowPages;
 using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
 using System.Threading;
 using System.Windows;
 
-namespace MedicalCentre.Windows
+namespace MedicalCentre.Views
 {
-    public partial class OperatorWindow : Window
+    public partial class AdminWindow : Window
     {
-        public OperatorWindow(Account account)
+        public AdminWindow(Account account)
         {
             InitializeComponent();
 
-
-            if (Thread.CurrentPrincipal == null || !Thread.CurrentPrincipal.IsInRole("Operator"))
+            if (Thread.CurrentPrincipal == null || !Thread.CurrentPrincipal.IsInRole("Admin"))
             {
                 Close();
             }
@@ -22,7 +21,7 @@ namespace MedicalCentre.Windows
             EmployeeNameBinderService.BindName(account, RoleName, EmployeeName);
 
             MainFrame.Content = new MainPage();
-            DataContext = new OperatorWindowViewModel(this, account);
+            DataContext = new AdminViewModel(this, account);
         }
     }
 }

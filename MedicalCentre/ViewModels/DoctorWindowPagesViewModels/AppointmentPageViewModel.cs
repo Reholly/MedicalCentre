@@ -2,7 +2,7 @@
 using MedicalCentre.Models;
 using MedicalCentre.Pages.DoctorWindowPages;
 using MedicalCentre.Services;
-using MedicalCentre.Windows;
+using MedicalCentre.Views;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
