@@ -1,17 +1,13 @@
 ﻿using MedicalCentre.ViewModels.OperatorWindowPagesViewModels;
 using System.Windows.Controls;
 
-namespace MedicalCentre.Pages.OperatorPages
+namespace MedicalCentre.Pages.OperatorPages;
+
+public partial class MainPage : Page
 {
-    /// <summary>
-    /// Логика взаимодействия для MainPage.xaml
-    /// </summary>
-    public partial class MainPage : Page
+    public MainPage()
     {
-        public MainPage()
-        {
-            InitializeComponent();
-            DataContext = new MainPageViewModel(this);
-        }
+        InitializeComponent();
+        DataContext = new MainPageViewModel(this);
     }
 }

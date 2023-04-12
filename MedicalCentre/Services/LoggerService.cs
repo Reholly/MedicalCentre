@@ -9,6 +9,7 @@ public static class LoggerService
     public static async Task CreateLog(string log, bool isSuccess)
     {
         ContextRepository<Log> db = new ContextRepository<Log>();
-        await db.AddItemAsync(new Log(log, isSuccess));
+
+        await Task.Run(async () => await db.AddItemAsync(new Log(log, isSuccess)));      
     }
 }

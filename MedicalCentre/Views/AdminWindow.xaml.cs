@@ -2,26 +2,20 @@
 using MedicalCentre.Pages.AdminWindowPages;
 using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
-using System.Threading;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
-namespace MedicalCentre.Views
+namespace MedicalCentre.Views;
+
+public partial class AdminWindow : Window
 {
-    public partial class AdminWindow : Window
+    public AdminWindow(Account account, IServiceCollection services)
     {
-        public AdminWindow(Account account)
-        {
-            InitializeComponent();
+        InitializeComponent();
 
-            if (Thread.CurrentPrincipal == null || !Thread.CurrentPrincipal.IsInRole("Admin"))
-            {
-                Close();
-            }
+        EmployeeNameBinderService.BindName(account, RoleName, EmployeeName);
 
-            EmployeeNameBinderService.BindName(account, RoleName, EmployeeName);
-
-            MainFrame.Content = new MainPage();
-            DataContext = new AdminViewModel(this, account);
-        }
+        MainFrame.Content = new MainPage(services);
+        DataContext = new AdminViewModel(this, account, services);
     }
 }

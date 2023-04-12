@@ -1,16 +1,16 @@
 ﻿using MedicalCentre.Models;
 using MedicalCentre.ViewModels.DoctorWindowPagesViewModels;
 using MedicalCentre.Views;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows.Controls;
 
-namespace MedicalCentre.Pages.DoctorWindowPages
+namespace MedicalCentre.Pages.DoctorWindowPages;
+
+public partial class AppointmentPage : Page
 {
-    public partial class AppointmentPage : Page
+    public AppointmentPage(Appointment appointment, DoctorWindow window, Account account, IServiceCollection services)
     {
-        public AppointmentPage(Appointment appointment, DoctorWindow window, Account account)
-        {
-            InitializeComponent();
-            DataContext = new AppointmentPageViewModel(appointment, this, window, account);
-        }
+        InitializeComponent();
+        DataContext = new AppointmentPageViewModel(appointment, this, window, account, services);
     }
 }

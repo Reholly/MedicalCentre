@@ -119,23 +119,26 @@
                     </materialDesign:HintAssist.Hint>
 
                 </TextBox>
-                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Name="Role"
-                             Text=""  
-                                MaxHeight="57"
-                             TextWrapping="Wrap"
-                             MaxWidth="530"
-                             materialDesign:HintAssist.FloatingOffset="0, -20"
-                             BorderBrush="#c5c8cc"
-                             Background="#c9d0d8"
-                             FontSize="18"
-                             BorderThickness=" 0 0 0 1.5">
 
-                    <materialDesign:HintAssist.Hint>
-                        <TextBlock Foreground="#3b515a">Роль</TextBlock>
-                    </materialDesign:HintAssist.Hint>
-
-                </TextBox>
+                <DockPanel Width="530" Height="57">
+                    <TextBlock Text="Роль:" 
+                               DockPanel.Dock="Left"                         
+                               Background="#c9d0d8"
+                               Foreground="#3b515a" 
+                               Opacity="0.6"
+                               VerticalAlignment="Center"
+                               FontSize="18"/>
+                    <ComboBox Text="Роль"
+                          Foreground="#3b515a"
+                          Background="#c9d0d8"
+                          
+                          FontSize="18"
+                          Style="{StaticResource MaterialDesignComboBox}" 
+                          Name="RolesComboBox"
+                          MaxHeight="57"
+                          MaxWidth="530"/>
+                </DockPanel>
+               
                 <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Name="Salary"
                              Text=""  

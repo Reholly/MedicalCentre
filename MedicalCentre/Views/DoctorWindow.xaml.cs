@@ -2,30 +2,20 @@
 using MedicalCentre.Pages.DoctorWindowPages;
 using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
-using System.Threading;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
-namespace MedicalCentre.Views
+namespace MedicalCentre.Views;
+
+public partial class DoctorWindow : Window
 {
-    public partial class DoctorWindow : Window
+    public DoctorWindow(Account account, IServiceCollection services)
     {
-        public DoctorWindow(Account account)
-        {
-            InitializeComponent();
+        InitializeComponent();
 
-            if (Thread.CurrentPrincipal == null || !Thread.CurrentPrincipal.IsInRole("Doctor"))
-            {
-                Close();
-            }
+        EmployeeNameBinderService.BindName(account, RoleName, EmployeeName);
 
-            EmployeeNameBinderService.BindName(account, RoleName, EmployeeName);
-            MainFrame.Content = new DoctorMainPage(this, account);
-            DataContext = new DoctorViewModel(this, account);
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        MainFrame.Content = new DoctorMainPage(this, account, services);
+        DataContext = new DoctorViewModel(this, account, services);
     }
 }

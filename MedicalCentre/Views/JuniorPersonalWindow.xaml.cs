@@ -1,16 +1,15 @@
 ﻿using MedicalCentre.Models;
 using MedicalCentre.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
-namespace MedicalCentre.Views
+namespace MedicalCentre.Views;
+
+public partial class JuniorPersonalWindow : Window
 {
-    public partial class JuniorPersonalWindow : Window
+    public JuniorPersonalWindow(Account account, IServiceCollection services)
     {
-        public JuniorPersonalWindow(Account account)
-        {
-            InitializeComponent();
-            DataContext = new JuniorPersonalViewModel(this, account);
-            //frame.Content = new JuniorPersonalWindow(account);
-        }
+        InitializeComponent();
+        DataContext = new JuniorPersonalViewModel(this, account, services);
     }
 }

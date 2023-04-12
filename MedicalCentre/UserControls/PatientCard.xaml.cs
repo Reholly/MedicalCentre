@@ -2,17 +2,13 @@
 using MedicalCentre.UserControls.ViewModels;
 using System.Windows.Controls;
 
-namespace MedicalCentre.UserControls
+namespace MedicalCentre.UserControls;
+
+public partial class PatientCard : UserControl
 {
-    /// <summary>
-    /// Логика взаимодействия для PatientCard.xaml
-    /// </summary>
-    public partial class PatientCard : UserControl
+    public PatientCard(Patient patient)
     {
-        public PatientCard(Patient patient)
-        {
-            InitializeComponent();
-            DataContext = new PatientCardViewModel(this, patient);
-        }
+        InitializeComponent();
+        DataContext = new PatientCardViewModel(this, patient);
     }
 }

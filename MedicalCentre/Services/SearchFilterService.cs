@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace MedicalCentre.Services;
 
-internal static class SearchFilterService<T>
+public static class SearchFilterService<T>
 {
     public static List<T> GetFilteredList(List<T> items, string property)
     {

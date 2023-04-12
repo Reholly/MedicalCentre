@@ -28,6 +28,7 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
 		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
 		<PackageReference Include="SciChart" Version="7.0.1.27055" />
 		<PackageReference Include="ScottPlot" Version="4.1.61" />
@@ -60,5 +61,10 @@
 			<Generator>SettingsSingleFileGenerator</Generator>
 			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
 		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="ViewModels\MainPagesViewModels\" />
+	  <Folder Include="ViewModels\PagesViewModels\" />
 	</ItemGroup>
 </Project>

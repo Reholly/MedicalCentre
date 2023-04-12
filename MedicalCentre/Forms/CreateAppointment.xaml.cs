@@ -1,14 +1,13 @@
 ﻿using MedicalCentre.FormsViewModels;
 using System.Windows;
 
-namespace MedicalCentre.Forms
+namespace MedicalCentre.Forms;
+
+public partial class CreateAppointment : Window
 {
-    public partial class CreateAppointment : Window
+    public CreateAppointment()
     {
-        public CreateAppointment()
-        {
-            InitializeComponent();
-            DataContext = new CreateAppointmentViewModel(this);
-        }
+        InitializeComponent();
+        DataContext = new CreateAppointmentViewModel(this);
     }
 }

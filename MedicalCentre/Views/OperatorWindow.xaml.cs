@@ -2,27 +2,20 @@
 using MedicalCentre.Pages.OperatorPages;
 using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
-using System.Threading;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
-namespace MedicalCentre.Views
+namespace MedicalCentre.Views;
+
+public partial class OperatorWindow : Window
 {
-    public partial class OperatorWindow : Window
+    public OperatorWindow(Account account, IServiceCollection services)
     {
-        public OperatorWindow(Account account)
-        {
-            InitializeComponent();
+        InitializeComponent();
 
+        EmployeeNameBinderService.BindName(account, RoleName, EmployeeName);
 
-            if (Thread.CurrentPrincipal == null || !Thread.CurrentPrincipal.IsInRole("Operator"))
-            {
-                Close();
-            }
-
-            EmployeeNameBinderService.BindName(account, RoleName, EmployeeName);
-
-            MainFrame.Content = new MainPage();
-            DataContext = new OperatorWindowViewModel(this, account);
-        }
+        MainFrame.Content = new MainPage();
+        DataContext = new OperatorWindowViewModel(this, account, services);
     }
 }

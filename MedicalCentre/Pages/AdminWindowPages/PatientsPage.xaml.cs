@@ -1,17 +1,14 @@
 ﻿using MedicalCentre.ViewModels.AdminWindowPagesViewModels;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows.Controls;
 
-namespace MedicalCentre.Pages.AdminWindowPages
+namespace MedicalCentre.Pages.AdminWindowPages;
+
+public partial class PatientsPage : Page
 {
-    /// <summary>
-    /// Логика взаимодействия для Patients.xaml
-    /// </summary>
-    public partial class PatientsPage : Page
+    public PatientsPage(IServiceCollection services)
     {
-        public PatientsPage()
-        {
-            InitializeComponent();
-            DataContext = new PatientsViewModel(this);
-        }
+        InitializeComponent();
+        DataContext = new PatientsViewModel(this, services);
     }
 }

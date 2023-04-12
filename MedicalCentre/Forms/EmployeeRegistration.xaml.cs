@@ -1,17 +1,14 @@
 ﻿using MedicalCentre.FormsViewModels;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
-namespace MedicalCentre.Forms
+namespace MedicalCentre.Forms;
+
+public partial class EmployeeRegistration : Window
 {
-    /// <summary>
-    /// Логика взаимодействия для EmployeeRegistration.xaml
-    /// </summary>
-    public partial class EmployeeRegistration : Window
+    public EmployeeRegistration(IServiceCollection services)
     {
-        public EmployeeRegistration()
-        {
-            InitializeComponent();
-            DataContext = new EmployeeRegistrationViewModel(this);
-        }
+        InitializeComponent();
+        DataContext = new EmployeeRegistrationViewModel(this, services);
     }
 }

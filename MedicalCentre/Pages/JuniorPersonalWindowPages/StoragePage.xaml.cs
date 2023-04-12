@@ -1,14 +1,14 @@
 ﻿using MedicalCentre.ViewModels.JuniorPersonalWindowPagesViewModel;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows.Controls;
 
-namespace MedicalCentre.Pages.GeneralPages
+namespace MedicalCentre.Pages.GeneralPages;
+
+public partial class StoragePage : Page
 {
-    public partial class StoragePage : Page
+    public StoragePage(IServiceCollection services)
     {
-        public StoragePage()
-        {
-            InitializeComponent();
-            DataContext = new JuniorPersonalMainPageViewModel();
-        }
+        InitializeComponent();
+        DataContext = new JuniorPersonalMainPageViewModel(services);
     }
 }

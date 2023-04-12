@@ -2,7 +2,7 @@
 
 namespace MedicalCentre.Services;
 
-internal static class OpenBrowserService
+public static class OpenBrowserService
 {
     public static void OpenPageInBrowser(string url)
     {

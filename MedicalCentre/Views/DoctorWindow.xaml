@@ -41,7 +41,7 @@
 
                 <Separator Height="1" Margin="20 30" Background="#0f2630 "/>
 
-                <Button Margin="0 10 0 10" Background="Transparent" Height="40" BorderBrush="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Cursor="Hand" Command="{Binding OpeningMainPageCommand}" Click="Button_Click">
+                <Button Margin="0 10 0 10" Background="Transparent" Height="40" BorderBrush="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Cursor="Hand" Command="{Binding OpeningMainPageCommand}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Patient"
                                                  Foreground="#c9d0d8"

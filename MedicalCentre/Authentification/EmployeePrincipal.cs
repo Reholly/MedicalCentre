@@ -1,25 +1,23 @@
 ﻿using System.Security.Principal;
 
-namespace MedicalCentre.Authentification
+namespace MedicalCentre.Authentification;
+
+public class AccountPrincipal : IPrincipal
 {
-    internal class AccountPrincipal : IPrincipal
+    IIdentity IPrincipal.Identity
     {
-        private AccountIdentity identity;
+        get { return this.Identity; }
+    }
+    public bool IsInRole(string role)
+    {
+        return identity.Role.ToString() == role;
+    }
 
-        public AccountIdentity Identity
-        {
-            get { return identity; }
-            set { identity = value; }
-        }
+    private AccountIdentity identity;
 
-        IIdentity IPrincipal.Identity
-        {
-            get { return this.Identity; }
-        }
-
-        public bool IsInRole(string role)
-        {
-            return identity.Role == role;
-        }
+    public AccountIdentity Identity
+    {
+        get { return identity; }
+        set { identity = value; }
     }
 }
