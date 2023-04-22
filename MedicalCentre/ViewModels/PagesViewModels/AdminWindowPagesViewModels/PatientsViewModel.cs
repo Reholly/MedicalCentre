@@ -5,6 +5,7 @@ using MedicalCentre.Pages.AdminWindowPages;
 using MedicalCentre.Services;
 using MedicalCentre.UserControls;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,11 +22,11 @@ public class PatientsViewModel
     public ICommand? OpenNewsCommand { get; set; }
 
     private PatientsPage page;
-    private IServiceCollection services;
-    public PatientsViewModel(PatientsPage page, IServiceCollection services)
+    private IServiceProvider serviceProvider;
+    public PatientsViewModel(PatientsPage page, IServiceProvider serviceProvider)
     {
         this.page = page;
-        this.services = services;
+        this.serviceProvider = serviceProvider;
 
         SearchCommand = new RelayCommandAsync(SearchItems);
         OpenRegistrationCommand = new RelayCommand(OpenRegistration);
@@ -44,7 +45,7 @@ public class PatientsViewModel
 
     private async Task SearchItems()
     {
-        IRepository<Patient> patientsDb = services.BuildServiceProvider().GetRequiredService<IRepository<Patient>>();
+        IRepository<Patient> patientsDb = serviceProvider.GetRequiredService<IRepository<Patient>>();
         Patients = new ObservableCollection<Patient>(await Task.Run( () => patientsDb.GetTableAsync()));
         Patients = new ObservableCollection<Patient>(SearchFilterService<Patient>.GetFilteredList(Patients.ToList(), page.Search.Text));
 

@@ -1,15 +1,14 @@
-﻿using MedicalCentre.Services;
-using MedicalCentre.ViewModels.AdminWindowPagesViewModels;
-using Microsoft.Extensions.DependencyInjection;
+﻿using MedicalCentre.ViewModels.AdminWindowPagesViewModels;
+using System;
 using System.Windows.Controls;
 
 namespace MedicalCentre.Pages.AdminWindowPages;
 
 public partial class EmployeesManagementPage : Page
 {
-    public EmployeesManagementPage(IServiceCollection services)
+    public EmployeesManagementPage(IServiceProvider serviceProvider)
     {
         InitializeComponent();
-        DataContext = new EmployeeManagementViewModel(this, services);
+        DataContext = new EmployeeManagementViewModel(this, serviceProvider);
     }
 }

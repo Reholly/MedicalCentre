@@ -1,14 +1,14 @@
 ﻿using MedicalCentre.ViewModels.AdminWindowPagesViewModels;
-using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Windows.Controls;
 
 namespace MedicalCentre.Pages.AdminWindowPages;
 
 public partial class CentreSettingsPage : Page
 {
-    public CentreSettingsPage(IServiceCollection services)
+    public CentreSettingsPage(IServiceProvider serviceProvider)
     {
         InitializeComponent();
-        DataContext = new CentreSettingsViewModel(this, services);
+        DataContext = new CentreSettingsViewModel(this, serviceProvider);
     }
 }

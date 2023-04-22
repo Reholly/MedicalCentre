@@ -2,20 +2,20 @@
 using MedicalCentre.Pages.OperatorPages;
 using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
-using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Windows;
 
 namespace MedicalCentre.Views;
 
 public partial class OperatorWindow : Window
 {
-    public OperatorWindow(Account account, IServiceCollection services)
+    public OperatorWindow(Account account, IServiceProvider serviceProvider)
     {
         InitializeComponent();
 
         EmployeeNameBinderService.BindName(account, RoleName, EmployeeName);
 
         MainFrame.Content = new MainPage();
-        DataContext = new OperatorWindowViewModel(this, account, services);
+        DataContext = new OperatorWindowViewModel(this, account, serviceProvider);
     }
 }

@@ -3,6 +3,7 @@ using MedicalCentre.Pages.AdminWindowPages;
 using MedicalCentre.Services;
 using MedicalCentre.Views;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -19,13 +20,13 @@ public class AdminViewModel
     private AdminWindow adminWindow;
     private Account currentAccount;
     private AuthentificationService authentificationService;
-    private IServiceCollection services;
+    private IServiceProvider serviceProvider;
 
-    public AdminViewModel(AdminWindow window, Account account, IServiceCollection services)
+    public AdminViewModel(AdminWindow window, Account account, IServiceProvider serviceProvider)
     {
         adminWindow = window;
         currentAccount = account;
-        this.services = services;
+        this.serviceProvider = serviceProvider;
 
         CloseCommand = new RelayCommandAsync(Close);
         OpenEmployeesCommand = new RelayCommand(OpenEmployeesPage);
@@ -33,7 +34,7 @@ public class AdminViewModel
         OpenMainCommand = new RelayCommand(OpenMainPage);
         OpenCentreSettings = new RelayCommand(OpentSettingsPage);
 
-        this.authentificationService = services.BuildServiceProvider().GetRequiredService<AuthentificationService>();
+        this.authentificationService = serviceProvider.GetRequiredService<AuthentificationService>();
     }
 
     private async Task Close()
@@ -44,21 +45,21 @@ public class AdminViewModel
 
     private void OpenEmployeesPage()
     {
-        adminWindow.MainFrame.Content = new EmployeesManagementPage(services);
+        adminWindow.MainFrame.Content = new EmployeesManagementPage(serviceProvider);
     }
 
     private void OpenPatientsPage()
     {
-        adminWindow.MainFrame.Content = new PatientsPage(services);
+        adminWindow.MainFrame.Content = new PatientsPage(serviceProvider);
     }
 
     private void OpenMainPage()
     {
-        adminWindow.MainFrame.Content = new MainPage(services);
+        adminWindow.MainFrame.Content = new MainPage(serviceProvider);
     }
 
     private void OpentSettingsPage()
     {
-        adminWindow.MainFrame.Content = new CentreSettingsPage(services);
+        adminWindow.MainFrame.Content = new CentreSettingsPage(serviceProvider);
     }
 }

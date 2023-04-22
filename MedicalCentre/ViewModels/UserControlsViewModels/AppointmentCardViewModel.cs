@@ -5,6 +5,7 @@ using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
 using MedicalCentre.Views;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,15 +23,15 @@ public class AppointmentCardViewModel
     private IRepository<Patient> patientRepository;
     private IRepository<Note> noteRepository;
     private IRepository<MedicalExamination> examsRepository;
-    private IServiceCollection services;
+    private IServiceProvider serviceProvider;
     public ICommand AppointmentStartingCommand { get; set; }
-    public AppointmentCardViewModel(AppointmentCard card, Appointment appointment, DoctorMainPage page, string patient, string doctor, DoctorWindow window, Account account, IServiceCollection services)
+    public AppointmentCardViewModel(AppointmentCard card, Appointment appointment, DoctorMainPage page, string patient, string doctor, DoctorWindow window, Account account, IServiceProvider serviceProvider)
     {
-        this.patientRepository = services.BuildServiceProvider().GetRequiredService<IRepository<Patient>>();
-        this.noteRepository = services.BuildServiceProvider().GetRequiredService<IRepository<Note>>();
-        this.examsRepository = services.BuildServiceProvider().GetRequiredService<IRepository<MedicalExamination>>();
+        this.patientRepository = serviceProvider.GetRequiredService<IRepository<Patient>>();
+        this.noteRepository = serviceProvider.GetRequiredService<IRepository<Note>>();
+        this.examsRepository = serviceProvider.GetRequiredService<IRepository<MedicalExamination>>();
 
-        this.services = services;
+        this.serviceProvider = serviceProvider;
         this.page = page;
         this.appointment = appointment;
         this.window = window;
@@ -45,7 +46,7 @@ public class AppointmentCardViewModel
         if (patient != "Тут_должен_быть_пациент")
         {
             Patient patient = await Task.Run( ()=> patientRepository.GetItemByIdAsync((uint)appointment.PatientId));
-            page.WorkspaceFrame.Content = new AppointmentPage(appointment, window, account, services);
+            page.WorkspaceFrame.Content = new AppointmentPage(appointment, window, account, serviceProvider);
             ShowNotes(patient);
             ShowExaminations(patient);
             await LoggerService.CreateLog($"Приём {appointment.Id} был начат", true);

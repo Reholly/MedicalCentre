@@ -3,6 +3,7 @@ using MedicalCentre.Models;
 using MedicalCentre.Pages.AdminWindowPages;
 using MedicalCentre.Services;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,12 +18,12 @@ public class CentreSettingsViewModel
     public ICommand? OpenHostCommand { get; set; }
 
     private CentreSettingsPage settingsPage;
-    private IServiceCollection services;
+    private IServiceProvider serviceProvider;
 
-    public CentreSettingsViewModel(CentreSettingsPage page, IServiceCollection services)
+    public CentreSettingsViewModel(CentreSettingsPage page, IServiceProvider services)
     {
         settingsPage = page;
-        this.services = services;
+        this.serviceProvider = services;
 
         OpenDbCommand = new RelayCommand(OpenDatabaseMenu);
         OpenHostCommand = new RelayCommand(OpenHostSite);
@@ -32,7 +33,7 @@ public class CentreSettingsViewModel
 
     private async Task Update()
     {
-        var logDb = services.BuildServiceProvider().GetRequiredService<IRepository<Log>>();
+        var logDb = serviceProvider.GetRequiredService<IRepository<Log>>();
         Logs = new ObservableCollection<Log>(await Task.Run(logDb.GetTableAsync));
 
         settingsPage.Logs.ItemsSource = Logs;

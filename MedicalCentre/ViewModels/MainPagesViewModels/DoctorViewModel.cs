@@ -3,6 +3,7 @@ using MedicalCentre.Pages.DoctorWindowPages;
 using MedicalCentre.Services;
 using MedicalCentre.Views;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -16,14 +17,14 @@ public class DoctorViewModel
     private DoctorWindow window;
     private Account account;
     private AuthentificationService authentificationService;
-    private IServiceCollection services;
+    private IServiceProvider serviceProvider;
 
-    public DoctorViewModel(DoctorWindow window, Account account, IServiceCollection services)
+    public DoctorViewModel(DoctorWindow window, Account account, IServiceProvider serviceProvider)
     {
         this.window = window;
         this.account = account;
-        this.services = services;
-        this.authentificationService = services.BuildServiceProvider().GetRequiredService<AuthentificationService>();
+        this.serviceProvider = serviceProvider;
+        this.authentificationService = serviceProvider.GetRequiredService<AuthentificationService>();
         WindowClosingCommand = new RelayCommandAsync(Close);
         OpeningMainPageCommand = new RelayCommand(OpenMainPage);
     }
@@ -34,5 +35,5 @@ public class DoctorViewModel
         window.Close();
     }
 
-    private void OpenMainPage() => window.MainFrame.Content = new DoctorMainPage(window, account, services);
+    private void OpenMainPage() => window.MainFrame.Content = new DoctorMainPage(window, account, serviceProvider);
 }

@@ -3,6 +3,7 @@ using MedicalCentre.Pages.GeneralPages;
 using MedicalCentre.Services;
 using MedicalCentre.Views;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -16,19 +17,19 @@ public class JuniorPersonalViewModel
     private JuniorPersonalWindow window;
     private Account account;
     private AuthentificationService authentificationService;
-    private IServiceCollection services;
+    private IServiceProvider serviceProvider;
 
-    public JuniorPersonalViewModel(JuniorPersonalWindow window, Account account, IServiceCollection services)
+    public JuniorPersonalViewModel(JuniorPersonalWindow window, Account account, IServiceProvider serviceProvider)
     {
         this.window = window;
         this.account = account;
-        this.authentificationService = services.BuildServiceProvider().GetRequiredService<AuthentificationService>();
-        this.services = services;
+        this.authentificationService = serviceProvider.GetRequiredService<AuthentificationService>();
+        this.serviceProvider = serviceProvider;
         ShowStorageItemsCommand = new RelayCommand(ShowStorageItems);
         LogoutCommand = new RelayCommandAsync(Close);
     }
 
-    private void ShowStorageItems() => window.frame.Content = new StoragePage(services);
+    private void ShowStorageItems() => window.frame.Content = new StoragePage(serviceProvider);
 
     private async Task Close()
     {

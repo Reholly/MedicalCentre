@@ -15,19 +15,21 @@ public class DoctorMainPageViewModel
     private readonly DoctorMainPage page;
     private readonly DoctorWindow window;
     private readonly Account account;
-    private readonly IServiceCollection services = null!;
+    private readonly IServiceProvider serviceProvider = null!;
 
-    public DoctorMainPageViewModel(DoctorMainPage page, DoctorWindow window, Account account, IServiceCollection services)
+    public DoctorMainPageViewModel(DoctorMainPage page, DoctorWindow window, Account account, IServiceProvider serviceProvider)
     {
         this.page = page;
         this.window = window;
+        this.serviceProvider = serviceProvider;
         this.account = account;
+
         ShowCards();
     }
 
     private async Task ShowCards()
     {
-        var appDb = services.BuildServiceProvider().GetRequiredService<IRepository<Appointment>>();
+        var appDb = serviceProvider.GetRequiredService<IRepository<Appointment>>();
         List<Appointment> appointments = await Task.Run(() => appDb.GetTableAsync());
         foreach (Appointment appointment in appointments)
         {
@@ -38,7 +40,7 @@ public class DoctorMainPageViewModel
 
                 if (appointment.PatientId != null)
                 {
-                    var patientsDb = services.BuildServiceProvider().GetRequiredService<IRepository<Patient>>();
+                    var patientsDb = serviceProvider.GetRequiredService<IRepository<Patient>>();
                     patient = patientsDb.GetItemById((uint)appointment.PatientId);
                     patientString = patient.ToStringForAppointment();
                 }
@@ -47,13 +49,13 @@ public class DoctorMainPageViewModel
                     patientString = "Тут_должен_быть_пациент";
                 }
 
-                var empDb = services.BuildServiceProvider().GetRequiredService<IRepository<Employee>>();
+                var empDb = serviceProvider.GetRequiredService<IRepository<Employee>>();
                 Employee doctor = empDb.GetItemById(appointment.DoctorId);
                 string doctorString = doctor.ToString();
 
                 if (account.EmployeeAccountId == appointment.DoctorId)
                 {
-                    page.AppointmentCards.Children.Insert(0, new AppointmentCard(appointment, page, patientString, doctorString, window, account,services));
+                    page.AppointmentCards.Children.Insert(0, new AppointmentCard(appointment, page, patientString, doctorString, window, account,serviceProvider));
                 }
             }
         }

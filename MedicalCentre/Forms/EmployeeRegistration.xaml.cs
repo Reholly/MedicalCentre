@@ -1,14 +1,14 @@
 ﻿using MedicalCentre.FormsViewModels;
-using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Windows;
 
 namespace MedicalCentre.Forms;
 
 public partial class EmployeeRegistration : Window
 {
-    public EmployeeRegistration(IServiceCollection services)
+    public EmployeeRegistration(IServiceProvider serviceProvider)
     {
         InitializeComponent();
-        DataContext = new EmployeeRegistrationViewModel(this, services);
+        DataContext = new EmployeeRegistrationViewModel(this, serviceProvider);
     }
 }

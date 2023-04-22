@@ -23,13 +23,13 @@ public class MainPageViewModel
 
     private readonly MainPage currentPage;
     private readonly IRepository<Transaction> transactionRepository;
-    private readonly IServiceCollection services;
+    private readonly IServiceProvider serviceProvider;
 
-    public MainPageViewModel(MainPage page, IServiceCollection services)
+    public MainPageViewModel(MainPage page, IServiceProvider serviceProvider)
     {
         currentPage = page;       
-        this.services = services;
-        transactionRepository = services.BuildServiceProvider().GetRequiredService<IRepository<Transaction>>();
+        this.serviceProvider = serviceProvider;
+        transactionRepository = serviceProvider.GetRequiredService<IRepository<Transaction>>();
 
         OpenNewsCommand = new RelayCommand(OpenNews);
         OpenManageCommand = new RelayCommand(OpenMail);

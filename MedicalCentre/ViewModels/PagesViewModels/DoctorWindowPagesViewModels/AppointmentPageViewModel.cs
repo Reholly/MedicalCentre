@@ -23,15 +23,15 @@ public class AppointmentPageViewModel
     private readonly AppointmentPage page;
     private readonly DoctorWindow window;
     private readonly Account account;
-    private readonly IServiceCollection services;
+    private readonly IServiceProvider serviceProvider;
     private readonly IRepository<Patient> patientsRepository;
-    public AppointmentPageViewModel(Appointment appointment, AppointmentPage page, DoctorWindow window, Account account, IServiceCollection services)
+    public AppointmentPageViewModel(Appointment appointment, AppointmentPage page, DoctorWindow window, Account account, IServiceProvider serviceProvider)
     {
         this.appointment = appointment;
         this.page = page;
         this.window = window;
-        this.services = services;
-        patientsRepository = services.BuildServiceProvider().GetRequiredService<IRepository<Patient>>();
+        this.serviceProvider = serviceProvider;
+        patientsRepository = serviceProvider.GetRequiredService<IRepository<Patient>>();
 
         NotePrintingCommand = new RelayCommand(PrintNote);
         AppointmentEndingCommand = new RelayCommandAsync(EndAppointment);
@@ -55,9 +55,9 @@ public class AppointmentPageViewModel
         await Task.Run( () => patientsRepository.UpdateItemAsync(patient));
 
         appointment.IsFinished = true;
-        window.MainFrame.Content = new DoctorMainPage(window, account, services);
+        window.MainFrame.Content = new DoctorMainPage(window, account, serviceProvider);
 
-        var appDb = services.BuildServiceProvider().GetRequiredService<IRepository<Appointment>>();
+        var appDb = serviceProvider.GetRequiredService<IRepository<Appointment>>();
         await Task.Run( () => appDb.UpdateItemAsync(appointment));
         await LoggerService.CreateLog($"Приём {appointment.Id} был закончен", true);
     }

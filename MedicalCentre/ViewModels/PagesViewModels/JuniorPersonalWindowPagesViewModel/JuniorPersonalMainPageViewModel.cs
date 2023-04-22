@@ -2,6 +2,7 @@
 using MedicalCentre.Forms;
 using MedicalCentre.Models;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,13 +19,10 @@ public class JuniorPersonalMainPageViewModel
     public ICommand ExaminationStartingCommand { get; set; }
 
     private bool isSaved = true;
-    private IServiceCollection services;
     private IRepository<StorageItem> storageRepository;
-    public JuniorPersonalMainPageViewModel(IServiceCollection services)
+    public JuniorPersonalMainPageViewModel(IServiceProvider serviceProvider)
     {
-        this.services = services;
-
-        storageRepository = services.BuildServiceProvider().GetRequiredService<IRepository<StorageItem>>();
+        storageRepository = serviceProvider.GetRequiredService<IRepository<StorageItem>>();
         Items = new(storageRepository.GetTable());
         ItemAddingCommand = new RelayCommand(AddItem);
         SavingChangesCommand = new RelayCommandAsync(SaveChanges);

@@ -2,14 +2,14 @@
 using MedicalCentre.Pages.DoctorWindowPages;
 using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
-using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Windows;
 
 namespace MedicalCentre.Views;
 
 public partial class DoctorWindow : Window
 {
-    public DoctorWindow(Account account, IServiceCollection services)
+    public DoctorWindow(Account account, IServiceProvider services)
     {
         InitializeComponent();
 

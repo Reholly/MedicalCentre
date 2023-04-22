@@ -10,8 +10,8 @@ namespace MedicalCentre;
 
 public partial class App : Application
 {
-    private ServiceProvider serviceProvider = null!;
-    private ServiceCollection services = null!;
+    private IServiceProvider serviceProvider = null!;
+    private IServiceCollection services = null!;
 
     protected override void OnStartup(StartupEventArgs e)
     {
@@ -26,7 +26,7 @@ public partial class App : Application
         base.OnStartup(e);
     }
 
-    private void ConfigureServices(ServiceCollection services)
+    private void ConfigureServices(IServiceCollection services)
     {
         services.AddTransient(typeof(IRepository<>), typeof(ContextRepository<>));
         services.AddTransient<IAuthentification,DefaultAuthentification>();
@@ -36,7 +36,7 @@ public partial class App : Application
 
     private void OnStartup(object sender, StartupEventArgs e)
     {
-        var mainWindow = new MainWindow(services);
+        var mainWindow = new MainWindow(serviceProvider);
         mainWindow.Show();
     }
 }

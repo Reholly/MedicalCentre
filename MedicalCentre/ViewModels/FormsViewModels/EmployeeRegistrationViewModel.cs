@@ -21,16 +21,16 @@ public class EmployeeRegistrationViewModel
     private Dictionary<string, Roles> roleVariantsToRoles;
     private EmployeeRegistration profile;
     private AuthentificationService authentificationService;
-    private IServiceCollection services;
+    private IServiceProvider serviceProvider;
             
     private const string DOCTOR_ROLE = "Доктор";
     private const string ADMIN_ROLE = "Администратор";
     private const string OPERATOR_ROLE = "Оператор";
     private const string JUNIOR_ROLE = "Младший мед.персонал";
 
-    public EmployeeRegistrationViewModel(EmployeeRegistration profile, IServiceCollection services)
+    public EmployeeRegistrationViewModel(EmployeeRegistration profile, IServiceProvider serviceProvider)
     {
-        this.services = services;
+        this.serviceProvider = serviceProvider;
 
         this.profile = profile;
         roleVariantsToRoles = new Dictionary<string, Roles>
@@ -41,7 +41,7 @@ public class EmployeeRegistrationViewModel
             { JUNIOR_ROLE, Roles.JuniorPersonal }
         };
 
-        this.authentificationService = services.BuildServiceProvider().GetRequiredService<AuthentificationService>();
+        this.authentificationService = serviceProvider.GetRequiredService<AuthentificationService>();
 
         this.profile.RolesComboBox.ItemsSource = new string[] { DOCTOR_ROLE, ADMIN_ROLE, OPERATOR_ROLE, JUNIOR_ROLE };
 
@@ -51,7 +51,7 @@ public class EmployeeRegistrationViewModel
 
     private async Task Register()
     {
-        var empDb = services.BuildServiceProvider().GetRequiredService<IRepository<Employee>>();
+        var empDb = serviceProvider.GetRequiredService<IRepository<Employee>>();
 
         Random random = new Random();
         uint empId = uint.Parse(random.Next(1, int.MaxValue).ToString());

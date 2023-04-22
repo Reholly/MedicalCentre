@@ -2,6 +2,7 @@
 using MedicalCentre.Services;
 using MedicalCentre.Views;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -14,13 +15,13 @@ public class MainViewModel
 
     private MainWindow window;
     private AuthentificationService authentificationService;
-    private IServiceCollection services;
+    private IServiceProvider serviceProvider;
 
-    public MainViewModel(MainWindow window, IServiceCollection services)
+    public MainViewModel(MainWindow window, IServiceProvider serviceProvider)
     {
         this.window = window;
-        this.services = services;
-        this.authentificationService = services.BuildServiceProvider().GetRequiredService<AuthentificationService>();
+        this.serviceProvider = serviceProvider;
+        this.authentificationService = serviceProvider.GetRequiredService<AuthentificationService>();
         LoginCommand = new RelayCommandAsync(Login);
         CloseCommand = new RelayCommand(Close);
     }
@@ -32,7 +33,7 @@ public class MainViewModel
         Account account = await Task.Run(() => Authentificate(login, password));
         if (account != null)
         {
-            await WindowOpenerByRoleService.OpenWindowByRole(account, services);
+            await WindowOpenerByRoleService.OpenWindowByRole(account, serviceProvider);
             Close();
         }
     }
