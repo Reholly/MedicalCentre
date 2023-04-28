@@ -31,11 +31,11 @@ namespace MedicalCentre.Models
             Type = type;
         }
 
-        public Transaction(uint id, double price, DateTime Date, TransactionType type)
+        public Transaction(uint id, double price, DateTime date, TransactionType type)
         {
             Id = id;
             Price = price;
-            TransactionDate = Date;
+            TransactionDate = date;
             Type = type;
         }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace MedicalCentre.ViewModels;
+namespace MedicalCentre.ViewModels.Commands;
 
 public class RelayCommand : ICommand
 {

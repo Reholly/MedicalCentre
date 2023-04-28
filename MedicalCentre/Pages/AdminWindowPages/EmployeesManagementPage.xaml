@@ -4,8 +4,6 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      xmlns:local="clr-namespace:MedicalCentre.Pages.AdminWindowPages"
-      xmlns:ucc="clr-namespace:MedicalCentre.UserControls"
         
       mc:Ignorable="d" 
       d:Height="1080" d:Width="1340"
@@ -114,7 +112,7 @@
                             <TextBlock Foreground="#3b515a">Поиск</TextBlock>
                         </materialDesign:HintAssist.Hint>
                     </TextBox>
-                    <Button   Width="101" Height="31" Background="#252934" Foreground="#fafafafa" BorderThickness="0" BorderBrush="Transparent" Content="Поиск" materialDesign:ButtonAssist.CornerRadius="-1"   Command="{Binding SearchCommand}"/>
+                    <Button   Width="101" Height="31" Background="#252934" Foreground="#fafafafa" BorderThickness="0" BorderBrush="Transparent" Content="Поиск" Command="{Binding SearchCommand}"/>
                 </DockPanel>
 
                 <StackPanel Width="600" Name="EmployeesCards"/>

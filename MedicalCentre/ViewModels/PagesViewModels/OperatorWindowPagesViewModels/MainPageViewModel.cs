@@ -1,9 +1,10 @@
-﻿using MedicalCentre.Forms;
+﻿using System.Windows.Input;
+using MedicalCentre.Forms;
 using MedicalCentre.Pages.OperatorPages;
 using MedicalCentre.Services;
-using System.Windows.Input;
+using MedicalCentre.ViewModels.Commands;
 
-namespace MedicalCentre.ViewModels.OperatorWindowPagesViewModels;
+namespace MedicalCentre.ViewModels.PagesViewModels.OperatorWindowPagesViewModels;
 
 public class MainPageViewModel
 {
@@ -30,7 +31,7 @@ public class MainPageViewModel
 
     private void Create()
     {
-        CreateAppointment window = new CreateAppointment();
+        AppointmentCreatingForm window = new AppointmentCreatingForm();
         window.Show();
     }
 

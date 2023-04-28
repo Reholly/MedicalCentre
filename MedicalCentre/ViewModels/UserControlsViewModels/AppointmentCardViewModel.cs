@@ -1,17 +1,18 @@
-﻿using MedicalCentre.DatabaseLayer;
-using MedicalCentre.Models;
-using MedicalCentre.Pages.DoctorWindowPages;
-using MedicalCentre.Services;
-using MedicalCentre.ViewModels;
-using MedicalCentre.Views;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Models;
+using MedicalCentre.Pages.DoctorWindowPages;
+using MedicalCentre.Services;
+using MedicalCentre.UserControls;
+using MedicalCentre.ViewModels.Commands;
+using MedicalCentre.Views;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace MedicalCentre.UserControls.ViewModels;
+namespace MedicalCentre.ViewModels.UserControlsViewModels;
 
 public class AppointmentCardViewModel
 {
@@ -45,7 +46,7 @@ public class AppointmentCardViewModel
     {
         if (patient != "Тут_должен_быть_пациент")
         {
-            Patient patient = await Task.Run( ()=> patientRepository.GetItemByIdAsync((uint)appointment.PatientId));
+            var patient = await Task.Run( ()=> patientRepository.GetItemByIdAsync(appointment.PatientId?? throw new NullReferenceException()));
             page.WorkspaceFrame.Content = new AppointmentPage(appointment, window, account, serviceProvider);
             ShowNotes(patient);
             ShowExaminations(patient);
@@ -60,26 +61,20 @@ public class AppointmentCardViewModel
     private void ShowNotes(Patient patient)
     {
         page.PatientsNotes.Children.Clear();
-        List<Note> notes = noteRepository.GetTable();
-        foreach (Note note in notes)
+        var notes = noteRepository.GetTable();
+        foreach (var note in notes.Where(note => note.PatientId == patient.Id))
         {
-            if (note.PatientId == patient.Id)
-            {
-                page.PatientsNotes.Children.Insert(0, new NoteCard(note));
-            }
+            page.PatientsNotes.Children.Insert(0, new NoteCard(note));
         }
     }
 
     private void ShowExaminations(Patient patient)
     {
         page.PatientsExaminations.Children.Clear();
-        List<MedicalExamination> examinations = examsRepository.GetTable();
-        foreach (MedicalExamination examination in examinations)
+        var examinations = examsRepository.GetTable();
+        foreach (var examination in examinations.Where(examination => examination.PatientId == patient.Id))
         {
-            if (examination.PatientId == patient.Id)
-            {
-                page.PatientsExaminations.Children.Insert(0, new ExaminationCard(examination));
-            }
+            page.PatientsExaminations.Children.Insert(0, new ExaminationCard(examination));
         }
     }
 }

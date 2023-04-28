@@ -1,9 +1,10 @@
-﻿using MedicalCentre.Forms;
+﻿using System.Windows.Input;
+using MedicalCentre.Forms;
 using MedicalCentre.Models;
-using MedicalCentre.ViewModels;
-using System.Windows.Input;
+using MedicalCentre.UserControls;
+using MedicalCentre.ViewModels.Commands;
 
-namespace MedicalCentre.UserControls.ViewModels
+namespace MedicalCentre.ViewModels.UserControlsViewModels
 {
     public class NoteCardViewModel
     {

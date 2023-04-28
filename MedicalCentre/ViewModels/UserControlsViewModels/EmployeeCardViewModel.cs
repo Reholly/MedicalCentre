@@ -1,14 +1,15 @@
-﻿using MedicalCentre.Forms;
+﻿using System.Windows.Input;
+using MedicalCentre.Forms;
 using MedicalCentre.Models;
-using MedicalCentre.ViewModels;
-using System.Windows.Input;
+using MedicalCentre.UserControls;
+using MedicalCentre.ViewModels.Commands;
 
-namespace MedicalCentre.UserControls.ViewModels
+namespace MedicalCentre.ViewModels.UserControlsViewModels
 {
     internal class EmployeeCardViewModel
     {
         public ICommand? ProfileCommand { get; set; }
-        private Employee currentEmployee;
+        private readonly Employee currentEmployee;
         public EmployeeCardViewModel(EmployeeCard card, Employee employee)
         {
             currentEmployee = employee;

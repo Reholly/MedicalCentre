@@ -2,22 +2,19 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MedicalCentre.ViewModels;
+namespace MedicalCentre.ViewModels.Commands;
 
 public class RelayCommandAsync : ICommand
 {
     private bool isExecuting;
-    private Func<Task> asyncDelegate;
-    public bool IsExecuting
+    private readonly Func<Task> asyncDelegate;
+    private bool IsExecuting
     {
-        get
-        {
-            return isExecuting;
-        }
+        get => isExecuting;
         set
         {
             isExecuting = value;
-            CanExecuteChanged?.Invoke(this, new EventArgs());
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -28,12 +25,12 @@ public class RelayCommandAsync : ICommand
         this.asyncDelegate = asyncDelegate;
     }
 
-    public bool CanExecute(object parameter)
+    public bool CanExecute(object? parameter)
     {
         return !IsExecuting;
     }
 
-    public async void Execute(object parameter)
+    public async void Execute(object? parameter)
     {
         IsExecuting = true;
 

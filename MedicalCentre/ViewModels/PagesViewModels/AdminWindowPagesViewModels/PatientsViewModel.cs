@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using MedicalCentre.ViewModels.Commands;
 
 namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels;
 

@@ -6,6 +6,7 @@ using MedicalCentre.ViewModels;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MedicalCentre.ViewModels.Commands;
 
 namespace MedicalCentre.FormsViewModels;
 
