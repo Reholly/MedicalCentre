@@ -13,10 +13,12 @@ namespace MedicalCentre.Authentification;
 
 public class DefaultAuthentification : IAuthentification
 {
-    private IRepository<Account> accountRepository;
-    public DefaultAuthentification(IRepository<Account> accountRepository)
+    private readonly IRepository<Account> accountRepository;
+    private readonly IRepository<Log> logRepository;
+    public DefaultAuthentification(IRepository<Account> accountRepository, IRepository<Log> logRepository)
     {
         this.accountRepository = accountRepository;
+        this.logRepository = logRepository;
     }
 
     public async Task<Account> LogIn(string username, string password)
@@ -35,7 +37,7 @@ public class DefaultAuthentification : IAuthentification
         }
         if (account != null && account.Password == CalculateHash(password, account.Id.ToString()))
         {
-            await LoggerService.CreateLog($"Доступ разрешен. Пользователь {account.Username} вошел в систему.", true);
+            await LoggerService.CreateLog($"Доступ разрешен. Пользователь {account.Username} вошел в систему.", true, logRepository);
             account.IsOnline = true;
             await accountRepository.UpdateItemAsync(account);
 
@@ -57,7 +59,7 @@ public class DefaultAuthentification : IAuthentification
     {
         currentAccount.IsOnline = false;
         await accountRepository.UpdateItemAsync(currentAccount);
-        await LoggerService.CreateLog($"Пользователь {currentAccount.Username} вышел из системы.", true);
+        await LoggerService.CreateLog($"Пользователь {currentAccount.Username} вышел из системы.", true, logRepository);
         return currentAccount;
     }
 

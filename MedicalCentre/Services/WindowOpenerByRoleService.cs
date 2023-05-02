@@ -1,4 +1,5 @@
 ﻿using MedicalCentre.Authentification;
+using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
 using MedicalCentre.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,7 @@ public static class WindowOpenerByRoleService
     public static async Task OpenWindowByRole(Account currentAccount, IServiceProvider serviceProvider)
     {
         AuthentificationService authentificationService = serviceProvider.GetRequiredService<AuthentificationService>();
+        IRepository<Log> logRepository = serviceProvider.GetRequiredService<IRepository<Log>>();
 
         switch (currentAccount.Role)
         {
@@ -33,7 +35,7 @@ public static class WindowOpenerByRoleService
                 juniorPersonal.Show();
                 break;
             default:
-                await LoggerService.CreateLog("Неверно указана роль.", false);
+                await LoggerService.CreateLog("Неверно указана роль.", false, logRepository);
                 MessageBox.Show("Проблемы с получением роли. Перезайдите и выполните вход заново или свяжитесь с сис.админом");
                 break;
         }

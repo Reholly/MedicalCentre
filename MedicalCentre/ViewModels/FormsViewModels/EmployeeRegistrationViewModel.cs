@@ -53,6 +53,7 @@ public class EmployeeRegistrationViewModel
     private async Task Register()
     {
         var empDb = serviceProvider.GetRequiredService<IRepository<Employee>>();
+        var logDb = serviceProvider.GetRequiredService<IRepository<Log>>();
 
         Random random = new Random();
         uint empId = uint.Parse(random.Next(1, int.MaxValue).ToString());
@@ -69,12 +70,12 @@ public class EmployeeRegistrationViewModel
         {
             await authentificationService.RegisterAsync(account);
             await empDb.AddItemAsync(employee);
-            await LoggerService.CreateLog($"Регистрация нового сотрудника {account.Id} - {account.Username}", true);
+            await LoggerService.CreateLog($"Регистрация нового сотрудника {account.Id} - {account.Username}", true, logDb);
         }
         catch (Exception)
         {
             MessageBox.Show("Неизвестная ошибка в создании аккаунта, попробуйте еще раз");
-            await LoggerService.CreateLog($"Ошибка в регистрации нового сотрудника {account.Id} - {account.Username}", false);
+            await LoggerService.CreateLog($"Ошибка в регистрации нового сотрудника {account.Id} - {account.Username}", false, logDb);
             profile.Close();
         }
 

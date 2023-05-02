@@ -21,16 +21,18 @@ public class AppointmentCardViewModel
     private readonly DoctorWindow window;
     private readonly Account account;
     private readonly string patient;
-    private IRepository<Patient> patientRepository;
-    private IRepository<Note> noteRepository;
-    private IRepository<MedicalExamination> examsRepository;
-    private IServiceProvider serviceProvider;
+    private readonly IRepository<Patient> patientRepository;
+    private readonly IRepository<Note> noteRepository;
+    private readonly IRepository<MedicalExamination> examsRepository;
+    private readonly IRepository<Log> logRepository;
+    private readonly IServiceProvider serviceProvider;
     public ICommand AppointmentStartingCommand { get; set; }
     public AppointmentCardViewModel(AppointmentCard card, Appointment appointment, DoctorMainPage page, string patient, string doctor, DoctorWindow window, Account account, IServiceProvider serviceProvider)
     {
-        this.patientRepository = serviceProvider.GetRequiredService<IRepository<Patient>>();
-        this.noteRepository = serviceProvider.GetRequiredService<IRepository<Note>>();
-        this.examsRepository = serviceProvider.GetRequiredService<IRepository<MedicalExamination>>();
+        patientRepository = serviceProvider.GetRequiredService<IRepository<Patient>>();
+        noteRepository = serviceProvider.GetRequiredService<IRepository<Note>>();
+        examsRepository = serviceProvider.GetRequiredService<IRepository<MedicalExamination>>();
+        logRepository = serviceProvider.GetRequiredService<IRepository<Log>>();
 
         this.serviceProvider = serviceProvider;
         this.page = page;
@@ -50,7 +52,7 @@ public class AppointmentCardViewModel
             page.WorkspaceFrame.Content = new AppointmentPage(appointment, window, account, serviceProvider);
             ShowNotes(patient);
             ShowExaminations(patient);
-            await LoggerService.CreateLog($"Приём {appointment.Id} был начат", true);
+            await LoggerService.CreateLog($"Приём {appointment.Id} был начат", true, logRepository);
         }
         else
         {

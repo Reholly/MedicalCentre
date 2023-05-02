@@ -26,6 +26,7 @@ public class AppointmentPageViewModel
     private readonly Account account;
     private readonly IServiceProvider serviceProvider;
     private readonly IRepository<Patient> patientsRepository;
+    private readonly IRepository<Log> logRepository;
     public AppointmentPageViewModel(Appointment appointment, AppointmentPage page, DoctorWindow window, Account account, IServiceProvider serviceProvider)
     {
         this.appointment = appointment;
@@ -33,6 +34,7 @@ public class AppointmentPageViewModel
         this.window = window;
         this.serviceProvider = serviceProvider;
         patientsRepository = serviceProvider.GetRequiredService<IRepository<Patient>>();
+        logRepository = serviceProvider.GetRequiredService<IRepository<Log>>();
 
         NotePrintingCommand = new RelayCommand(PrintNote);
         AppointmentEndingCommand = new RelayCommandAsync(EndAppointment);
@@ -60,7 +62,7 @@ public class AppointmentPageViewModel
 
         var appDb = serviceProvider.GetRequiredService<IRepository<Appointment>>();
         await Task.Run( () => appDb.UpdateItemAsync(appointment));
-        await LoggerService.CreateLog($"Приём {appointment.Id} был закончен", true);
+        await LoggerService.CreateLog($"Приём {appointment.Id} был закончен", true, logRepository);
     }
 
     private void PrintNote()

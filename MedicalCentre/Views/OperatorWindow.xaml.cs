@@ -15,7 +15,7 @@ public partial class OperatorWindow : Window
 
         EmployeeNameBinderService.BindName(account, RoleName, EmployeeName);
 
-        MainFrame.Content = new MainPage();
+        MainFrame.Content = new MainPage(serviceProvider);
         DataContext = new OperatorWindowViewModel(this, account, serviceProvider);
     }
 }

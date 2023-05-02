@@ -9,7 +9,8 @@ using MedicalCentre.Migrations;
 using MedicalCentre.Models;
 using MedicalCentre.Pages.OperatorPages;
 using MedicalCentre.Services;
-using MedicalCentre.ViewModels.Commands;
+using System;
+using System.Windows.Input;
 
 namespace MedicalCentre.ViewModels.PagesViewModels.OperatorWindowPagesViewModels;
 
@@ -20,13 +21,13 @@ public class MainPageViewModel
     public ICommand WriteCommand { get; set; }
     public ICommand CreateCommand { get; set; }
 
-    private readonly MainPage currentPage;
-    private readonly ContextRepository<Account> accDb = new();
-    private readonly ContextRepository<Employee> doctorDb = new();
-
-    public MainPageViewModel(MainPage page)
+    private MainPage currentPage;
+    private readonly IServiceProvider serviceProvider;
+    public MainPageViewModel(MainPage page, IServiceProvider serviceProvider)
     {
-        this.currentPage = page;
+        currentPage = page;
+        this.serviceProvider = serviceProvider;
+
         OpenNewsCommand = new RelayCommand(OpenNews);
         OpenNewFeaturesCommand = new RelayCommand(OpenNewFeatures);
         CreateCommand = new RelayCommandAsync(Create);
@@ -40,14 +41,13 @@ public class MainPageViewModel
 
     private async Task Create()
     {
-        var doctors = await Task.Run(InitDoctors);
-        var window = new AppointmentCreatingForm(doctors);
+        CreateAppointment window = new CreateAppointment(serviceProvider);
         window.Show();
     }
 
     private void Write()
     {
-        WriteAppointment window = new WriteAppointment();
+        WriteAppointment window = new WriteAppointment(serviceProvider);
         window.Show();
     }
 

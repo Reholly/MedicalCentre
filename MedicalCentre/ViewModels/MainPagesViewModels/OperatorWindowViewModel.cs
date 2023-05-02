@@ -18,8 +18,8 @@ public class OperatorWindowViewModel
 
     private OperatorWindow window;
     private Account currentAccount;
-    private AuthentificationService authentificationService;
-    private IServiceProvider serviceProvider;
+    private readonly AuthentificationService authentificationService;
+    private readonly IServiceProvider serviceProvider;
 
     public OperatorWindowViewModel(OperatorWindow window, Account account, IServiceProvider serviceProvider)
     {
@@ -34,7 +34,7 @@ public class OperatorWindowViewModel
     }
 
     private void OpenPatientsPage() => window.MainFrame.Content = new PatientsPage(serviceProvider);
-    private void OpenAppointmentsManagementPage() => window.MainFrame.Content = new MedicalCentre.Pages.OperatorPages.MainPage();
+    private void OpenAppointmentsManagementPage() => window.MainFrame.Content = new MedicalCentre.Pages.OperatorPages.MainPage(serviceProvider);
     private async Task Close()
     {
         await authentificationService.LogOutAsync(currentAccount);

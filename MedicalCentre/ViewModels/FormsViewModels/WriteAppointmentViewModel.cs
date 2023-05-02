@@ -3,6 +3,7 @@ using MedicalCentre.Forms;
 using MedicalCentre.Models;
 using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -16,10 +17,11 @@ public class WriteAppointmentViewModel
     public ICommand CloseCommand { get; set; }
 
     private WriteAppointment currentPage;
-
-    public WriteAppointmentViewModel(WriteAppointment page)
+    private readonly IRepository<Log> logRepository;
+    public WriteAppointmentViewModel(WriteAppointment page, IServiceProvider provider)
     {
         currentPage = page;
+        logRepository = provider.GetRequiredService<IRepository<Log>>();
         WriteCommand = new RelayCommandAsync(Write);
         CloseCommand = new RelayCommand(() => currentPage.Close());
     }
@@ -36,11 +38,11 @@ public class WriteAppointmentViewModel
 
             appointment.PatientId = patient.Id;
             await appointmetnDb.UpdateItemAsync(appointment);
-            await LoggerService.CreateLog($"patient {patient.Id} was recorded on {appointment.Id}", true);
+            await LoggerService.CreateLog($"patient {patient.Id} was recorded on {appointment.Id}", true, logRepository);
         }
         catch (Exception ex)
         {
-            await LoggerService.CreateLog(ex.Message, false);
+            await LoggerService.CreateLog(ex.Message, false, logRepository);
         }
         currentPage.Close();
     }

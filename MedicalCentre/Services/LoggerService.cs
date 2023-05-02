@@ -6,10 +6,8 @@ namespace MedicalCentre.Services;
 
 public static class LoggerService
 {
-    public static async Task CreateLog(string log, bool isSuccess)
+    public static async Task CreateLog(string log, bool isSuccess, IRepository<Log> logRepository)
     {
-        ContextRepository<Log> db = new ContextRepository<Log>();
-
-        await Task.Run(async () => await db.AddItemAsync(new Log(log, isSuccess)));      
+        await logRepository.AddItemAsync(new Log(log, isSuccess));      
     }
 }
