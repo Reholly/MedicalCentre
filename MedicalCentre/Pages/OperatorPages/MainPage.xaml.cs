@@ -1,7 +1,6 @@
 ﻿using MedicalCentre.ViewModels.OperatorWindowPagesViewModels;
 using System;
 using System.Windows.Controls;
-using MedicalCentre.ViewModels.PagesViewModels.OperatorWindowPagesViewModels;
 
 namespace MedicalCentre.Pages.OperatorPages;
 

@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MedicalCentre.ViewModels.Commands;
 
 namespace MedicalCentre.ViewModels;
 
