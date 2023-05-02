@@ -1,14 +1,15 @@
-﻿using MedicalCentre.FormsViewModels;
+﻿using System;
 using System.Windows;
+using MedicalCentre.ViewModels.FormsViewModels;
 
 namespace MedicalCentre.Forms
 {
     public partial class CreateExaminationForm : Window
     {
-        public CreateExaminationForm()
+        public CreateExaminationForm(IServiceProvider provider)
         {
             InitializeComponent();
-            DataContext = new CreateExaminationFormViewModel(this);
+            DataContext = new ExaminationCreatingFormViewModel(this, provider);
         }
     }
 }

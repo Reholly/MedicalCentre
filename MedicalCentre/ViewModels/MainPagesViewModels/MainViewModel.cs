@@ -1,48 +1,44 @@
-﻿using MedicalCentre.Models;
-using MedicalCentre.Services;
-using MedicalCentre.Views;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MedicalCentre.Models;
+using MedicalCentre.Services;
 using MedicalCentre.ViewModels.Commands;
+using MedicalCentre.Views;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace MedicalCentre.ViewModels;
+namespace MedicalCentre.ViewModels.MainPagesViewModels;
 
 public class MainViewModel
 {
     public ICommand LoginCommand { get; set; }
     public ICommand CloseCommand { get; set; }
 
-    private MainWindow window;
-    private AuthentificationService authentificationService;
-    private IServiceProvider serviceProvider;
+    private readonly MainWindow window;
+    private readonly AuthentificationService authentificationService;
+    private readonly IServiceProvider serviceProvider;
 
     public MainViewModel(MainWindow window, IServiceProvider serviceProvider)
     {
         this.window = window;
         this.serviceProvider = serviceProvider;
-        this.authentificationService = serviceProvider.GetRequiredService<AuthentificationService>();
+        authentificationService = serviceProvider.GetRequiredService<AuthentificationService>();
         LoginCommand = new RelayCommandAsync(Login);
         CloseCommand = new RelayCommand(Close);
     }
 
     private async Task Login()
     {
-        string login = window.Login.Text;
-        string password = window.Password.Password;
-        Account account = await Task.Run(() => Authentificate(login, password));
-        if (account != null)
-        {
-            await WindowOpenerByRoleService.OpenWindowByRole(account, serviceProvider);
-            Close();
-        }
+        var login = window.Login.Text;
+        var password = window.Password.Password;
+        var account = await Task.Run(() => Authentificate(login, password));
+        await Task.Run(() => WindowOpenerByRoleService.OpenWindowByRole(account, serviceProvider));
+        Close();
     }
     private async Task<Account> Authentificate(string login, string password)
     {
-        Account account = await authentificationService.LogInAsync(login, password);
-           
-        return account;      
+        var account = await Task.Run(() => authentificationService.LogInAsync(login, password));
+        return account!;      
     }
     private void Close() => window.Close();
 }

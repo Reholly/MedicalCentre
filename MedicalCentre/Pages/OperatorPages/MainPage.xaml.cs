@@ -1,4 +1,4 @@
-﻿using MedicalCentre.ViewModels.OperatorWindowPagesViewModels;
+﻿using MedicalCentre.ViewModels.PagesViewModels.OperatorWindowPagesViewModels;
 using System;
 using System.Windows.Controls;
 
@@ -9,6 +9,6 @@ public partial class MainPage : Page
     public MainPage(IServiceProvider serviceProvider)
     {
         InitializeComponent();
-        DataContext = new MainPageViewModel(this, serviceProvider);
+        DataContext = new MainPageViewModel(serviceProvider);
     }
 }

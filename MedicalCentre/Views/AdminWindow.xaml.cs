@@ -4,6 +4,7 @@ using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
 using System;
 using System.Windows;
+using MedicalCentre.ViewModels.MainPagesViewModels;
 
 namespace MedicalCentre.Views;
 
@@ -16,6 +17,6 @@ public partial class AdminWindow : Window
         EmployeeNameBinderService.BindName(account, RoleName, EmployeeName);
 
         MainFrame.Content = new MainPage(serviceProvider);
-        DataContext = new AdminViewModel(this, account, serviceProvider);
+        DataContext = new AdminWindowViewModel(this, account, serviceProvider);
     }
 }

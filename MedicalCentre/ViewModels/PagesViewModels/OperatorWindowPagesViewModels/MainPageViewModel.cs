@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MedicalCentre.Authentification;
-using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Forms;
-using MedicalCentre.Migrations;
 using MedicalCentre.Models;
 using MedicalCentre.Pages.OperatorPages;
 using MedicalCentre.Services;
 using System;
-using System.Windows.Input;
+using System.Linq;
+using MedicalCentre.DatabaseLayer;
+using MedicalCentre.ViewModels.Commands;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MedicalCentre.ViewModels.PagesViewModels.OperatorWindowPagesViewModels;
 
@@ -20,12 +20,10 @@ public class MainPageViewModel
     public ICommand OpenNewFeaturesCommand { get; set; }
     public ICommand WriteCommand { get; set; }
     public ICommand CreateCommand { get; set; }
-
-    private MainPage currentPage;
+    
     private readonly IServiceProvider serviceProvider;
-    public MainPageViewModel(MainPage page, IServiceProvider serviceProvider)
+    public MainPageViewModel(IServiceProvider serviceProvider)
     {
-        currentPage = page;
         this.serviceProvider = serviceProvider;
 
         OpenNewsCommand = new RelayCommand(OpenNews);
@@ -41,7 +39,8 @@ public class MainPageViewModel
 
     private async Task Create()
     {
-        CreateAppointment window = new CreateAppointment(serviceProvider);
+        var doctorsList = await Task.Run(InitDoctors);
+        var window = new AppointmentCreatingForm(doctorsList, serviceProvider);
         window.Show();
     }
 
@@ -53,11 +52,11 @@ public class MainPageViewModel
 
     private async Task<List<Employee>> InitDoctors()
     {
-        var accounts = await Task.Run(() => accDb.GetTableAsync());
+        var accounts = await Task.Run(() => serviceProvider.GetRequiredService<IRepository<Account>>().GetTableAsync());
         var doctorsList = new List<Employee>();
         foreach (var account in accounts.Where(account => account.Role == Roles.Doctor))
         {
-            var doctor = await Task.Run(() => doctorDb.GetItemByIdAsync(account.EmployeeAccountId));
+            var doctor = await Task.Run(() => serviceProvider.GetRequiredService<IRepository<Employee>>().GetItemByIdAsync(account.EmployeeAccountId));
             doctorsList.Add(doctor);
         }
 

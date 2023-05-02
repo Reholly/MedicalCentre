@@ -109,7 +109,7 @@
                             <TextBlock Foreground="#3b515a">Поиск</TextBlock>
                         </materialDesign:HintAssist.Hint>
                     </TextBox>
-                    <Button   Width="101" Height="31" Background="#252934" Foreground="#fafafafa" BorderThickness="0" BorderBrush="Transparent" Content="Поиск" materialDesign:ButtonAssist.CornerRadius="-1" Command="{Binding SearchCommand}"/>
+                    <Button   Width="101" Height="31" Background="#252934" Foreground="#fafafafa" BorderThickness="0" BorderBrush="Transparent" Content="Поиск" Command="{Binding SearchCommand}"/>
                 </DockPanel>
 
                 <StackPanel Width="600" Name="PatientsCards"/>

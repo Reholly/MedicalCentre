@@ -1,35 +1,34 @@
-﻿using MedicalCentre.DatabaseLayer;
-using MedicalCentre.Forms;
-using MedicalCentre.Models;
-using MedicalCentre.ViewModels;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MedicalCentre.Forms;
+using MedicalCentre.Models;
 using MedicalCentre.ViewModels.Commands;
 
-namespace MedicalCentre.FormsViewModels;
+namespace MedicalCentre.ViewModels.FormsViewModels;
 
-public class CreateExaminationFormViewModel
+public class ExaminationCreatingFormViewModel
 {
     private readonly CreateExaminationForm form;
+    private readonly IServiceProvider provider;
     public ICommand ChangesSavingCommand { get; set; }
     public ICommand ClosingCommand { get; set; }
-    public CreateExaminationFormViewModel(CreateExaminationForm form)
+    public ExaminationCreatingFormViewModel(CreateExaminationForm form, IServiceProvider provider)
     {
         this.form = form;
+        this.provider = provider;
         ChangesSavingCommand = new RelayCommandAsync(SaveChanges);
         ClosingCommand = new RelayCommand(Close);
     }
 
     private async Task SaveChanges()
     {
-        ContextRepository<MedicalExamination> repository = new();
-        MedicalExamination examination = new MedicalExamination(
+        var examination = new MedicalExamination(
             uint.Parse(form.PatientsId.Text),
             form.Title.Text,
             form.Conclusion.Text,
             DateTime.Now);
-        await repository.AddItemAsync(examination);
+        await Task.Run(() => .AddItemAsync(examination));
         form.Close();
     }
 

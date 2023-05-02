@@ -15,7 +15,7 @@ public class DoctorMainPageViewModel
     private readonly DoctorMainPage page;
     private readonly DoctorWindow window;
     private readonly Account account;
-    private readonly IServiceProvider serviceProvider = null!;
+    private readonly IServiceProvider serviceProvider;
 
     public DoctorMainPageViewModel(DoctorMainPage page, DoctorWindow window, Account account, IServiceProvider serviceProvider)
     {
