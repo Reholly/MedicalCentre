@@ -34,7 +34,7 @@ public class OperatorWindowViewModel
     }
 
     private void OpenPatientsPage() => window.MainFrame.Content = new PatientsPage(serviceProvider);
-    private void OpenAppointmentsManagementPage() => window.MainFrame.Content = new MedicalCentre.Pages.OperatorPages.MainPage(serviceProvider);
+    private void OpenAppointmentsManagementPage() => window.MainFrame.Content = new MedicalCentre.Pages.AdminWindowPages.MainPage(serviceProvider);
     private async Task Close()
     {
         await authentificationService.LogOutAsync(currentAccount);
