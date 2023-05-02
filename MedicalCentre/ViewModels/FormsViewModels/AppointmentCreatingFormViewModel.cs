@@ -22,12 +22,12 @@ public class AppointmentCreatingFormViewModel
     private readonly ContextRepository<Appointment> appointmentDb = new ContextRepository<Appointment>();
     private readonly ContextRepository<Employee> doctorDb = new ContextRepository<Employee>();
     private readonly ContextRepository<Account> accountDb = new ContextRepository<Account>();
-    public AppointmentCreatingFormViewModel(AppointmentCreatingForm page)
+    public AppointmentCreatingFormViewModel(AppointmentCreatingForm page, List<Employee> doctors)
     {
         currentPage = page;
         CreateCommand = new RelayCommandAsync(Create);
         CloseCommand = new RelayCommand(() => currentPage.Close());
-        _ = Task.Run(Init);
+        currentPage.DoctorsList.ItemsSource = doctors;
     }
 
     private async Task Create()
