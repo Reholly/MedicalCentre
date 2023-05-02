@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using MedicalCentre.ViewModels.Commands;
 
 namespace MedicalCentre.ViewModels;
 
@@ -34,7 +33,7 @@ public class OperatorWindowViewModel
     }
 
     private void OpenPatientsPage() => window.MainFrame.Content = new PatientsPage(serviceProvider);
-    private void OpenAppointmentsManagementPage() => window.MainFrame.Content = new MedicalCentre.Pages.AdminWindowPages.MainPage(serviceProvider);
+    private void OpenAppointmentsManagementPage() => window.MainFrame.Content = new MedicalCentre.Pages.OperatorPages.MainPage(serviceProvider);
     private async Task Close()
     {
         await authentificationService.LogOutAsync(currentAccount);
