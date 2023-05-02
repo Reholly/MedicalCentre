@@ -3,7 +3,6 @@ using MedicalCentre.Forms;
 using MedicalCentre.Models;
 using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
-using MedicalCentre.ViewModels.Commands;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Globalization;
