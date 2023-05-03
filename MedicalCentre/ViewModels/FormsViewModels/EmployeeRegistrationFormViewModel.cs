@@ -1,28 +1,27 @@
-﻿using MedicalCentre.Authentification;
-using MedicalCentre.DatabaseLayer;
-using MedicalCentre.Forms;
-using MedicalCentre.Models;
-using MedicalCentre.Services;
-using MedicalCentre.ViewModels;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using MedicalCentre.Authentification;
+using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Forms;
+using MedicalCentre.Models;
+using MedicalCentre.Services;
 using MedicalCentre.ViewModels.Commands;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace MedicalCentre.FormsViewModels;
+namespace MedicalCentre.ViewModels.FormsViewModels;
 
 public class EmployeeRegistrationFormViewModel
 {
-    public ICommand? RegisterCommand { get; set; }
-    public ICommand? CloseCommand { get; set; }
+    public ICommand RegisterCommand { get; set; }
+    public ICommand CloseCommand { get; set; }
 
-    private Dictionary<string, Roles> roleVariantsToRoles;
-    private EmployeeRegistrationForm profile;
-    private AuthentificationService authentificationService;
-    private IServiceProvider serviceProvider;
+    private readonly Dictionary<string, Roles> roleVariantsToRoles;
+    private readonly EmployeeRegistrationForm profile;
+    private readonly AuthentificationService authentificationService;
+    private readonly IServiceProvider serviceProvider;
             
     private const string DOCTOR_ROLE = "Доктор";
     private const string ADMIN_ROLE = "Администратор";
@@ -44,7 +43,7 @@ public class EmployeeRegistrationFormViewModel
 
         this.authentificationService = serviceProvider.GetRequiredService<AuthentificationService>();
 
-        this.profile.RolesComboBox.ItemsSource = new string[] { DOCTOR_ROLE, ADMIN_ROLE, OPERATOR_ROLE, JUNIOR_ROLE };
+        this.profile.RolesComboBox.ItemsSource = new[] { DOCTOR_ROLE, ADMIN_ROLE, OPERATOR_ROLE, JUNIOR_ROLE };
 
         RegisterCommand = new RelayCommandAsync(Register);
         CloseCommand = new RelayCommand(() => profile.Close());
@@ -55,16 +54,16 @@ public class EmployeeRegistrationFormViewModel
         var empDb = serviceProvider.GetRequiredService<IRepository<Employee>>();
         var logDb = serviceProvider.GetRequiredService<IRepository<Log>>();
 
-        Random random = new Random();
-        uint empId = uint.Parse(random.Next(1, int.MaxValue).ToString());
-        uint accId = uint.Parse(random.Next(1, int.MaxValue).ToString());
+        var random = new Random();
+        var empId = uint.Parse(random.Next(1, int.MaxValue).ToString());
+        var accId = uint.Parse(random.Next(1, int.MaxValue).ToString());
 
-        Employee employee = new Employee(empId, profile.Name.Text, accId, profile.Surname.Text,
+        var employee = new Employee(empId, profile.Name.Text, accId, profile.Surname.Text,
                                         profile.Patronymic.Text, profile.Specialization.Text,
                                         profile.Description.Text, double.Parse(profile.Salary.Text));
-        Roles accountRole = GetRoleByString(profile.RolesComboBox.SelectedItem.ToString());
+        var accountRole = GetRoleByString(profile.RolesComboBox.SelectedItem.ToString()!);
 
-        Account account = new Account(accId, empId, profile.Login.Text, profile.Password.Text, accountRole);
+        var account = new Account(accId, empId, profile.Login.Text, profile.Password.Text, accountRole);
 
         try
         {

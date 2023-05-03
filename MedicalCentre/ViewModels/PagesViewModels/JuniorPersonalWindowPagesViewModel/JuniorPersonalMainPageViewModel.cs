@@ -13,21 +13,23 @@ namespace MedicalCentre.ViewModels.PagesViewModels.JuniorPersonalWindowPagesView
 
 public class JuniorPersonalMainPageViewModel
 {
-    public ObservableCollection<StorageItem> Items { get; set; }
+    private ObservableCollection<StorageItem> Items { get; set; }
     public StorageItem? SelectedItem { get; set; }
     public ICommand ItemAddingCommand { get; set; }
     public ICommand SavingChangesCommand { get; set; }
     public ICommand ExaminationStartingCommand { get; set; }
 
     private bool isSaved = true;
-    private IRepository<StorageItem> storageRepository;
+    private readonly IRepository<StorageItem> storageRepository;
+    private readonly IServiceProvider provider;
     public JuniorPersonalMainPageViewModel(IServiceProvider serviceProvider)
     {
+        provider = serviceProvider;
         storageRepository = serviceProvider.GetRequiredService<IRepository<StorageItem>>();
-        Items = new(storageRepository.GetTable());
+        Items = new ObservableCollection<StorageItem>(storageRepository.GetTable());
         ItemAddingCommand = new RelayCommand(AddItem);
         SavingChangesCommand = new RelayCommandAsync(SaveChanges);
-        //ExaminationStartingCommand = new RelayCommand(StartExamination);
+        ExaminationStartingCommand = new RelayCommand(StartExamination);
     }
 
     private void AddItem()
@@ -57,5 +59,5 @@ public class JuniorPersonalMainPageViewModel
         }
     }
 
-    //private void StartExamination() => new AppointmentCreatingForm().Show();
+    private void StartExamination() => new CreateExaminationForm(provider).Show();
 }

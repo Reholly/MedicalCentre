@@ -1,45 +1,47 @@
-﻿using MedicalCentre.DatabaseLayer;
-using MedicalCentre.Forms;
-using MedicalCentre.Models;
-using MedicalCentre.ViewModels;
-using System;
+﻿using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Forms;
+using MedicalCentre.Models;
 using MedicalCentre.ViewModels.Commands;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace MedicalCentre.FormsViewModels;
+namespace MedicalCentre.ViewModels.FormsViewModels;
 
 public class EmployeeProfileViewModel
 {
-    public ICommand? CloseCommand { get; set; }
-    public ICommand? SaveCommand { get; set; }
-    public ICommand? DeleteCommand { get; set; }
+    public ICommand CloseCommand { get; set; }
+    public ICommand SaveCommand { get; set; }
+    public ICommand DeleteCommand { get; set; }
 
-    private EmployeeProfileForm profileForm;
-    private Employee employee;
+    private readonly EmployeeProfileForm profileForm;
+    private readonly Employee employee;
+    private readonly IServiceProvider provider;
 
-    public EmployeeProfileViewModel(EmployeeProfileForm profileForm, Employee employee)
+    public EmployeeProfileViewModel(EmployeeProfileForm profileForm, Employee employee, IServiceProvider provider)
     {
         this.profileForm = profileForm;
         this.employee = employee;
+        this.provider = provider;
 
-        var accDb = new ContextRepository<Account>();
+        var accDb = this.provider.GetRequiredService<IRepository<Account>>();
 
         CloseCommand = new RelayCommand(Close);
         DeleteCommand = new RelayCommandAsync(Delete);
         SaveCommand = new RelayCommandAsync(Save);
 
-        if (accDb.GetItemById(employee.AccountId).IsOnline) this.profileForm.IsOnline.IsChecked = true;
-        else this.profileForm.IsOnline.IsChecked = false;
+        this.profileForm.IsOnline.IsChecked = accDb.GetItemById(employee.AccountId).IsOnline;
 
         this.profileForm.Password.Text = accDb.GetItemById(employee.AccountId).Password;
         this.profileForm.Login.Text = accDb.GetItemById(employee.AccountId).Username;
         this.profileForm.Name.Text = employee.Name;
         this.profileForm.Surname.Text = employee.Surname;
         this.profileForm.Patronymic.Text = employee.Patronymic;
-        this.profileForm.Salary.Text = employee.Salary.ToString();
-        this.profileForm.Description.Text = employee.Description.ToString();
+        this.profileForm.Salary.Text = employee.Salary.ToString(CultureInfo.InvariantCulture);
+        this.profileForm.Description.Text = employee.Description;
     }
 
     private async Task Delete()
@@ -49,20 +51,20 @@ public class EmployeeProfileViewModel
 
         Account account = await accDb.GetItemByIdAsync(employee.AccountId);
 
-        accDb.DeleteItemAsync(account);
-        empDb.DeleteItemAsync(employee);
+        await Task.Run(() => accDb.DeleteItemAsync(account));
+        await Task.Run(() => empDb.DeleteItemAsync(employee));
 
         Close();
     }
 
     private async Task Save()
     {
-        var accDb = new ContextRepository<Account>();
-        Account account = await accDb.GetItemByIdAsync(employee.AccountId);
+        var accDb = provider.GetRequiredService<IRepository<Account>>();
+        var account = await accDb.GetItemByIdAsync(employee.AccountId);
         account.Password = profileForm.Password.Text;
         account.Username = profileForm.Login.Text;
 
-        account.IsOnline = profileForm.IsOnline.IsChecked.Value;
+        account.IsOnline = profileForm.IsOnline.IsChecked!.Value;
 
         employee.Name = profileForm.Name.Text;
         employee.Surname = profileForm.Surname.Text;
@@ -78,10 +80,10 @@ public class EmployeeProfileViewModel
         employee.Description = profileForm.Description.Text;
 
 
-        var empDb = new ContextRepository<Employee>();
+        var empDb = provider.GetRequiredService<IRepository<Employee>>();
 
-        accDb.UpdateItemAsync(account);
-        empDb.UpdateItemAsync(employee);
+        await Task.Run(() => accDb.UpdateItemAsync(account));
+        await Task.Run(() => empDb.UpdateItemAsync(employee));
 
         Close();
     }

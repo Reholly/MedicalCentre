@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using MedicalCentre.Forms;
 using MedicalCentre.Models;
 using MedicalCentre.UserControls;
@@ -8,17 +9,19 @@ namespace MedicalCentre.ViewModels.UserControlsViewModels
 {
     internal class PatientCardViewModel
     {
-        public ICommand? ProfileCommand { get; set; }
+        public ICommand ProfileCommand { get; set; }
         private readonly Patient currentPatient;
-        public PatientCardViewModel(PatientCard card, Patient patient)
+        private readonly IServiceProvider provider;
+        public PatientCardViewModel(PatientCard card, Patient patient, IServiceProvider provider)
         {
             currentPatient = patient;
+            this.provider = provider;
             ProfileCommand = new RelayCommand(OpenProfile);
             card.Card.Text = patient.ToString();
         }
         private void OpenProfile()
         {
-            PatientProfile profile = new(currentPatient);
+            PatientProfile profile = new(currentPatient, provider);
             profile.Show();
         }
     }

@@ -54,7 +54,7 @@ public class EmployeeManagementPageViewModel
         page.EmployeesCards.Children.Clear();
 
         foreach (var employee in Employees)
-            page.EmployeesCards.Children.Insert(0, new EmployeeCard(employee));       
+            page.EmployeesCards.Children.Insert(0, new EmployeeCard(employee, serviceProvider));       
     }
 
     private void OpenNews() => OpenBrowserService.OpenPageInBrowser(Properties.Settings.Default.RickRoll);

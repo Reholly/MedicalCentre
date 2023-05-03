@@ -1,30 +1,30 @@
-﻿using MedicalCentre.DatabaseLayer;
-using MedicalCentre.Forms;
-using MedicalCentre.Models;
-using MedicalCentre.ViewModels;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Forms;
+using MedicalCentre.Models;
 using MedicalCentre.ViewModels.Commands;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace MedicalCentre.FormsViewModels;
+namespace MedicalCentre.ViewModels.FormsViewModels;
 
 public class PatientProfileViewModel
 {
-    public ICommand? CloseCommand { get; set; }
-    public ICommand? SaveCommand { get; set; }
-    public ICommand? DeleteCommand { get; set; }
+    public ICommand CloseCommand { get; set; }
+    public ICommand SaveCommand { get; set; }
+    public ICommand DeleteCommand { get; set; }
 
-    private PatientProfile profile;
-    private Patient currentPatient;
+    private readonly PatientProfile profile;
+    private readonly Patient currentPatient;
+    private readonly IServiceProvider provider;
 
-    public PatientProfileViewModel(PatientProfile profile, Patient patient)
+    public PatientProfileViewModel(PatientProfile profile, Patient patient, IServiceProvider provider)
     {
         this.profile = profile;
-        this.currentPatient = patient;
-
-        var accDb = new ContextRepository<Account>();
+        currentPatient = patient;
+        this.provider = provider;
 
         CloseCommand = new RelayCommand(Close);
         DeleteCommand = new RelayCommandAsync(Delete);
@@ -39,9 +39,9 @@ public class PatientProfileViewModel
 
     private async Task Delete()
     {
-        var patientDb = new ContextRepository<Patient>();
+        var patientDb = provider.GetRequiredService<IRepository<Patient>>();
 
-        Patient patient = await patientDb.GetItemByIdAsync(currentPatient.Id);
+        var patient = await patientDb.GetItemByIdAsync(currentPatient.Id);
 
         await patientDb.DeleteItemAsync(patient);
 
@@ -50,8 +50,8 @@ public class PatientProfileViewModel
 
     private async Task Save()
     {
-        var accDb = new ContextRepository<Patient>();
-        Patient patient = await accDb.GetItemByIdAsync(currentPatient.Id);
+        var accDb = provider.GetRequiredService<IRepository<Account>>();
+        var patient = await accDb.GetItemByIdAsync(currentPatient.Id);
 
         currentPatient.Name = profile.Name.Text;
         currentPatient.Surname = profile.Surname.Text;

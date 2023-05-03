@@ -4,7 +4,6 @@ using System.Windows.Input;
 using MedicalCentre.Authentification;
 using MedicalCentre.Forms;
 using MedicalCentre.Models;
-using MedicalCentre.Pages.OperatorPages;
 using MedicalCentre.Services;
 using System;
 using System.Linq;
@@ -46,7 +45,7 @@ public class MainPageViewModel
 
     private void Write()
     {
-        WriteAppointment window = new WriteAppointment(serviceProvider);
+        AppointmentWritingForm window = new AppointmentWritingForm(serviceProvider);
         window.Show();
     }
 

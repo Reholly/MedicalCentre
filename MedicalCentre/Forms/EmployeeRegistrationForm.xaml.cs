@@ -1,6 +1,6 @@
-﻿using MedicalCentre.FormsViewModels;
-using System;
+﻿using System;
 using System.Windows;
+using MedicalCentre.ViewModels.FormsViewModels;
 
 namespace MedicalCentre.Forms;
 

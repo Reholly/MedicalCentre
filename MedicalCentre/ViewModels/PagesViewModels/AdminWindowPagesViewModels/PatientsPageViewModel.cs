@@ -54,7 +54,7 @@ public class PatientsPageViewModel
 
         foreach (var patient in Patients)
         {
-            page.PatientsCards.Children.Insert(0, new PatientCard(patient));
+            page.PatientsCards.Children.Insert(0, new PatientCard(patient, serviceProvider));
         }
     }
 
