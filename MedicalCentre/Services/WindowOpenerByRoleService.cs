@@ -19,7 +19,7 @@ public static class WindowOpenerByRoleService
         switch (currentAccount.Role)
         {
             case Roles.Doctor:
-                DoctorWindow doctor = new DoctorWindow(currentAccount, serviceProvider);
+                var doctor = new DoctorWindow(currentAccount, serviceProvider);
                 doctor.Show();
                 break;
             case Roles.Admin:
@@ -27,11 +27,11 @@ public static class WindowOpenerByRoleService
                 admin.Show();
                 break;
             case Roles.Operator:
-                OperatorWindow operatorWindow = new OperatorWindow(currentAccount, serviceProvider);
+                var operatorWindow = new OperatorWindow(currentAccount, serviceProvider);
                 operatorWindow.Show();
                 break;
             case Roles.JuniorPersonal:
-                JuniorPersonalWindow juniorPersonal = new JuniorPersonalWindow(currentAccount, serviceProvider);
+                var juniorPersonal = new JuniorPersonalWindow(currentAccount, serviceProvider);
                 juniorPersonal.Show();
                 break;
             default:

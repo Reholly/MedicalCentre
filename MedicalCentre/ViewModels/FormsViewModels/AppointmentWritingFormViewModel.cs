@@ -38,8 +38,8 @@ public class AppointmentWritingFormViewModel
             var appointment = await appointmentDb.GetItemByIdAsync(uint.Parse(currentPage.AppointmentId.Text));
 
             appointment.PatientId = patient.Id;
-            await appointmentDb.UpdateItemAsync(appointment);
-            await LoggerService.CreateLog($"patient {patient.Id} was recorded on {appointment.Id}", true, logRepository);
+            await Task.Run(() => appointmentDb.UpdateItemAsync(appointment));
+            await Task.Run(() => LoggerService.CreateLog($"patient {patient.Id} was recorded on {appointment.Id}", true, logRepository));
         }
         catch (Exception ex)
         {

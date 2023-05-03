@@ -23,6 +23,7 @@ public class JuniorPersonalWindowViewModel
     public JuniorPersonalWindowViewModel(JuniorPersonalWindow window, Account account, IServiceProvider serviceProvider)
     {
         this.window = window;
+        window.frame.Content = new StoragePage(serviceProvider);
         this.account = account;
         authentificationService = serviceProvider.GetRequiredService<AuthentificationService>();
         this.serviceProvider = serviceProvider;

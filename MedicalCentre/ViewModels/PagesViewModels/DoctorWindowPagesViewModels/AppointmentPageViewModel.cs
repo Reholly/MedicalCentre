@@ -58,11 +58,11 @@ public class AppointmentPageViewModel
         await Task.Run( () => patientsRepository.UpdateItemAsync(patient));
 
         appointment.IsFinished = true;
-        window.MainFrame.Content = new DoctorMainPage(window, account, serviceProvider);
 
         var appDb = serviceProvider.GetRequiredService<IRepository<Appointment>>();
         await Task.Run( () => appDb.UpdateItemAsync(appointment));
         await Task.Run(() => LoggerService.CreateLog($"Приём {appointment.Id} был закончен", true, logRepository));
+        window.MainFrame.Content = new DoctorMainPage(window, account, serviceProvider);
     }
 
     private void PrintNote()

@@ -49,7 +49,7 @@ public class JuniorPersonalMainPageViewModel
     {
         if (!isSaved)
         {
-            StorageItem item = Items[^1];
+            var item = Items[^1];
             isSaved = true;
             await Task.Run(() => storageRepository.AddItemAsync(item));
         }
