@@ -32,13 +32,13 @@ public class MainViewModel
         var login = window.Login.Text;
         var password = window.Password.Password;
         var account = await Task.Run(() => Authentificate(login, password));
-        await Task.Run(() => WindowOpenerByRoleService.OpenWindowByRole(account, serviceProvider));
+        await WindowOpenerByRoleService.OpenWindowByRole(account, serviceProvider);
         Close();
     }
     private async Task<Account> Authentificate(string login, string password)
     {
         var account = await Task.Run(() => authentificationService.LogInAsync(login, password));
-        return account!;      
+        return account;      
     }
     private void Close() => window.Close();
 }

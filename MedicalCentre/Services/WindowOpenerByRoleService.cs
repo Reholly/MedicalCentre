@@ -23,7 +23,7 @@ public static class WindowOpenerByRoleService
                 doctor.Show();
                 break;
             case Roles.Admin:
-                AdminWindow admin = new AdminWindow(currentAccount, serviceProvider);
+                var admin = new AdminWindow(currentAccount, serviceProvider);
                 admin.Show();
                 break;
             case Roles.Operator:
@@ -35,7 +35,7 @@ public static class WindowOpenerByRoleService
                 juniorPersonal.Show();
                 break;
             default:
-                await LoggerService.CreateLog("Неверно указана роль.", false, logRepository);
+                await Task.Run(() => LoggerService.CreateLog("Неверно указана роль.", false, logRepository));
                 MessageBox.Show("Проблемы с получением роли. Перезайдите и выполните вход заново или свяжитесь с сис.админом");
                 break;
         }

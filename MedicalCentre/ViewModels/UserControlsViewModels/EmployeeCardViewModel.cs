@@ -8,7 +8,7 @@ namespace MedicalCentre.ViewModels.UserControlsViewModels
 {
     internal class EmployeeCardViewModel
     {
-        public ICommand? ProfileCommand { get; set; }
+        public ICommand ProfileCommand { get; set; }
         private readonly Employee currentEmployee;
         public EmployeeCardViewModel(EmployeeCard card, Employee employee)
         {
@@ -16,10 +16,11 @@ namespace MedicalCentre.ViewModels.UserControlsViewModels
             ProfileCommand = new RelayCommand(OpenProfile);
             card.Card.Text = employee.ToString();
         }
+        
         private void OpenProfile()
         {
-            EmployeeProfile profile = new(currentEmployee);
-            profile.Show();
+            var profileForm = new EmployeeProfileForm(currentEmployee);
+            profileForm.Show();
         }
     }
 }

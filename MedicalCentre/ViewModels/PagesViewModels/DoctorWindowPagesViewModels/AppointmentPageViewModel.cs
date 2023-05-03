@@ -1,19 +1,19 @@
-﻿using MedicalCentre.DatabaseLayer;
-using MedicalCentre.Models;
-using MedicalCentre.Pages.DoctorWindowPages;
-using MedicalCentre.Services;
-using MedicalCentre.Views;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Models;
+using MedicalCentre.Pages.DoctorWindowPages;
+using MedicalCentre.Services;
 using MedicalCentre.ViewModels.Commands;
+using MedicalCentre.Views;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels;
+namespace MedicalCentre.ViewModels.PagesViewModels.DoctorWindowPagesViewModels;
 
 public class AppointmentPageViewModel
 {
@@ -44,7 +44,7 @@ public class AppointmentPageViewModel
 
     private void Initialize()
     {
-        string patient = patientsRepository.GetItemById((uint)appointment.PatientId).ToStringForAppointment();
+        var patient = patientsRepository.GetItemById((uint)appointment.PatientId).ToStringForAppointment();
         page.PatientsSNP.Text = patient;
     }
 
@@ -53,7 +53,7 @@ public class AppointmentPageViewModel
         Note note = new((uint)appointment.PatientId, page.AppointmentTitleBox.Text, page.AppointmentTextBox.Text, DateTime.Now);
 
         
-        Patient patient = await Task.Run(() => patientsRepository.GetItemByIdAsync((uint)appointment.PatientId));
+        var patient = await Task.Run(() => patientsRepository.GetItemByIdAsync((uint)appointment.PatientId));
         patient.Notes.Add(note);
         await Task.Run( () => patientsRepository.UpdateItemAsync(patient));
 
@@ -62,7 +62,7 @@ public class AppointmentPageViewModel
 
         var appDb = serviceProvider.GetRequiredService<IRepository<Appointment>>();
         await Task.Run( () => appDb.UpdateItemAsync(appointment));
-        await LoggerService.CreateLog($"Приём {appointment.Id} был закончен", true, logRepository);
+        await Task.Run(() => LoggerService.CreateLog($"Приём {appointment.Id} был закончен", true, logRepository));
     }
 
     private void PrintNote()

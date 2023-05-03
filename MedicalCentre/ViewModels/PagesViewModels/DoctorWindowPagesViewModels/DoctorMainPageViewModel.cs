@@ -1,14 +1,13 @@
-﻿using MedicalCentre.DatabaseLayer;
+﻿using System;
+using System.Threading.Tasks;
+using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
 using MedicalCentre.Pages.DoctorWindowPages;
 using MedicalCentre.UserControls;
 using MedicalCentre.Views;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
-namespace MedicalCentre.ViewModels.DoctorWindowPagesViewModels;
+namespace MedicalCentre.ViewModels.PagesViewModels.DoctorWindowPagesViewModels;
 
 public class DoctorMainPageViewModel
 {
@@ -30,8 +29,8 @@ public class DoctorMainPageViewModel
     private async Task ShowCards()
     {
         var appDb = serviceProvider.GetRequiredService<IRepository<Appointment>>();
-        List<Appointment> appointments = await Task.Run(() => appDb.GetTableAsync());
-        foreach (Appointment appointment in appointments)
+        var appointments = await Task.Run(() => appDb.GetTableAsync());
+        foreach (var appointment in appointments)
         {
             if (appointment.IsFinished == false && appointment.AppointmentTime.Date == DateTime.Today.Date)
             {
@@ -50,8 +49,8 @@ public class DoctorMainPageViewModel
                 }
 
                 var empDb = serviceProvider.GetRequiredService<IRepository<Employee>>();
-                Employee doctor = empDb.GetItemById(appointment.DoctorId);
-                string doctorString = doctor.ToString();
+                var doctor = empDb.GetItemById(appointment.DoctorId);
+                var doctorString = doctor.ToString();
 
                 if (account.EmployeeAccountId == appointment.DoctorId)
                 {

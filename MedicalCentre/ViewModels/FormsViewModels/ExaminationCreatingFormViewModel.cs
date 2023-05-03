@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Forms;
 using MedicalCentre.Models;
 using MedicalCentre.ViewModels.Commands;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MedicalCentre.ViewModels.FormsViewModels;
 
@@ -28,7 +30,7 @@ public class ExaminationCreatingFormViewModel
             form.Title.Text,
             form.Conclusion.Text,
             DateTime.Now);
-        await Task.Run(() => .AddItemAsync(examination));
+        await Task.Run(() => provider.GetRequiredService<IRepository<MedicalExamination>>().AddItemAsync(examination));
         form.Close();
     }
 

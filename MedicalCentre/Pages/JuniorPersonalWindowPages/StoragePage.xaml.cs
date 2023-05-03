@@ -1,8 +1,8 @@
-﻿using MedicalCentre.ViewModels.JuniorPersonalWindowPagesViewModel;
-using System;
+﻿using System;
 using System.Windows.Controls;
+using MedicalCentre.ViewModels.PagesViewModels.JuniorPersonalWindowPagesViewModel;
 
-namespace MedicalCentre.Pages.GeneralPages;
+namespace MedicalCentre.Pages.JuniorPersonalWindowPages;
 
 public partial class StoragePage : Page
 {

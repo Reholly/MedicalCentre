@@ -1,7 +1,7 @@
-﻿using MedicalCentre.ViewModels.AdminWindowPagesViewModels;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows.Controls;
+using MedicalCentre.ViewModels.PagesViewModels.AdminWindowPagesViewModels;
 
 namespace MedicalCentre.Pages.AdminWindowPages;
 

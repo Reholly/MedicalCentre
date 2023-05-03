@@ -1,14 +1,14 @@
-﻿using MedicalCentre.Models;
-using MedicalCentre.Pages.AdminWindowPages;
-using MedicalCentre.Services;
-using MedicalCentre.Views;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MedicalCentre.Models;
+using MedicalCentre.Pages.AdminWindowPages;
+using MedicalCentre.Services;
 using MedicalCentre.ViewModels.Commands;
+using MedicalCentre.Views;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace MedicalCentre.ViewModels;
+namespace MedicalCentre.ViewModels.MainPagesViewModels;
 
 public class OperatorWindowViewModel
 {
@@ -16,8 +16,8 @@ public class OperatorWindowViewModel
     public ICommand AppointmentsManagementPageOpeningCommand { get; set; }
     public ICommand WindowClosingCommand { get; set; }
 
-    private OperatorWindow window;
-    private Account currentAccount;
+    private readonly OperatorWindow window;
+    private readonly Account currentAccount;
     private readonly AuthentificationService authentificationService;
     private readonly IServiceProvider serviceProvider;
 
@@ -37,7 +37,7 @@ public class OperatorWindowViewModel
     private void OpenAppointmentsManagementPage() => window.MainFrame.Content = new MedicalCentre.Pages.OperatorPages.MainPage(serviceProvider);
     private async Task Close()
     {
-        await authentificationService.LogOutAsync(currentAccount);
+        await Task.Run(() => authentificationService.LogOutAsync(currentAccount));
         window.Close();
     }
 }

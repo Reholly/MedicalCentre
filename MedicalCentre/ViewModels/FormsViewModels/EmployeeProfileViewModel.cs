@@ -16,12 +16,12 @@ public class EmployeeProfileViewModel
     public ICommand? SaveCommand { get; set; }
     public ICommand? DeleteCommand { get; set; }
 
-    private EmployeeProfile profile;
+    private EmployeeProfileForm profileForm;
     private Employee employee;
 
-    public EmployeeProfileViewModel(EmployeeProfile profile, Employee employee)
+    public EmployeeProfileViewModel(EmployeeProfileForm profileForm, Employee employee)
     {
-        this.profile = profile;
+        this.profileForm = profileForm;
         this.employee = employee;
 
         var accDb = new ContextRepository<Account>();
@@ -30,16 +30,16 @@ public class EmployeeProfileViewModel
         DeleteCommand = new RelayCommandAsync(Delete);
         SaveCommand = new RelayCommandAsync(Save);
 
-        if (accDb.GetItemById(employee.AccountId).IsOnline) this.profile.IsOnline.IsChecked = true;
-        else this.profile.IsOnline.IsChecked = false;
+        if (accDb.GetItemById(employee.AccountId).IsOnline) this.profileForm.IsOnline.IsChecked = true;
+        else this.profileForm.IsOnline.IsChecked = false;
 
-        this.profile.Password.Text = accDb.GetItemById(employee.AccountId).Password;
-        this.profile.Login.Text = accDb.GetItemById(employee.AccountId).Username;
-        this.profile.Name.Text = employee.Name;
-        this.profile.Surname.Text = employee.Surname;
-        this.profile.Patronymic.Text = employee.Patronymic;
-        this.profile.Salary.Text = employee.Salary.ToString();
-        this.profile.Description.Text = employee.Description.ToString();
+        this.profileForm.Password.Text = accDb.GetItemById(employee.AccountId).Password;
+        this.profileForm.Login.Text = accDb.GetItemById(employee.AccountId).Username;
+        this.profileForm.Name.Text = employee.Name;
+        this.profileForm.Surname.Text = employee.Surname;
+        this.profileForm.Patronymic.Text = employee.Patronymic;
+        this.profileForm.Salary.Text = employee.Salary.ToString();
+        this.profileForm.Description.Text = employee.Description.ToString();
     }
 
     private async Task Delete()
@@ -59,23 +59,23 @@ public class EmployeeProfileViewModel
     {
         var accDb = new ContextRepository<Account>();
         Account account = await accDb.GetItemByIdAsync(employee.AccountId);
-        account.Password = profile.Password.Text;
-        account.Username = profile.Login.Text;
+        account.Password = profileForm.Password.Text;
+        account.Username = profileForm.Login.Text;
 
-        account.IsOnline = profile.IsOnline.IsChecked.Value;
+        account.IsOnline = profileForm.IsOnline.IsChecked.Value;
 
-        employee.Name = profile.Name.Text;
-        employee.Surname = profile.Surname.Text;
-        employee.Patronymic = profile.Patronymic.Text;
+        employee.Name = profileForm.Name.Text;
+        employee.Surname = profileForm.Surname.Text;
+        employee.Patronymic = profileForm.Patronymic.Text;
         try
         {
-            employee.Salary = double.Parse(profile.Salary.Text);
+            employee.Salary = double.Parse(profileForm.Salary.Text);
         }
         catch (Exception)
         {
             MessageBox.Show("Зарплата должна быть числом. Попробуйте позже.");
         }
-        employee.Description = profile.Description.Text;
+        employee.Description = profileForm.Description.Text;
 
 
         var empDb = new ContextRepository<Employee>();
@@ -88,6 +88,6 @@ public class EmployeeProfileViewModel
 
     private void Close()
     {
-        profile.Close();
+        profileForm.Close();
     }
 }

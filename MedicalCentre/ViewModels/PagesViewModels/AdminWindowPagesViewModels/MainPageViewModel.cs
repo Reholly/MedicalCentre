@@ -1,19 +1,18 @@
-﻿using LiveCharts;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
 using MedicalCentre.Pages.AdminWindowPages;
 using MedicalCentre.Services;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
 using MedicalCentre.ViewModels.Commands;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels;
+namespace MedicalCentre.ViewModels.PagesViewModels.AdminWindowPagesViewModels;
 
 public class MainPageViewModel
 {

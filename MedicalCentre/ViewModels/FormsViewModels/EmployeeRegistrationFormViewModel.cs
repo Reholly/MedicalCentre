@@ -14,13 +14,13 @@ using MedicalCentre.ViewModels.Commands;
 
 namespace MedicalCentre.FormsViewModels;
 
-public class EmployeeRegistrationViewModel
+public class EmployeeRegistrationFormViewModel
 {
     public ICommand? RegisterCommand { get; set; }
     public ICommand? CloseCommand { get; set; }
 
     private Dictionary<string, Roles> roleVariantsToRoles;
-    private EmployeeRegistration profile;
+    private EmployeeRegistrationForm profile;
     private AuthentificationService authentificationService;
     private IServiceProvider serviceProvider;
             
@@ -29,7 +29,7 @@ public class EmployeeRegistrationViewModel
     private const string OPERATOR_ROLE = "Оператор";
     private const string JUNIOR_ROLE = "Младший мед.персонал";
 
-    public EmployeeRegistrationViewModel(EmployeeRegistration profile, IServiceProvider serviceProvider)
+    public EmployeeRegistrationFormViewModel(EmployeeRegistrationForm profile, IServiceProvider serviceProvider)
     {
         this.serviceProvider = serviceProvider;
 

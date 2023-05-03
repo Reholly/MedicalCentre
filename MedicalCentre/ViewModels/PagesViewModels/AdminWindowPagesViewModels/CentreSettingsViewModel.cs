@@ -1,30 +1,30 @@
-﻿using MedicalCentre.DatabaseLayer;
-using MedicalCentre.Models;
-using MedicalCentre.Pages.AdminWindowPages;
-using MedicalCentre.Services;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Models;
+using MedicalCentre.Pages.AdminWindowPages;
+using MedicalCentre.Services;
 using MedicalCentre.ViewModels.Commands;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels;
+namespace MedicalCentre.ViewModels.PagesViewModels.AdminWindowPagesViewModels;
 
 public class CentreSettingsViewModel
 {
-    public ObservableCollection<Log> Logs { get; set; } = new ObservableCollection<Log>();
-    public ICommand? OpenDbCommand { get; set; }
-    public ICommand? OpenHostCommand { get; set; }
+    private ObservableCollection<Log> Logs { get; set; } = new();
+    public ICommand OpenDbCommand { get; set; }
+    public ICommand OpenHostCommand { get; set; }
 
-    private CentreSettingsPage settingsPage;
-    private IServiceProvider serviceProvider;
+    private readonly CentreSettingsPage settingsPage;
+    private readonly IServiceProvider serviceProvider;
 
     public CentreSettingsViewModel(CentreSettingsPage page, IServiceProvider services)
     {
         settingsPage = page;
-        this.serviceProvider = services;
+        serviceProvider = services;
 
         OpenDbCommand = new RelayCommand(OpenDatabaseMenu);
         OpenHostCommand = new RelayCommand(OpenHostSite);

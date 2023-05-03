@@ -4,6 +4,7 @@ using MedicalCentre.Services;
 using MedicalCentre.ViewModels;
 using System;
 using System.Windows;
+using MedicalCentre.ViewModels.MainPagesViewModels;
 
 namespace MedicalCentre.Views;
 

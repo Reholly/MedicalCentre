@@ -1,30 +1,30 @@
-﻿using MedicalCentre.DatabaseLayer;
-using MedicalCentre.Forms;
-using MedicalCentre.Models;
-using MedicalCentre.Pages.AdminWindowPages;
-using MedicalCentre.Services;
-using MedicalCentre.UserControls;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Forms;
+using MedicalCentre.Models;
+using MedicalCentre.Pages.AdminWindowPages;
+using MedicalCentre.Services;
+using MedicalCentre.UserControls;
 using MedicalCentre.ViewModels.Commands;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace MedicalCentre.ViewModels.AdminWindowPagesViewModels;
+namespace MedicalCentre.ViewModels.PagesViewModels.AdminWindowPagesViewModels;
 
-public class PatientsViewModel
+public class PatientsPageViewModel
 {
-    public ObservableCollection<Patient> Patients { get; set; } = new();
-    public ICommand? SearchCommand { get; set; }
-    public ICommand? OpenRegistrationCommand { get; set; }
-    public ICommand? OpenNewsCommand { get; set; }
+    private ObservableCollection<Patient> Patients { get; set; } = new();
+    public ICommand SearchCommand { get; set; }
+    public ICommand OpenRegistrationCommand { get; set; }
+    public ICommand OpenNewsCommand { get; set; }
 
-    private PatientsPage page;
-    private IServiceProvider serviceProvider;
-    public PatientsViewModel(PatientsPage page, IServiceProvider serviceProvider)
+    private readonly PatientsPage page;
+    private readonly IServiceProvider serviceProvider;
+    public PatientsPageViewModel(PatientsPage page, IServiceProvider serviceProvider)
     {
         this.page = page;
         this.serviceProvider = serviceProvider;
@@ -40,13 +40,13 @@ public class PatientsViewModel
     
     private void OpenRegistration()
     {
-        PatientRegistration patientRegister = new();
+        var patientRegister = new PatientRegistrationFrom();
         patientRegister.Show();
     }
 
     private async Task SearchItems()
     {
-        IRepository<Patient> patientsDb = serviceProvider.GetRequiredService<IRepository<Patient>>();
+        var patientsDb = serviceProvider.GetRequiredService<IRepository<Patient>>();
         Patients = new ObservableCollection<Patient>(await Task.Run( () => patientsDb.GetTableAsync()));
         Patients = new ObservableCollection<Patient>(SearchFilterService<Patient>.GetFilteredList(Patients.ToList(), page.Search.Text));
 
@@ -58,7 +58,7 @@ public class PatientsViewModel
         }
     }
 
-    private void OnTextChanged(object sender, TextChangedEventArgs args) => SearchItems();
+    private void OnTextChanged(object sender, TextChangedEventArgs args) => Task.Run(SearchItems);
 
     private void OpenNews() => OpenBrowserService.OpenPageInBrowser(Properties.Settings.Default.OpenHealthNews);
 }

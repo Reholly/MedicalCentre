@@ -1,6 +1,6 @@
-﻿using MedicalCentre.ViewModels.AdminWindowPagesViewModels;
-using System;
+﻿using System;
 using System.Windows.Controls;
+using MedicalCentre.ViewModels.PagesViewModels.AdminWindowPagesViewModels;
 
 namespace MedicalCentre.Pages.AdminWindowPages;
 

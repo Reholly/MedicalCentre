@@ -1,15 +1,15 @@
-﻿using MedicalCentre.DatabaseLayer;
-using MedicalCentre.Forms;
-using MedicalCentre.Models;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using MedicalCentre.DatabaseLayer;
+using MedicalCentre.Forms;
+using MedicalCentre.Models;
 using MedicalCentre.ViewModels.Commands;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace MedicalCentre.ViewModels.JuniorPersonalWindowPagesViewModel;
+namespace MedicalCentre.ViewModels.PagesViewModels.JuniorPersonalWindowPagesViewModel;
 
 public class JuniorPersonalMainPageViewModel
 {
@@ -27,7 +27,7 @@ public class JuniorPersonalMainPageViewModel
         Items = new(storageRepository.GetTable());
         ItemAddingCommand = new RelayCommand(AddItem);
         SavingChangesCommand = new RelayCommandAsync(SaveChanges);
-        ExaminationStartingCommand = new RelayCommand(StartExamination);
+        //ExaminationStartingCommand = new RelayCommand(StartExamination);
     }
 
     private void AddItem()
@@ -57,5 +57,5 @@ public class JuniorPersonalMainPageViewModel
         }
     }
 
-    private void StartExamination() => new CreateExaminationForm().Show();
+    //private void StartExamination() => new AppointmentCreatingForm().Show();
 }
