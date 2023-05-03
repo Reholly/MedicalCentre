@@ -9,7 +9,6 @@ public class MedicalExamination
     public uint PatientId { get; set; }
     public string Title { get; set; } = null!;
     public string Conclusion { get; set; } = null!;
-    public bool IsFinished { get; set; } = false;
 
     public MedicalExamination() { }
 

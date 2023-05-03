@@ -40,7 +40,7 @@ public class PatientsPageViewModel
     
     private void OpenRegistration()
     {
-        var patientRegister = new PatientRegistrationFrom();
+        var patientRegister = new PatientRegistrationFrom(serviceProvider);
         patientRegister.Show();
     }
 

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using MedicalCentre.ViewModels.FormsViewModels;
 
 
@@ -6,10 +7,10 @@ namespace MedicalCentre.Forms
 {
     public partial class PatientRegistrationFrom : Window
     {
-        public PatientRegistrationFrom()
+        public PatientRegistrationFrom(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            DataContext = new PatientRegistrationFormViewModel(this);
+            DataContext = new PatientRegistrationFormViewModel(this, serviceProvider);
         }
     }
 }
