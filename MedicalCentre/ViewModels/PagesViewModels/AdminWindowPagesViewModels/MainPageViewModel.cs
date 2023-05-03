@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using LiveCharts;
@@ -23,12 +24,10 @@ public class MainPageViewModel
 
     private readonly MainPage currentPage;
     private readonly IRepository<Transaction> transactionRepository;
-    private readonly IServiceProvider serviceProvider;
 
     public MainPageViewModel(MainPage page, IServiceProvider serviceProvider)
     {
-        currentPage = page;       
-        this.serviceProvider = serviceProvider;
+        currentPage = page;
         transactionRepository = serviceProvider.GetRequiredService<IRepository<Transaction>>();
 
         OpenNewsCommand = new RelayCommand(OpenNews);
@@ -99,7 +98,7 @@ public class MainPageViewModel
         List<string> lines = new List<string>();
 
         foreach (var i in dates)
-            lines.Add(i.ToString());
+            lines.Add(i.ToString(CultureInfo.InvariantCulture));
 
         currentPage.series.Series = new SeriesCollection
         {
@@ -154,9 +153,9 @@ public class MainPageViewModel
         };
     }
 
-    public void OpenNewFeatures() => OpenBrowserService.OpenPageInBrowser(Properties.Settings.Default.NewFeatures);
+    private void OpenNewFeatures() => OpenBrowserService.OpenPageInBrowser(Properties.Settings.Default.NewFeatures);
     
-    public void OpenNews() => OpenBrowserService.OpenPageInBrowser(Properties.Settings.Default.OpenHealthNews);
+    private void OpenNews() => OpenBrowserService.OpenPageInBrowser(Properties.Settings.Default.OpenHealthNews);
 
-    public void OpenMail() => OpenBrowserService.OpenPageInBrowser(Properties.Settings.Default.MainMail);
+    private void OpenMail() => OpenBrowserService.OpenPageInBrowser(Properties.Settings.Default.MainMail);
 }

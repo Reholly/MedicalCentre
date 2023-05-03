@@ -15,10 +15,10 @@ public partial class App : Application
 
     protected override void OnStartup(StartupEventArgs e)
     {
-        AccountPrincipal employeePrincipal = new AccountPrincipal();
+        var employeePrincipal = new AccountPrincipal();
         AppDomain.CurrentDomain.SetThreadPrincipal(employeePrincipal);
 
-        services = new ServiceCollection();   
+        services = new ServiceCollection();
         ConfigureServices(services);
 
         serviceProvider = services.BuildServiceProvider();
