@@ -32,8 +32,11 @@ public class MainViewModel
         var login = window.Login.Text;
         var password = window.Password.Password;
         var account = await Task.Run(() => Authentificate(login, password));
-        await WindowOpenerByRoleService.OpenWindowByRole(account, serviceProvider);
-        Close();
+        if (account != null)
+        {
+            await WindowOpenerByRoleService.OpenWindowByRole(account, serviceProvider);
+            Close();
+        }
     }
     private async Task<Account> Authentificate(string login, string password)
     {

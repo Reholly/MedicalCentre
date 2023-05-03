@@ -48,7 +48,9 @@ public class EmployeeManagementPageViewModel
     {
         var empDb = serviceProvider.GetRequiredService<IRepository<Employee>>();
 
-        Employees = new ObservableCollection<Employee>(await Task.Run( () => empDb.GetTableAsync()));
+        var employees = await Task.Run(() => empDb.GetTableAsync());
+
+        Employees = new ObservableCollection<Employee>(employees);
         Employees = new ObservableCollection<Employee>(SearchFilterService<Employee>.GetFilteredList(Employees.ToList(), page.Search.Text));
 
         page.EmployeesCards.Children.Clear();

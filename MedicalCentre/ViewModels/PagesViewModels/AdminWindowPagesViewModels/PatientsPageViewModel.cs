@@ -47,7 +47,8 @@ public class PatientsPageViewModel
     private async Task SearchItems()
     {
         var patientsDb = serviceProvider.GetRequiredService<IRepository<Patient>>();
-        Patients = new ObservableCollection<Patient>(await Task.Run( () => patientsDb.GetTableAsync()));
+        var patients = await Task.Run( () => patientsDb.GetTableAsync());
+        Patients = new ObservableCollection<Patient>(patients);
         Patients = new ObservableCollection<Patient>(SearchFilterService<Patient>.GetFilteredList(Patients.ToList(), page.Search.Text));
 
         page.PatientsCards.Children.Clear();
