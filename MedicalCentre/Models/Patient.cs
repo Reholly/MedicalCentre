@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace MedicalCentre.Models;
 
@@ -45,7 +46,15 @@ public class Patient
 
     public override string ToString()
     {
-        return $"{Name[0]}.{Patronymic[0]}.{Surname} - {BirthDate} - {PhoneNumber}";
+        try
+        {
+            string result = $"{Name[0]}.{Patronymic[0]}.{Surname} - {BirthDate} - {PhoneNumber}";
+            return result;
+        }
+        catch (Exception)
+        {
+            return "";
+        }
     }
 
     public string ToStringForAppointment()

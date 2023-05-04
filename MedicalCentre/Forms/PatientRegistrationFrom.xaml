@@ -102,7 +102,7 @@
                     </materialDesign:HintAssist.Hint>
 
                 </TextBox>
-                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+              <!--  <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Name="BirthDate"
                              Text=""  
                              MaxHeight="57"
@@ -118,8 +118,12 @@
                         <TextBlock Foreground="#3b515a">Дата рождения(dd.mm.yyyy)</TextBlock>
                     </materialDesign:HintAssist.Hint>
 
-                </TextBox>
-               
+                </TextBox> -->
+                <DockPanel>
+                    <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" FontSize="18" Opacity="0.35" MinWidth="130" Width="130" HorizontalAlignment="Left">Дата рождения</TextBlock>
+                    <DatePicker Width="150" Name="BirthDate" Style="{StaticResource MaterialDesignDatePicker}" Height="37" HorizontalAlignment="Left" SelectedDateFormat="Short"/>
+                </DockPanel>
+
             </StackPanel>
             <DockPanel Grid.Row="2" VerticalAlignment="Top">
                 <Button Width="589" HorizontalAlignment="Left" Height="50" materialDesign:ButtonAssist.CornerRadius="0 0 20 20" FontSize="18" Background="#252934" Foreground="#fafafafa" Command="{Binding RegisterCommand}">

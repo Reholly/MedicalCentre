@@ -99,7 +99,7 @@
                              Name="Search"
                              Text=""
                              FontSize="18"
-                             Width="400"
+                             Width="350"
                              Foreground="#252934"
                              BorderBrush="#c5c8cc"
                              Background="#c9d0d8"
@@ -109,7 +109,7 @@
                             <TextBlock Foreground="#3b515a">Поиск</TextBlock>
                         </materialDesign:HintAssist.Hint>
                     </TextBox>
-                    <Button   Width="101" Height="31" Background="#252934" Foreground="#fafafafa" BorderThickness="0" BorderBrush="Transparent" Content="Поиск" Command="{Binding SearchCommand}"/>
+                    <Button   Width="151" Height="31" Background="#252934" Foreground="#fafafafa" BorderThickness="0" BorderBrush="Transparent" Content="Обновить | Поиск" Command="{Binding SearchCommand}"/>
                 </DockPanel>
 
                 <StackPanel Width="600" Name="PatientsCards"/>
