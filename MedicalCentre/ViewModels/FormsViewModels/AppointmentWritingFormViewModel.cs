@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MedicalCentre.DatabaseLayer;
@@ -18,9 +19,11 @@ public class AppointmentWritingFormViewModel
     private readonly AppointmentWritingForm currentPage;
     private readonly IRepository<Log> logRepository;
     private readonly IServiceProvider provider;
-    public AppointmentWritingFormViewModel(AppointmentWritingForm page, IServiceProvider provider)
+    public AppointmentWritingFormViewModel(AppointmentWritingForm page, IServiceProvider provider, List<Patient> patients, List<string> appointments)
     {
         currentPage = page;
+        currentPage.Patient.ItemsSource = patients;
+        currentPage.Appointment.ItemsSource = appointments;
         logRepository = provider.GetRequiredService<IRepository<Log>>();
         this.provider = provider;
         WriteCommand = new RelayCommandAsync(Write);
@@ -32,12 +35,12 @@ public class AppointmentWritingFormViewModel
         try
         {
             var appointmentDb = provider.GetRequiredService<IRepository<Appointment>>();
-            var patientDb = provider.GetRequiredService<IRepository<Patient>>();
 
-            var patient = await patientDb.GetItemByIdAsync(uint.Parse(currentPage.PatientId.Text));
-            var appointment = await appointmentDb.GetItemByIdAsync(uint.Parse(currentPage.AppointmentId.Text));
+            var patient = currentPage.Patient.SelectedItem as Patient;
+            var appointmentId = ((currentPage.Appointment.SelectedItem as string)!).Split(" - ")[0];
+            var appointment = await Task.Run(() => appointmentDb.GetItemByIdAsync(uint.Parse(appointmentId)));
 
-            appointment.PatientId = patient.Id;
+            appointment!.PatientId = patient!.Id;
             await Task.Run(() => appointmentDb.UpdateItemAsync(appointment));
             await Task.Run(() => LoggerService.CreateLog($"patient {patient.Id} was recorded on {appointment.Id}", true, logRepository));
         }

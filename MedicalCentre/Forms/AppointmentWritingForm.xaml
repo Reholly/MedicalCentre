@@ -31,25 +31,24 @@
                         Command="{Binding CloseCommand}"/>
             <StackPanel VerticalAlignment="Top"
                             Margin="20 0" Width="250"  HorizontalAlignment="Left">
-
-                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                 Name="AppointmentId"
-                                 Text=""
-                                 Width="250"
-                                HorizontalAlignment="Left"
-                                 materialDesign:HintAssist.Hint="Id(приём)"
-                                 materialDesign:HintAssist.FloatingOffset="0, -20"
-                                 BorderBrush="#c5c8cc"
-                                 BorderThickness=" 0 0 0 1.5"/>
-                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                 Name="PatientId"
-                                 Text=""
-                         Width="250"
-                         HorizontalAlignment="Left"
-                                 materialDesign:HintAssist.Hint="Id(пациент)"
-                                 materialDesign:HintAssist.FloatingOffset="0, -20"
-                                 BorderBrush="#c5c8cc"
-                                 BorderThickness=" 0 0 0 1.5"/>
+                <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                          Name="Appointment"
+                          Text=""
+                          Width="250"
+                          HorizontalAlignment="Left"
+                          materialDesign:HintAssist.Hint="Выберите приём"
+                          materialDesign:HintAssist.FloatingOffset="0, -20"
+                          BorderBrush="#c5c8cc"
+                          BorderThickness="0 0 0 1.5"/>
+                <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                          Name="Patient"
+                          Text=""
+                          Width="250"
+                          HorizontalAlignment="Left"
+                          materialDesign:HintAssist.Hint="Выберите пациента"
+                          materialDesign:HintAssist.FloatingOffset="0, -20"
+                          BorderBrush="#c5c8cc"
+                          BorderThickness="0 0 0 1.5"/>
                
                   
                 

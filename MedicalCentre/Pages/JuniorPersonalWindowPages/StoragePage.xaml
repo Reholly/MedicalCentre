@@ -23,10 +23,8 @@
                 <Button Background="#252934" Foreground="#fafafa" Command="{Binding ItemAddingCommand}" Content="Добавить предмет"/>
                 <Button Background="#252934" Foreground="#fafafa" Command="{Binding SavingChangesCommand}" Content="Сохранить"/>
                 <DataGrid x:Name="Items"
-                      ItemsSource="{Binding Items}"
-                      SelectedItem="{Binding SelectedItem}"                   
-                      Background="Transparent"
-                      Style="{StaticResource MaterialDesignDataGrid}"/>
+                          Background="Transparent"
+                          Style="{StaticResource MaterialDesignDataGrid}"/>
             </StackPanel>
 
             <Border Width="370"  CornerRadius="20" HorizontalAlignment="Center" Margin="0,48,0,436" Grid.Column="2">

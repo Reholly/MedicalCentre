@@ -30,13 +30,6 @@
                         BorderBrush="Transparent"
                         Command="{Binding CloseCommand}"/>
             <StackPanel VerticalAlignment="Top" Margin="20 0" Width="250" HorizontalAlignment="Left" >
-                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                 Name="Id"
-                                 Text=""
-                                 materialDesign:HintAssist.Hint="ID (приём)"
-                                 materialDesign:HintAssist.FloatingOffset="0, -20"
-                                 BorderBrush="#c5c8cc"
-                                 BorderThickness=" 0 0 0 1.5"/>
                 <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                           Name="DoctorsList"
                           materialDesign:HintAssist.Hint="Выберите врача"

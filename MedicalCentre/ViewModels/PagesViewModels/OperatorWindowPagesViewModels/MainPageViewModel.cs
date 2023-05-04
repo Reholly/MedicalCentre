@@ -28,7 +28,7 @@ public class MainPageViewModel
         OpenNewsCommand = new RelayCommand(OpenNews);
         OpenNewFeaturesCommand = new RelayCommand(OpenNewFeatures);
         CreateCommand = new RelayCommandAsync(Create);
-        WriteCommand = new RelayCommand(Write);
+        WriteCommand = new RelayCommandAsync(Write);
     }
 
     private void OpenNews() => OpenBrowserService.OpenPageInBrowser(Properties.Settings.Default.OpenInvalidSite);
@@ -43,9 +43,11 @@ public class MainPageViewModel
         window.Show();
     }
 
-    private void Write()
+    private async Task Write()
     {
-        AppointmentWritingForm window = new AppointmentWritingForm(serviceProvider);
+        var patientsList = await Task.Run(InitPatients);
+        var appointmentsList = await Task.Run(InitAppointments);
+        var window = new AppointmentWritingForm(serviceProvider, patientsList, appointmentsList);
         window.Show();
     }
 
@@ -60,5 +62,26 @@ public class MainPageViewModel
         }
 
         return doctorsList;
+    }
+
+    private async Task<List<Patient>> InitPatients()
+    {
+        var patientsDb = serviceProvider.GetRequiredService<IRepository<Patient>>();
+        var patients = await Task.Run(() => patientsDb.GetTableAsync());
+        return patients;
+    }
+
+    private async Task<List<string>> InitAppointments()
+    {
+        var appointments = await Task.Run(() =>
+            serviceProvider.GetRequiredService<IRepository<Appointment>>().GetTableAsync());
+        var result = new List<string>();
+        foreach (var appointment in appointments.Where(a => a is { IsFinished: false, PatientId: null } && a.AppointmentTime.Date >= DateTime.Today.Date))
+        {
+            var doctor = await Task.Run(() => serviceProvider.GetRequiredService<IRepository<Employee>>().GetItemByIdAsync(appointment.DoctorId));
+            result.Add($"{appointment.Id} - {doctor.Surname} - {doctor.Specialization} - {appointment.AppointmentTime}");
+        }
+
+        return result;
     }
 }

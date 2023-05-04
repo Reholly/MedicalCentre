@@ -33,11 +33,10 @@ public class AppointmentCreatingFormViewModel
     {
         try
         {
-            var id = uint.Parse(currentPage.Id.Text);
             var employee = currentPage.DoctorsList.SelectedItem as Employee;
             var appointmentTime = DateTime.ParseExact(currentPage.AppointmentTime.Text, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
 
-            var appointment = new Appointment(id, employee!.Id, appointmentTime);
+            var appointment = new Appointment(employee!.Id, appointmentTime);
 
             await Task.Run(() => provider.GetRequiredService<IRepository<Appointment>>().AddItemAsync(appointment));
             await Task.Run(() => LoggerService.CreateLog($"Created appointment {appointment.Id}", true, provider.GetRequiredService<IRepository<Log>>()));

@@ -6,6 +6,7 @@ using System.Windows.Input;
 using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Forms;
 using MedicalCentre.Models;
+using MedicalCentre.Pages.JuniorPersonalWindowPages;
 using MedicalCentre.ViewModels.Commands;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,11 +23,12 @@ public class JuniorPersonalMainPageViewModel
     private bool isSaved = true;
     private readonly IRepository<StorageItem> storageRepository;
     private readonly IServiceProvider provider;
-    public JuniorPersonalMainPageViewModel(IServiceProvider serviceProvider)
+    public JuniorPersonalMainPageViewModel(IServiceProvider serviceProvider, StoragePage page)
     {
         provider = serviceProvider;
         storageRepository = serviceProvider.GetRequiredService<IRepository<StorageItem>>();
         Items = new ObservableCollection<StorageItem>(storageRepository.GetTable());
+        page.Items.ItemsSource = Items;
         ItemAddingCommand = new RelayCommand(AddItem);
         SavingChangesCommand = new RelayCommandAsync(SaveChanges);
         ExaminationStartingCommand = new RelayCommand(StartExamination);

@@ -9,6 +9,6 @@ public partial class StoragePage : Page
     public StoragePage(IServiceProvider serviceProvider)
     {
         InitializeComponent();
-        DataContext = new JuniorPersonalMainPageViewModel(serviceProvider);
+        DataContext = new JuniorPersonalMainPageViewModel(serviceProvider, this);
     }
 }

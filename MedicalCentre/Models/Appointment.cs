@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MedicalCentre.Models;
 
@@ -26,5 +28,11 @@ public class Appointment
         DoctorId = doctor;
         PatientId = null;
         AppointmentTime = appointmentTime;
+    }
+
+    public Appointment(uint doctor, DateTime time)
+    {
+        DoctorId = doctor;
+        AppointmentTime = time;
     }
 }
