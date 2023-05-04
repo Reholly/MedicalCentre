@@ -42,7 +42,7 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
             List<KeyboardButton> buttons = new List<KeyboardButton>();
             for(int i = 0; i < medicalExaminationsAll.Count; i++) 
             {
-                if (medicalExaminationsAll[i].Patient.Id == user.Id)
+                if (medicalExaminationsAll[i].PatientId == user.Id)
                 {
                     medicalExaminations.Add(medicalExaminationsAll[i]);
                     buttons.Add(new KeyboardButton(i.ToString()));
@@ -83,9 +83,10 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
             {
                 if(select == i)
                 {
+
                     await client.SendTextMessageAsync(chatId, $"{medicalExaminations[i].Title} - {medicalExaminations[i].Conclusion}");
-                    var photo = new InputMedia(new MemoryStream(medicalExaminations[i].AttachedImage.ImageBytes), "photo.jpg");
-                    await client.SendPhotoAsync(chatId, photo);
+                    //var photo = new InputMedia(new MemoryStream(medicalExaminations[i].AttachedImage.ImageBytes), "photo.jpg");
+                    //await client.SendPhotoAsync(chatId, photo);
 
                     KeyboardButton backBtn = new KeyboardButton("Меню");
                     var backMarkup = new ReplyKeyboardMarkup(backBtn)

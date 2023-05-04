@@ -2,7 +2,7 @@
   "profiles": {
     "MedicalCentre.TelegramBot": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false
       "launchUrl": "api/bot",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
@@ -13,7 +13,7 @@
     },
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "weatherforecast",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

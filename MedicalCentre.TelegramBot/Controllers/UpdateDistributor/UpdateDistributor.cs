@@ -27,8 +27,6 @@ namespace MedicalCentre.TelegramBot.Controllers.UpdateDistributor
             {
                 listener = new T();
                 listeners.Add(chatId, listener);
-                await listener.GetUpdate(update);
-                return;
             }
             await listener.GetUpdate(update);
         }

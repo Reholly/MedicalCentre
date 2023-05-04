@@ -9,6 +9,6 @@ namespace MedicalCentre.TelegramBot
     internal static class AppSetings
     {
         public static string? Token;
-        public static readonly TimeSpan TimeOfNotification = TimeSpan.FromMinutes(23 * 60 + 2);
+        public static readonly TimeSpan TimeOfNotification = TimeSpan.FromMinutes(21 * 60 + 42);
     }
 }

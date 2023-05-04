@@ -31,7 +31,7 @@ namespace MedicalCentre.TelegramBot.Controllers.MessageController.Commands
                 new KeyboardButton("Инфо"),
             };
 
-            var menuMarkup = new ReplyKeyboardMarkup(buttons)
+            var menuMarkup = new ReplyKeyboardMarkup(buttons.ToRows(3))
             {
                 ResizeKeyboard = true,
                 OneTimeKeyboard = true
