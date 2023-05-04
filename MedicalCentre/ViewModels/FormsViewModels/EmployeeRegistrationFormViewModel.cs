@@ -58,15 +58,16 @@ public class EmployeeRegistrationFormViewModel
         var empId = uint.Parse(random.Next(1, int.MaxValue).ToString());
         var accId = uint.Parse(random.Next(1, int.MaxValue).ToString());
 
-        var employee = new Employee(empId, profile.Name.Text, accId, profile.Surname.Text,
-                                        profile.Patronymic.Text, profile.Specialization.Text,
-                                        profile.Description.Text, double.Parse(profile.Salary.Text));
-        var accountRole = GetRoleByString(profile.RolesComboBox.SelectedItem.ToString()!);
-
-        var account = new Account(accId, empId, profile.Login.Text, profile.Password.Text, accountRole);
+        
 
         try
         {
+            var employee = new Employee(empId, profile.Name.Text, accId, profile.Surname.Text,
+                                        profile.Patronymic.Text, profile.Specialization.Text,
+                                        profile.Description.Text, double.Parse(profile.Salary.Text));
+            var accountRole = GetRoleByString(profile.RolesComboBox.SelectedItem.ToString()!);
+
+            var account = new Account(accId, empId, profile.Login.Text, profile.Password.Text, accountRole);
             await authentificationService.RegisterAsync(account);
             await empDb.AddItemAsync(employee);
             await LoggerService.CreateLog($"Регистрация нового сотрудника {account.Id} - {account.Username}", true, logDb);
@@ -74,7 +75,7 @@ public class EmployeeRegistrationFormViewModel
         catch (Exception)
         {
             MessageBox.Show("Неизвестная ошибка в создании аккаунта, попробуйте еще раз");
-            await LoggerService.CreateLog($"Ошибка в регистрации нового сотрудника {account.Id} - {account.Username}", false, logDb);
+            await LoggerService.CreateLog($"Ошибка в регистрации нового сотрудника", false, logDb);
             profile.Close();
         }
 

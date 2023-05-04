@@ -43,21 +43,28 @@ public class JuniorPersonalMainPageViewModel
         }
         else
         {
-            MessageBox.Show("Улюлю, сначала сохрани прошлые изменения");
+            MessageBox.Show("Сначала нужно сохранить прошлые изменения");
         }
     }
 
     private async Task SaveChanges()
     {
-        if (!isSaved)
+        try
         {
-            var item = Items[^1];
-            isSaved = true;
-            await Task.Run(() => storageRepository.AddItemAsync(item));
+            if (!isSaved)
+            {
+                var item = Items[^1];
+                isSaved = true;
+                await Task.Run(() => storageRepository.AddItemAsync(item));
+            }
+            else
+            {
+                MessageBox.Show("Вам нечего сохранять");
+            }
         }
-        else
+        catch(Exception ex)
         {
-            MessageBox.Show("Мужик, тебе сохранять нечего");
+            MessageBox.Show(ex.ToString());
         }
     }
 
