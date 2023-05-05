@@ -1,7 +1,7 @@
 ﻿namespace MedicalCentre.Models;
 
 public class StorageItem
-{
+{   
     public uint Id { get; set; }
     public string Name { get; set; }
     public uint Amount { get; set; }

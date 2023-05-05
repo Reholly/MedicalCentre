@@ -11,7 +11,7 @@ public class ContextRepository<T> : IRepository<T>
     private ApplicationContext context = new();
 
     public async Task AddItemAsync(T newItem)
-    {
+    {   
         await context.Set<T>().AddAsync(newItem);
         await context.SaveChangesAsync();
     }

@@ -29,7 +29,7 @@ public class AuthentificationService
     /// Log out from Account, it can return null if something wrong.
     /// </summary>
     /// <param name="account"></param>
-    /// <returns></returns>
+    /// <returns></returns> 
     public async Task<Account?> LogOutAsync(Account account)
     {
         return await TryActionAsync(authentification.LogOut(account));
