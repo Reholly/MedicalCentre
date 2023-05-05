@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -31,7 +32,7 @@ public class JuniorPersonalMainPageViewModel
         page.Items.ItemsSource = Items;
         ItemAddingCommand = new RelayCommand(AddItem);
         SavingChangesCommand = new RelayCommandAsync(SaveChanges);
-        ExaminationStartingCommand = new RelayCommand(StartExamination);
+        ExaminationStartingCommand = new RelayCommandAsync(StartExamination);
     }
 
     private void AddItem()
@@ -68,5 +69,16 @@ public class JuniorPersonalMainPageViewModel
         }
     }
 
-    private void StartExamination() => new CreateExaminationForm(provider).Show();
+    private async Task StartExamination()
+    {
+        var patients = await Task.Run(InitPatients);
+        new ExaminationCreatingForm(provider, patients).Show();
+    }
+
+    private async Task<List<Patient>> InitPatients()
+    {
+        var patientsDb = provider.GetRequiredService<IRepository<Patient>>();
+        var patients = await Task.Run(() => patientsDb.GetTableAsync());
+        return patients;
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -12,14 +13,15 @@ namespace MedicalCentre.ViewModels.FormsViewModels;
 
 public class ExaminationCreatingFormViewModel
 {
-    private readonly CreateExaminationForm form;
+    private readonly ExaminationCreatingForm creatingForm;
     private readonly IServiceProvider provider;
     public ICommand ChangesSavingCommand { get; set; }
     public ICommand ClosingCommand { get; set; }
-    public ExaminationCreatingFormViewModel(CreateExaminationForm form, IServiceProvider provider)
+    public ExaminationCreatingFormViewModel(ExaminationCreatingForm creatingForm, IServiceProvider provider, List<Patient> patients)
     {
-        this.form = form;
+        this.creatingForm = creatingForm;
         this.provider = provider;
+        this.creatingForm.PatientsBox.ItemsSource = patients;
         ChangesSavingCommand = new RelayCommandAsync(SaveChanges);
         ClosingCommand = new RelayCommand(Close);
     }
@@ -28,13 +30,14 @@ public class ExaminationCreatingFormViewModel
     {
         try
         {
+            var patient = creatingForm.PatientsBox.SelectedItem as Patient;
             var examination = new MedicalExamination(
-                uint.Parse(form.PatientsId.Text),
-                form.Title.Text,
-                form.Conclusion.Text,
+                patient!.Id,
+                creatingForm.Title.Text,
+                creatingForm.Conclusion.Text,
                 DateTime.Now);
             await Task.Run(() => provider.GetRequiredService<IRepository<MedicalExamination>>().AddItemAsync(examination));
-            form.Close();
+            creatingForm.Close();
         }
         catch(Exception ex)
         {
@@ -42,5 +45,5 @@ public class ExaminationCreatingFormViewModel
         }
     }
 
-    private void Close() => form.Close();
+    private void Close() => creatingForm.Close();
 }
