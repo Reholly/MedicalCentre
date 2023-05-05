@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Forms;
@@ -25,13 +26,20 @@ public class ExaminationCreatingFormViewModel
 
     private async Task SaveChanges()
     {
-        var examination = new MedicalExamination(
-            uint.Parse(form.PatientsId.Text),
-            form.Title.Text,
-            form.Conclusion.Text,
-            DateTime.Now);
-        await Task.Run(() => provider.GetRequiredService<IRepository<MedicalExamination>>().AddItemAsync(examination));
-        form.Close();
+        try
+        {
+            var examination = new MedicalExamination(
+                uint.Parse(form.PatientsId.Text),
+                form.Title.Text,
+                form.Conclusion.Text,
+                DateTime.Now);
+            await Task.Run(() => provider.GetRequiredService<IRepository<MedicalExamination>>().AddItemAsync(examination));
+            form.Close();
+        }
+        catch(Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
     }
 
     private void Close() => form.Close();

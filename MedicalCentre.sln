@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalCentre", "MedicalCentre\MedicalCentre.csproj", "{ACB8467C-0431-4400-81E2-C2514AA1E538}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalCentre.TelegramBot", "..\..\..\..\OneDrive\Рабочий стол\MedicalCentre.TelegramBot\MedicalCentre.TelegramBot.csproj", "{89B2B75D-B07B-4BCA-9C0C-ED1973CC00C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalCentre.TelegramBot", "MedicalCentre.TelegramBot\MedicalCentre.TelegramBot.csproj", "{16314B25-E7CF-494D-B4E9-379225E71BF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{ACB8467C-0431-4400-81E2-C2514AA1E538}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACB8467C-0431-4400-81E2-C2514AA1E538}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACB8467C-0431-4400-81E2-C2514AA1E538}.Release|Any CPU.Build.0 = Release|Any CPU
-		{89B2B75D-B07B-4BCA-9C0C-ED1973CC00C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{89B2B75D-B07B-4BCA-9C0C-ED1973CC00C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{89B2B75D-B07B-4BCA-9C0C-ED1973CC00C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{89B2B75D-B07B-4BCA-9C0C-ED1973CC00C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16314B25-E7CF-494D-B4E9-379225E71BF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16314B25-E7CF-494D-B4E9-379225E71BF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16314B25-E7CF-494D-B4E9-379225E71BF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16314B25-E7CF-494D-B4E9-379225E71BF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
