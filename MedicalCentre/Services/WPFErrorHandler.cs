@@ -15,7 +15,7 @@ public class WPFErrorHandler : IErrorHandler
     }
     public async void HandleError(Exception ex)
     {
-        MessageBox.Show(ex.Message);
+        MessageBox.Show($"{ex.Message} Попробуйте перезапустить проект или обратитесь к администратору" );
         await Task.Run(() => LoggerService.CreateLog(ex.Message, false, logRepository));
     }
 }
