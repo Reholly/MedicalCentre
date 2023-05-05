@@ -38,11 +38,11 @@
                           BorderThickness="0 0 0 1.5"/>
                 <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                          Name="AppointmentTime"
-                         Text=""
-                         materialDesign:HintAssist.Hint="Время приёма (yyyy-MM-dd HH:mm)"
+                         materialDesign:HintAssist.Hint="Введите время в формате yyyy-MM-dd hh:mm"
+                         FontSize="11"
                          materialDesign:HintAssist.FloatingOffset="0, -20"
                          BorderBrush="#c5c8cc"
-                         BorderThickness=" 0 0 0 1.5"/>
+                         BorderThickness="0 0 0 1.5"/>
             </StackPanel>
             <DockPanel  VerticalAlignment="Bottom">
                 <Button Width="310" HorizontalAlignment="Left" Height="50" materialDesign:ButtonAssist.CornerRadius="0 0 20 20" FontSize="18" Background="#252934" Foreground="#fafafafa" Command="{Binding CreateCommand}">

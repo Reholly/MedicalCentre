@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using MedicalCentre.DatabaseLayer;
 using MedicalCentre.Models;
@@ -30,32 +31,29 @@ public class DoctorMainPageViewModel
     {
         var appDb = serviceProvider.GetRequiredService<IRepository<Appointment>>();
         var appointments = await Task.Run(() => appDb.GetTableAsync());
-        foreach (var appointment in appointments)
+        foreach (var appointment in appointments.Where(a => !a.IsFinished && a.AppointmentTime.Date == DateTime.Today.Date))
         {
-            if (appointment.IsFinished == false && appointment.AppointmentTime.Date == DateTime.Today.Date)
+            Patient patient;
+            string patientString;
+
+            if (appointment.PatientId != null)
             {
-                Patient patient;
-                string patientString;
+                var patientsDb = serviceProvider.GetRequiredService<IRepository<Patient>>();
+                patient = await Task.Run(() => patientsDb.GetItemByIdAsync((uint)appointment.PatientId));
+                patientString = patient.ToStringForAppointment();
+            }
+            else
+            {
+                patientString = "...";
+            }
 
-                if (appointment.PatientId != null)
-                {
-                    var patientsDb = serviceProvider.GetRequiredService<IRepository<Patient>>();
-                    patient = patientsDb.GetItemById((uint)appointment.PatientId);
-                    patientString = patient.ToStringForAppointment();
-                }
-                else
-                {
-                    patientString = "Тут_должен_быть_пациент";
-                }
+            var empDb = serviceProvider.GetRequiredService<IRepository<Employee>>();
+            var doctor = await Task.Run(() => empDb.GetItemByIdAsync(appointment.DoctorId));
+            var doctorString = doctor.ToString();
 
-                var empDb = serviceProvider.GetRequiredService<IRepository<Employee>>();
-                var doctor = empDb.GetItemById(appointment.DoctorId);
-                var doctorString = doctor.ToString();
-
-                if (account.EmployeeAccountId == appointment.DoctorId)
-                {
-                    page.AppointmentCards.Children.Insert(0, new AppointmentCard(appointment, page, patientString, doctorString, window, account,serviceProvider));
-                }
+            if (account.EmployeeAccountId == appointment.DoctorId)
+            {
+                page.AppointmentCards.Children.Insert(0, new AppointmentCard(appointment, page, patientString, doctorString, window, account,serviceProvider));
             }
         }
     }
